@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- basic styles -->
+
+    <!--<link href="bootstrap/css/bootstrap.css" rel="stylesheet">-->
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+
+    <!--[if IE 7]>
+    <link rel="stylesheet" href="css/font-awesome-ie7.min.css" />
+    <![endif]-->
+
+    <!-- page specific plugin styles -->
+
+    <!-- fonts -->
+
+    <!-- ace styles -->
+    <link rel="stylesheet" href="css/ace.min.css">
+    <link rel="stylesheet" href="css/ace-rtl.min.css">
+    <link rel="stylesheet" href="css/ace-skins.min.css">
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="css/ace-ie.min.css" />
+    <![endif]-->
+
+    <!-- inline styles related to this page -->
+    <!--form-->
+    <link rel="stylesheet" type="text/css" href="css/hdw.css"/>
+    <script type="text/javascript" src="js/jquery-1.6.4.min.js"></script>
+    <script type="text/javascript" src="js/hdw.js"></script>
+
+
+    <!-- ace settings handler -->
+
+    <script src="js/ace-extra.min.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <style>
+        .btn1 {
+            padding: 6px 12px;
+            font-size: 14px;
+            font-weight: normal;
+            /*line-height: 1.428571429;*/
+            text-align: center;
+            white-space: nowrap;
+            user-select: none;
+        }
+    </style>
+</head>
+
+<body>
+
+
+<!-- 导航 -->
+<div class="navbar navbar-default" id="navbar">
+    <script type="text/javascript">
+        try {ace.settings.check('navbar','fixed')}catch (e) {}
+    </script>
+
+    <div class="navbar-container" id="navbar-container">
+        <div class="navbar-header pull-left">
+            <a href="page.html" class="navbar-brand">
+                <small>
+                    <i class="icon-leaf">
+                        中医妇产科临床流调数据中心
+                    </i>
+                </small>
+            </a>
+        </div>
+    </div>
+
+    <div class="navbar-header pull-right" role="navigation">
+        <ul class="nav ace-nav">
+            <li class="light-blue">
+                <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                    <img class="nav-user-photo" src="avatars/user.jpg" alt="Jason's Photo">
+                    <span class="user-info">
+                        <small>welcome,</small>
+                        admin
+                    </span>
+
+                    <i class="icon-caret-down"></i>
+                </a>
+
+                <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+
+                    <li class="divider"></li>
+
+                    <li>
+                        <a href="#">
+                            <i class="icon-off"></i>
+                            Logout
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<!-- 注册 -->
+
+
+        <form method="post" action="">
+            <div class="one">
+                <label for="username">用户名：</label>
+                <input type="text" id="username" class="a1" />
+            </div>
+            <div class="one">
+                <label for="passwowd">密码：</label>
+                <input type="password" id="password" class="a1" />
+            </div>
+            <div class="one">
+                <label for="passwords">确认密码：</label>
+                <input type="password" id="passwords" class="a1" />
+            </div>
+            <div class="one">
+                <label for="email">邮件：</label>
+                <input type="text" id="email" class="a1" />
+            </div>
+            <div class="one">
+                <label for="tel">手机：</label>
+                <input type="text" id="tel" class="a1" />
+            </div>
+            <div class="two">
+                <input class="btn1 btn-primary" type="submit" id="send" value="提交">
+                <input type="reset" id="res" value="重置">
+            </div>
+        </form>
+
+        <!--<button type="button" class="btn1 btn-primary">注册</button>-->
+        <!--<a href="#" class="register">快速注册</a>-->
+
+
+
+<!--<script src="bootstrap/js/jquery-1.7.2.min.js"></script>-->
+<!--<script src="bootstrap/js/bootstrap.js"></script>-->
+
+<!--[if !IE]> -->
+
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='js/jquery-2.0.3.min.js'>"+"<"+"/script>");
+</script>
+
+<!-- <![endif]-->
+
+<!--[if IE]>
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+</script>
+<![endif]-->
+
+<script type="text/javascript">
+    if("ontouchend" in document) document.write("<script src='js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+</script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/typeahead-bs2.min.js"></script>
+
+<!-- page specific plugin scripts -->
+
+<!-- ace scripts -->
+
+<script src="js/ace-elements.min.js"></script>
+<script src="js/ace.min.js"></script>
+
+<!-- inline scripts related to this page -->
+<script type="text/javascript">
+    var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cscript src='" + _bdhmProtocol + ""));
+</script>
+</body>
+</html>

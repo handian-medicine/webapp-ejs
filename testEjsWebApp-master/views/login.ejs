@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        <%= title %>
+    </title>
+    <link rel='stylesheet' href='/public/stylesheets/style.css' />
+    <script src="/public/javascripts/jquery.min.js"></script>
+</head>
+
+<body>
+    <script>
+        $(document).ready(function () {
+        $("#userLogin").click(function () {
+            $.ajax({
+                url: "/users/login",//寻址地址，向该地址发出请求
+                type: "POST",
+                data: {
+                    email: $("#id_email").val(),    //    用户邮箱和密码
+                    pass: $("#id_password").val()
+                },
+                success: function (data) {
+                    if (data.status == 1) {
+                        window.location.href = '/home';    //    请求成功后跳转到你的主页
+                    } else {
+                        alert(data.msg);
+                    }
+
+                },
+                error: function () {
+                    alert("登录失败");
+                    window.location.href = '/';
+                }
+            });
+        });
+    });
+</script>
+
+    <h1>登录页面</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th><label for="id_email">电子邮箱:</label></th>
+                <td><input type="text" name="email" maxlength="50" required="" id="id_email"></td>
+            </tr>
+            <tr>
+                <th><label for="id_password">密码:</label></th>
+                <td><input type="password" name="password" required="" id="id_password"></td>
+            </tr>
+        </tbody>
+    </table>
+    <button type="submit" id="userLogin">登录</button>
+
+
+       <!-- <form action="/users/login" method="POST">
+      <ul>
+        <li>
+          user email: <input type="text" name="email">
+        </li>
+        <li>
+          user password: <input type="password" name="pass">
+        </li>
+      </ul>
+      <input type="submit" value="Submit">
+    </form> -->
+
+</body>
+
+</html>

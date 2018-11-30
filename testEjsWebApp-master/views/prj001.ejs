@@ -1,0 +1,1447 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>数据展示</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- basic styles -->
+
+    <link rel="stylesheet" href="../public/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../public/css/font-awesome.min.css">
+
+    <!--[if IE 7]>
+    <link rel="stylesheet" href="css/font-awesome-ie7.min.css" />
+    <![endif]-->
+
+    <!-- page specific plugin styles -->
+
+    <!-- fonts -->
+
+    <!-- ace styles -->
+    <link rel="stylesheet" href="../public/css/ace.min.css">
+    <link rel="stylesheet" href="../public/css/ace-rtl.min.css">
+    <link rel="stylesheet" href="../public/css/ace-skins.min.css">
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="css/ace-ie.min.css" />
+    <![endif]-->
+
+    <!-- inline styles related to this page -->
+
+    <!-- ace settings handler -->
+
+    <script src="../public/js/ace-extra.min.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <!-- 导航 -->
+    <div class="navbar navbar-default" id="navbar">
+        <script type="text/javascript">
+            try {
+                ace.settings.check('navbar', 'fixed')
+            } catch (e) {}
+        </script>
+
+        <div class="navbar-container" id="navbar-container">
+            <div class="navbar-header pull-left">
+                <a href="../public/page.html" class="navbar-brand">
+                    <small>
+                        <i class="icon-leaf">
+                            中医妇产科临床流调数据中心
+                        </i>
+                    </small>
+                </a>
+            </div>
+        </div>
+
+        <div class="navbar-header pull-right" role="navigation">
+            <ul class="nav ace-nav">
+                <li class="light-blue">
+                    <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                        <img class="nav-user-photo" src="../public/avatars/user.jpg" alt="Jason's Photo">
+                        <span class="user-info">
+                            <small>welcome,</small>
+                            admin
+                        </span>
+
+                        <i class="icon-caret-down"></i>
+                    </a>
+
+                    <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+
+                        <li class="divider"></li>
+
+                        <li>
+                            <a href="../public/logout.html">
+                                <i class="icon-off"></i>
+                                Logout
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="main-container" id="main-container">
+        <script type="text/javascript">
+            try {
+                ace.settings.check('main-container', 'fixed')
+            } catch (e) {}
+        </script>
+
+        <div class="main-container-inner">
+
+            <div class="sidebar" id="sidebar">
+                <script type="text/javascript">
+                    try {
+                        ace.settings.check('sidebar', 'fixed')
+                    } catch (e) {}
+                </script>
+
+                <ul class="nav nav-list">
+                    <li>
+                        <a href="../public/datalist.html">
+                            <i class="icon-dashboard"></i>
+                            <span class="menu-text"> 数据展示 </span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="../public/datainput.html">
+                            <i class="icon-text-width"></i>
+                            <span class="menu-text"> 数据采集 </span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="../public/dataana.html">
+                            <i class="icon-list-alt"></i>
+                            <span class="menu-text"> 数据分析 </span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="../public/about.html">
+                            <i class="icon-picture"></i>
+                            <span class="menu-text"> 关于 </span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="sidebar-collapse" id="sidebar-collapse">
+                    <i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
+                </div>
+
+                <script type="text/javascript">
+                    try {
+                        ace.settings.check('sidebar', 'collapsed')
+                    } catch (e) {}
+                </script>
+            </div>
+
+            <div class="main-content">
+
+                <div class="page-content">
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <!-- PAGE CONTENT BEGINS -->
+
+                            <div class="row">
+                                <div class="col-xs-12">
+
+                                    <form class="form-search" id="sample-table-2_filter">
+                                        <span class="input-icon align-middle">
+                                            <i class="icon-search"></i>
+
+                                            <input type="text" class="search-query" placeholder="采集对象人员姓名" />
+                                        </span>
+                                        <button class="btn btn-sm" onclick="return false;">检索</button>
+                                    </form>
+                                    <hr>
+                                    <div class="table-responsive">
+                                        <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>名字</th>
+                                                    <th>名族</th>
+                                                    <th>年龄</th>
+                                                    <th>身高cm</th>
+                                                    <th>体重kg</th>
+                                                    <th>血型</th>
+                                                    <th class="hidden-480">职业</th>
+
+                                                    <th>
+                                                        文化程度
+                                                    </th>
+                                                    <th class="hidden-480">婚姻状况</th>
+
+                                                    <th>数据修改</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                                <% archives.forEach(function(archive){ %>
+                                                <tr>
+
+                                                    <td><a href="../public/bingo.html"><%= archive.name %></a></td>
+                                                    <td><%= archive.nation %></td>
+                                                    <td class=""><%= archive.age %></td>
+                                                    <td><%= archive.height %></td>
+                                                    <td class=""><%= archive.weight %></td>
+                                                    <td><%= archive.blood_type %></td>
+                                                    <td><%= archive.career %></td>
+                                                    <td class="hidden-480"><%= archive.culture %></td>
+                                                    <td class="hidden-480"><%= archive.marriage %></td>
+                                                    <td>
+                                                        <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
+                                                            <button class="btn btn-xs btn-success">
+                                                                <a href="#modal-table" class="blue" role="button"
+                                                                    data-toggle="modal">一般情况</a>
+                                                            </button>
+
+                                                            <button class="btn btn-xs btn-info">
+                                                                <a href="#modal-table1" class="blue" role="button"
+                                                                    data-toggle="modal">月经情况</a>
+                                                            </button>
+
+                                                            <button class="btn btn-xs btn-danger">
+                                                                <a href="#modal-table2" class="blue" role="button"
+                                                                    data-toggle="modal">全身症状</a>
+                                                            </button>
+
+                                                            <button class="btn btn-xs btn-warning">
+                                                                <a href="#modal-table3" class="blue" role="button"
+                                                                    data-toggle="modal">其它情况</a>
+                                                            </button>
+                                                            <button class="btn btn-xs btn-info">
+                                                                <a href="#modal-table4" class="blue" role="button"
+                                                                    data-toggle="modal">临床诊断</a>
+                                                            </button>
+                                                        </div>
+
+                                                        <div class="visible-xs visible-sm hidden-md hidden-lg">
+                                                            <div class="inline position-relative">
+                                                                <button class="btn btn-minier btn-primary dropdown-toggle"
+                                                                    data-toggle="dropdown">
+                                                                    <i class="icon-cog icon-only bigger-110"></i>
+                                                                </button>
+
+                                                                <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                                    <li>
+                                                                        <a href="#modal-table" class="tooltip-info"
+                                                                            data-toggle="modal">
+                                                                            <span class="blue">
+                                                                                一般情况
+                                                                            </span>
+                                                                        </a>
+                                                                    </li>
+
+                                                                    <li>
+                                                                        <a href="#modal-table1" class="tooltip-success"
+                                                                            data-toggle="modal">
+                                                                            <span class="green">
+                                                                                月经情况
+                                                                            </span>
+                                                                        </a>
+                                                                    </li>
+
+                                                                    <li>
+                                                                        <a href="#modal-table2" class="tooltip-error"
+                                                                            data-toggle="modal">
+                                                                            <span class="red">
+                                                                                全身症状
+                                                                            </span>
+                                                                        </a>
+                                                                    </li>
+
+                                                                    <li>
+                                                                        <a href="#modal-table3" class="tooltip-info"
+                                                                            data-toggle="modal">
+                                                                            <span class="orange">
+                                                                                其他情况
+                                                                            </span>
+                                                                        </a>
+                                                                    </li>
+
+                                                                    <li>
+                                                                        <a href="#modal-table4" class="tooltip-info"
+                                                                            data-toggle="modal">
+                                                                            <span class="blue">
+                                                                                临床诊断
+                                                                            </span>
+                                                                        </a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <% }) %>
+
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--一般情况-->
+                            <div id="modal-table" class="modal fade" tabindex="-1">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header no-padding">
+                                            <div class="table-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                    <span class="white">&times;</span>
+                                                </button>
+                                                一般情况
+                                            </div>
+                                        </div>
+
+                                        <div class="modal-body no-padding">
+                                            <table class="table table-striped table-bordered table-hover no-margin-bottom no-border-top">
+                                                <div class="modal-body">
+                                                    <p>
+                                                        日期:<input type="text" id="box" />
+                                                    </p>
+                                                    <p>
+                                                        问卷编码:<input type="text" id="nameTxt" />
+                                                    </p>
+                                                    <p>
+                                                        医院名称:<input type="text" id="nameTxt1" />
+                                                    </p>
+                                                    <p>
+                                                        填表专家姓名:<input type="text" id="nameTxt2" />
+                                                    </p>
+                                                    <p>
+                                                        职称:
+                                                        <p>
+                                                            <label><input type="radio" value="2" name="dateTxt" />------</label>
+                                                            <label><input type="radio" value="4" name="dateTxt" />主任医师</label>
+                                                            <label><input type="radio" value="2" name="dateTxt" />副主任医师</label>
+                                                            <label><input type="radio" value="4" name="dateTxt" />主治医师</label>
+                                                        </p>
+
+                                                    </p>
+                                                    <p>
+                                                        患者姓名:<input type="text" id="nameTxt3" />
+                                                    </p>
+                                                    <p>
+                                                        电话:<input type="text" id="nameTxt4" />
+                                                    </p>
+                                                    <p>
+                                                        年龄:<input type="text" id="nameTxt5" />
+                                                    </p>
+                                                    <p>
+                                                        身高cm:<input type="text" id="nameTxt6" />
+                                                    </p>
+                                                    <p>
+                                                        体重kg:<input type="text" id="nameTxt7" />
+                                                    </p>
+                                                    <p>
+                                                        血型:
+                                                        <p>
+                                                            <label><input type="radio" value="2" name="dateTxt" />---</label>
+                                                            <label><input type="radio" value="4" name="dateTxt" />A</label>
+                                                            <label><input type="radio" value="2" name="dateTxt" />B</label>
+                                                            <label><input type="radio" value="4" name="dateTxt" />O</label>
+                                                            <label><input type="radio" value="4" name="dateTxt" />AB</label>
+                                                        </p>
+
+                                                    </p>
+                                                    <p>
+                                                        民族:
+                                                        <p>
+                                                            <label><input type="radio" value="2" name="dateTxt" />汉族</label>
+                                                            <label><input type="radio" value="4" name="dateTxt" />蒙古族</label>
+                                                            <label><input type="radio" value="2" name="dateTxt" />回族</label>
+                                                            <label><input type="radio" value="4" name="dateTxt" />藏族</label>
+                                                            <label><input type="radio" value="2" name="dateTxt" />维吾尔族</label>
+                                                            <label><input type="radio" value="4" name="dateTxt" />苗族</label>
+                                                            <label><input type="radio" value="2" name="dateTxt" />彝族</label>
+                                                            <label><input type="radio" value="4" name="dateTxt" />壮族</label>
+                                                            <label><input type="radio" value="2" name="dateTxt" />布依族</label>
+                                                            <label><input type="radio" value="4" name="dateTxt" />朝鲜族</label>
+                                                            <label><input type="radio" value="2" name="dateTxt" />满族</label>
+                                                            <label><input type="radio" value="4" name="dateTxt" />侗族</label>
+                                                            <label><input type="radio" value="2" name="dateTxt" />瑶族</label>
+                                                            <label><input type="radio" value="4" name="dateTxt" />白族</label>
+                                                            <label><input type="radio" value="2" name="dateTxt" />土家族</label>
+                                                            <label><input type="radio" value="4" name="dateTxt" />哈尼族</label>
+                                                            <label><input type="radio" value="2" name="dateTxt" />哈萨克族</label>
+                                                            <label><input type="radio" value="4" name="dateTxt" />傣族</label>
+                                                            <label><input type="radio" value="2" name="dateTxt" />黎族</label>
+                                                            <label><input type="radio" value="4" name="dateTxt" />傈傈族</label>
+                                                            <label><input type="radio" value="2" name="dateTxt" />佤族</label>
+                                                            <label><input type="radio" value="4" name="dateTxt" />苗族</label>
+                                                            <label><input type="radio" value="2" name="dateTxt" />畲族</label>
+                                                            <label><input type="radio" value="4" name="dateTxt" />高山族</label>
+                                                            <label><input type="radio" value="2" name="dateTxt" />拉祜族</label>
+                                                            <label><input type="radio" value="4" name="dateTxt" />水族</label>
+                                                            <label><input type="radio" value="2" name="dateTxt" />东乡族</label>
+                                                            <label><input type="radio" value="4" name="dateTxt" />纳西族</label>
+                                                            <label><input type="radio" value="2" name="dateTxt" />景颇族</label>
+                                                            <label><input type="radio" value="4" name="dateTxt" />科尔克孜族</label>
+                                                            <label><input type="radio" value="2" name="dateTxt" />土族</label>
+                                                            <label><input type="radio" value="4" name="dateTxt" />达斡尔族</label>
+                                                            <label><input type="radio" value="4" name="dateTxt" />仫佬族</label>
+                                                            <label><input type="radio" value="2" name="dateTxt" />羌族</label>
+                                                            <label><input type="radio" value="4" name="dateTxt" />布朗族</label>
+                                                            <label><input type="radio" value="2" name="dateTxt" />撒拉族</label>
+                                                            <label><input type="radio" value="4" name="dateTxt" />毛难族</label>
+                                                            <label><input type="radio" value="2" name="dateTxt" />仡佬族</label>
+                                                            <label><input type="radio" value="4" name="dateTxt" />锡伯族</label>
+                                                            <label><input type="radio" value="2" name="dateTxt" />阿昌族</label>
+                                                            <label><input type="radio" value="4" name="dateTxt" />普米族</label>
+                                                            <label><input type="radio" value="2" name="dateTxt" />塔吉克族</label>
+                                                            <label><input type="radio" value="4" name="dateTxt" />怒族</label>
+                                                            <label><input type="radio" value="2" name="dateTxt" />乌孜别克族</label>
+                                                            <label><input type="radio" value="4" name="dateTxt" />俄罗斯族</label>
+                                                            <label><input type="radio" value="2" name="dateTxt" />鄂温克族</label>
+                                                            <label><input type="radio" value="4" name="dateTxt" />崩龙族</label>
+                                                            <label><input type="radio" value="2" name="dateTxt" />保安族</label>
+                                                            <label><input type="radio" value="4" name="dateTxt" />裕固族</label>
+                                                            <label><input type="radio" value="2" name="dateTxt" />京族</label>
+                                                            <label><input type="radio" value="4" name="dateTxt" />塔塔尔族</label>
+                                                            <label><input type="radio" value="2" name="dateTxt" />独龙族</label>
+                                                            <label><input type="radio" value="4" name="dateTxt" />鄂伦春族</label>
+                                                            <label><input type="radio" value="4" name="dateTxt" />赫哲族</label>
+                                                            <label><input type="radio" value="2" name="dateTxt" />门巴族</label>
+                                                            <label><input type="radio" value="4" name="dateTxt" />珞巴族</label>
+                                                            <label><input type="radio" value="2" name="dateTxt" />基诺族</label>
+                                                            <label><input type="radio" value="4" name="dateTxt" />其他</label>
+                                                        </p>
+
+                                                    </p>
+                                                    <p>
+                                                        职业:
+                                                        <p>
+                                                            <label><input type="radio" value="2" name="dateTxt" />------</label>
+                                                            <label><input type="radio" value="4" name="dateTxt" />学生</label>
+                                                            <label><input type="radio" value="2" name="dateTxt" />个体</label>
+                                                            <label><input type="radio" value="4" name="dateTxt" />农名</label>
+                                                            <label><input type="radio" value="2" name="dateTxt" />军人</label>
+                                                            <label><input type="radio" value="4" name="dateTxt" />工人</label>
+                                                            <label><input type="radio" value="2" name="dateTxt" />财会人员</label>
+                                                            <label><input type="radio" value="4" name="dateTxt" />技术人员</label>
+                                                            <label><input type="radio" value="4" name="dateTxt" />服务业</label>
+                                                            <label><input type="radio" value="2" name="dateTxt" />科教文卫</label>
+                                                            <label><input type="radio" value="4" name="dateTxt" />行政管理</label>
+                                                            <label><input type="radio" value="2" name="dateTxt" />无业</label>
+                                                            <label><input type="radio" value="4" name="dateTxt" />其它</label>
+                                                        </p>
+
+                                                    </p>
+                                                    <p>
+                                                        病人现住址:<input type="text" id="nameTxt8" />
+                                                    </p>
+                                                    <p>
+                                                        病人来源:
+                                                        <p>
+                                                            <label><input type="radio" value="2" name="dateTxt" />------</label>
+                                                            <label><input type="radio" value="4" name="dateTxt" />门诊</label>
+                                                            <label><input type="radio" value="2" name="dateTxt" />病房</label>
+                                                        </p>
+
+                                                    </p>
+                                                    <p>
+                                                        文化程度:
+                                                        <p>
+                                                            <label><input type="radio" value="2" name="dateTxt" />------</label>
+                                                            <label><input type="radio" value="4" name="dateTxt" />文盲</label>
+                                                            <label><input type="radio" value="2" name="dateTxt" />小学及以下</label>
+                                                            <label><input type="radio" value="2" name="dateTxt" />中学与中专</label>
+                                                            <label><input type="radio" value="4" name="dateTxt" />大专</label>
+                                                            <label><input type="radio" value="2" name="dateTxt" />本科</label>
+                                                            <label><input type="radio" value="2" name="dateTxt" />研究生及以上</label>
+                                                        </p>
+
+                                                    </p>
+                                                    <p>
+                                                        婚姻状况:
+                                                        <p>
+                                                            <label><input type="radio" value="2" name="dateTxt" />------</label>
+                                                            <label><input type="radio" value="4" name="dateTxt" />未婚无性生活</label>
+                                                            <label><input type="radio" value="2" name="dateTxt" />未婚有性生活</label>
+                                                            <label><input type="radio" value="2" name="dateTxt" />已婚同居</label>
+                                                            <label><input type="radio" value="4" name="dateTxt" />已婚分居</label>
+                                                            <label><input type="radio" value="2" name="dateTxt" />离婚</label>
+                                                        </p>
+
+                                                    </p>
+                                                    <p>
+                                                        ----特殊工种环境：
+                                                        <p>
+                                                            <label><input name="nianji" type="checkbox" value="1" />高空</label>
+                                                            <label><input name="nianji" type="checkbox" value="2" />低温</label>
+                                                            <label><input name="nianji" type="checkbox" value="3" />噪声</label>
+                                                            <label><input name="nianji" type="checkbox" value="4" />辐射</label>
+                                                            <label><input name="nianji" type="checkbox" value="5" />化工污染</label>
+                                                            <label><input name="nianji" type="checkbox" value="6" />剧烈运动</label>
+                                                            <label><input name="nianji" type="checkbox" value="5" />汽油</label>
+                                                            <label><input name="nianji" type="checkbox" value="6" />无</label>
+                                                        </p>
+
+
+                                                    </p>
+                                                    <p>
+                                                        ----饮食偏好：
+                                                        <p>
+                                                            <label><input name="nianji" type="checkbox" value="1" />无特殊</label>
+                                                            <label><input name="nianji" type="checkbox" value="2" />素食</label>
+                                                            <label><input name="nianji" type="checkbox" value="3" />酸</label>
+                                                            <label><input name="nianji" type="checkbox" value="4" />甜</label>
+                                                            <label><input name="nianji" type="checkbox" value="5" />咸</label>
+                                                            <label><input name="nianji" type="checkbox" value="6" />辛辣</label>
+                                                            <label><input name="nianji" type="checkbox" value="3" />油</label>
+                                                            <label><input name="nianji" type="checkbox" value="4" />生冷</label>
+                                                            <label><input name="nianji" type="checkbox" value="5" />含咖啡因食物或饮品</label>
+                                                            <label><input name="nianji" type="checkbox" value="6" />其它</label>
+                                                        </p>
+
+                                                        <p>
+                                                            其它说明:<input type="text" id="nameTxt9" value="无" />
+                                                        </p>
+                                                </div>
+                                            </table>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-primary" id="tijiaoBtn">提交</button>
+
+                                        </div>
+                                    </div><!-- /.modal-content -->
+                                </div><!-- /.modal-dialog -->
+                            </div>
+
+                            <!--月经情况-->
+                            <div id="modal-table1" class="modal fade" tabindex="-1">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header no-padding">
+                                            <div class="table-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                    <span class="white">&times;</span>
+                                                </button>
+                                                月经情况
+                                            </div>
+                                        </div>
+
+                                        <div class="modal-body no-padding">
+                                            <table class="table table-striped table-bordered table-hover no-margin-bottom no-border-top">
+                                                <div class="modal-body">
+                                                    <p>
+                                                        初潮年龄:
+                                                        <input type="number" id="renshuTxt" />
+                                                    </p>
+                                                    <p>
+                                                        月经周期:
+                                                        <p>
+                                                            <label><input type="radio" value="2" name="dateTxt" />-----</label>
+                                                            <label><input type="radio" value="4" name="dateTxt" />尚规律</label>
+                                                            <label><input type="radio" value="2" name="dateTxt" />不规律</label>
+                                                        </p>
+                                                        <p>
+                                                            月经规律间隔天数:
+                                                            <input type="number" id="renshuTxt1" />
+                                                        </p>
+                                                        <p>
+                                                            月经不规律:
+                                                            <p>
+                                                                <label><input type="radio" value="2" name="dateTxt" />-----</label>
+                                                                <label><input type="radio" value="4" name="dateTxt" />或提前7天以上</label>
+                                                                <label><input type="radio" value="2" name="dateTxt" />或1月多次</label>
+                                                                <label><input type="radio" value="4" name="dateTxt" />获数月1次</label>
+                                                            </p>
+
+                                                        </p>
+
+                                                        <p>
+                                                            行经天数:
+                                                            <p>
+                                                                <label><input type="radio" value="2" name="dateTxt" />-----</label>
+                                                                <label><input type="radio" value="4" name="dateTxt" />不足2天</label>
+                                                                <label><input type="radio" value="2" name="dateTxt" />3-7天</label>
+                                                                <label><input type="radio" value="4" name="dateTxt" />7天以上</label>
+                                                                <label><input type="radio" value="4" name="dateTxt" />有时几日即净,有时7日以上甚至达半月余不净</label>
+                                                            </p>
+
+                                                        </p>
+                                                        <p>
+                                                            出血量所需卫生巾数:
+                                                            <input type="number" id="renshuTxt2" />
+                                                        </p>
+                                                        <p>
+                                                            出血情况:
+                                                            <p>
+                                                                <label><input type="radio" value="2" name="dateTxt" />-----</label>
+                                                                <label><input type="radio" value="4" name="dateTxt" />出血量中等,每次约需5-20张卫生巾</label>
+                                                                <label><input type="radio" value="2" name="dateTxt" />出血量多，每次多余20张卫生巾</label>
+                                                                <label><input type="radio" value="4" name="dateTxt" />经量少,每次少于5张卫生巾</label>
+                                                                <label><input type="radio" value="4" name="dateTxt" />经量极少,几乎不用卫生巾,用护垫即可</label>
+                                                            </p>
+
+                                                        </p>
+                                                        <p>
+                                                            出血颜色:
+                                                            <p>
+                                                                <label><input type="radio" value="2" name="dateTxt" />-----</label>
+                                                                <label><input type="radio" value="4" name="dateTxt" />淡红</label>
+                                                                <label><input type="radio" value="2" name="dateTxt" />鲜红</label>
+                                                                <label><input type="radio" value="4" name="dateTxt" />暗红</label>
+                                                                <label><input type="radio" value="4" name="dateTxt" />紫红</label>
+                                                                <label><input type="radio" value="4" name="dateTxt" />紫黯</label>
+                                                                <label><input type="radio" value="2" name="dateTxt" />紫黑</label>
+                                                                <label><input type="radio" value="4" name="dateTxt" />褐色</label>
+                                                                <label><input type="radio" value="4" name="dateTxt" />其他</label>
+                                                            </p>
+
+                                                        </p>
+                                                        <p>
+                                                            出血质地:
+                                                            <p>
+                                                                <label><input type="radio" value="2" name="dateTxt" />-----</label>
+                                                                <label><input type="radio" value="4" name="dateTxt" />正常</label>
+                                                                <label><input type="radio" value="2" name="dateTxt" />粘稠</label>
+                                                                <label><input type="radio" value="4" name="dateTxt" />清稀</label>
+                                                            </p>
+
+                                                        </p>
+                                                        <p>
+                                                            血块:
+                                                            <p>
+                                                                <label><input type="radio" value="2" name="dateTxt" />-----</label>
+                                                                <label><input type="radio" value="4" name="dateTxt" />无</label>
+                                                                <label><input type="radio" value="2" name="dateTxt" />偶尔</label>
+                                                                <label><input type="radio" value="4" name="dateTxt" />常夹少量小血块</label>
+                                                                <label><input type="radio" value="4" name="dateTxt" />常夹较大血块</label>
+                                                            </p>
+
+                                                        </p>
+                                                        <p>
+                                                            出血特点:
+                                                            <p>
+                                                                <label><input type="radio" value="2" name="dateTxt" />-----</label>
+                                                                <label><input type="radio" value="4" name="dateTxt" />顺畅</label>
+                                                                <label><input type="radio" value="2" name="dateTxt" />势急暴下</label>
+                                                                <label><input type="radio" value="4" name="dateTxt" />淋漓不断</label>
+                                                                <label><input type="radio" value="4" name="dateTxt" />点滴即净</label>
+                                                            </p>
+
+                                                        </p>
+                                                </div>
+                                            </table>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-primary" id="tijiaoBtn1">提交</button>
+
+                                        </div>
+                                    </div><!-- /.modal-content -->
+                                </div><!-- /.modal-dialog -->
+                            </div>
+                            <!--全身症状-->
+                            <div id="modal-table2" class="modal fade" tabindex="-1">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header no-padding">
+                                            <div class="table-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                    <span class="white">&times;</span>
+                                                </button>
+                                                全身症状
+                                            </div>
+                                        </div>
+
+                                        <div class="modal-body no-padding">
+                                            <table class="table table-striped table-bordered table-hover no-margin-bottom no-border-top">
+                                                <div class="modal-body">
+                                                    <p>
+                                                        ----精神：
+                                                        <p>
+                                                            <label><input name="nianji" type="checkbox" value="1" />精力充沛</label>
+                                                            <label><input name="nianji" type="checkbox" value="2" />健忘</label>
+                                                            <label><input name="nianji" type="checkbox" value="3" />精神不集中</label>
+                                                            <label><input name="nianji" type="checkbox" value="4" />神疲乏力</label>
+                                                            <label><input name="nianji" type="checkbox" value="5" />学习、工作压力大</label>
+                                                            <label><input name="nianji" type="checkbox" value="6" />个人/家庭遭遇较大变故</label>
+                                                            <label><input name="nianji" type="checkbox" value="5" />悲伤欲哭</label>
+                                                        </p>
+
+
+                                                    </p>
+                                                    <p>
+                                                        ----情绪：
+                                                        <p>
+                                                            <label><input name="nianji" type="checkbox" value="1" />正常</label>
+                                                            <label><input name="nianji" type="checkbox" value="2" />乐观开朗</label>
+                                                            <label><input name="nianji" type="checkbox" value="3" />思虑过度</label>
+                                                            <label><input name="nianji" type="checkbox" value="4" />喜怒无常</label>
+                                                            <label><input name="nianji" type="checkbox" value="5" />烦躁易怒</label>
+                                                            <label><input name="nianji" type="checkbox" value="6" />焦虑</label>
+                                                            <label><input name="nianji" type="checkbox" value="5" />悲伤欲哭</label>
+                                                            <label><input name="nianji" type="checkbox" value="5" />抑郁</label>
+                                                            <label><input name="nianji" type="checkbox" value="6" />多思多虑</label>
+                                                            <label><input name="nianji" type="checkbox" value="5" />其它</label>
+                                                            其它说明:<input type="text" id="nameTxt10" value="无" />
+                                                        </p>
+
+
+                                                    </p>
+                                                    <p>
+                                                        ----寒热：
+                                                        <p>
+                                                            <label><input name="nianji" type="checkbox" value="1" />正常</label>
+                                                            <label><input name="nianji" type="checkbox" value="2" />畏寒</label>
+                                                            <label><input name="nianji" type="checkbox" value="3" />五心烦热</label>
+                                                            <label><input name="nianji" type="checkbox" value="4" />午后潮热</label>
+                                                            <label><input name="nianji" type="checkbox" value="5" />低热不退</label>
+                                                        </p>
+
+
+                                                    </p>
+                                                </div>
+                                            </table>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-primary" id="tijiaoBtn2">提交</button>
+
+                                        </div>
+                                    </div><!-- /.modal-content -->
+                                </div><!-- /.modal-dialog -->
+                            </div>
+                            <!--其他情况-->
+                            <div id="modal-table3" class="modal fade" tabindex="-1">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header no-padding">
+                                            <div class="table-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                    <span class="white">&times;</span>
+                                                </button>
+                                                其它情况
+                                            </div>
+                                        </div>
+
+                                        <div class="modal-body no-padding">
+                                            <table class="table table-striped table-bordered table-hover no-margin-bottom no-border-top">
+                                                <div class="modal-body">
+                                                    <p>
+                                                        出身情况:
+                                                        <p>
+                                                            <label><input type="radio" value="2" name="dateTxt" />-----</label>
+                                                            <label><input type="radio" value="4" name="dateTxt" />早产(28周-37周)</label>
+                                                            <label><input type="radio" value="2" name="dateTxt" />足月产</label>
+                                                            <label><input type="radio" value="4" name="dateTxt" />阴道分娩</label>
+                                                            <label><input type="radio" value="2" name="dateTxt" />刨宫产</label>
+                                                        </p>
+                                                        <p>
+                                                            体力状况:
+                                                            <p>
+                                                                <label><input type="radio" value="2" name="dateTxt" />-----</label>
+                                                                <label><input type="radio" value="4" name="dateTxt" />好</label>
+                                                                <label><input type="radio" value="2" name="dateTxt" />一般</label>
+                                                                <label><input type="radio" value="2" name="dateTxt" />易疲劳乏力</label>
+                                                            </p>
+                                                            <p>
+                                                                职业体力活动:
+                                                                <p>
+                                                                    <label><input type="radio" value="2" name="dateTxt" />-----</label>
+                                                                    <label><input type="radio" value="4" name="dateTxt" />重体力劳动(如：搬运工、清洁工、农场工人、畜牧产工人等)</label>
+                                                                    <label><input type="radio" value="2" name="dateTxt" />中体力劳动(如：家政服务人员、服务生、厨师、护士等)</label>
+                                                                    <label><input type="radio" value="2" name="dateTxt" />中体力劳动(如：教师、美容美发师、批发商、职员等)</label>
+                                                                    <label><input type="radio" value="2" name="dateTxt" />坐式的工作(如：收银员、出纳员、接线员、秘书等)</label>
+                                                                </p>
+                                                                <p>
+                                                                    贫血与否:
+                                                                    <p>
+                                                                        <label><input type="radio" value="2" name="dateTxt" />-----</label>
+                                                                        <label><input type="radio" value="4" name="dateTxt" />不详</label>
+                                                                        <label><input type="radio" value="2" name="dateTxt" />贫血</label>
+                                                                        <label><input type="radio" value="4" name="dateTxt" />不贫血</label>
+                                                                    </p>
+
+                                                                    <p>
+                                                                        体育锻炼:
+                                                                        <p>
+                                                                            <label><input type="radio" value="2" name="dateTxt" />很少（≤1次/周）</label>
+                                                                            <label><input type="radio" value="4" name="dateTxt" />偶尔（≤3次/周）</label>
+                                                                            <label><input type="radio" value="2" name="dateTxt" />经常（≥4次/周）</label>
+                                                                            <label><input type="radio" value="4" name="dateTxt" />一般（少量出汗，心率≤120次/分）</label>
+                                                                            <label><input type="radio" value="4" name="dateTxt" />高强度（大汗淋漓，心率>120次/分）</label>
+                                                                        </p>
+                                                                        <p>
+                                                                            一级亲属（母亲、姐妹、女儿）异常子宫出血史:
+                                                                            <p>
+                                                                                <label><input type="radio" value="2"
+                                                                                        name="dateTxt" />-----</label>
+                                                                                <label><input type="radio" value="4"
+                                                                                        name="dateTxt" />无</label>
+                                                                                <label><input type="radio" value="2"
+                                                                                        name="dateTxt" />有</label>
+                                                                                <label><input type="radio" value="4"
+                                                                                        name="dateTxt" />不详</label>
+                                                                            </p>
+                                                                            <p>
+                                                                                是否为排卵障碍性:
+                                                                                <p>
+                                                                                    <label><input type="radio" value="2"
+                                                                                            name="dateTxt" />-----</label>
+                                                                                    <label><input type="radio" value="4"
+                                                                                            name="dateTxt" />是</label>
+                                                                                    <label><input type="radio" value="2"
+                                                                                            name="dateTxt" />否</label>
+                                                                                    <label><input type="radio" value="4"
+                                                                                            name="dateTxt" />不详</label>
+                                                                                </p>
+                                                                                <p>
+                                                                                    ----特殊嗜好：
+                                                                                    <p>
+                                                                                        <label><input name="nianji"
+                                                                                                type="checkbox" value="1" />无</label>
+                                                                                        <label><input name="nianji"
+                                                                                                type="checkbox" value="2" />吸烟</label>
+                                                                                        <label><input name="nianji"
+                                                                                                type="checkbox" value="3" />饮酒</label>
+                                                                                        <label><input name="nianji"
+                                                                                                type="checkbox" value="5" />其它</label>
+                                                                                        其它说明:<input type="text" id="nameTxt11"
+                                                                                            value="无" />
+                                                                                    </p>
+                                                                                    <p>
+                                                                                        ----减肥情况：
+                                                                                        <p>
+                                                                                            <label><input name="nianji"
+                                                                                                    type="checkbox"
+                                                                                                    value="1" />有减肥</label>
+                                                                                            <label><input name="nianji"
+                                                                                                    type="checkbox"
+                                                                                                    value="2" />运动减肥</label>
+                                                                                            <label><input name="nianji"
+                                                                                                    type="checkbox"
+                                                                                                    value="3" />节食减肥</label>
+                                                                                            <label><input name="nianji"
+                                                                                                    type="checkbox"
+                                                                                                    value="3" />药物减肥</label>
+                                                                                            <label><input name="nianji"
+                                                                                                    type="checkbox"
+                                                                                                    value="5" />其它</label>
+                                                                                            其它说明:<input type="text" id="nameTxt12"
+                                                                                                value="无" />
+                                                                                            初潮年龄:<input type="number"
+                                                                                                id="renshuTxt3" />
+                                                                                        </p>
+                                                                                        <p>
+                                                                                            ----经期情况:
+                                                                                            <p>
+                                                                                                经期运动：
+                                                                                                <label><input type="radio"
+                                                                                                        value="2" name="dateTxt" />-----</label>
+                                                                                                <label><input type="radio"
+                                                                                                        value="4" name="dateTxt" />有</label>
+                                                                                                <label><input type="radio"
+                                                                                                        value="2" name="dateTxt" />偶尔</label>
+                                                                                                <label><input type="radio"
+                                                                                                        value="4" name="dateTxt" />经常</label>
+                                                                                                <label><input type="radio"
+                                                                                                        value="4" name="dateTxt" />无</label>
+                                                                                            </p>
+                                                                                            <p>
+                                                                                                经期感冒：
+                                                                                                <label><input type="radio"
+                                                                                                        value="2" name="dateTxt" />-----</label>
+                                                                                                <label><input type="radio"
+                                                                                                        value="4" name="dateTxt" />有</label>
+                                                                                                <label><input type="radio"
+                                                                                                        value="2" name="dateTxt" />偶尔</label>
+                                                                                                <label><input type="radio"
+                                                                                                        value="4" name="dateTxt" />经常</label>
+                                                                                                <label><input type="radio"
+                                                                                                        value="4" name="dateTxt" />无</label>
+                                                                                            </p>
+                                                                                            <p>
+                                                                                                经期同房：
+                                                                                                <label><input type="radio"
+                                                                                                        value="2" name="dateTxt" />-----</label>
+                                                                                                <label><input type="radio"
+                                                                                                        value="4" name="dateTxt" />有</label>
+                                                                                                <label><input type="radio"
+                                                                                                        value="2" name="dateTxt" />偶尔</label>
+                                                                                                <label><input type="radio"
+                                                                                                        value="4" name="dateTxt" />经常</label>
+                                                                                                <label><input type="radio"
+                                                                                                        value="4" name="dateTxt" />无</label>
+                                                                                            </p>
+                                                                                            <p>
+                                                                                                经期着凉：
+                                                                                                <label><input type="radio"
+                                                                                                        value="2" name="dateTxt" />-----</label>
+                                                                                                <label><input type="radio"
+                                                                                                        value="4" name="dateTxt" />有</label>
+                                                                                                <label><input type="radio"
+                                                                                                        value="2" name="dateTxt" />偶尔</label>
+                                                                                                <label><input type="radio"
+                                                                                                        value="4" name="dateTxt" />经常</label>
+                                                                                                <label><input type="radio"
+                                                                                                        value="4" name="dateTxt" />无</label>
+                                                                                            </p>
+                                                                                            <p>
+                                                                                                ----平素带下情况：
+                                                                                                <p>
+                                                                                                    <label><input name="nianji"
+                                                                                                            type="checkbox"
+                                                                                                            value="1" />带下量少</label>
+                                                                                                    <label><input name="nianji"
+                                                                                                            type="checkbox"
+                                                                                                            value="2" />带下量可</label>
+                                                                                                    <label><input name="nianji"
+                                                                                                            type="checkbox"
+                                                                                                            value="3" />带下量多</label>
+                                                                                                    <label><input name="nianji"
+                                                                                                            type="checkbox"
+                                                                                                            value="3" />带下色黄</label>
+                                                                                                    <label><input name="nianji"
+                                                                                                            type="checkbox"
+                                                                                                            value="5" />带下色白</label>
+                                                                                                    <label><input name="nianji"
+                                                                                                            type="checkbox"
+                                                                                                            value="3" />带下色绿</label>
+                                                                                                    <label><input name="nianji"
+                                                                                                            type="checkbox"
+                                                                                                            value="3" />带下质清稀</label>
+                                                                                                    <label><input name="nianji"
+                                                                                                            type="checkbox"
+                                                                                                            value="5" />带下质黏稠</label>
+                                                                                                </p>
+                                                                                                <p>
+                                                                                                    ----既往病史：
+                                                                                                    <p>
+                                                                                                        <label><input
+                                                                                                                name="nianji"
+                                                                                                                type="checkbox"
+                                                                                                                value="1" />无</label>
+                                                                                                        <label><input
+                                                                                                                name="nianji"
+                                                                                                                type="checkbox"
+                                                                                                                value="2" />月经不调</label>
+                                                                                                        <label><input
+                                                                                                                name="nianji"
+                                                                                                                type="checkbox"
+                                                                                                                value="3" />阴道炎</label>
+                                                                                                        <label><input
+                                                                                                                name="nianji"
+                                                                                                                type="checkbox"
+                                                                                                                value="5" />子宫内膜炎</label>
+                                                                                                        <label><input
+                                                                                                                name="nianji"
+                                                                                                                type="checkbox"
+                                                                                                                value="1" />子宫内膜异位症</label>
+                                                                                                        <label><input
+                                                                                                                name="nianji"
+                                                                                                                type="checkbox"
+                                                                                                                value="2" />子宫腺肌症</label>
+                                                                                                        <label><input
+                                                                                                                name="nianji"
+                                                                                                                type="checkbox"
+                                                                                                                value="3" />盆腔炎</label>
+                                                                                                        <label><input
+                                                                                                                name="nianji"
+                                                                                                                type="checkbox"
+                                                                                                                value="5" />子宫肌瘤</label>
+                                                                                                        <label><input
+                                                                                                                name="nianji"
+                                                                                                                type="checkbox"
+                                                                                                                value="1" />卵巢囊肿</label>
+                                                                                                        <label><input
+                                                                                                                name="nianji"
+                                                                                                                type="checkbox"
+                                                                                                                value="2" />乳腺增生</label>
+                                                                                                        <label><input
+                                                                                                                name="nianji"
+                                                                                                                type="checkbox"
+                                                                                                                value="3" />甲状腺相关疾病</label>
+                                                                                                        <label><input
+                                                                                                                name="nianji"
+                                                                                                                type="checkbox"
+                                                                                                                value="5" />生殖器官发育异常</label>
+                                                                                                        <label><input
+                                                                                                                name="nianji"
+                                                                                                                type="checkbox"
+                                                                                                                value="1" />脑垂体瘤</label>
+                                                                                                        <label><input
+                                                                                                                name="nianji"
+                                                                                                                type="checkbox"
+                                                                                                                value="2" />肥胖</label>
+                                                                                                        <label><input
+                                                                                                                name="nianji"
+                                                                                                                type="checkbox"
+                                                                                                                value="3" />肝炎</label>
+                                                                                                        <label><input
+                                                                                                                name="nianji"
+                                                                                                                type="checkbox"
+                                                                                                                value="5" />结核</label>
+                                                                                                        <label><input
+                                                                                                                name="nianji"
+                                                                                                                type="checkbox"
+                                                                                                                value="5" />其它</label>
+                                                                                                        其它说明:<input
+                                                                                                            type="text"
+                                                                                                            id="nameTxt13"
+                                                                                                            value="无" />
+                                                                                                    </p>
+                                                                                                    <p>
+                                                                                                        ----月经不调病史：
+                                                                                                        <p>
+                                                                                                            <label><input
+                                                                                                                    name="nianji"
+                                                                                                                    type="checkbox"
+                                                                                                                    value="1" />月经周期絮乱</label>
+                                                                                                            <label><input
+                                                                                                                    name="nianji"
+                                                                                                                    type="checkbox"
+                                                                                                                    value="2" />月经量多</label>
+                                                                                                            <label><input
+                                                                                                                    name="nianji"
+                                                                                                                    type="checkbox"
+                                                                                                                    value="3" />月经周期缩短</label>
+                                                                                                            <label><input
+                                                                                                                    name="nianji"
+                                                                                                                    type="checkbox"
+                                                                                                                    value="3" />月经延后</label>
+                                                                                                            <label><input
+                                                                                                                    name="nianji"
+                                                                                                                    type="checkbox"
+                                                                                                                    value="5" />行经期延长</label>
+                                                                                                            <label><input
+                                                                                                                    name="nianji"
+                                                                                                                    type="checkbox"
+                                                                                                                    value="3" />月经停闭</label>
+                                                                                                            <label><input
+                                                                                                                    name="nianji"
+                                                                                                                    type="checkbox"
+                                                                                                                    value="3" />经期间出血</label>
+                                                                                                        </p>
+                                                                                                        <p>
+                                                                                                            ----一级亲属其它病史：
+                                                                                                            <p>
+                                                                                                                <label><input
+                                                                                                                        name="nianji"
+                                                                                                                        type="checkbox"
+                                                                                                                        value="1" />无</label>
+                                                                                                                <label><input
+                                                                                                                        name="nianji"
+                                                                                                                        type="checkbox"
+                                                                                                                        value="2" />高血压</label>
+                                                                                                                <label><input
+                                                                                                                        name="nianji"
+                                                                                                                        type="checkbox"
+                                                                                                                        value="3" />糖尿病</label>
+                                                                                                                <label><input
+                                                                                                                        name="nianji"
+                                                                                                                        type="checkbox"
+                                                                                                                        value="5" />心脏病</label>
+                                                                                                                <label><input
+                                                                                                                        name="nianji"
+                                                                                                                        type="checkbox"
+                                                                                                                        value="1" />多囊卵巢综合征</label>
+                                                                                                                <label><input
+                                                                                                                        name="nianji"
+                                                                                                                        type="checkbox"
+                                                                                                                        value="2" />不详</label>
+                                                                                                                <label><input
+                                                                                                                        name="nianji"
+                                                                                                                        type="checkbox"
+                                                                                                                        value="3" />其它</label>
+                                                                                                                其它说明:<input
+                                                                                                                    type="text"
+                                                                                                                    id="nameTxt14"
+                                                                                                                    value="无" />
+                                                                                                            </p>
+                                                                                                            <p>
+                                                                                                                ----孕育史：
+                                                                                                                <p>
+                                                                                                                    孕次总数:<input
+                                                                                                                        type="number"
+                                                                                                                        id="renshuTxt4" />
+                                                                                                                    <p>
+                                                                                                                        刨宫产次数:<input
+                                                                                                                            type="number"
+                                                                                                                            id="renshuTxt5" />
+                                                                                                                        <p>
+                                                                                                                            顺产次数:<input
+                                                                                                                                type="number"
+                                                                                                                                id="renshuTxt6" />
+                                                                                                                            <p>
+                                                                                                                                药物流产次数:<input
+                                                                                                                                    type="number"
+                                                                                                                                    id="renshuTxt7" />
+                                                                                                                                <p>
+                                                                                                                                    人工流产次数:<input
+                                                                                                                                        type="number"
+                                                                                                                                        id="renshuTxt8" />
+                                                                                                                                    <p>
+                                                                                                                                        自然流产次数:<input
+                                                                                                                                            type="number"
+                                                                                                                                            id="renshuTxt9" />
+                                                                                                                                        <p>
+                                                                                                                                            生化妊娠次数:<input
+                                                                                                                                                type="number"
+                                                                                                                                                id="renshuTxt10" />
+                                                                                                                                            <p>
+                                                                                                                                                异位妊娠次数:<input
+                                                                                                                                                    type="number"
+                                                                                                                                                    id="renshuTxt11" />
+                                                                                                                                                <p>
+                                                                                                                                                    胎停育次数:<input
+                                                                                                                                                        type="number"
+                                                                                                                                                        id="renshuTxt12" />
+                                                                                                                                                    <p>
+                                                                                                                                                        清宫术次数:<input
+                                                                                                                                                            type="number"
+                                                                                                                                                            id="renshuTxt13" />
+                                                                                                                                                    </p>
+                                                                                                                                                    <p>
+                                                                                                                                                        ----避孕措施：
+                                                                                                                                                        <p>
+                                                                                                                                                            <label><input
+                                                                                                                                                                    name="nianji"
+                                                                                                                                                                    type="checkbox"
+                                                                                                                                                                    value="1" />结扎</label>
+                                                                                                                                                            <label><input
+                                                                                                                                                                    name="nianji"
+                                                                                                                                                                    type="checkbox"
+                                                                                                                                                                    value="2" />宫内节育器</label>
+                                                                                                                                                            <label><input
+                                                                                                                                                                    name="nianji"
+                                                                                                                                                                    type="checkbox"
+                                                                                                                                                                    value="3" />避孕套</label>
+                                                                                                                                                            <label><input
+                                                                                                                                                                    name="nianji"
+                                                                                                                                                                    type="checkbox"
+                                                                                                                                                                    value="3" />口服避孕药</label>
+                                                                                                                                                            <p>
+                                                                                                                                                                末次口服避孕药时间:<input
+                                                                                                                                                                    type="number"
+                                                                                                                                                                    id="renshuTxt14" />
+                                                                                                                                                                <p>
+                                                                                                                                                                    <label><input
+                                                                                                                                                                            name="nianji"
+                                                                                                                                                                            type="checkbox"
+                                                                                                                                                                            value="1" />去氧孕烯炔雌片（妈富隆）</label>
+                                                                                                                                                                    <label><input
+                                                                                                                                                                            name="nianji"
+                                                                                                                                                                            type="checkbox"
+                                                                                                                                                                            value="2" />炔雌醇环丙孕酮片（达英-35）</label>
+                                                                                                                                                                    <label><input
+                                                                                                                                                                            name="nianji"
+                                                                                                                                                                            type="checkbox"
+                                                                                                                                                                            value="3" />屈螺酮炔雌醇片（优思明）</label>
+                                                                                                                                                                    <label><input
+                                                                                                                                                                            name="nianji"
+                                                                                                                                                                            type="checkbox"
+                                                                                                                                                                            value="3" />左炔诺孕酮复方左炔诺孕酮</label>
+                                                                                                                                                                    <label><input
+                                                                                                                                                                            name="nianji"
+                                                                                                                                                                            type="checkbox"
+                                                                                                                                                                            value="3" />复方左炔诺孕酮</label>
+                                                                                                                                                                    <label><input
+                                                                                                                                                                            name="nianji"
+                                                                                                                                                                            type="checkbox"
+                                                                                                                                                                            value="5" />其它</label>
+                                                                                                                                                                    <p>
+                                                                                                                                                                        其它说明:<input
+                                                                                                                                                                            type="text"
+                                                                                                                                                                            id="nameTxt15"
+                                                                                                                                                                            value="无" />
+                                                                                                                                                                    </p>
+                                                                                                                                                                    <p>
+                                                                                                                                                                        ----其它辅助检查：
+                                                                                                                                                                        <p>
+                                                                                                                                                                            血红蛋白值：
+                                                                                                                                                                            <label><input
+                                                                                                                                                                                    type="radio"
+                                                                                                                                                                                    value="2"
+                                                                                                                                                                                    name="dateTxt" />-----</label>
+                                                                                                                                                                            <label><input
+                                                                                                                                                                                    type="radio"
+                                                                                                                                                                                    value="4"
+                                                                                                                                                                                    name="dateTxt" />>110</label>
+                                                                                                                                                                            <label><input
+                                                                                                                                                                                    type="radio"
+                                                                                                                                                                                    value="2"
+                                                                                                                                                                                    name="dateTxt" />91-110</label>
+                                                                                                                                                                            <label><input
+                                                                                                                                                                                    type="radio"
+                                                                                                                                                                                    value="4"
+                                                                                                                                                                                    name="dateTxt" />61-90</label>
+                                                                                                                                                                            <label><input
+                                                                                                                                                                                    type="radio"
+                                                                                                                                                                                    value="4"
+                                                                                                                                                                                    name="dateTxt" />30-60</label>
+                                                                                                                                                                            <p>
+                                                                                                                                                                                <label><input
+                                                                                                                                                                                        name="nianji"
+                                                                                                                                                                                        type="checkbox"
+                                                                                                                                                                                        value="1" />全血细胞计数</label>
+                                                                                                                                                                                <label><input
+                                                                                                                                                                                        name="nianji"
+                                                                                                                                                                                        type="checkbox"
+                                                                                                                                                                                        value="2" />出血性疾病筛查（如女性血管性血友病）</label>
+                                                                                                                                                                                <label><input
+                                                                                                                                                                                        name="nianji"
+                                                                                                                                                                                        type="checkbox"
+                                                                                                                                                                                        value="3" />甲状腺功能检测</label>
+                                                                                                                                                                                <label><input
+                                                                                                                                                                                        name="nianji"
+                                                                                                                                                                                        type="checkbox"
+                                                                                                                                                                                        value="5" />尿妊娠试验</label>
+                                                                                                                                                                                <label><input
+                                                                                                                                                                                        name="nianji"
+                                                                                                                                                                                        type="checkbox"
+                                                                                                                                                                                        value="1" />盆腔超声检查</label>
+                                                                                                                                                                                <label><input
+                                                                                                                                                                                        name="nianji"
+                                                                                                                                                                                        type="checkbox"
+                                                                                                                                                                                        value="2" />基础体温测定</label>
+                                                                                                                                                                                <label><input
+                                                                                                                                                                                        name="nianji"
+                                                                                                                                                                                        type="checkbox"
+                                                                                                                                                                                        value="1" />激素水平测定</label>
+                                                                                                                                                                                <label><input
+                                                                                                                                                                                        name="nianji"
+                                                                                                                                                                                        type="checkbox"
+                                                                                                                                                                                        value="2" />诊断性刮宫或宫腔镜下刮宫</label>
+                                                                                                                                                                                <label><input
+                                                                                                                                                                                        name="nianji"
+                                                                                                                                                                                        type="checkbox"
+                                                                                                                                                                                        value="3" />其它</label>
+                                                                                                                                                                                其它说明:<input
+                                                                                                                                                                                    type="text"
+                                                                                                                                                                                    id="nameTxt16"
+                                                                                                                                                                                    value="无" />
+                                                                                                                                                                            </p>
+                                                </div>
+                                            </table>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-primary" id="tijiaoBtn3">提交</button>
+
+                                        </div>
+                                    </div><!-- /.modal-content -->
+                                </div><!-- /.modal-dialog -->
+                            </div>
+                            <!--临床诊断-->
+                            <div id="modal-table4" class="modal fade" tabindex="-1">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header no-padding">
+                                            <div class="table-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                    <span class="white">&times;</span>
+                                                </button>
+                                                临床诊断
+                                            </div>
+                                        </div>
+
+                                        <div class="modal-body no-padding">
+                                            <table class="table table-striped table-bordered table-hover no-margin-bottom no-border-top">
+                                                <div class="modal-body">
+                                                    <p>
+                                                        ----中医诊断：
+                                                        <p>
+                                                            <label><input name="nianji" type="checkbox" value="1" />崩漏</label>
+                                                            <label><input name="nianji" type="checkbox" value="2" />月经过多</label>
+                                                            <label><input name="nianji" type="checkbox" value="3" />月经先期</label>
+                                                            <label><input name="nianji" type="checkbox" value="4" />经期延长</label>
+                                                            <label><input name="nianji" type="checkbox" value="5" />经间期出血</label>
+                                                        </p>
+                                                        <p>
+                                                            ----虚证诊断：
+                                                            <p>
+                                                                <label><input name="nianji" type="checkbox" value="1" />肾阴虚症</label>
+                                                                <label><input name="nianji" type="checkbox" value="2" />肾阳虚症</label>
+                                                                <label><input name="nianji" type="checkbox" value="3" />肾气虚症</label>
+                                                                <label><input name="nianji" type="checkbox" value="4" />脾气虚症</label>
+                                                                <label><input name="nianji" type="checkbox" value="5" />气虚下陷症</label>
+                                                                <label><input name="nianji" type="checkbox" value="6" />虚热症</label>
+                                                                <label><input name="nianji" type="checkbox" value="5" />心脾两虚症</label>
+                                                                <label><input name="nianji" type="checkbox" value="5" />脾肾阳虚症</label>
+                                                                <label><input name="nianji" type="checkbox" value="6" />气血亏虚症</label>
+                                                                <label><input name="nianji" type="checkbox" value="6" />肝肾阴虚症</label>
+                                                                <label><input name="nianji" type="checkbox" value="5" />其它</label>
+                                                                其它说明:<input type="text" id="nameTxt17" value="无" />
+                                                            </p>
+                                                            <p>
+                                                                ----实证诊断：
+                                                                <p>
+                                                                    <label><input name="nianji" type="checkbox" value="1" />肝郁血热症</label>
+                                                                    <label><input name="nianji" type="checkbox" value="2" />阳盛血热症</label>
+                                                                    <label><input name="nianji" type="checkbox" value="3" />肝经湿热症</label>
+                                                                    <label><input name="nianji" type="checkbox" value="4" />痰热瘀阻症</label>
+                                                                    <label><input name="nianji" type="checkbox" value="5" />痰湿阻滞症</label>
+                                                                    <label><input name="nianji" type="checkbox" value="6" />痰瘀阻滞症</label>
+                                                                    <label><input name="nianji" type="checkbox" value="5" />瘀热互结症</label>
+                                                                    <label><input name="nianji" type="checkbox" value="5" />血瘀症</label>
+                                                                    <label><input name="nianji" type="checkbox" value="6" />气滞血瘀症</label>
+                                                                    <label><input name="nianji" type="checkbox" value="6" />寒凝血淤症</label>
+                                                                    <label><input name="nianji" type="checkbox" value="5" />其它</label>
+                                                                    <p>
+                                                                        其它说明:<input type="text" id="nameTxt18" value="无" />
+                                                                    </p>
+
+                                                                    <p>
+                                                                        ----虚实夹杂诊断：
+                                                                        <p>
+                                                                            <label><input name="nianji" type="checkbox"
+                                                                                    value="1" />肾虚血瘀症</label>
+                                                                            <label><input name="nianji" type="checkbox"
+                                                                                    value="2" />肾虚血瘀症</label>
+                                                                            <label><input name="nianji" type="checkbox"
+                                                                                    value="3" />肾虚肝郁症</label>
+                                                                            <label><input name="nianji" type="checkbox"
+                                                                                    value="4" />气虚血瘀症</label>
+                                                                            <label><input name="nianji" type="checkbox"
+                                                                                    value="5" />阴虚血瘀症</label>
+                                                                            <label><input name="nianji" type="checkbox"
+                                                                                    value="6" />阴虚火旺症</label>
+                                                                            <label><input name="nianji" type="checkbox"
+                                                                                    value="5" />肝郁脾虚症</label>
+                                                                            <label><input name="nianji" type="checkbox"
+                                                                                    value="5" />其它</label>
+                                                                            其它说明:<input type="text" id="nameTxt19"
+                                                                                value="无" />
+                                                                        </p>
+                                                                        <p>
+                                                                            ----西医诊断：
+                                                                            <p>
+                                                                                <label><input name="nianji" type="checkbox"
+                                                                                        value="1" />多囊卵巢综合症</label>
+                                                                                <label><input name="nianji" type="checkbox"
+                                                                                        value="2" />高泌乳素血症</label>
+                                                                                <label><input name="nianji" type="checkbox"
+                                                                                        value="3" />低促行线激素疾病</label>
+                                                                                <label><input name="nianji" type="checkbox"
+                                                                                        value="5" />其它</label>
+                                                                                <p>
+                                                                                    其它说明:<input type="text" id="nameTxt20"
+                                                                                        value="无" />
+                                                                                </p>
+                                                </div>
+                                            </table>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-primary" id="tijiaoBtn4">提交</button>
+
+                                        </div>
+                                    </div><!-- /.modal-content -->
+                                </div><!-- /.modal-dialog -->
+                            </div>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.page-content -->
+            </div><!-- /.main-content -->
+
+        </div><!-- /.main-container-inner -->
+
+        <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+            <i class="icon-double-angle-up icon-only bigger-110"></i>
+        </a>
+    </div>
+
+
+    <!--[if !IE]> -->
+
+    <script type="text/javascript">
+        window.jQuery || document.write("<script src='../public/js/jquery-2.0.3.min.js'>" + "<" + "/script>");
+    </script>
+
+    <!-- <![endif]-->
+
+    <!--[if IE]>
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+</script>
+<![endif]-->
+
+    <script type="text/javascript">
+        if ("ontouchend" in document) document.write("<script src='../public/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+    </script>
+    <script src="../public/js/bootstrap.min.js"></script>
+    <script src="../public/js/typeahead-bs2.min.js"></script>
+
+    <!-- page specific plugin scripts -->
+    <script src="../public/js/jquery.dataTables.min.js"></script>
+    <script src="../public/js/jquery.dataTables.bootstrap.js"></script>
+    <!-- ace scripts -->
+
+    <script src="../public/js/ace-elements.min.js"></script>
+    <script src="../public/js/ace.min.js"></script>
+
+    <!-- inline scripts related to this page -->
+    <script type="text/javascript">
+        jQuery(function ($) {
+            var oTable1 = $('#sample-table-2').dataTable({
+                "aoColumns": [{
+                        "bSortable": false
+                    },
+                    null, null, null, null, null,
+                    {
+                        "bSortable": false
+                    }
+                ]
+            });
+
+
+            $('table th input:checkbox').on('click', function () {
+                var that = this;
+                $(this).closest('table').find('tr > td:first-child input:checkbox')
+                    .each(function () {
+                        this.checked = that.checked;
+                        $(this).closest('tr').toggleClass('selected');
+                    });
+
+            });
+
+
+            $('[data-rel="tooltip"]').tooltip({
+                placement: tooltip_placement
+            });
+
+            function tooltip_placement(context, source) {
+                var $source = $(source);
+                var $parent = $source.closest('table')
+                var off1 = $parent.offset();
+                var w1 = $parent.width();
+
+                var off2 = $source.offset();
+                var w2 = $source.width();
+
+                if (parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2)) return 'right';
+                return 'left';
+            }
+        })
+    </script>
+
+    <script type="text/javascript">
+        var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+        document.write(unescape("%3Cscript src='" + _bdhmProtocol + ""));
+    </script>
+</body>
+
+</html>
