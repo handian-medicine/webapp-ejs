@@ -8,42 +8,17 @@
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- basic styles -->
-
     <link rel="stylesheet" href="../public/css/bootstrap.min.css">
     <link rel="stylesheet" href="../public/css/font-awesome.min.css">
 
-    <!--[if IE 7]>
-    <link rel="stylesheet" href="css/font-awesome-ie7.min.css" />
-    <![endif]-->
-
-    <!-- page specific plugin styles -->
-
-    <!-- fonts -->
-
-    <!-- ace styles -->
     <link rel="stylesheet" href="../public/css/ace.min.css">
     <link rel="stylesheet" href="../public/css/ace-rtl.min.css">
     <link rel="stylesheet" href="../public/css/ace-skins.min.css">
-    <!--[if lte IE 8]>
-    <link rel="stylesheet" href="css/ace-ie.min.css" />
-    <![endif]-->
-
 
     <script language="JavaScript" src="../public/js/bootstrap.min.js"></script>
 
-    <!-- inline styles related to this page -->
-
-    <!-- ace settings handler -->
-
     <script src="../public/js/ace-extra.min.js"></script>
 
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-
-    <!--[if lt IE 9]>
-    <script src="js/html5shiv.js"></script>
-    <script src="js/respond.min.js"></script>
-    <![endif]-->
     <style>
         /* 侧边栏分辨率大于等于 768px 时 宽度设置250px） 小于768px时 样式表不起作用 */
         @media (min-width: 768px) {
@@ -86,7 +61,7 @@
                         <img class="nav-user-photo" src="../public/avatars/user.jpg" alt="Jason's Photo">
                         <span class="user-info">
                             <small>welcome,</small>
-                            admin
+                            <%= userobj.user_name %>
                         </span>
 
                         <i class="icon-caret-down"></i>
@@ -119,14 +94,15 @@
         <ul class="nav">
             <% prjs.forEach(function(prj){ %>
             <% if (prj.status == "进行中"){ %>
-            <li><a href="<%= prj.linkurl %>"><%= prj.name %><span class="glyphicon glyphicon-chevron-right pull-right"></span>
+            <li style="background-color: #EEEEEE"><a href="<%= prj.linkurl %>">
+                    <%= prj.name %><span class="glyphicon glyphicon-chevron-right pull-right">
+                    </span>
                 </a>
             </li>
             <% }else { %>
             <li>
                 <a href="<%= prj.linkurl %>">
                     <%= prj.name %><span class="glyphicon glyphicon-chevron-right pull-right">
-                        <%= prj.status %>
                     </span>
                 </a>
             </li>
@@ -157,7 +133,7 @@
     <!--[if !IE]> -->
 
     <script type="text/javascript">
-        window.jQuery || document.write("<script src='js/jquery-2.0.3.min.js'>" + "<" + "/script>");
+        window.jQuery || document.write("<script src='../public/js/jquery-2.0.3.min.js'>" + "<" + "/script>");
     </script>
 
     <!-- <![endif]-->
@@ -169,7 +145,8 @@
 <![endif]-->
 
     <script type="text/javascript">
-        if ("ontouchend" in document) document.write("<script src='js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+        if ("ontouchend" in document) document.write("<script src='../public/js/jquery.mobile.custom.min.js'>" + "<" +
+            "/script>");
     </script>
     <script src="../public/js/bootstrap.min.js"></script>
     <script src="../public/js/typeahead-bs2.min.js"></script>

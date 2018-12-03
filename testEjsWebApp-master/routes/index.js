@@ -9,8 +9,9 @@ router.get('/', function (req, res, next) {
     console.log(">>>method: ", req.method);
     console.log(">>>path: ", req.path);
     console.log(">>>headers: ", req.headers);
-    res.render('login', {title: 'Chinese Clinical Investigation Center'});
-});
+    res.render('login', {title: '中医妇产科临床流调数据中心'});
+}); 
+//Chinese Clinical Investigation Center
 
 /* GET projects list page. */
 router.get('/home', function (req, res, next) {
@@ -61,7 +62,7 @@ router.get('/home', function (req, res, next) {
                         var userobj = JSON.parse(body);
                         console.log(">>>userobj project: ", userobj);
                         console.log(">>>项目列表: ", userobj.myprojects[0].linkurl);
-                        res.render('home', {title: '临床流调项目中心', prjs: userobj.myprojects});
+                        res.render('home', {title: '临床流调项目中心', prjs: userobj.myprojects, userobj: userobj});
                     }
                     else {
                         console.log(">>>Getting user details met unknown error. "+err.error_description);

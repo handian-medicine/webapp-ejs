@@ -27,19 +27,22 @@ router.post('/login', function (req, res, next) {
             var obj = JSON.parse(body); //由JSON字符串转换为JSON对象
             // 请求成功的处理逻辑
             // 登陆成功后将token写入Cookie，maxAge为cookie过期时间
-            console.log(">>>users.js -> obj: ", obj)
+            console.log(">>>users.js -> obj: ", obj);
             res.cookie("usertoken", {
                 "access_token": obj.access_token,
                 "refresh_token": obj.refresh_token,
                 "scope": obj.scope,
                 "expires_in": obj.expires_in
             }, {maxAge: 1000 * 60 * 60 * 4, httpOnly: true});//cookie 4小时有效时间
-
+            console.log(">>>users.js -> res.cookie: ", res.cookie);
             res.cookie("userinfo", {
                 "email": req.body.email,
                 "password": req.body.pass
             }, {maxAge: 1000 * 60 * 60 * 4, httpOnly: true});//cookie 4小时有效时间
             //以上设置的两个cookie未来都需要以base64进行编码以防泄密
+            console.log(">>>users.js -> Set-Cookie: ", res.get('Set-Cookie'));           
+            //res.set('Set-Cookie',[Buffer.from(res.get('Set-Cookie')[0]).toString('base64'), Buffer.from(res.get('Set-Cookie')[1]).toString('base64')]);
+            //console.log(">>>users.js -> Set-Cookie base64: ", res.get('Set-Cookie'));
 
             // 返回成功代码，转到项目列表页面
             res.json({status:1, msg:"登录成功"});

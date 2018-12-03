@@ -7,7 +7,7 @@
 
     <!-- basic styles -->
 
-    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
 
     <!--[if IE 7]>
@@ -28,11 +28,6 @@
 
     <!-- inline styles related to this page -->
 
-    <!--form-->
-    <link rel="stylesheet" type="text/css" href="css/hdw.css"/>
-    <script type="text/javascript" src="js/jquery-1.6.4.min.js"></script>
-    <script type="text/javascript" src="js/hdw.js"></script>
-
     <!-- ace settings handler -->
 
     <script src="js/ace-extra.min.js"></script>
@@ -47,20 +42,6 @@
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <style>
-        .btn1 {
-            padding: 6px 12px;
-            font-size: 14px;
-            font-weight: normal;
-            /*line-height: 1.428571429;*/
-            text-align: center;
-            white-space: nowrap;
-            user-select: none;
-        }
-        .register{
-            font-size: 12px;
-        }
-    </style>
 </head>
 <body>
 <!-- 导航 -->
@@ -83,20 +64,20 @@
 </div>
 
 <!-- 登录 -->
-<form method="post" action="">
-    <div class="one">
-        <label for="username">用户名：</label>
-        <input type="text" id="username" class="a1" />
-    </div>
-    <div class="one">
-        <label for="passwowd">密码：</label>
-        <input type="password" id="password" class="a1" />
-    </div>
-    <div class="two">
-        <input class="btn1 btn-primary" type="submit" id="send" value="登录">
-        <a href="register.html" class="register">快速注册</a>
-    </div>
-</form>
+<table>
+    <tbody>
+    <tr>
+        <th><label for="id_email">电子邮箱:</label></th>
+        <td><input type="text" name="email" maxlength="50" required="" id="id_email"></td>
+    </tr>
+    <tr>
+        <th><label for="id_password">密码:</label></th>
+        <td><input type="password" name="password" required="" id="id_password"></td>
+    </tr>
+    </tbody>
+</table>
+<button type="submit" id="userLogin">登录</button>
+
 
 
 <!--[if !IE]> -->
