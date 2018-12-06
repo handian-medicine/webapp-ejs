@@ -27,7 +27,7 @@
 
         <div class="navbar-container" id="navbar-container">
             <div class="navbar-header pull-left">
-                <a href="../public/page.html" class="navbar-brand">
+                <a href="../home" class="navbar-brand">
                     <small>
                         <i class="icon-leaf">
                             中医妇产科临床流调数据中心
@@ -44,7 +44,7 @@
                         <img class="nav-user-photo" src="../public/avatars/user.jpg" alt="Jason's Photo">
                         <span class="user-info">
                             <small>welcome,</small>
-                            admin
+                            <%= username %>
                         </span>
 
                         <i class="icon-caret-down"></i>
@@ -84,14 +84,14 @@
 
                 <ul class="nav nav-list">
                     <li>
-                        <a href="../public/datalist.html">
+                        <a href="/prj001">
                             <i class="icon-dashboard"></i>
                             <span class="menu-text"> 数据展示 </span>
                         </a>
                     </li>
 
                     <li>
-                        <a href="../public/datainput.html">
+                        <a href="../datainput">
                             <i class="icon-text-width"></i>
                             <span class="menu-text"> 数据采集 </span>
                         </a>
@@ -167,7 +167,6 @@
                                             <tbody>
                                                 <% archives.forEach(function(archive){ %>
                                                 <tr>
-
                                                     <td><a href="../public/bingo.html"><%= archive.name %></a></td>
                                                     <td><%= archive.nation %></td>
                                                     <td class=""><%= archive.age %></td>
@@ -184,17 +183,14 @@
                                                                 <a href="#modal-table" class="blue" role="button"
                                                                     data-toggle="modal">一般情况</a>
                                                             </button>
-
                                                             <button class="btn btn-xs btn-info">
                                                                 <a href="#modal-table1" class="blue" role="button"
                                                                     data-toggle="modal">月经情况</a>
                                                             </button>
-
                                                             <button class="btn btn-xs btn-danger">
                                                                 <a href="#modal-table2" class="blue" role="button"
                                                                     data-toggle="modal">全身症状</a>
                                                             </button>
-
                                                             <button class="btn btn-xs btn-warning">
                                                                 <a href="#modal-table3" class="blue" role="button"
                                                                     data-toggle="modal">其它情况</a>
@@ -204,14 +200,12 @@
                                                                     data-toggle="modal">临床诊断</a>
                                                             </button>
                                                         </div>
-
                                                         <div class="visible-xs visible-sm hidden-md hidden-lg">
                                                             <div class="inline position-relative">
                                                                 <button class="btn btn-minier btn-primary dropdown-toggle"
                                                                     data-toggle="dropdown">
                                                                     <i class="icon-cog icon-only bigger-110"></i>
                                                                 </button>
-
                                                                 <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
                                                                     <li>
                                                                         <a href="#modal-table" class="tooltip-info"
@@ -221,7 +215,6 @@
                                                                             </span>
                                                                         </a>
                                                                     </li>
-
                                                                     <li>
                                                                         <a href="#modal-table1" class="tooltip-success"
                                                                             data-toggle="modal">
@@ -230,7 +223,6 @@
                                                                             </span>
                                                                         </a>
                                                                     </li>
-
                                                                     <li>
                                                                         <a href="#modal-table2" class="tooltip-error"
                                                                             data-toggle="modal">
@@ -239,7 +231,6 @@
                                                                             </span>
                                                                         </a>
                                                                     </li>
-
                                                                     <li>
                                                                         <a href="#modal-table3" class="tooltip-info"
                                                                             data-toggle="modal">
@@ -248,7 +239,6 @@
                                                                             </span>
                                                                         </a>
                                                                     </li>
-
                                                                     <li>
                                                                         <a href="#modal-table4" class="tooltip-info"
                                                                             data-toggle="modal">
@@ -263,8 +253,6 @@
                                                     </td>
                                                 </tr>
                                                 <% }) %>
-
-
                                             </tbody>
                                         </table>
                                     </div>
@@ -1378,8 +1366,6 @@
                     }
                 ]
             });
-
-
             $('table th input:checkbox').on('click', function () {
                 var that = this;
                 $(this).closest('table').find('tr > td:first-child input:checkbox')
@@ -1387,23 +1373,17 @@
                         this.checked = that.checked;
                         $(this).closest('tr').toggleClass('selected');
                     });
-
             });
-
-
             $('[data-rel="tooltip"]').tooltip({
                 placement: tooltip_placement
             });
-
             function tooltip_placement(context, source) {
                 var $source = $(source);
                 var $parent = $source.closest('table')
                 var off1 = $parent.offset();
                 var w1 = $parent.width();
-
                 var off2 = $source.offset();
                 var w2 = $source.width();
-
                 if (parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2)) return 'right';
                 return 'left';
             }

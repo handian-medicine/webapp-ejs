@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>数据采集</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- basic styles -->
+
+    <link rel="stylesheet" href="../public/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../public/css/font-awesome.min.css">
+
+    <!--[if IE 7]>
+    <link rel="stylesheet" href="../public/css/font-awesome-ie7.min.css" />
+    <![endif]-->
+
+    <!-- page specific plugin styles -->
+    <link rel="stylesheet" href="../public/css/jquery-ui-1.10.3.custom.min.css" />
+    <link rel="stylesheet" href="../public/css/chosen.css" />
+    <link rel="stylesheet" href="../public/css/datepicker.css" />
+    <link rel="stylesheet" href="../public/css/bootstrap-timepicker.css" />
+    <link rel="stylesheet" href="../public/css/daterangepicker.css" />
+    <link rel="stylesheet" href="../public/css/colorpicker.css" />
+    <!-- fonts -->
+
+    <!-- ace styles -->
+    <link rel="stylesheet" href="../public/css/ace.min.css">
+    <link rel="stylesheet" href="../public/css/ace-rtl.min.css">
+    <link rel="stylesheet" href="../public/css/ace-skins.min.css">
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="../public/css/ace-ie.min.css" />
+    <![endif]-->
+
+    <!-- inline styles related to this page -->
+
+    <!-- ace settings handler -->
+
+    <script src="../public/js/ace-extra.min.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+
+    <!--[if lt IE 9]>
+    <script src="../public/../public/js/html5shiv.js"></script>
+    <script src="../public/../public/js/respond.min.js"></script>
+    <![endif]-->
+    <script src="/public/javascripts/jquery.min.js"></script>
+</head>
+
+<body>
+    <script>
+        $(document).ready(function () {
+            $("#tijiaoBtn").click(function () {
+                            alert($('#form1').serialize());
+                            $.ajax({
+                                url: "/datainput", //用来处理ajax请求的函数的所在网址路径
+                                type: "POST",
+                                dataType: "json",
+                                data: $('#form1').serialize(), //#form表单的名字
+                                success: function (result) {
+                                    console.log(result);
+                                    if (result.resultCode == 200) {
+                                        alert("SUCCESS");
+                                        window.location.href = '/datainput'; //    请求成功后跳转到项目主页
+                                    } else {
+                                        alert("异常");
+                                    }
+                                },
+                                error: function () {
+                                    alert("异常");
+                                    window.location.href = '/home';
+                                }
+                            });
+                        })
+                })
+    </script>
+    <!-- 导航 -->
+    <div class="navbar navbar-default" id="navbar">
+        <script type="text/javascript">
+            try {
+                ace.settings.check('navbar', 'fixed')
+            } catch (e) {}
+        </script>
+
+        <div class="navbar-container" id="navbar-container">
+            <div class="navbar-header pull-left">
+                <a href="../home" class="navbar-brand">
+                    <small>
+                        <i class="icon-leaf">
+                            中医妇产科临床流调数据中心
+                        </i>
+                    </small>
+                </a>
+            </div>
+        </div>
+
+        <div class="navbar-header pull-right" role="navigation">
+            <ul class="nav ace-nav">
+                <li class="light-blue">
+                    <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                        <img class="nav-user-photo" src="../public/avatars/user.jpg" alt="Jason's Photo">
+                        <span class="user-info">
+                            <small>welcome,</small>
+                            admin
+                        </span>
+
+                        <i class="icon-caret-down"></i>
+                    </a>
+
+                    <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+
+                        <li class="divider"></li>
+
+                        <li>
+                            <a href="logout.html">
+                                <i class="icon-off"></i>
+                                Logout
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="main-container" id="main-container">
+        <script type="text/javascript">
+            try {
+                ace.settings.check('main-container', 'fixed')
+            } catch (e) {}
+        </script>
+
+        <div class="main-container-inner">
+            <a class="menu-toggler" id="menu-toggler" href="#">
+                <span class="menu-text"></span>
+            </a>
+
+            <div class="sidebar" id="sidebar">
+                <script type="text/javascript">
+                    try {
+                        ace.settings.check('sidebar', 'fixed')
+                    } catch (e) {}
+                </script>
+
+                <ul class="nav nav-list">
+                    <li>
+                        <a href="../prj001">
+                            <i class="icon-dashboard"></i>
+                            <span class="menu-text"> 数据展示 </span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="../datainput">
+                            <i class="icon-text-width"></i>
+                            <span class="menu-text"> 数据采集 </span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="../public/dataana.html">
+                            <i class="icon-list-alt"></i>
+                            <span class="menu-text"> 数据分析 </span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="../public/about.html">
+                            <i class="icon-picture"></i>
+                            <span class="menu-text"> 关于 </span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="sidebar-collapse" id="sidebar-collapse">
+                    <i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
+                </div>
+
+                <script type="text/javascript">
+                    try {
+                        ace.settings.check('sidebar', 'collapsed')
+                    } catch (e) {}
+                </script>
+            </div>
+
+            <div class="main-content">
+                <div class="page-content">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <form class="form-search" id="sample-table-2_filter">
+                                <span class="input-icon align-middle">
+                                    <i class="icon-search"></i>
+
+                                    <input type="text" class="search-query" placeholder="输入文件标记名称" />
+                                </span>
+                                <button class="btn btn-sm" onclick="return false;">提交</button>
+                            </form>
+                            <hr>
+
+                            <h4 class="pink">
+                                <i class="icon-hand-right icon-animated-hand-pointer blue"></i>
+                                <a href="#modal-table" role="button" class="green" data-toggle="modal"> Table Inside a
+                                    Modal Box </a>
+                            </h4>
+                            <div id="modal-table" class="modal fade" tabindex="-1">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header no-padding">
+                                            <div class="table-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                    <span class="white">&times;</span>
+                                                </button>
+                                                基本信息
+                                            </div>
+                                        </div>
+
+                                        <form class="modal-body no-padding" id="form1">
+                                            <table class="table table-striped table-bordered table-hover no-margin-bottom no-border-top">
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <div class="col-xs-12 col-sm-12">
+
+                                                            日期：
+                                                            <input type="date" id="recdate" name="recdate" class="form-control hasDatepicker">
+
+                                                            </p>
+                                                            <p>
+                                                                问卷编码:<input class="form-control" id="serial" name="serial"
+                                                                    type="text" />
+                                                            </p>
+                                                            <p>
+                                                                医院名称:<input class="form-control" id="hospital" name="hospital"
+                                                                    type="text" />
+                                                            </p>
+                                                            <p>
+                                                                填表专家姓名:<input class="form-control" id="expert" name="expert"
+                                                                    type="text" />
+                                                            </p>
+                                                            <p>
+                                                                职称:
+                                                                <label><input type="radio" value="主任医师" name="title" />主任医师</label>
+                                                                <label><input type="radio" value="副主任医师" name="title" />副主任医师</label>
+                                                                <label><input type="radio" value="主治医师" name="title" />主治医师</label>
+                                                            </p>
+                                                            <p>
+                                                                患者姓名:<input class="form-control" id="name" name="name"
+                                                                    type="text" />
+                                                            </p>
+                                                            <p>
+                                                                电话:<input class="form-control" id="telephone" name="telephone"
+                                                                    type="text" />
+                                                            </p>
+                                                            <p>
+                                                                年龄:<input class="form-control" type="number" name="age"
+                                                                    id="age" />
+                                                            </p>
+                                                            <p>
+                                                                身高cm:<input class="form-control" type="number" name="height"
+                                                                    id="height" />
+                                                            </p>
+                                                            <p>
+                                                                体重kg:<input class="form-control" type="number" id="weight "
+                                                                    name="weight " />
+                                                            </p>
+                                                            <p>
+                                                                血型:
+                                                                <label><input type="radio" value="A" name="blood_type" />A</label>
+                                                                <label><input type="radio" value="B" name="blood_type" />B</label>
+                                                                <label><input type="radio" value="O" name="blood_type" />O</label>
+                                                                <label><input type="radio" value="AB" name="blood_type" />AB</label>
+                                                            </p>
+
+                                                            <p>
+                                                                民族:
+                                                                <p>
+                                                                    <label><input type="radio" value="汉族" name="nation" />汉族</label>
+                                                                    <label><input type="radio" value="蒙古" name="nation" />蒙古族</label>
+                                                                    <label><input type="radio" value="回族" name="nation" />回族</label>
+                                                                    <label><input type="radio" value="藏族" name="nation" />藏族</label>
+                                                                    <label><input type="radio" value="维吾尔族" name="nation" />维吾尔族</label>
+                                                                    <label><input type="radio" value="苗族" name="nation" />苗族</label>
+                                                                    <label><input type="radio" value="彝族" name="nation" />彝族</label>
+                                                                    <label><input type="radio" value="壮族" name="nation" />壮族</label>
+                                                                    <label><input type="radio" value="布依族" name="nation" />布依族</label>
+                                                                    <label><input type="radio" value="朝鲜族" name="nation" />朝鲜族</label>
+                                                                    <label><input type="radio" value="满族" name="nation" />满族</label>
+                                                                    <label><input type="radio" value="侗族" name="nation" />侗族</label>
+                                                                    <label><input type="radio" value="瑶族" name="nation" />瑶族</label>
+                                                                    <label><input type="radio" value="白族" name="nation" />白族</label>
+                                                                    <label><input type="radio" value="土家族" name="nation" />土家族</label>
+                                                                    <label><input type="radio" value="哈尼族" name="nation" />哈尼族</label>
+                                                                    <label><input type="radio" value="哈萨克族" name="nation" />哈萨克族</label>
+                                                                    <label><input type="radio" value="傣族" name="nation" />傣族</label>
+                                                                    <label><input type="radio" value="黎族" name="nation" />黎族</label>
+                                                                    <label><input type="radio" value="傈傈族" name="nation" />傈傈族</label>
+                                                                    <label><input type="radio" value="佤族" name="nation" />佤族</label>
+                                                                    <label><input type="radio" value="畲族" name="nation" />畲族</label>
+                                                                    <label><input type="radio" value="高山族" name="nation" />高山族</label>
+                                                                    <label><input type="radio" value="拉祜族" name="nation" />拉祜族</label>
+                                                                    <label><input type="radio" value="水族" name="nation" />水族</label>
+                                                                    <label><input type="radio" value="东乡族" name="nation" />东乡族</label>
+                                                                    <label><input type="radio" value="纳西族" name="nation" />纳西族</label>
+                                                                    <label><input type="radio" value="景颇族" name="nation" />景颇族</label>
+                                                                    <label><input type="radio" value="科尔克孜族" name="nation" />科尔克孜族</label>
+                                                                    <label><input type="radio" value="土族" name="nation" />土族</label>
+                                                                    <label><input type="radio" value="达斡尔族" name="nation" />达斡尔族</label>
+                                                                    <label><input type="radio" value="仫佬族" name="nation" />仫佬族</label>
+                                                                    <label><input type="radio" value="羌族" name="nation" />羌族</label>
+                                                                    <label><input type="radio" value="布朗族" name="nation" />布朗族</label>
+                                                                    <label><input type="radio" value="撒拉族" name="nation" />撒拉族</label>
+                                                                    <label><input type="radio" value="毛难族" name="nation" />毛难族</label>
+                                                                    <label><input type="radio" value="仡佬族" name="nation" />仡佬族</label>
+                                                                    <label><input type="radio" value="锡伯族" name="nation" />锡伯族</label>
+                                                                    <label><input type="radio" value="阿昌族" name="nation" />阿昌族</label>
+                                                                    <label><input type="radio" value="普米族" name="nation" />普米族</label>
+                                                                    <label><input type="radio" value="塔吉克族" name="nation" />塔吉克族</label>
+                                                                    <label><input type="radio" value="怒族" name="nation" />怒族</label>
+                                                                    <label><input type="radio" value="乌孜别克族" name="nation" />乌孜别克族</label>
+                                                                    <label><input type="radio" value="俄罗斯族" name="nation" />俄罗斯族</label>
+                                                                    <label><input type="radio" value="鄂温克族" name="nation" />鄂温克族</label>
+                                                                    <label><input type="radio" value="崩龙族" name="nation" />崩龙族</label>
+                                                                    <label><input type="radio" value="保安族" name="nation" />保安族</label>
+                                                                    <label><input type="radio" value="裕固族" name="nation" />裕固族</label>
+                                                                    <label><input type="radio" value="京族" name="nation" />京族</label>
+                                                                    <label><input type="radio" value="塔塔尔族" name="nation" />塔塔尔族</label>
+                                                                    <label><input type="radio" value="独龙族" name="nation" />独龙族</label>
+                                                                    <label><input type="radio" value="鄂伦春族" name="nation" />鄂伦春族</label>
+                                                                    <label><input type="radio" value="赫哲族" name="nation" />赫哲族</label>
+                                                                    <label><input type="radio" value="门巴族" name="nation" />门巴族</label>
+                                                                    <label><input type="radio" value="珞巴族" name="nation" />珞巴族</label>
+                                                                    <label><input type="radio" value="基诺族" name="nation" />基诺族</label>
+                                                                    <label><input type="radio" value="其他" name="nation" />其他</label>
+                                                                </p>
+
+                                                                <p>
+                                                                    职业:
+                                                                    <p>
+                                                                        <label><input type="radio" value="学生" name="career" />学生</label>
+                                                                        <label><input type="radio" value="个体" name="career" />个体</label>
+                                                                        <label><input type="radio" value="农名" name="career" />农名</label>
+                                                                        <label><input type="radio" value="军人" name="career" />军人</label>
+                                                                        <label><input type="radio" value="工人" name="career" />工人</label>
+                                                                        <label><input type="radio" value="财会人员" name="career" />财会人员</label>
+                                                                        <label><input type="radio" value="技术人员" name="career" />技术人员</label>
+                                                                        <label><input type="radio" value="服务业" name="career" />服务业</label>
+                                                                        <label><input type="radio" value="科教文卫" name="career" />科教文卫</label>
+                                                                        <label><input type="radio" value="行政管理" name="career" />行政管理</label>
+                                                                        <label><input type="radio" value="无业" name="career" />无业</label>
+                                                                        <label><input type="radio" value="其它" name="career" />其它</label>
+                                                                    </p>
+                                                                    <p>
+                                                                        病人现住址:<input class="form-control" id="address"
+                                                                            name="address" type="text" />
+                                                                    </p>
+                                                                    <p>
+                                                                        病人来源:
+                                                                        <label><input type="radio" value="门诊" name="entrance" />门诊</label>
+                                                                        <label><input type="radio" value="病房" name="entrance" />病房</label>
+                                                                    </p>
+
+                                                                    <p>
+                                                                        文化程度:
+                                                                        <p>
+                                                                            <label><input type="radio" value="文盲" name="culture" />文盲</label>
+                                                                            <label><input type="radio" value="小学及以下"
+                                                                                    name="culture" />小学及以下</label>
+                                                                            <label><input type="radio" value="中学与中专"
+                                                                                    name="culture" />中学与中专</label>
+                                                                            <label><input type="radio" value="大专" name="culture" />大专</label>
+                                                                            <label><input type="radio" value="本科" name="culture" />本科</label>
+                                                                            <label><input type="radio" value="研究生及以上"
+                                                                                    name="culture" />研究生及以上</label>
+                                                                        </p>
+
+                                                                    </p>
+                                                                    <p>
+                                                                        婚姻状况:
+                                                                        <p>
+                                                                            <label><input type="radio" value="未婚无性生活"
+                                                                                    name="marriage" />未婚无性生活</label>
+                                                                            <label><input type="radio" value="未婚有性生活"
+                                                                                    name="marriage" />未婚有性生活</label>
+                                                                            <label><input type="radio" value="已婚同居"
+                                                                                    name="marriage" />已婚同居</label>
+                                                                            <label><input type="radio" value="已婚分居"
+                                                                                    name="marriage" />已婚分居</label>
+                                                                            <label><input type="radio" value="离婚" name="marriage" />离婚</label>
+                                                                        </p>
+
+                                                                        <p>
+                                                                            特殊工种环境：
+                                                                            <p>
+                                                                                <label><input name="gaokong" type="checkbox"
+                                                                                        value="true" />高空</label>
+                                                                                <label><input name="diwen" type="checkbox"
+                                                                                        value="true" />低温</label>
+                                                                                <label><input name="zaosheng" type="checkbox"
+                                                                                        value="true" />噪声</label>
+                                                                                <label><input name="fushe" type="checkbox"
+                                                                                        value="true" />辐射</label>
+                                                                                <label><input name="huagongyinran" type="checkbox"
+                                                                                        value="true" />化工污染</label>
+                                                                                <label><input name="julieyundong" type="checkbox"
+                                                                                        value="true" />剧烈运动</label>
+                                                                                <label><input name="qiyou" type="checkbox"
+                                                                                        value="true" />汽油</label>
+                                                                                <label><input name="wu" type="checkbox"
+                                                                                        value="true" />无</label>
+                                                                            </p>
+                                                                            <p>
+                                                                                饮食偏好：
+                                                                                <p>
+                                                                                    <label><input name="wuteshu" type="checkbox"
+                                                                                            value="true" />无特殊</label>
+                                                                                    <label><input name="sushi" type="checkbox"
+                                                                                            value="true" />素食</label>
+                                                                                    <label><input name="suan" type="checkbox"
+                                                                                            value="true" />酸</label>
+                                                                                    <label><input name="tian" type="checkbox"
+                                                                                            value="true" />甜</label>
+                                                                                    <label><input name="xian" type="checkbox"
+                                                                                            value="true" />咸</label>
+                                                                                    <label><input name="xinla" type="checkbox"
+                                                                                            value="true" />辛辣</label>
+                                                                                    <label><input name="you" type="checkbox"
+                                                                                            value="true" />油</label>
+                                                                                    <label><input name="shengleng" type="checkbox"
+                                                                                            value="true" />生冷</label>
+                                                                                    <label><input name="kafei" type="checkbox"
+                                                                                            value="true" />含咖啡因食物或饮品</label>
+                                                                                    <label><input name="qita" type="checkbox"
+                                                                                            value="true" />其它</label>
+                                                                                </p>
+
+                                                                                <p>
+                                                                                    其它说明:<input type="text" id="" name=""
+                                                                                        value="无" />
+                                                                                </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </table>
+
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-primary" id="tijiaoBtn">提交</button>
+                                            </div>
+                                        </form>
+
+                                    </div><!-- /.modal-content -->
+                                </div><!-- /.modal-dialog -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /.main-container-inner -->
+
+        <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+            <i class="icon-double-angle-up icon-only bigger-110"></i>
+        </a>
+    </div>
+
+
+    <!--[if !IE]> -->
+
+    <script type="text/javascript">
+        window.jQuery || document.write("<script src='../public/js/jquery-2.0.3.min.js'>" + "<" + "/script>");
+    </script>
+
+    <!-- <![endif]-->
+
+    <!--[if IE]>
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='../public/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+</script>
+<![endif]-->
+
+    <script type="text/javascript">
+        if ("ontouchend" in document) document.write("<script src='../public/js/jquery.mobile.custom.min.js'>" + "<" +
+            "/script>");
+    </script>
+    <script src="../public/js/bootstrap.min.js"></script>
+    <script src="../public/js/typeahead-bs2.min.js"></script>
+    <!-- page specific plugin scripts -->
+    <script src="../public/js/jquery.dataTables.min.js"></script>
+    <script src="../public/js/jquery.dataTables.bootstrap.js"></script>
+
+    <script src="../public/js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="../public/js/jquery.ui.touch-punch.min.js"></script>
+    <script src="../public/js/chosen.jquery.min.js"></script>
+    <script src="../public/js/fuelux/fuelux.spinner.min.js"></script>
+    <script src="../public/js/date-time/bootstrap-datepicker.min.js"></script>
+    <script src="../public/js/date-time/bootstrap-timepicker.min.js"></script>
+    <script src="../public/js/date-time/moment.min.js"></script>
+    <script src="../public/js/date-time/daterangepicker.min.js"></script>
+    <script src="../public/js/bootstrap-colorpicker.min.js"></script>
+    <script src="../public/js/jquery.knob.min.js"></script>
+    <script src="../public/js/jquery.autosize.min.js"></script>
+    <script src="../public/js/jquery.inputlimiter.1.3.1.min.js"></script>
+    <script src="../public/js/jquery.maskedinput.min.js"></script>
+    <script src="../public/js/bootstrap-tag.min.js"></script>
+    <!-- ace scripts -->
+
+
+    <!--[if lte IE 8]>
+<script src="../public/js/excanvas.min.js"></script>
+<![endif]-->
+
+    <script src="../public/js/ace-elements.min.js"></script>
+    <script src="../public/js/ace.min.js"></script>
+
+    <!-- inline scripts related to this page -->
+
+    <script type="text/javascript">
+        jQuery(function ($) {
+            $('#id-disable-check').on('click', function () {
+                var inp = $('#form-input-readonly').get(0);
+                if (inp.hasAttribute('disabled')) {
+                    inp.setAttribute('readonly', 'true');
+                    inp.removeAttribute('disabled');
+                    inp.value = "This text field is readonly!";
+                } else {
+                    inp.setAttribute('disabled', 'disabled');
+                    inp.removeAttribute('readonly');
+                    inp.value = "This text field is disabled!";
+                }
+            });
+
+
+            $(".chosen-select").chosen();
+            $('#chosen-multiple-style').on('click', function (e) {
+                var target = $(e.target).find('input[type=radio]');
+                var which = parseInt(target.val());
+                if (which == 2) $('#form-field-select-4').addClass('tag-input-style');
+                else $('#form-field-select-4').removeClass('tag-input-style');
+            });
+
+
+            $('[data-rel=tooltip]').tooltip({
+                container: 'body'
+            });
+            $('[data-rel=popover]').popover({
+                container: 'body'
+            });
+
+            $('textarea[class*=autosize]').autosize({
+                append: "\n"
+            });
+            $('textarea.limited').inputlimiter({
+                remText: '%n character%s remaining...',
+                limitText: 'max allowed : %n.'
+            });
+
+            $.mask.definitions['~'] = '[+-]';
+            $('.input-mask-date').mask('99/99/9999');
+            $('.input-mask-phone').mask('(999) 999-9999');
+            $('.input-mask-eyescript').mask('~9.99 ~9.99 999');
+            $(".input-mask-product").mask("a*-999-a999", {
+                placeholder: " ",
+                completed: function () {
+                    alert("You typed the following: " + this.val());
+                }
+            });
+
+
+
+            $("#input-size-slider").css('width', '200px').slider({
+                value: 1,
+                range: "min",
+                min: 1,
+                max: 8,
+                step: 1,
+                slide: function (event, ui) {
+                    var sizing = ['', 'input-sm', 'input-lg', 'input-mini', 'input-small',
+                        'input-medium', 'input-large', 'input-xlarge', 'input-xxlarge'
+                    ];
+                    var val = parseInt(ui.value);
+                    $('#form-field-4').attr('class', sizing[val]).val('.' + sizing[val]);
+                }
+            });
+
+            $("#input-span-slider").slider({
+                value: 1,
+                range: "min",
+                min: 1,
+                max: 12,
+                step: 1,
+                slide: function (event, ui) {
+                    var val = parseInt(ui.value);
+                    $('#form-field-5').attr('class', 'col-xs-' + val).val('.col-xs-' + val);
+                }
+            });
+
+
+            $("#slider-range").css('height', '200px').slider({
+                orientation: "vertical",
+                range: true,
+                min: 0,
+                max: 100,
+                values: [17, 67],
+                slide: function (event, ui) {
+                    var val = ui.values[$(ui.handle).index() - 1] + "";
+
+                    if (!ui.handle.firstChild) {
+                        $(ui.handle).append(
+                            "<div class='tooltip right in' style='display:none;left:16px;top:-6px;'><div class='tooltip-arrow'></div><div class='tooltip-inner'></div></div>"
+                        );
+                    }
+                    $(ui.handle.firstChild).show().children().eq(1).text(val);
+                }
+            }).find('a').on('blur', function () {
+                $(this.firstChild).hide();
+            });
+
+            $("#slider-range-max").slider({
+                range: "max",
+                min: 1,
+                max: 10,
+                value: 2
+            });
+
+            $("#eq > span").css({
+                width: '90%',
+                'float': 'left',
+                margin: '15px'
+            }).each(function () {
+                // read initial values from markup and remove that
+                var value = parseInt($(this).text(), 10);
+                $(this).empty().slider({
+                    value: value,
+                    range: "min",
+                    animate: true
+
+                });
+            });
+
+
+            $('#id-input-file-1 , #id-input-file-2').ace_file_input({
+                no_file: 'No File ...',
+                btn_choose: 'Choose',
+                btn_change: 'Change',
+                droppable: false,
+                onchange: null,
+                thumbnail: false //| true | large
+                //whitelist:'gif|png|jpg|jpeg'
+                //blacklist:'exe|php'
+                //onchange:''
+                //
+            });
+
+            $('#id-input-file-3').ace_file_input({
+                style: 'well',
+                btn_choose: 'Drop files here or click to choose',
+                btn_change: null,
+                no_icon: 'icon-cloud-upload',
+                droppable: true,
+                thumbnail: 'small' //large | fit
+                    //,icon_remove:null//set null, to hide remove/reset button
+                    /**,before_change:function(files, dropped) {
+						//Check an example below
+						//or examples/file-upload.html
+						return true;
+					}*/
+                    /**,before_remove : function() {
+						return true;
+					}*/
+                    ,
+                preview_error: function (filename, error_code) {
+                    //name of the file that failed
+                    //error_code values
+                    //1 = 'FILE_LOAD_FAILED',
+                    //2 = 'IMAGE_LOAD_FAILED',
+                    //3 = 'THUMBNAIL_FAILED'
+                    //alert(error_code);
+                }
+
+            }).on('change', function () {
+                //console.log($(this).data('ace_input_files'));
+                //console.log($(this).data('ace_input_method'));
+            });
+
+
+            //dynamically change allowed formats by changing before_change callback function
+            $('#id-file-format').removeAttr('checked').on('change', function () {
+                var before_change
+                var btn_choose
+                var no_icon
+                if (this.checked) {
+                    btn_choose = "Drop images here or click to choose";
+                    no_icon = "icon-picture";
+                    before_change = function (files, dropped) {
+                        var allowed_files = [];
+                        for (var i = 0; i < files.length; i++) {
+                            var file = files[i];
+                            if (typeof file === "string") {
+                                //IE8 and browsers that don't support File Object
+                                if (!(/\.(jpe?g|png|gif|bmp)$/i).test(file)) return false;
+                            } else {
+                                var type = $.trim(file.type);
+                                if ((type.length > 0 && !(/^image\/(jpe?g|png|gif|bmp)$/i).test(
+                                        type)) ||
+                                    (type.length == 0 && !(/\.(jpe?g|png|gif|bmp)$/i).test(file.name)) //for android's default browser which gives an empty string for file.type
+                                ) continue; //not an image so don't keep this file
+                            }
+
+                            allowed_files.push(file);
+                        }
+                        if (allowed_files.length == 0) return false;
+
+                        return allowed_files;
+                    }
+                } else {
+                    btn_choose = "Drop files here or click to choose";
+                    no_icon = "icon-cloud-upload";
+                    before_change = function (files, dropped) {
+                        return files;
+                    }
+                }
+                var file_input = $('#id-input-file-3');
+                file_input.ace_file_input('update_settings', {
+                    'before_change': before_change,
+                    'btn_choose': btn_choose,
+                    'no_icon': no_icon
+                })
+                file_input.ace_file_input('reset_input');
+            });
+
+
+
+
+            $('#spinner1').ace_spinner({
+                    value: 0,
+                    min: 0,
+                    max: 200,
+                    step: 10,
+                    btn_up_class: 'btn-info',
+                    btn_down_class: 'btn-info'
+                })
+                .on('change', function () {
+                    //alert(this.value)
+                });
+            $('#spinner2').ace_spinner({
+                value: 0,
+                min: 0,
+                max: 10000,
+                step: 100,
+                touch_spinner: true,
+                icon_up: 'icon-caret-up',
+                icon_down: 'icon-caret-down'
+            });
+            $('#spinner3').ace_spinner({
+                value: 0,
+                min: -100,
+                max: 100,
+                step: 10,
+                on_sides: true,
+                icon_up: 'icon-plus smaller-75',
+                icon_down: 'icon-minus smaller-75',
+                btn_up_class: 'btn-success',
+                btn_down_class: 'btn-danger'
+            });
+
+
+
+            $('.date-picker').datepicker({
+                autoclose: true
+            }).next().on(ace.click_event, function () {
+                $(this).prev().focus();
+            });
+            $('input[name=date-range-picker]').daterangepicker().prev().on(ace.click_event, function () {
+                $(this).next().focus();
+            });
+
+            $('#timepicker1').timepicker({
+                minuteStep: 1,
+                showSeconds: true,
+                showMeridian: false
+            }).next().on(ace.click_event, function () {
+                $(this).prev().focus();
+            });
+
+            $('#colorpicker1').colorpicker();
+            $('#simple-colorpicker-1').ace_colorpicker();
+
+
+            $(".knob").knob();
+
+
+            //we could just set the data-provide="tag" of the element inside HTML, but IE8 fails!
+            var tag_input = $('#form-field-tags');
+            if (!(/msie\s*(8|7|6)/.test(navigator.userAgent.toLowerCase()))) {
+                tag_input.tag({
+                    placeholder: tag_input.attr('placeholder'),
+                    //enable typeahead by specifying the source array
+                    source: ace.variable_US_STATES, //defined in ace.js >> ace.enable_search_ahead
+                });
+            } else {
+                //display a textarea for old IE, because it doesn't support this plugin or another one I tried!
+                tag_input.after('<textarea id="' + tag_input.attr('id') + '" name="' + tag_input.attr('name') +
+                    '" rows="3">' + tag_input.val() + '</textarea>').remove();
+                //$('#form-field-tags').autosize({append: "\n"});
+            }
+
+
+
+
+            /////////
+            $('#modal-form input[type=file]').ace_file_input({
+                style: 'well',
+                btn_choose: 'Drop files here or click to choose',
+                btn_change: null,
+                no_icon: 'icon-cloud-upload',
+                droppable: true,
+                thumbnail: 'large'
+            })
+
+            //chosen plugin inside a modal will have a zero width because the select element is originally hidden
+            //and its width cannot be determined.
+            //so we set the width after modal is show
+            $('#modal-form').on('shown.bs.modal', function () {
+                $(this).find('.chosen-container').each(function () {
+                    $(this).find('a:first-child').css('width', '210px');
+                    $(this).find('.chosen-drop').css('width', '210px');
+                    $(this).find('.chosen-search input').css('width', '200px');
+                });
+            })
+            /**
+         //or you can activate the chosen plugin after modal is shown
+         //this way select element becomes visible with dimensions and chosen works as expected
+         $('#modal-form').on('shown', function () {
+					$(this).find('.modal-chosen').chosen();
+				})
+         */
+
+        });
+    </script>
+    <script type="text/javascript">
+        var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+        document.write(unescape("%3Cscript src='" + _bdhmProtocol + ""));
+    </script>
+</body>
+
+</html>

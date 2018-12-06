@@ -7,10 +7,10 @@ var router = express.Router();
 /* GET login result. */
 /* 这里/login是相对app.js里的app.use('/users', usersRouter)路径 */
 router.post('/login', function (req, res, next) {
-    console.log(">>>method: ", req.method);
-    console.log(">>>path: ", req.path);
-    console.log(">>>headers: ", req.headers);
-    console.log(">>>myconst: " + myconst.apiurl);
+    console.log(">>>users.js: method: ", req.method);
+    console.log(">>>users.js: path: ", req.path);
+    console.log(">>>users.js: headers: ", req.headers);
+    console.log(">>>users.js: myconst: " + myconst.apiurl);
     var url = myconst.apiurl + "o/token/";
     var loginData = {
         "username": req.body.email,
@@ -20,9 +20,9 @@ router.post('/login', function (req, res, next) {
         "client_id": myconst.client_id,
         "client_secret": myconst.client_secret
     };
-    console.log(">>>Info used for user authentication: " + JSON.stringify(loginData));
+    console.log(">>>users.js: Info used for user authentication: " + JSON.stringify(loginData));
     request.post({url: url, form: loginData}, function (error, response, body) {
-        console.log(">>>Authentication results: " + body);
+        console.log(">>>users.js: Authentication results: " + body);
         if (!error && response.statusCode == 200) {
             var obj = JSON.parse(body); //由JSON字符串转换为JSON对象
             // 请求成功的处理逻辑
@@ -34,7 +34,6 @@ router.post('/login', function (req, res, next) {
                 "scope": obj.scope,
                 "expires_in": obj.expires_in
             }, {maxAge: 1000 * 60 * 60 * 4, httpOnly: true});//cookie 4小时有效时间
-            console.log(">>>users.js -> res.cookie: ", res.cookie);
             res.cookie("userinfo", {
                 "email": req.body.email,
                 "password": req.body.pass

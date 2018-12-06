@@ -42,7 +42,7 @@
         $(document).ready(function () {
         $("#userLogin").click(function () {
             $.ajax({
-                url: "/users/login",//寻址地址，向该地址发出请求
+                url: "/users/login",//路由，用来处理ajax请求的函数的所在地址
                 type: "POST",
                 data: {
                     email: $("#id_email").val(),    //    用户邮箱和密码

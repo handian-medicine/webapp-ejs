@@ -5,12 +5,12 @@ var router = express.Router();
 
 /* GET login page. */
 router.get('/', function (req, res, next) {
-    console.log(">>>index.js: begin login");
-    console.log(">>>method: ", req.method);
-    console.log(">>>path: ", req.path);
-    console.log(">>>headers: ", req.headers);
+    console.log(">>>index.js: begin");
+    console.log(">>>index.js: method: ", req.method);
+    console.log(">>>index.js: path: ", req.path);
+    console.log(">>>index.js: headers: ", req.headers);
     res.render('login', {title: '中医妇产科临床流调数据中心'});
-}); 
+});
 //Chinese Clinical Investigation Center
 
 /* GET projects list page. */
@@ -21,8 +21,8 @@ router.get('/home', function (req, res, next) {
         var authstring = req.cookies.usertoken.access_token;
         var useremail = req.cookies.userinfo.email;
 
-        console.log(">>>user access_token in cookie: " + authstring);
-        console.log(">>>user emain: " + useremail);
+        console.log(">>>index.js: user access_token in cookie: " + authstring);
+        console.log(">>>index.js: user emain: " + useremail);
         
         var options = {
             url: url,
@@ -37,14 +37,14 @@ router.get('/home', function (req, res, next) {
                 var userobjs = JSON.parse(body);
                 var userurl = "";
                 //console.log(">>>response: ", response);
-                console.log(">>>userobjs: ", userobjs);
+                console.log(">>>index.js: userobjs: ", userobjs);
                 //从所有用户列表中找到与当前用户email信息匹配的，获取其用户详情的url
                 for(var i=0,l=userobjs.count;i<l;i++){
                     /*for(var key in userobjs.results[i]){
                         console.log(key+':'+userobjs.results[i][key]);
                     }*/
                     if (userobjs.results[i]['email'] == useremail ) {
-                        console.log(">>>Found the user! " + userobjs.results[i]['url']);
+                        console.log(">>>index.js: Found the user! " + userobjs.results[i]['url']);
                         userurl = userobjs.results[i]['url'];
                         break;
                     }
@@ -60,12 +60,11 @@ router.get('/home', function (req, res, next) {
                 request(newoptions, function (error, response, body) {
                     if (!error && response.statusCode == 200) {
                         var userobj = JSON.parse(body);
-                        console.log(">>>userobj project: ", userobj);
-                        console.log(">>>项目列表: ", userobj.myprojects[0].linkurl);
+                        console.log(">>>index.js: userobj : ", userobj);
                         res.render('home', {title: '临床流调项目中心', prjs: userobj.myprojects, userobj: userobj});
                     }
                     else {
-                        console.log(">>>Getting user details met unknown error. "+err.error_description);
+                        console.log(">>>index.js: Getting user details met unknown error. "+err.error_description);
                         res.redirect("login");
                     }
                 });

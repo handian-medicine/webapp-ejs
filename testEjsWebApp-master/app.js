@@ -7,6 +7,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var prj001Router = require('./routes/prj001')
+var datainputRouter = require('./routes/datainput')
 
 var app = express();
 
@@ -18,15 +19,18 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+//app.use(bodyParser.urlencoded({ extended: true }));//body解析
 
-console.log("app.js: '/public'")
+console.log("app.js: begin")
 app.use('/public',express.static(path.join(__dirname, 'public')));
-console.log("app.js: '/'")
+
 app.use('/', indexRouter);
-console.log("app.js: '/users'")
+
 app.use('/users', usersRouter);
-console.log("app.js: '/prj001'")
+
 app.use('/prj001', prj001Router);
+
+app.use('/datainput', datainputRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
