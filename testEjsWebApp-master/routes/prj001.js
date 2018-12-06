@@ -31,7 +31,7 @@ router.get('/', function (req, res, next) {
                     username: req.cookies.userinfo.email
                 });
             } else {
-                console.log(">>>Getting archives met unknown error. " + err.error_description);
+                console.log(">>>Getting archives met unknown error. " + error.error_description);
                 res.redirect("login");
             }
         });
@@ -103,12 +103,35 @@ router.get('/', function (req, res, next) {
     }
 
 });
-// router.get('/geninfo', function (req, res, next){
-//     if (req.cookies.prj001token) {
-//         id = 1
-//         var url = myconst.apiurl + "/prj001/geninfo/" + id;
-//     }
-// });
+
+router.post('/geninfo', function (req, res, next){
+    console.log(">>>prj001.js/geninfo/userid:", JSON.parse(req.body.userid))
+    //if (req.cookies.prj001token) {
+        //var userid = req.body.userid;
+        var url = myconst.apiurl + "/prj001/geninfo/" + req.body.userid;
+        console.log(">>>prj001.js url: ", url);
+        var authstring = req.cookies.prj001token.access_token;
+        var options = {
+            url: url,
+            headers: {
+                'Authorization': 'Bearer ' + authstring
+            }
+        };
+        request(options, function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+                console.log(">>>prj001.js options: ", options)
+                var user_geninfo = JSON.parse(body);
+                console.log(">>>prj001.js -> user_geninfo: ", user_geninfo);
+                console.log(">>>prj001.js -> body:", body);
+                //res.render('prj001', {user_geninfo: user_geninfo});
+                res.json(user_geninfo);
+            } else {
+                //console.log(">>>Getting archives met unknown error. " + error.error_description);
+                res.redirect("prj001");
+            }
+        });
+    //}
+});
 // router.get('/symptom', function (req, res, next){
 //     /prj001/symptom/{id}/
 // });
