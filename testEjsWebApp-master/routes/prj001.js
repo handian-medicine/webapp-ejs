@@ -109,7 +109,6 @@ router.post('/geninfo', function (req, res, next){
     //if (req.cookies.prj001token) {
         //var userid = req.body.userid;
         var url = myconst.apiurl + "/prj001/geninfo/" + req.body.userid;
-        console.log(">>>prj001.js url: ", url);
         var authstring = req.cookies.prj001token.access_token;
         var options = {
             url: url,
@@ -122,29 +121,114 @@ router.post('/geninfo', function (req, res, next){
                 console.log(">>>prj001.js options: ", options)
                 var user_geninfo = JSON.parse(body);
                 console.log(">>>prj001.js -> user_geninfo: ", user_geninfo);
-                console.log(">>>prj001.js -> body:", body);
-                //res.render('prj001', {user_geninfo: user_geninfo});
                 res.json(user_geninfo);
             } else {
                 //console.log(">>>Getting archives met unknown error. " + error.error_description);
-                res.redirect("prj001");
+                res.redirect("/prj001");
             }
         });
     //}
 });
-// router.get('/symptom', function (req, res, next){
-//     /prj001/symptom/{id}/
-// });
 
-// router.get('/menstruation', function (req, res, next){
-//     /prj001/menstruation/{id}/
-// });
-// router.get('/other', function (req, res, next){
-//     /prj001/other/{id}/
-// });
-// router.get('/cc', function (req, res, next){
-//     /prj001/cc/{id}/
-// });
-
+router.post('/menstruation', function (req, res, next){
+    console.log(">>>prj001.js/menstruation/userid:", JSON.parse(req.body.userid))
+    //if (req.cookies.prj001token) {
+        //var userid = req.body.userid;
+        var url = myconst.apiurl + "/prj001/menstruation/" + req.body.userid;
+        var authstring = req.cookies.prj001token.access_token;
+        var options = {
+            url: url,
+            headers: {
+                'Authorization': 'Bearer ' + authstring
+            }
+        };
+        request(options, function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+                console.log(">>>prj001.js options: ", options)
+                var user_menstruation = JSON.parse(body);
+                console.log(">>>prj001.js -> user_menstruation: ", user_menstruation);
+                res.json(user_menstruation);
+            } else {
+                //console.log(">>>Getting archives met unknown error. " + error.error_description);
+                res.redirect("/prj001");
+            }
+        });
+    //}
+});
+router.post('/symptom', function (req, res, next){
+    console.log(">>>prj001.js/symptom/userid:", JSON.parse(req.body.userid))
+    //if (req.cookies.prj001token) {
+        //var userid = req.body.userid;
+        var url = myconst.apiurl + "/prj001/symptom/" + req.body.userid;
+        var authstring = req.cookies.prj001token.access_token;
+        var options = {
+            url: url,
+            headers: {
+                'Authorization': 'Bearer ' + authstring
+            }
+        };
+        request(options, function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+                console.log(">>>prj001.js options: ", options)
+                var user_symptom = JSON.parse(body);
+                console.log(">>>prj001.js -> user_symptom: ", user_symptom);
+                res.json(user_symptom);
+            } else {
+                //console.log(">>>Getting archives met unknown error. " + error.error_description);
+                res.redirect("/prj001");
+            }
+        });
+    //}
+});
+router.post('/other', function (req, res, next){
+    console.log(">>>prj001.js/other/userid:", JSON.parse(req.body.userid))
+    //if (req.cookies.prj001token) {
+        //var userid = req.body.userid;
+        var url = myconst.apiurl + "/prj001/other/" + req.body.userid;
+        var authstring = req.cookies.prj001token.access_token;
+        var options = {
+            url: url,
+            headers: {
+                'Authorization': 'Bearer ' + authstring
+            }
+        };
+        request(options, function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+                console.log(">>>prj001.js options: ", options)
+                var user_other = JSON.parse(body);
+                console.log(">>>prj001.js -> user_other: ", user_other);
+                res.json(user_other);
+            } else {
+                //console.log(">>>Getting archives met unknown error. " + error.error_description);
+                res.redirect("/prj001");
+            }
+        });
+    //}
+});
+router.post('/cc', function (req, res, next){
+    console.log(">>>prj001.js/cc/userid:", JSON.parse(req.body.userid))
+    //if (req.cookies.prj001token) {
+        //var userid = req.body.userid;
+        var url = myconst.apiurl + "/prj001/cc/" + req.body.userid;
+        var authstring = req.cookies.prj001token.access_token;
+        var options = {
+            url: url,
+            headers: {
+                'Authorization': 'Bearer ' + authstring
+            }
+        };
+        request(options, function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+                console.log(">>>prj001.js options: ", options)
+                var user_cc = JSON.parse(body);
+                console.log(">>>prj001.js -> user_cc: ", user_menstruation);
+                res.json(user_menstruation);
+            } else {
+                //console.log(">>>Getting archives met unknown error. " + error.error_description);
+                res.redirect("/prj001");
+            }
+        });
+    //}
+});
 
 module.exports = router;

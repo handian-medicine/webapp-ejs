@@ -15,6 +15,14 @@
 
     <script src="../public/js/ace-extra.min.js"></script>
     <script src="/public/javascripts/jquery.min.js"></script>
+        <style>
+        .color{
+            color: #fff;
+        }
+        :hover.color {
+            color: #fff;
+        }
+    </style>
 </head>
 
 <body>
@@ -200,17 +208,17 @@
                                                             <button id="geninfo" class="btn btn-xs btn-info geninfo" userid=<%= archive.id %>>
                                                                     <a href="#modal-table" class="color" role="button" data-toggle="modal">一般情况</a>
                                                             </button>
-                                                            <button id="menstruation" class="btn btn-xs btn-info">
+                                                            <button id="menstruation" class="btn btn-xs btn-info menstruation" userid=<%= archive.id %>>
                                                                     <a href="#modal-table1" class="color" role="button" data-toggle="modal">月经情况</a>
                                                             </button>
-                                                            <button id="symptom" class="btn btn-xs btn-danger">
+                                                            <button id="symptom" class="btn btn-xs btn-danger symptom" userid=<%= archive.id %>>
                                                                     <a href="#modal-table2" class="color" role="button" data-toggle="modal">全身症状</a>
                                                                 </button>
         
-                                                                <button id="other" class="btn btn-xs btn-warning">
+                                                                <button id="other" class="btn btn-xs btn-warning other" userid=<%= archive.id %>>
                                                                     <a href="#modal-table3" class="color" role="button" data-toggle="modal">其它情况</a>
                                                                 </button>
-                                                                <button id="cc" class="btn btn-xs btn-info">
+                                                                <button id="cc" class="btn btn-xs btn-info cc" userid=<%= archive.id %>>
                                                                     <a href="#modal-table4" class="color" role="button" data-toggle="modal">临床诊断</a>
                                                                 </button>
                                                         </div>
@@ -272,52 +280,60 @@
                                     </div>
                                 </div>
                             </div>
+                            <!--一般情况-->
                             <script>
-                                    $(document).ready(function () {
+                                $(document).ready(function () {
                                             $(".geninfo").click(function () {
-                                                alert($(this).attr("userid"))
+                                                document.getElementById("form-geninfo").reset();
+                                                //alert($(this).attr("userid"))
                                                 $.ajax({
                                                     url: "/prj001/geninfo",//路由，用来处理ajax请求的函数的所在地址
                                                     type: "POST",
                                                     data: {userid: $(this).attr("userid")},
                                                     success: function(result){
                                                         if (result !== null) {
-                                                            alert("ajax success: ");
+                                                            //alert("ajax success: ");
+                                                            //$('#person').valu(result["id"])
                                                             $('#recdate').val(result["recdate"]);
                                                             $('#serial').val(result["serial"]);
                                                             $('#hospital').val(result["hospital"]);
                                                             $('#expert').val(result["expert"]);
-                                                            $('#title').text(result["title"]);
                                                             $('#name').val(result["name"]);
                                                             $('#telephone').val(result["telephone"]);
                                                             $('#age').val(result["age"]);
                                                             $('#height').val(result["height"]);
                                                             $('#weight').val(result["weight"]);
-                                                            $('#blood_type').val(result["blood_type"]);
-                                                            $('#nation').val(result["nation"]);
-                                                            $('#career').val(result["career"]);
-                                                            $('#gaokong').val(result["gaokong"]);
-                                                            $('#diwen').val(result["diwen"]);
-                                                            $('#zaosheng').val(result["zaosheng"]);
-                                                            $('#fushe').val(result["fushe"]);
-                                                            $('#huagongyinran').val(result["huagongyinran"]);
-                                                            $('#julieyundong').val(result["julieyundong"]);
-                                                            $('#qiyou').val(result["qiyou"]);
-                                                            $('#wu').val(result["wu"]);
                                                             $('#address').val(result["address"]);
-                                                            $('#entrance').val(result["entrance"]);
-                                                            $('#culture').val(result["culture"]);
-                                                            $('#marriage').val(result["marriage"]);
-                                                            $('#wuteshu').val(result["wuteshu"]);
-                                                            $('#sushi').val(result["sushi"]);
-                                                            $('#suan').val(result["suan"]);
-                                                            $('#tian').val(result["tian"]);
-                                                            $('#xian').val(result["xian"]);
-                                                            $('#xinla').val(result["xinla"]);
-                                                            $('#you').val(result["you"]);
-                                                            $('#shengleng').val(result["shengleng"]);
-                                                            $('#kafei').val(result["kafei"]);
                                                             $('#qita').val(result["qita"]);
+
+                                                            $("input[name='title'][value='"+result["title"]+"']").attr("checked",true);
+                                                            $("input[name='blood_type'][value='"+result["blood_type"]+"']").attr("checked",true);
+                                                            $("input[name='nation'][value='"+result["nation"]+"']").attr("checked",true);
+                                                            $("input[name='career'][value='"+result["career"]+"']").attr("checked",true);
+
+                                                            $("input[name='entrance'][value='"+result["entrance"]+"']").attr("checked",true);
+                                                            $("input[name='culture'][value='"+result["culture"]+"']").attr("checked",true);
+                                                            $("input[name='marriage'][value='"+result["marriage"]+"']").attr("checked",true);
+                                                            
+                                                            $("input:checkbox[name='wuteshu']").attr('checked',result["wuteshu"]);
+                                                            $("input:checkbox[name='sushi']").attr('checked',result["sushi"]);
+                                                            $("input:checkbox[name='suan']").attr('checked',result["suan"]);
+                                                            $("input:checkbox[name='tian']").attr('checked',result["tian"]);
+                                                            $("input:checkbox[name='xian']").attr('checked',result["xian"]);
+                                                            $("input:checkbox[name='xinla']").attr('checked',result["xinla"]);
+                                                            $("input:checkbox[name='you']").attr('checked',result["you"]);
+                                                            $("input:checkbox[name='shengleng']").attr('checked',result["shengleng"]);
+                                                            $("input:checkbox[name='kafei']").attr('checked',result["kafei"]);
+                                                            
+                                                            $("input:checkbox[name='gaokong']").attr('checked',result["gaokong"]);
+                                                            $("input:checkbox[name='diwen']").attr('checked',result["diwen"]);
+                                                            $("input:checkbox[name='zaosheng']").attr('checked',result["zaosheng"]);
+                                                            $("input:checkbox[name='fushe']").attr('checked',result["fushe"]);
+                                                            $("input:checkbox[name='huagongyinran']").attr('checked',result["huagongyinran"]);
+                                                            $("input:checkbox[name='julieyundong']").attr('checked',result["julieyundong"]);
+                                                            $("input:checkbox[name='qiyou']").attr('checked',result["qiyou"]);
+                                                            $("input:checkbox[name='wu']").attr('checked',result["wu"]);
+
                                                             $('#menstruation').val(result["menstruation"]);
                                                             $('#symptom').val(result["symptom"]);
                                                             $('#other').val(result["other"]);
@@ -332,9 +348,9 @@
                                                 });
                                             });
                                         });
-                                </script>
-                                                    <!--一般情况-->
-                        <div id="modal-table" class="modal fade" tabindex="-1">
+                            </script>
+                            
+                            <div id="modal-table" class="modal fade" tabindex="-1">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header no-padding">
@@ -346,11 +362,12 @@
                                             </div>
                                         </div>
     
-                                        <form class="modal-body no-padding">
+                                        <form class="modal-body no-padding" id="form-geninfo">
                                             <table class="table table-striped table-bordered table-hover no-margin-bottom no-border-top">
                                                 <div class="modal-body">
                                                     <div class="row">
                                                         <div class="col-xs-12 col-sm-12">
+                                                            <!-- <input type="hidden" name="person" value=""/> -->
                                                             <p>
                                                                 日期：<input class="form-control" id="recdate" name="recdate"  type="text"/>
                                                             </p>
@@ -382,7 +399,7 @@
                                                                 身高cm:<input class="form-control" type="number" name="height" id="height"/>
                                                             </p>
                                                             <p>
-                                                                体重kg:<input class="form-control" type="number" name="weight " id="weight "/>
+                                                                体重kg:<input class="form-control" type="text" name="weight" id="weight"/>
                                                             </p>
                                                             <p>
                                                                 血型:
@@ -459,7 +476,7 @@
                                                             <p>
                                                                 <label><input type="radio" value="学生" name="career"/>学生</label>
                                                                 <label><input type="radio" value="个体" name="career"/>个体</label>
-                                                                <label><input type="radio" value="农名" name="career"/>农名</label>
+                                                                <label><input type="radio" value="农民" name="career"/>农民</label>
                                                                 <label><input type="radio" value="军人" name="career"/>军人</label>
                                                                 <label><input type="radio" value="工人" name="career"/>工人</label>
                                                                 <label><input type="radio" value="财会人员" name="career"/>财会人员</label>
@@ -484,7 +501,7 @@
                                                             <p>
                                                                 <label><input type="radio" value="文盲" name="culture"/>文盲</label>
                                                                 <label><input type="radio" value="小学及以下" name="culture"/>小学及以下</label>
-                                                                <label><input type="radio" value="中学与中专" name="culture"/>中学与中专</label>
+                                                                <label><input type="radio" value="中学或中专" name="culture"/>中学或中专</label>
                                                                 <label><input type="radio" value="大专" name="culture"/>大专</label>
                                                                 <label><input type="radio" value="本科" name="culture"/>本科</label>
                                                                 <label><input type="radio" value="研究生及以上" name="culture"/>研究生及以上</label>
@@ -504,32 +521,31 @@
                                                             <p>
                                                                 特殊工种环境：
                                                             <p>
-                                                                <label><input name="gaokong" type="checkbox" value="true"/>高空</label>
-                                                                <label><input name="diwen" type="checkbox" value="true"/>低温</label>
-                                                                <label><input name="zaosheng" type="checkbox" value="true"/>噪声</label>
-                                                                <label><input name="fushe" type="checkbox" value="true"/>辐射</label>
-                                                                <label><input name="huagongyinran" type="checkbox" value="true"/>化工污染</label>
-                                                                <label><input name="julieyundong" type="checkbox" value="true"/>剧烈运动</label>
-                                                                <label><input name="qiyou" type="checkbox" value="true"/>汽油</label>
-                                                                <label><input name="wu" type="checkbox" value="true"/>无</label>
+                                                                <label><input name="gaokong" type="checkbox" />高空</label>
+                                                                <label><input name="diwen" type="checkbox" />低温</label>
+                                                                <label><input name="zaosheng" type="checkbox" />噪声</label>
+                                                                <label><input name="fushe" type="checkbox" />辐射</label>
+                                                                <label><input name="huagongyinran" type="checkbox" />化工污染</label>
+                                                                <label><input name="julieyundong" type="checkbox" />剧烈运动</label>
+                                                                <label><input name="qiyou" type="checkbox" />汽油</label>
+                                                                <label><input name="wu" type="checkbox" />无</label>
                                                             </p>
                                                             <p>
                                                                 饮食偏好：
                                                             <p>
-                                                                <label><input name="wuteshu" type="checkbox" value="true"/>无特殊</label>
-                                                                <label><input name="sushi" type="checkbox" value="true"/>素食</label>
-                                                                <label><input name="suan" type="checkbox" value="true"/>酸</label>
-                                                                <label><input name="tian" type="checkbox" value="true"/>甜</label>
-                                                                <label><input name="xian" type="checkbox" value="true"/>咸</label>
-                                                                <label><input name="xinla" type="checkbox" value="true"/>辛辣</label>
-                                                                <label><input name="you" type="checkbox" value="true"/>油</label>
-                                                                <label><input name="shengleng" type="checkbox" value="true"/>生冷</label>
-                                                                <label><input name="kafei" type="checkbox" value="true"/>含咖啡因食物或饮品</label>
-                                                                <label><input name="qita" type="checkbox" value="true"/>其它</label>
+                                                                <label><input name="wuteshu" type="checkbox"/>无特殊</label>
+                                                                <label><input name="sushi" type="checkbox" />素食</label>
+                                                                <label><input name="suan" type="checkbox" />酸</label>
+                                                                <label><input name="tian" type="checkbox" />甜</label>
+                                                                <label><input name="xian" type="checkbox" />咸</label>
+                                                                <label><input name="xinla" type="checkbox" />辛辣</label>
+                                                                <label><input name="you" type="checkbox" />油</label>
+                                                                <label><input name="shengleng" type="checkbox" />生冷</label>
+                                                                <label><input name="kafei" type="checkbox" />含咖啡因食物或饮品</label>
                                                             </p>
     
                                                             <p>
-                                                                其它说明:<input type="text" id="" name="" value="无"/>
+                                                                其它说明:<input type="text" id="qita" name="qita" value=""/>
                                                             </p>
                                                         </div>
                                                     </div>
@@ -546,11 +562,51 @@
                                 </div>
                             </div>
                             <!--月经情况-->
+                            <script>
+                                $(document).ready(function () {
+                                                $(".menstruation").click(function () {
+                                                    document.getElementById("form-menstruation").reset();
+                                                    //alert($(this).attr("userid"))
+                                                    $.ajax({
+                                                        url: "/prj001/menstruation",//路由，用来处理ajax请求的函数的所在地址
+                                                        type: "POST",
+                                                        data: {userid: $(this).attr("userid")},
+                                                        success: function(result){
+                                                            if (result !== null) {
+                                                                //alert("ajax success: ");
+                                                                $('#first_time').val(12);
+                                                                if (result["cyclicity"]== true){
+                                                                    $("input[name='cyclicity'][value='尚规律']").attr("checked",true);
+                                                                } else {
+                                                                    $("input[name='cyclicity'][value='不规律']").attr("checked",true);
+                                                                }
+                                                                $('#normal').val(result["normal"]);
+                                                                $("input[name='abnormal'][value='"+result["abnormal"]+"']").attr("checked",true);
+                                                                $("input[name='cyclicity_sum'][value='"+result["cyclicity_sum"]+"']").attr("checked",true);
+                                                                $("input[name='blood_cond'][value='"+result["blood_cond"]+"']").attr("checked",true);
+                                                                $("input[name='blood_color'][value='"+result["blood_color"]+"']").attr("checked",true);
+                                                                $("input[name='blood_quality'][value='"+result["blood_quality"]+"']").attr("checked",true);
+                                                                $("input[name='blood_block'][value='"+result["blood_block"]+"']").attr("checked",true);
+                                                                $("input[name='blood_character'][value='"+result["blood_character"]+"']").attr("checked",true);
+                                                            
+                                                            }else {
+                                                                alert("result.status wrong");
+                                                            }    
+                                                        },
+                                                        error: function () {
+                                                            alert("ajax异常");
+                                                        }
+                                                    });
+                                                });
+                                            });
+                            </script>
+                            
                             <div id="modal-table1" class="modal fade" tabindex="-1">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header no-padding">
                                             <div class="table-header">
+                                                
                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                                                     <span class="white">&times;</span>
                                                 </button>
@@ -559,14 +615,15 @@
                                             </div>
                                         </div>
     
-                                        <div class="modal-body no-padding">
+                                        <form class="modal-body no-padding" id="form-menstruation">
+                                            
                                             <table class="table table-striped table-bordered table-hover no-margin-bottom no-border-top">
                                                 <div class="modal-body">
                                                     <div class="row">
                                                         <div class="col-xs-12 col-sm-12">
                                                     <p>
                                                         初潮年龄:
-                                                        <input class="form-control" type="number" name="first_time"/>
+                                                        <input class="form-control" type="number" name="first_time" id="first_time"/>
                                                     </p>
                                                     <p>
                                                         月经周期:
@@ -575,13 +632,13 @@
                                                     </p>
                                                     <p>
                                                         月经规律间隔天数:
-                                                        <input class="form-control" type="number" name="normal"/>
+                                                        <input class="form-control" type="number" name="normal" id="normal"/>
                                                     </p>
                                                     <p>
                                                         月经不规律:
                                                         <label><input type="radio" value="或提前7天以上" name="abnormal"/>或提前7天以上</label>
                                                         <label><input type="radio" value="或1月多次" name="abnormal"/>或1月多次</label>
-                                                        <label><input type="radio" value="获数月1次" name="abnormal"/>获数月1次</label>
+                                                        <label><input type="radio" value="或数月1次" name="abnormal"/>或数月1次</label>
                                                     </p>
                                                     <p>
                                                         行经天数:
@@ -593,10 +650,10 @@
                                                     <p>
                                                         出血情况:
                                                     <p>
-                                                        <label><input type="radio" value="出血量中等,每次约需5-20张卫生巾" name="blood_cond"/>出血量中等,每次约需5-20张卫生巾</label>
-                                                        <label><input type="radio" value="出血量多，每次多余20张卫生巾" name="blood_cond"/>出血量多，每次多余20张卫生巾</label>
-                                                        <label><input type="radio" value="经量少,每次少于5张卫生巾" name="blood_cond"/>经量少,每次少于5张卫生巾</label>
-                                                        <label><input type="radio" value="经量极少,几乎不用卫生巾,用护垫即可" name="blood_cond"/>经量极少,几乎不用卫生巾,用护垫即可</label>
+                                                        <label><input type="radio" value="出血量中等，每次约需5-20张卫生巾" name="blood_cond"/>出血量中等，每次约需5-20张卫生巾</label>
+                                                        <label><input type="radio" value="出血量多，每次多于20张卫生巾" name="blood_cond"/>出血量多，每次多于20张卫生巾</label>
+                                                        <label><input type="radio" value="经量少，每次少于5张卫生巾" name="blood_cond"/>经量少，每次少于5张卫生巾</label>
+                                                        <label><input type="radio" value="经量极少，几乎不用卫生巾，用护垫即可" name="blood_cond"/>经量极少，几乎不用卫生巾，用护垫即可</label>
                                                     </p>
                                                     <p>
                                                         出血颜色:
@@ -621,7 +678,7 @@
                                                         血块:
                                                     <p>
                                                         <label><input type="radio" value="无" name="blood_block"/>无</label>
-                                                        <label><input type="radio" value="偶尔" name="blood_block"/>偶尔</label>
+                                                        <label><input type="radio" value="偶有" name="blood_block"/>偶有</label>
                                                         <label><input type="radio" value="常夹少量小血块" name="blood_block"/>常夹少量小血块</label>
                                                         <label><input type="radio" value="常夹较大血块" name="blood_block"/>常夹较大血块</label>
                                                     </p>
@@ -637,7 +694,8 @@
                                                     </div>
                                                 </div>
                                             </table>
-                                        </div>
+                                    
+                                        </form>
     
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-primary" id="tijiaoBtn1">提交</button>
@@ -647,6 +705,28 @@
                                 </div>
                             </div>
                             <!--全身症状-->
+                            <script>
+                                    $(document).ready(function () {
+                                                    $(".symptom").click(function () {
+                                                        alert($(this).attr("userid"))
+                                                        $.ajax({
+                                                            url: "/prj001/symptom",//路由，用来处理ajax请求的函数的所在地址
+                                                            type: "POST",
+                                                            data: {userid: $(this).attr("userid")},
+                                                            success: function(result){
+                                                                if (result !== null) {
+                                                                    alert("ajax success: ");
+                                                                }else {
+                                                                    alert("result.status wrong");
+                                                                }    
+                                                            },
+                                                            error: function () {
+                                                                alert("ajax异常");
+                                                            }
+                                                        });
+                                                    });
+                                                });
+                            </script>
                             <div id="modal-table2" class="modal fade" tabindex="-1">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -659,7 +739,7 @@
                                             </div>
                                         </div>
     
-                                        <div class="modal-body no-padding">
+                                        <form class="modal-body no-padding" id="form-symptom">
                                             <table class="table table-striped table-bordered table-hover no-margin-bottom no-border-top">
                                                 <div class="modal-body">
                                                     <div class="row">
@@ -703,7 +783,7 @@
                                                     </div>
                                                 </div>
                                             </table>
-                                        </div>
+                                        </form>
     
     
                                         <div class="modal-footer">
@@ -714,6 +794,28 @@
                                 </div>
                             </div>
                             <!--其他情况-->
+                            <script>
+                                    $(document).ready(function () {
+                                                    $(".other").click(function () {
+                                                        alert($(this).attr("userid"))
+                                                        $.ajax({
+                                                            url: "/prj001/other",//路由，用来处理ajax请求的函数的所在地址
+                                                            type: "POST",
+                                                            data: {userid: $(this).attr("userid")},
+                                                            success: function(result){
+                                                                if (result !== null) {
+                                                                    alert("ajax success: ");
+                                                                }else {
+                                                                    alert("result.status wrong");
+                                                                }    
+                                                            },
+                                                            error: function () {
+                                                                alert("ajax异常");
+                                                            }
+                                                        });
+                                                    });
+                                                });
+                            </script>
                             <div id="modal-table3" class="modal fade" tabindex="-1">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -726,7 +828,7 @@
                                             </div>
                                         </div>
     
-                                        <div class="modal-body no-padding">
+                                        <form class="modal-body no-padding" id="form-other">
                                             <table class="table table-striped table-bordered table-hover no-margin-bottom no-border-top">
                                                 <div class="modal-body">
                                                     <div class="row">
@@ -961,16 +1063,38 @@
                                                     </div>
                                                 </div>
                                             </table>
-                                        </div>
+                                        </form>
     
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-primary" id="tijiaoBtn3">提交</button>
     
                                         </div>
-                                    </div><
-                                </div><!-- /.modal-dialog -->
+                                    </div>
+                                </div>
                             </div>
                             <!--临床诊断-->
+                            <script>
+                                    $(document).ready(function () {
+                                                    $(".cc").click(function () {
+                                                        alert($(this).attr("userid"))
+                                                        $.ajax({
+                                                            url: "/prj001/cc",//路由，用来处理ajax请求的函数的所在地址
+                                                            type: "POST",
+                                                            data: {userid: $(this).attr("userid")},
+                                                            success: function(result){
+                                                                if (result !== null) {
+                                                                    alert("ajax success: ");
+                                                                }else {
+                                                                    alert("result.status wrong");
+                                                                }    
+                                                            },
+                                                            error: function () {
+                                                                alert("ajax异常");
+                                                            }
+                                                        });
+                                                    });
+                                                });
+                            </script>
                             <div id="modal-table4" class="modal fade" tabindex="-1">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -983,7 +1107,7 @@
                                             </div>
                                         </div>
     
-                                        <div class="modal-body no-padding">
+                                        <form class="modal-body no-padding" id="form-cc">
                                             <table class="table table-striped table-bordered table-hover no-margin-bottom no-border-top">
                                                 <div class="modal-body">
                                                     <div class="row">
@@ -1058,7 +1182,7 @@
                                                     </div>
                                                 </div>
                                             </table>
-                                        </div>
+                                        </form>
     
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-primary" id="tijiaoBtn4">提交</button>
