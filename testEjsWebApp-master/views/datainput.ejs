@@ -52,7 +52,7 @@
     <script>
         $(document).ready(function () {
             $("#tijiaoBtn").click(function () {
-                alert($('#form1').serialize());
+                // alert($('#form1').serialize());
                 $.ajax({
                     url: "/prj001/datainput", //用来处理ajax请求的函数的所在网址路径
                     method: "POST",
@@ -60,12 +60,11 @@
                     data: {
                         formdata: $('#form1').serialize()
                     },
-                    // data: {per_name: $("#name").val()},
-                    success: function (result) {
-                        console.log(result);
-                        if (result.resultCode == 200) { //result.resultCode == 200,result.status == 1
+                    success: function (data) {
+                        console.log("ajax result:", data);
+                        if (data.status == 1) { //result.resultCode == 201,result.status == 1
                             alert("SUCCESS");
-                            // window.location.href = '/prj001'; //    请求成功后跳转到项目主页
+                           // window.location.href = '/prj001'; //    请求成功后跳转到项目主页
                         } else {
                             alert("录入失败");
                         }
@@ -76,6 +75,30 @@
                     }
                 });
             })
+            // $("#file-submit").click(function () {
+            //     // alert($('#form1').serialize());
+            //     $.ajax({
+            //         url: "/prj001/file_upload", //用来处理ajax请求的函数的所在网址路径
+            //         method: "POST",
+            //         dataType: "json",
+            //         data: {
+            //             formdata: 
+            //         },
+            //         success: function (data) {
+            //             console.log("ajax result:", data);
+            //             if (data.status == 1) { //result.resultCode == 201,result.status == 1
+            //                 alert("SUCCESS");
+            //                // window.location.href = '/prj001'; //    请求成功后跳转到项目主页
+            //             } else {
+            //                 alert("录入失败");
+            //             }
+            //         },
+            //         error: function () {
+            //             alert("录入失败");
+            //             // window.location.href = '/prj001/datainput';
+            //         }
+            //     });
+            // })
         })
     </script>
     <!-- 导航 -->
@@ -116,7 +139,7 @@
                         <li class="divider"></li>
 
                         <li>
-                            <a href="../public/logout.html">
+                            <a href="../logout">
                                 <i class="icon-off"></i>
                                 Logout
                             </a>
@@ -269,7 +292,7 @@
                                                                 民族:
                                                                 <p>
                                                                     <label><input type="radio" value="汉族" name="nation" />汉族</label>
-                                                                    <label><input type="radio" value="蒙古" name="nation" />蒙古族</label>
+                                                                    <label><input type="radio" value="蒙古族" name="nation" />蒙古族</label>
                                                                     <label><input type="radio" value="回族" name="nation" />回族</label>
                                                                     <label><input type="radio" value="藏族" name="nation" />藏族</label>
                                                                     <label><input type="radio" value="维吾尔族" name="nation" />维吾尔族</label>
@@ -332,7 +355,7 @@
                                                                     <p>
                                                                         <label><input type="radio" value="学生" name="career" />学生</label>
                                                                         <label><input type="radio" value="个体" name="career" />个体</label>
-                                                                        <label><input type="radio" value="农名" name="career" />农名</label>
+                                                                        <label><input type="radio" value="农民" name="career" />农民</label>
                                                                         <label><input type="radio" value="军人" name="career" />军人</label>
                                                                         <label><input type="radio" value="工人" name="career" />工人</label>
                                                                         <label><input type="radio" value="财会人员" name="career" />财会人员</label>
@@ -450,7 +473,7 @@
                                 <div class="col-sm-5">
                                     <div class="widget-box">
                                         <div class="widget-header">
-                                            <h4>上传文件</h4>
+                                            <h6>通过Excel模板创建案例</h6>
 
                                                 <span class="widget-toolbar">
                                                     <a href="#" data-action="collapse">
@@ -463,7 +486,7 @@
                                                 </span>
                                             </div>
 
-                                            <div class="widget-body">
+                                            <!-- <div class="widget-body">
                                                 <div class="widget-main">
                                                     <fieldset>
                                                         <label>上传名称：</label>
@@ -473,13 +496,19 @@
                                                     </fieldset>
                                                     <input type="file" id="id-input-file-2" />
                                                     <div class="center">
-                                                        <button type="button" class="btn btn-sm btn-success">
+                                                        <button type="button" class="btn btn-sm btn-success" id="file-submit">
                                                             确定提交
                                                             <i class="icon-arrow-right icon-on-right bigger-110"></i>
                                                         </button>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> -->
+                                            <form action="/prj001/file_upload" method="post" enctype="multipart/form-data">
+                                                <input type="file" name="image" size="80" />
+                                                <br />
+                                                <input type="submit" value="提交" />
+                                            </form>
+                                            <br />
                                         </div>
                                     </div>
                                 </div>

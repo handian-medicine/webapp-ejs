@@ -64,7 +64,7 @@
                         <li class="divider"></li>
 
                         <li>
-                            <a href="../public/logout.html">
+                            <a href="../logout">
                                 <i class="icon-off"></i>
                                 Logout
                             </a>
@@ -209,20 +209,20 @@
                                                     <td>
                                                         
                                                         <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
-                                                            <button id="geninfo" class="btn btn-xs btn-info geninfo" userid=<%= archive.id %>>
+                                                            <button id="geninfo" class="btn btn-xs btn-info geninfo" geninfo-url=<%= archive.url %>>
                                                                     <a href="#modal-table" class="color" role="button" data-toggle="modal">一般情况</a>
                                                             </button>
-                                                            <button id="menstruation" class="btn btn-xs btn-success menstruation" userid=<%= archive.id %>>
+                                                            <button id="menstruation" class="btn btn-xs btn-success menstruation" menstruation-url=<%= archive.menstruation %>>
                                                                     <a href="#modal-table1" class="color" role="button" data-toggle="modal">月经情况</a>
                                                             </button>
-                                                            <button id="symptom" class="btn btn-xs btn-danger symptom" userid=<%= archive.id %>>
+                                                            <button id="symptom" class="btn btn-xs btn-danger symptom" symptom-url=<%= archive.symptom %>>
                                                                     <a href="#modal-table2" class="color" role="button" data-toggle="modal">全身症状</a>
                                                                 </button>
         
-                                                                <button id="other" class="btn btn-xs btn-warning other" userid=<%= archive.id %>>
+                                                                <button id="other" class="btn btn-xs btn-warning other" other-url=<%= archive.other %>>
                                                                     <a href="#modal-table3" class="color" role="button" data-toggle="modal">其它情况</a>
                                                                 </button>
-                                                                <button id="cc" class="btn btn-xs btn-info cc" userid=<%= archive.id %>>
+                                                                <button id="cc" class="btn btn-xs btn-info cc" cc-url=<%= archive.clinicalconclusion %>>
                                                                     <a href="#modal-table4" class="color" role="button" data-toggle="modal">临床诊断</a>
                                                                 </button>
                                                         </div>
@@ -289,11 +289,11 @@
                                 $(document).ready(function () {
                                             $(".geninfo").click(function () {
                                                 document.getElementById("form-geninfo").reset();
-                                                //alert($(this).attr("userid"))
+                                                alert($(this).attr("geninfo-url"))
                                                 $.ajax({
                                                     url: "/prj001/geninfo",//路由，用来处理ajax请求的函数的所在地址
                                                     type: "POST",
-                                                    data: {userid: $(this).attr("userid")},
+                                                    data: {geninfo_url: $(this).attr("geninfo-url")},
                                                     success: function(result){
                                                         if (result !== null) {
                                                             //alert("ajax success: ");
@@ -417,7 +417,7 @@
                                                                 民族:
                                                             <p>
                                                                 <label><input type="radio" value="汉族" name="nation"/>汉族</label>
-                                                                <label><input type="radio" value="蒙古" name="nation"/>蒙古族</label>
+                                                                <label><input type="radio" value="蒙古族" name="nation"/>蒙古族</label>
                                                                 <label><input type="radio" value="回族" name="nation"/>回族</label>
                                                                 <label><input type="radio" value="藏族" name="nation"/>藏族</label>
                                                                 <label><input type="radio" value="维吾尔族" name="nation"/>维吾尔族</label>
@@ -570,11 +570,11 @@
                                 $(document).ready(function () {
                                                 $(".menstruation").click(function () {
                                                     document.getElementById("form-menstruation").reset();
-                                                    //alert($(this).attr("userid"))
+                                                    alert($(this).attr("menstruation-url"))
                                                     $.ajax({
                                                         url: "/prj001/menstruation",//路由，用来处理ajax请求的函数的所在地址
                                                         type: "POST",
-                                                        data: {userid: $(this).attr("userid")},
+                                                        data: {menstruation_url: $(this).attr("menstruation-url")},
                                                         success: function(result){
                                                             if (result !== null) {
                                                                 //alert("ajax success: ");
@@ -712,11 +712,11 @@
                             <script>
                                     $(document).ready(function () {
                                                     $(".symptom").click(function () {
-                                                        alert($(this).attr("userid"))
+                                                        alert($(this).attr("symptom-url"))
                                                         $.ajax({
                                                             url: "/prj001/symptom",//路由，用来处理ajax请求的函数的所在地址
                                                             type: "POST",
-                                                            data: {userid: $(this).attr("userid")},
+                                                            data: {symptom_url: $(this).attr("symptom-url")},
                                                             success: function(result){
                                                                 if (result !== null) {
                                                                     alert("ajax success: ");
@@ -801,11 +801,11 @@
                             <script>
                                     $(document).ready(function () {
                                                     $(".other").click(function () {
-                                                        alert($(this).attr("userid"))
+                                                        alert($(this).attr("other-url"))
                                                         $.ajax({
                                                             url: "/prj001/other",//路由，用来处理ajax请求的函数的所在地址
                                                             type: "POST",
-                                                            data: {userid: $(this).attr("userid")},
+                                                            data: {other_url: $(this).attr("other-url")},
                                                             success: function(result){
                                                                 if (result !== null) {
                                                                     alert("ajax success: ");
@@ -1080,11 +1080,11 @@
                             <script>
                                     $(document).ready(function () {
                                                     $(".cc").click(function () {
-                                                        alert($(this).attr("userid"))
+                                                        alert($(this).attr("cc-url"))
                                                         $.ajax({
                                                             url: "/prj001/cc",//路由，用来处理ajax请求的函数的所在地址
                                                             type: "POST",
-                                                            data: {userid: $(this).attr("userid")},
+                                                            data: {cc_url: $(this).attr("cc-url")},
                                                             success: function(result){
                                                                 if (result !== null) {
                                                                     alert("ajax success: ");

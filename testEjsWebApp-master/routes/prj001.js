@@ -1,7 +1,10 @@
 var request = require("request");
 var express = require('express');
 var myconst = require("./const");
+var mutipart= require('connect-multiparty');
+var fs = require("fs");
 var router = express.Router();
+var mutipartMiddeware = mutipart();
 
 /* GET prj001 home page. */
 router.get('/', function (req, res, next) {
@@ -108,50 +111,78 @@ router.get('/datainput', function (req, res, next) {
     console.log(">>>Visting datainput page!");
     res.render('datainput',{username: req.cookies.userinfo.email});
 });
-//router.any()
 router.post('/datainput', function (req, res, next) {
-    console.log(">>>datainput.js->post", req);
     if (req.cookies.prj001token) {
         var url = myconst.apiurl + "prj001/geninfo/create/";
         var authstring = req.cookies.prj001token.access_token;
         var options = {
             form: req.body.formdata,
-            //JSON.stringify(req.body.formdata),
-            // "recdate": req.body.recdate,
-            // "per_name": req.body.per_name,
-            // form:{"name":req.body.per_name},
             url: url,
             headers: {
                 'Authorization': 'Bearer ' + authstring
             }
         };  
-        console.log("prj001.js res.body:", req.body.formdata);
+        console.log("prj001.js formdata:", req.body.formdata);
         console.log(">>>prj001.js -> options: ", options);
         request.post(options, function (error, response, body) {
-            console.log("options:", options);
             console.log("response:", response.body);
-            if (!error && response.statusCode == 200) {
-                var archiveobjs = JSON.parse(body);
-                console.log(">>>prj001.js -> archiveobjs: ", archiveobjs);
-                res.json({status:1, msg:"录入成功"});
+            console.log("response.statusCode: ", response.statusCode);
+            if (!error && response.statusCode == 201) {
+                // res.json({status:1, msg:"录入成功"});
+                console.log("prj001.js ajax result:", res);
                 //res.render('datainput',{username: req.cookies.userinfo.email});
             }
         })
         }
     })
+router.post('/file_upload', mutipartMiddeware, function (req, res, next) {
+    console.log(req.files);
+    const formData = {
+        // Pass a simple key-value pair
+        name: '测试excel文件',
+        // Pass data via Streams
+        ivfile: fs.createReadStream(req.files.image.path),
+        // Pass owner
+        owner_id: req.cookies.userid.id
+    };
+    var authstring = req.cookies.prj001token.access_token;
+    var options = {
+        url: myconst.apiurl+"prj001/upload/",
+        headers: {
+            'Authorization': 'Bearer ' + authstring
+        },
+        formData: formData
+    };
+
+    request.post(options, function optionalCallback(err, response, body) {
+        if (!err && response.statusCode == 200) {
+            console.log('Upload successful!  Server responded with:', body);
+            //给浏览器返回一个成功提示。
+            res.redirect("/prj001");
+        }
+        else {
+            return console.error('upload failed:', err);
+            res.send('上传失败!');
+        }
+    });
+
+});
 
 
+//数据展示
 router.post('/geninfo', function (req, res, next){
-    console.log(">>>prj001.js/geninfo/userid:", JSON.parse(req.body.userid))
+    console.log(">>>prj001.js:", req.body.geninfo_url);
     //if (req.cookies.prj001token) {
         //var userid = req.body.userid;
-        var url = myconst.apiurl + "/prj001/geninfo/" + req.body.userid;
+        // var url = myconst.apiurl + "/prj001/geninfo/" + req.body.userid;
+        var url = req.body.geninfo_url;
         var authstring = req.cookies.prj001token.access_token;
         var options = {
             url: url,
             headers: {
                 'Authorization': 'Bearer ' + authstring
             }
+            // body: {page:}
         };
         request(options, function (error, response, body) {
             if (!error && response.statusCode == 200) {
@@ -168,10 +199,12 @@ router.post('/geninfo', function (req, res, next){
 });
 
 router.post('/menstruation', function (req, res, next){
-    console.log(">>>prj001.js/menstruation/userid:", JSON.parse(req.body.userid))
+    console.log(">>>prj001.js:", req.body.menstruation_url);
+    // console.log(">>>prj001.js/menstruation/userid:", JSON.parse(req.body.userid))
     //if (req.cookies.prj001token) {
         //var userid = req.body.userid;
-        var url = myconst.apiurl + "/prj001/menstruation/" + req.body.userid;
+        // var url = myconst.apiurl + "/prj001/menstruation/" + req.body.userid;
+        var url = req.body.menstruation;
         var authstring = req.cookies.prj001token.access_token;
         var options = {
             url: url,
@@ -193,10 +226,11 @@ router.post('/menstruation', function (req, res, next){
     //}
 });
 router.post('/symptom', function (req, res, next){
-    console.log(">>>prj001.js/symptom/userid:", JSON.parse(req.body.userid))
+    // console.log(">>>prj001.js/symptom/userid:", JSON.parse(req.body.userid))
     //if (req.cookies.prj001token) {
         //var userid = req.body.userid;
-        var url = myconst.apiurl + "/prj001/symptom/" + req.body.userid;
+        // var url = myconst.apiurl + "/prj001/symptom/" + req.body.userid;
+        var url = req.body.symptom_url;
         var authstring = req.cookies.prj001token.access_token;
         var options = {
             url: url,
@@ -218,10 +252,11 @@ router.post('/symptom', function (req, res, next){
     //}
 });
 router.post('/other', function (req, res, next){
-    console.log(">>>prj001.js/other/userid:", JSON.parse(req.body.userid))
+    // console.log(">>>prj001.js/other/userid:", JSON.parse(req.body.userid))
     //if (req.cookies.prj001token) {
         //var userid = req.body.userid;
-        var url = myconst.apiurl + "/prj001/other/" + req.body.userid;
+        // var url = myconst.apiurl + "/prj001/other/" + req.body.userid;
+        var url = req.body.other_url;
         var authstring = req.cookies.prj001token.access_token;
         var options = {
             url: url,
@@ -243,10 +278,11 @@ router.post('/other', function (req, res, next){
     //}
 });
 router.post('/cc', function (req, res, next){
-    console.log(">>>prj001.js/cc/userid:", JSON.parse(req.body.userid))
+    // console.log(">>>prj001.js/cc/userid:", JSON.parse(req.body.userid))
     //if (req.cookies.prj001token) {
         //var userid = req.body.userid;
-        var url = myconst.apiurl + "/prj001/cc/" + req.body.userid;
+        // var url = myconst.apiurl + "/prj001/cc/" + req.body.userid;
+        var url = req.body.cc_url;
         var authstring = req.cookies.prj001token.access_token;
         var options = {
             url: url,

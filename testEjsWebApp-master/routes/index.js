@@ -9,6 +9,10 @@ router.get('/', function (req, res, next) {
     console.log(">>>index.js: method: ", req.method);
     console.log(">>>index.js: path: ", req.path);
     console.log(">>>index.js: headers: ", req.headers);
+    console.log(">>>Clear all cookies");
+    res.clearCookie('userinfo');
+    res.clearCookie('usertoken');
+    res.clearCookie('prj001token');
     res.render('login', {title: '中医妇产科临床流调数据中心'});
 });
 //Chinese Clinical Investigation Center
@@ -46,6 +50,9 @@ router.get('/home', function (req, res, next) {
                     if (userobjs.results[i]['email'] == useremail ) {
                         console.log(">>>index.js: Found the user! " + userobjs.results[i]['url']);
                         userurl = userobjs.results[i]['url'];
+                        res.cookie("userid", {
+                            "id": userobjs.results[i]['id']
+                        }, {maxAge: 1000 * 60 * 60 * 4, httpOnly: true});//cookie 4小时有效时间
                         break;
                     }
                 }
@@ -80,4 +87,10 @@ router.get('/home', function (req, res, next) {
 
 });
 
+router.get('/logout', function (req, res, next){
+    console.log(">>>Visting logout page!");
+    console.log(">>>res.cookies", res.cookies.usertoken);
+    res.clearCookie("userinfo", "prj001token", "usertoken", {expires: new Date(), path: '/' });
+    res.render('logout');
+});
 module.exports = router;
