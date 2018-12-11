@@ -11,7 +11,7 @@ router.get('/', function (req, res, next) {
 router.post('/', function (req, res, next) {
     console.log(">>>datainput.js->post");
     if (req.cookies.prj001token) {
-        var url = myconst.apiurl + "/prj001/geninfo/create/";
+        var url = myconst.apiurl + "prj001/geninfo/create/";
         var authstring = req.cookies.prj001token.access_token;
         var options = {
             url: url,
@@ -23,7 +23,7 @@ router.post('/', function (req, res, next) {
             if (!error && response.statusCode == 200) {
                 var archiveobjs = JSON.parse(body);
                 console.log(">>>datainput.js -> archiveobjs: ", archiveobjs);
-                res.render('datainput');
+                res.render('datainput',{username: req.cookies.userinfo.email});
             }
         })
         }

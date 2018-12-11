@@ -22,7 +22,7 @@ router.post('/login', function (req, res, next) {
     };
     console.log(">>>users.js: Info used for user authentication: " + JSON.stringify(loginData));
     request.post({url: url, form: loginData}, function (error, response, body) {
-        console.log(">>>users.js: Authentication results: " + body);
+        console.log(">>>users.js: Authentication results: ", body);
         if (!error && response.statusCode == 200) {
             var obj = JSON.parse(body); //由JSON字符串转换为JSON对象
             // 请求成功的处理逻辑

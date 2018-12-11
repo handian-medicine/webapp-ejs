@@ -40,6 +40,21 @@
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
     <![endif]-->
+    <style>
+            /*给出一个最大宽度 适配移动端*/
+            #main{
+                max-width: 1920px;
+                height: 400px;
+                border:1px rgba(185, 185, 185, 0.49) solid
+            }
+    
+            @media screen and (max-width:780px) {
+                #main{
+                    width: 100%;
+                    height: 300px;
+                }
+            }
+        </style>
 </head>
 <body>
 <!-- 导航 -->
@@ -95,6 +110,9 @@
     </script>
 
     <div class="main-container-inner">
+            <a class="menu-toggler" id="menu-toggler" href="#">
+                    <span class="menu-text"></span>
+                </a>
 
         <div class="sidebar" id="sidebar">
             <script type="text/javascript">
@@ -110,7 +128,7 @@
                 </li>
 
                 <li>
-                    <a href="../datainput">
+                    <a href="../prj001/datainput">
                         <i class="icon-text-width"></i>
                         <span class="menu-text"> 数据采集 </span>
                     </a>
@@ -125,7 +143,7 @@
 
                 <li>
                     <a href="../public/about.html">
-                        <i class="icon-picture"></i>
+                        <i class="icon-tag"></i>
                         <span class="menu-text"> 关于 </span>
                     </a>
                 </li>
@@ -235,7 +253,9 @@
             </div><!-- /.row -->
 
                 <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
-            <div id="main" style="width: 600px;height:400px; margin-left: 20%"></div>
+                <div class="col-sm12" >
+                        <div id="main"></div>
+                    </div>
 
         <!-- /.main-content -->
     </div><!-- /.main-container-inner -->
@@ -293,46 +313,58 @@
 
     // 指定图表的配置项和数据
     var option = {
-        title : {
-            text: '',
-            subtext: '',
-            x:'center'
-        },
-        tooltip : {
+        tooltip: {
             trigger: 'item',
-            formatter: "{a} <br/>{b} : {c} ({d}%)"
+            formatter: "{a} <br/>{b}: {c} ({d}%)"
         },
         legend: {
             orient: 'vertical',
-            left: 'left',
-            data: ['','']
+            x: 'left',
+            data:['']
         },
-        series : [
+        series: [
             {
-                name: '访问来源',
-                type: 'pie',
-                radius : '55%',
-                center: ['50%', '60%'],
-                data:[
-                    {value:335, name:'直接访问'},
-                    {value:310, name:'邮件营销'},
-                    {value:234, name:'联盟广告'},
-                    {value:135, name:'视频广告'},
-                    // {value:1548, name:'搜索引擎'}
-                ],
-                itemStyle: {
+                name:'访问来源',
+                type:'pie',
+                radius: ['50%', '70%'],
+                avoidLabelOverlap: false,
+                label: {
+                    normal: {
+                        show: false,
+                        position: 'center'
+                    },
                     emphasis: {
-                        shadowBlur: 10,
-                        shadowOffsetX: 0,
-                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        show: true,
+                        textStyle: {
+                            fontSize: '30',
+                            fontWeight: 'bold'
+                        }
                     }
-                }
+                },
+                labelLine: {
+                    normal: {
+                        show: false
+                    }
+                },
+                data:[
+                    {value:10, name:'20以下'},
+                    {value:20, name:'20~29'},
+                    {value:50, name:'30~39'},
+                    {value:20, name:'40以上'},
+                    // {value:1548, name:'搜索引擎'}
+                ]
             }
         ]
     };
 
     // 使用刚指定的配置项和数据显示图表。
     myChart.setOption(option);
+    //通过DOM id获取到echarts实例
+    var myChart = echarts.getInstanceByDom(document.getElementById("main"));
+    window.onresize = function () {
+        myChart.resize();
+    };
+
 </script>
 
 <script type="text/javascript">

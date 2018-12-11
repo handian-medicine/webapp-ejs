@@ -84,6 +84,10 @@
 
         <div class="main-container-inner">
 
+            <a class="menu-toggler" id="menu-toggler" href="#">
+                <span class="menu-text"></span>
+            </a>
+
             <div class="sidebar" id="sidebar">
                 <script type="text/javascript">
                     try {
@@ -100,7 +104,7 @@
                     </li>
 
                     <li>
-                        <a href="../datainput">
+                        <a href="../prj001/datainput">
                             <i class="icon-text-width"></i>
                             <span class="menu-text"> 数据采集 </span>
                         </a>
@@ -115,7 +119,7 @@
 
                     <li>
                         <a href="../public/about.html">
-                            <i class="icon-picture"></i>
+                            <i class="icon-tag"></i>
                             <span class="menu-text"> 关于 </span>
                         </a>
                     </li>
@@ -193,13 +197,13 @@
                                                     <td>
                                                         <%= archive.blood_type %>
                                                     </td>
-                                                    <td>
+                                                    <td class="hidden-480">
                                                         <%= archive.career %>
                                                     </td>
                                                     <td>
                                                         <%= archive.culture %>
                                                     </td>
-                                                    <td>
+                                                    <td class="hidden-480">
                                                         <%= archive.marriage %>
                                                     </td>
                                                     <td>
@@ -208,7 +212,7 @@
                                                             <button id="geninfo" class="btn btn-xs btn-info geninfo" userid=<%= archive.id %>>
                                                                     <a href="#modal-table" class="color" role="button" data-toggle="modal">一般情况</a>
                                                             </button>
-                                                            <button id="menstruation" class="btn btn-xs btn-info menstruation" userid=<%= archive.id %>>
+                                                            <button id="menstruation" class="btn btn-xs btn-success menstruation" userid=<%= archive.id %>>
                                                                     <a href="#modal-table1" class="color" role="button" data-toggle="modal">月经情况</a>
                                                             </button>
                                                             <button id="symptom" class="btn btn-xs btn-danger symptom" userid=<%= archive.id %>>

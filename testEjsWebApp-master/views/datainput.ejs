@@ -45,34 +45,38 @@
     <script src="../public/../public/js/respond.min.js"></script>
     <![endif]-->
     <script src="/public/javascripts/jquery.min.js"></script>
+    <script src="/public/javascripts/jquery.form.min.js"></script>
 </head>
 
 <body>
     <script>
         $(document).ready(function () {
             $("#tijiaoBtn").click(function () {
-                            alert($('#form1').serialize());
-                            $.ajax({
-                                url: "/datainput", //用来处理ajax请求的函数的所在网址路径
-                                type: "POST",
-                                dataType: "json",
-                                data: $('#form1').serialize(), //#form表单的名字
-                                success: function (result) {
-                                    console.log(result);
-                                    if (result.resultCode == 200) {
-                                        alert("SUCCESS");
-                                        window.location.href = '/datainput'; //    请求成功后跳转到项目主页
-                                    } else {
-                                        alert("异常");
-                                    }
-                                },
-                                error: function () {
-                                    alert("异常");
-                                    window.location.href = '/home';
-                                }
-                            });
-                        })
-                })
+                alert($('#form1').serialize());
+                $.ajax({
+                    url: "/prj001/datainput", //用来处理ajax请求的函数的所在网址路径
+                    method: "POST",
+                    dataType: "json",
+                    data: {
+                        formdata: $('#form1').serialize()
+                    },
+                    // data: {per_name: $("#name").val()},
+                    success: function (result) {
+                        console.log(result);
+                        if (result.resultCode == 200) { //result.resultCode == 200,result.status == 1
+                            alert("SUCCESS");
+                            // window.location.href = '/prj001'; //    请求成功后跳转到项目主页
+                        } else {
+                            alert("录入失败");
+                        }
+                    },
+                    error: function () {
+                        alert("录入失败");
+                        // window.location.href = '/prj001/datainput';
+                    }
+                });
+            })
+        })
     </script>
     <!-- 导航 -->
     <div class="navbar navbar-default" id="navbar">
@@ -101,7 +105,7 @@
                         <img class="nav-user-photo" src="../public/avatars/user.jpg" alt="Jason's Photo">
                         <span class="user-info">
                             <small>welcome,</small>
-                            admin
+                            <%= username %>
                         </span>
 
                         <i class="icon-caret-down"></i>
@@ -112,7 +116,7 @@
                         <li class="divider"></li>
 
                         <li>
-                            <a href="logout.html">
+                            <a href="../public/logout.html">
                                 <i class="icon-off"></i>
                                 Logout
                             </a>
@@ -151,7 +155,7 @@
                     </li>
 
                     <li>
-                        <a href="../datainput">
+                        <a href="../prj001/datainput">
                             <i class="icon-text-width"></i>
                             <span class="menu-text"> 数据采集 </span>
                         </a>
@@ -166,7 +170,7 @@
 
                     <li>
                         <a href="../public/about.html">
-                            <i class="icon-picture"></i>
+                            <i class="icon-tag"></i>
                             <span class="menu-text"> 关于 </span>
                         </a>
                     </li>
@@ -187,20 +191,12 @@
                 <div class="page-content">
                     <div class="row">
                         <div class="col-xs-12">
-                            <form class="form-search" id="sample-table-2_filter">
-                                <span class="input-icon align-middle">
-                                    <i class="icon-search"></i>
-
-                                    <input type="text" class="search-query" placeholder="输入文件标记名称" />
-                                </span>
-                                <button class="btn btn-sm" onclick="return false;">提交</button>
-                            </form>
-                            <hr>
 
                             <h4 class="pink">
                                 <i class="icon-hand-right icon-animated-hand-pointer blue"></i>
-                                <a href="#modal-table" role="button" class="green" data-toggle="modal"> 点击输入 </a>
+                                <a href="#modal-table" role="button" class="green" data-toggle="modal"> 点击添加基本信息 </a>
                             </h4>
+                            <hr>
                             <div id="modal-table" class="modal fade" tabindex="-1">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -259,7 +255,7 @@
                                                             </p>
                                                             <p>
                                                                 体重kg:<input class="form-control" type="number" id="weight "
-                                                                    name="weight " />
+                                                                    name="weight" />
                                                             </p>
                                                             <p>
                                                                 血型:
@@ -448,6 +444,46 @@
                                     </div><!-- /.modal-content -->
                                 </div><!-- /.modal-dialog -->
                             </div>
+
+
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <div class="widget-box">
+                                        <div class="widget-header">
+                                            <h4>上传文件</h4>
+
+                                                <span class="widget-toolbar">
+                                                    <a href="#" data-action="collapse">
+                                                        <i class="icon-chevron-up"></i>
+                                                    </a>
+
+                                                    <a href="#" data-action="close">
+                                                        <i class="icon-remove"></i>
+                                                    </a>
+                                                </span>
+                                            </div>
+
+                                            <div class="widget-body">
+                                                <div class="widget-main">
+                                                    <fieldset>
+                                                        <label>上传名称：</label>
+
+                                                        <input type="text" placeholder="输入文件标记名称&hellip;" />
+                                                        <span class="help-block"></span>
+                                                    </fieldset>
+                                                    <input type="file" id="id-input-file-2" />
+                                                    <div class="center">
+                                                        <button type="button" class="btn btn-sm btn-success">
+                                                            确定提交
+                                                            <i class="icon-arrow-right icon-on-right bigger-110"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        
                         </div>
                     </div>
                 </div>

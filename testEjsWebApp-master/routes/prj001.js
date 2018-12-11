@@ -31,7 +31,7 @@ router.get('/', function (req, res, next) {
                     username: req.cookies.userinfo.email
                 });
             } else {
-                console.log(">>>Getting archives met unknown error. " + error.error_description);
+                console.log(">>>Getting archives met unknown error. " , error.error_description);
                 res.redirect("login");
             }
         });
@@ -103,6 +103,43 @@ router.get('/', function (req, res, next) {
     }
 
 });
+//数据采集
+router.get('/datainput', function (req, res, next) {
+    console.log(">>>Visting datainput page!");
+    res.render('datainput',{username: req.cookies.userinfo.email});
+});
+//router.any()
+router.post('/datainput', function (req, res, next) {
+    console.log(">>>datainput.js->post", req);
+    if (req.cookies.prj001token) {
+        var url = myconst.apiurl + "prj001/geninfo/create/";
+        var authstring = req.cookies.prj001token.access_token;
+        var options = {
+            form: req.body.formdata,
+            //JSON.stringify(req.body.formdata),
+            // "recdate": req.body.recdate,
+            // "per_name": req.body.per_name,
+            // form:{"name":req.body.per_name},
+            url: url,
+            headers: {
+                'Authorization': 'Bearer ' + authstring
+            }
+        };  
+        console.log("prj001.js res.body:", req.body.formdata);
+        console.log(">>>prj001.js -> options: ", options);
+        request.post(options, function (error, response, body) {
+            console.log("options:", options);
+            console.log("response:", response.body);
+            if (!error && response.statusCode == 200) {
+                var archiveobjs = JSON.parse(body);
+                console.log(">>>prj001.js -> archiveobjs: ", archiveobjs);
+                res.json({status:1, msg:"录入成功"});
+                //res.render('datainput',{username: req.cookies.userinfo.email});
+            }
+        })
+        }
+    })
+
 
 router.post('/geninfo', function (req, res, next){
     console.log(">>>prj001.js/geninfo/userid:", JSON.parse(req.body.userid))
