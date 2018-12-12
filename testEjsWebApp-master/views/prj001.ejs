@@ -26,6 +26,163 @@
 </head>
 
 <body>
+<script>
+    $(document).ready(function () {
+        $(".geninfo").click(function () {
+            document.getElementById("form-geninfo").reset();
+            //alert($(this).attr("geninfo-url"));
+            $.ajax({
+                url: "/prj001/geninfo",//路由，用来处理ajax请求的函数的所在地址
+                type: "POST",
+                data: {geninfo_url: $(this).attr("geninfo-url")},
+                success: function(result){
+                    if (result !== null) {
+                        //alert("ajax success: ");
+                        //$('#person').valu(result["id"])
+                        $('#recdate').val(result["recdate"]);
+                        $('#serial').val(result["serial"]);
+                        $('#hospital').val(result["hospital"]);
+                        $('#expert').val(result["expert"]);
+                        $('#name').val(result["name"]);
+                        $('#telephone').val(result["telephone"]);
+                        $('#age').val(result["age"]);
+                        $('#height').val(result["height"]);
+                        $('#weight').val(result["weight"]);
+                        $('#address').val(result["address"]);
+                        $('#qita').val(result["qita"]);
+
+                        $("input[name='title'][value='"+result["title"]+"']").attr("checked",true);
+                        $("input[name='blood_type'][value='"+result["blood_type"]+"']").attr("checked",true);
+                        $("input[name='nation'][value='"+result["nation"]+"']").attr("checked",true);
+                        $("input[name='career'][value='"+result["career"]+"']").attr("checked",true);
+
+                        $("input[name='entrance'][value='"+result["entrance"]+"']").attr("checked",true);
+                        $("input[name='culture'][value='"+result["culture"]+"']").attr("checked",true);
+                        $("input[name='marriage'][value='"+result["marriage"]+"']").attr("checked",true);
+
+                        $("input:checkbox[name='wuteshu']").attr('checked',result["wuteshu"]);
+                        $("input:checkbox[name='sushi']").attr('checked',result["sushi"]);
+                        $("input:checkbox[name='suan']").attr('checked',result["suan"]);
+                        $("input:checkbox[name='tian']").attr('checked',result["tian"]);
+                        $("input:checkbox[name='xian']").attr('checked',result["xian"]);
+                        $("input:checkbox[name='xinla']").attr('checked',result["xinla"]);
+                        $("input:checkbox[name='you']").attr('checked',result["you"]);
+                        $("input:checkbox[name='shengleng']").attr('checked',result["shengleng"]);
+                        $("input:checkbox[name='kafei']").attr('checked',result["kafei"]);
+
+                        $("input:checkbox[name='gaokong']").attr('checked',result["gaokong"]);
+                        $("input:checkbox[name='diwen']").attr('checked',result["diwen"]);
+                        $("input:checkbox[name='zaosheng']").attr('checked',result["zaosheng"]);
+                        $("input:checkbox[name='fushe']").attr('checked',result["fushe"]);
+                        $("input:checkbox[name='huagongyinran']").attr('checked',result["huagongyinran"]);
+                        $("input:checkbox[name='julieyundong']").attr('checked',result["julieyundong"]);
+                        $("input:checkbox[name='qiyou']").attr('checked',result["qiyou"]);
+                        $("input:checkbox[name='wu']").attr('checked',result["wu"]);
+
+                        $('#menstruation').val(result["menstruation"]);
+                        $('#symptom').val(result["symptom"]);
+                        $('#other').val(result["other"]);
+                        $('#clinicalconclusion').val(result["clinicalconclusion"]);
+                    } else {
+                        alert("result.status wrong");
+                    }
+                },
+                error: function () {
+                    alert("ajax异常");
+                }
+            });
+        });
+
+        $(".menstruation").click(function () {
+            document.getElementById("form-menstruation").reset();
+            //alert($(this).attr("menstruation-url"));
+            $.ajax({
+                url: "/prj001/menstruation",//路由，用来处理ajax请求的函数的所在地址
+                type: "POST",
+                data: {menstruation_url: $(this).attr("menstruation-url")},
+                success: function(result){
+                    if (result !== null) {
+                        //alert("ajax success: ");
+                        $('#first_time').val(12);
+                        if (result["cyclicity"]== true){
+                            $("input[name='cyclicity'][value='尚规律']").attr("checked",true);
+                        } else {
+                            $("input[name='cyclicity'][value='不规律']").attr("checked",true);
+                        }
+                        $('#normal').val(result["normal"]);
+                        $("input[name='abnormal'][value='"+result["abnormal"]+"']").attr("checked",true);
+                        $("input[name='cyclicity_sum'][value='"+result["cyclicity_sum"]+"']").attr("checked",true);
+                        $("input[name='blood_cond'][value='"+result["blood_cond"]+"']").attr("checked",true);
+                        $("input[name='blood_color'][value='"+result["blood_color"]+"']").attr("checked",true);
+                        $("input[name='blood_quality'][value='"+result["blood_quality"]+"']").attr("checked",true);
+                        $("input[name='blood_block'][value='"+result["blood_block"]+"']").attr("checked",true);
+                        $("input[name='blood_character'][value='"+result["blood_character"]+"']").attr("checked",true);
+
+                    }else {
+                        alert("result.status wrong");
+                    }
+                },
+                error: function () {
+                    alert("ajax异常");
+                }
+            });
+        });
+        $(".symptom").click(function () {
+            //alert($(this).attr("symptom-url"))
+            $.ajax({
+                url: "/prj001/symptom",//路由，用来处理ajax请求的函数的所在地址
+                type: "POST",
+                data: {symptom_url: $(this).attr("symptom-url")},
+                success: function(result){
+                    if (result !== null) {
+                        alert("代码调试中……");
+                    }else {
+                        alert("result.status wrong");
+                    }
+                },
+                error: function () {
+                    alert("ajax异常");
+                }
+            });
+        });
+        $(".other").click(function () {
+            //alert($(this).attr("other-url"))
+            $.ajax({
+                url: "/prj001/other",//路由，用来处理ajax请求的函数的所在地址
+                type: "POST",
+                data: {other_url: $(this).attr("other-url")},
+                success: function(result){
+                    if (result !== null) {
+                        alert("代码调试中……");
+                    }else {
+                        alert("result.status wrong");
+                    }
+                },
+                error: function () {
+                    alert("ajax异常");
+                }
+            });
+        });
+        $(".cc").click(function () {
+            //alert($(this).attr("cc-url"))
+            $.ajax({
+                url: "/prj001/cc",//路由，用来处理ajax请求的函数的所在地址
+                type: "POST",
+                data: {cc_url: $(this).attr("cc-url")},
+                success: function(result){
+                    if (result !== null) {
+                        alert("代码调试中……");
+                    }else {
+                        alert("result.status wrong");
+                    }
+                },
+                error: function () {
+                    alert("ajax异常");
+                }
+            });
+        });
+    });
+</script>
     <!-- 导航 -->
     <div class="navbar navbar-default" id="navbar">
         <script type="text/javascript">
@@ -281,78 +438,35 @@
                                                 <% }) %>
                                             </tbody>
                                         </table>
+                                        <div class="row">
+                                                <div class="col-sm-6"></div>
+                                                <div class="col-sm-6">
+                                                    <div class="dataTables_paginate paging_bootstrap">
+                                                        <ul class="pagination">
+                                                            <li class="prev disabled">
+                                                                <a href=" ">
+                                                                    <i class="icon-double-angle-left"></i>
+                                                                </a >
+                                                            </li>
+                                                            <li class="active">
+                                                                <a href="#">1</a >
+                                                            </li>
+                                                            <li><a href="#">2</a ></li>
+                                                            <li><a href="#">3</a ></li>
+                                                            <li class="next">
+                                                                <a href="#">
+                                                                    <i class="icon-double-angle-right"></i>
+                                                                </a >
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
                                     </div>
                                 </div>
                             </div>
                             <!--一般情况-->
-                            <script>
-                                $(document).ready(function () {
-                                            $(".geninfo").click(function () {
-                                                document.getElementById("form-geninfo").reset();
-                                                alert($(this).attr("geninfo-url"))
-                                                $.ajax({
-                                                    url: "/prj001/geninfo",//路由，用来处理ajax请求的函数的所在地址
-                                                    type: "POST",
-                                                    data: {geninfo_url: $(this).attr("geninfo-url")},
-                                                    success: function(result){
-                                                        if (result !== null) {
-                                                            //alert("ajax success: ");
-                                                            //$('#person').valu(result["id"])
-                                                            $('#recdate').val(result["recdate"]);
-                                                            $('#serial').val(result["serial"]);
-                                                            $('#hospital').val(result["hospital"]);
-                                                            $('#expert').val(result["expert"]);
-                                                            $('#name').val(result["name"]);
-                                                            $('#telephone').val(result["telephone"]);
-                                                            $('#age').val(result["age"]);
-                                                            $('#height').val(result["height"]);
-                                                            $('#weight').val(result["weight"]);
-                                                            $('#address').val(result["address"]);
-                                                            $('#qita').val(result["qita"]);
 
-                                                            $("input[name='title'][value='"+result["title"]+"']").attr("checked",true);
-                                                            $("input[name='blood_type'][value='"+result["blood_type"]+"']").attr("checked",true);
-                                                            $("input[name='nation'][value='"+result["nation"]+"']").attr("checked",true);
-                                                            $("input[name='career'][value='"+result["career"]+"']").attr("checked",true);
-
-                                                            $("input[name='entrance'][value='"+result["entrance"]+"']").attr("checked",true);
-                                                            $("input[name='culture'][value='"+result["culture"]+"']").attr("checked",true);
-                                                            $("input[name='marriage'][value='"+result["marriage"]+"']").attr("checked",true);
-                                                            
-                                                            $("input:checkbox[name='wuteshu']").attr('checked',result["wuteshu"]);
-                                                            $("input:checkbox[name='sushi']").attr('checked',result["sushi"]);
-                                                            $("input:checkbox[name='suan']").attr('checked',result["suan"]);
-                                                            $("input:checkbox[name='tian']").attr('checked',result["tian"]);
-                                                            $("input:checkbox[name='xian']").attr('checked',result["xian"]);
-                                                            $("input:checkbox[name='xinla']").attr('checked',result["xinla"]);
-                                                            $("input:checkbox[name='you']").attr('checked',result["you"]);
-                                                            $("input:checkbox[name='shengleng']").attr('checked',result["shengleng"]);
-                                                            $("input:checkbox[name='kafei']").attr('checked',result["kafei"]);
-                                                            
-                                                            $("input:checkbox[name='gaokong']").attr('checked',result["gaokong"]);
-                                                            $("input:checkbox[name='diwen']").attr('checked',result["diwen"]);
-                                                            $("input:checkbox[name='zaosheng']").attr('checked',result["zaosheng"]);
-                                                            $("input:checkbox[name='fushe']").attr('checked',result["fushe"]);
-                                                            $("input:checkbox[name='huagongyinran']").attr('checked',result["huagongyinran"]);
-                                                            $("input:checkbox[name='julieyundong']").attr('checked',result["julieyundong"]);
-                                                            $("input:checkbox[name='qiyou']").attr('checked',result["qiyou"]);
-                                                            $("input:checkbox[name='wu']").attr('checked',result["wu"]);
-
-                                                            $('#menstruation').val(result["menstruation"]);
-                                                            $('#symptom').val(result["symptom"]);
-                                                            $('#other').val(result["other"]);
-                                                            $('#clinicalconclusion').val(result["clinicalconclusion"]);
-                                                        } else {
-                                                            alert("result.status wrong");
-                                                        }    
-			                                        },
-                                                    error: function () {
-                                                        alert("ajax异常");
-                                                    }
-                                                });
-                                            });
-                                        });
-                            </script>
                             
                             <div id="modal-table" class="modal fade" tabindex="-1">
                                 <div class="modal-dialog">
@@ -559,51 +673,13 @@
                                         </form>
     
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-primary" id="tijiaoBtn">提交</button>
+                                            <button type="button" class="btn btn-primary" id="geninfoBtn">提交</button>
     
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <!--月经情况-->
-                            <script>
-                                $(document).ready(function () {
-                                                $(".menstruation").click(function () {
-                                                    document.getElementById("form-menstruation").reset();
-                                                    alert($(this).attr("menstruation-url"))
-                                                    $.ajax({
-                                                        url: "/prj001/menstruation",//路由，用来处理ajax请求的函数的所在地址
-                                                        type: "POST",
-                                                        data: {menstruation_url: $(this).attr("menstruation-url")},
-                                                        success: function(result){
-                                                            if (result !== null) {
-                                                                //alert("ajax success: ");
-                                                                $('#first_time').val(12);
-                                                                if (result["cyclicity"]== true){
-                                                                    $("input[name='cyclicity'][value='尚规律']").attr("checked",true);
-                                                                } else {
-                                                                    $("input[name='cyclicity'][value='不规律']").attr("checked",true);
-                                                                }
-                                                                $('#normal').val(result["normal"]);
-                                                                $("input[name='abnormal'][value='"+result["abnormal"]+"']").attr("checked",true);
-                                                                $("input[name='cyclicity_sum'][value='"+result["cyclicity_sum"]+"']").attr("checked",true);
-                                                                $("input[name='blood_cond'][value='"+result["blood_cond"]+"']").attr("checked",true);
-                                                                $("input[name='blood_color'][value='"+result["blood_color"]+"']").attr("checked",true);
-                                                                $("input[name='blood_quality'][value='"+result["blood_quality"]+"']").attr("checked",true);
-                                                                $("input[name='blood_block'][value='"+result["blood_block"]+"']").attr("checked",true);
-                                                                $("input[name='blood_character'][value='"+result["blood_character"]+"']").attr("checked",true);
-                                                            
-                                                            }else {
-                                                                alert("result.status wrong");
-                                                            }    
-                                                        },
-                                                        error: function () {
-                                                            alert("ajax异常");
-                                                        }
-                                                    });
-                                                });
-                                            });
-                            </script>
                             
                             <div id="modal-table1" class="modal fade" tabindex="-1">
                                 <div class="modal-dialog">
@@ -702,35 +778,13 @@
                                         </form>
     
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-primary" id="tijiaoBtn1">提交</button>
+                                            <button type="button" class="btn btn-primary" id="menstruationBtn">提交</button>
     
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <!--全身症状-->
-                            <script>
-                                    $(document).ready(function () {
-                                                    $(".symptom").click(function () {
-                                                        alert($(this).attr("symptom-url"))
-                                                        $.ajax({
-                                                            url: "/prj001/symptom",//路由，用来处理ajax请求的函数的所在地址
-                                                            type: "POST",
-                                                            data: {symptom_url: $(this).attr("symptom-url")},
-                                                            success: function(result){
-                                                                if (result !== null) {
-                                                                    alert("ajax success: ");
-                                                                }else {
-                                                                    alert("result.status wrong");
-                                                                }    
-                                                            },
-                                                            error: function () {
-                                                                alert("ajax异常");
-                                                            }
-                                                        });
-                                                    });
-                                                });
-                            </script>
                             <div id="modal-table2" class="modal fade" tabindex="-1">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -791,35 +845,13 @@
     
     
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-primary" id="tijiaoBtn2">提交</button>
+                                            <button type="button" class="btn btn-primary" id="symptomBtn">提交</button>
     
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <!--其他情况-->
-                            <script>
-                                    $(document).ready(function () {
-                                                    $(".other").click(function () {
-                                                        alert($(this).attr("other-url"))
-                                                        $.ajax({
-                                                            url: "/prj001/other",//路由，用来处理ajax请求的函数的所在地址
-                                                            type: "POST",
-                                                            data: {other_url: $(this).attr("other-url")},
-                                                            success: function(result){
-                                                                if (result !== null) {
-                                                                    alert("ajax success: ");
-                                                                }else {
-                                                                    alert("result.status wrong");
-                                                                }    
-                                                            },
-                                                            error: function () {
-                                                                alert("ajax异常");
-                                                            }
-                                                        });
-                                                    });
-                                                });
-                            </script>
                             <div id="modal-table3" class="modal fade" tabindex="-1">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -1070,35 +1102,13 @@
                                         </form>
     
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-primary" id="tijiaoBtn3">提交</button>
+                                            <button type="button" class="btn btn-primary" id="otherBtn">提交</button>
     
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <!--临床诊断-->
-                            <script>
-                                    $(document).ready(function () {
-                                                    $(".cc").click(function () {
-                                                        alert($(this).attr("cc-url"))
-                                                        $.ajax({
-                                                            url: "/prj001/cc",//路由，用来处理ajax请求的函数的所在地址
-                                                            type: "POST",
-                                                            data: {cc_url: $(this).attr("cc-url")},
-                                                            success: function(result){
-                                                                if (result !== null) {
-                                                                    alert("ajax success: ");
-                                                                }else {
-                                                                    alert("result.status wrong");
-                                                                }    
-                                                            },
-                                                            error: function () {
-                                                                alert("ajax异常");
-                                                            }
-                                                        });
-                                                    });
-                                                });
-                            </script>
                             <div id="modal-table4" class="modal fade" tabindex="-1">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -1189,7 +1199,7 @@
                                         </form>
     
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-primary" id="tijiaoBtn4">提交</button>
+                                            <button type="button" class="btn btn-primary" id="ccBtn">提交</button>
     
                                         </div>
                                     </div>

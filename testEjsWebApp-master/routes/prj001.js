@@ -111,7 +111,7 @@ router.get('/datainput', function (req, res, next) {
     console.log(">>>Visting datainput page!");
     res.render('datainput',{username: req.cookies.userinfo.email});
 });
-router.post('/datainput', function (req, res, next) {
+router.post('/datainputoptr', function (req, res, next) {
     if (req.cookies.prj001token) {
         var url = myconst.apiurl + "prj001/geninfo/create/";
         var authstring = req.cookies.prj001token.access_token;
@@ -137,11 +137,15 @@ router.post('/datainput', function (req, res, next) {
     })
 router.post('/file_upload', mutipartMiddeware, function (req, res, next) {
     console.log(req.files);
+    //xlsFileTrans 是前端的form里面input的名称
+    if (req.files.xlsFileTrans.originalFilename == "") {
+        res.send('请选择文件!');
+    }
     const formData = {
         // Pass a simple key-value pair
         name: '测试excel文件',
         // Pass data via Streams
-        ivfile: fs.createReadStream(req.files.image.path),
+        ivfile: fs.createReadStream(req.files.xlsFileTrans.path),
         // Pass owner
         owner_id: req.cookies.userid.id
     };
@@ -204,7 +208,7 @@ router.post('/menstruation', function (req, res, next){
     //if (req.cookies.prj001token) {
         //var userid = req.body.userid;
         // var url = myconst.apiurl + "/prj001/menstruation/" + req.body.userid;
-        var url = req.body.menstruation;
+        var url = req.body.menstruation_url;
         var authstring = req.cookies.prj001token.access_token;
         var options = {
             url: url,
@@ -294,8 +298,8 @@ router.post('/cc', function (req, res, next){
             if (!error && response.statusCode == 200) {
                 console.log(">>>prj001.js options: ", options)
                 var user_cc = JSON.parse(body);
-                console.log(">>>prj001.js -> user_cc: ", user_menstruation);
-                res.json(user_menstruation);
+                console.log(">>>prj001.js -> user_cc: ", user_cc);
+                res.json(user_cc);
             } else {
                 //console.log(">>>Getting archives met unknown error. " + error.error_description);
                 res.redirect("/prj001");

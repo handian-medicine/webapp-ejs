@@ -49,65 +49,81 @@
 </head>
 
 <body>
-    <script>
-        $(document).ready(function () {
-            $("#tijiaoBtn").click(function () {
-                // alert($('#form1').serialize());
-                $.ajax({
-                    url: "/prj001/datainput", //用来处理ajax请求的函数的所在网址路径
-                    method: "POST",
-                    dataType: "json",
-                    data: {
-                        formdata: $('#form1').serialize()
-                    },
-                    success: function (data) {
-                        console.log("ajax result:", data);
-                        if (data.status == 1) { //result.resultCode == 201,result.status == 1
-                            alert("SUCCESS");
-                           // window.location.href = '/prj001'; //    请求成功后跳转到项目主页
-                        } else {
-                            alert("录入失败");
-                        }
-                    },
-                    error: function () {
+<script>
+    $(document).ready(function () {
+        $("#tijiaoBtn").click(function () {
+            // alert($('#form1').serialize());
+            $.ajax({
+                url: "/prj001/datainputoptr", //用来处理ajax请求的函数的所在网址路径
+                method: "POST",
+                dataType: "json",
+                data: {
+                    formdata: $('#form1').serialize()
+                },
+                success: function (data) {
+                    console.log("ajax result:", data);
+                    if (data.status == 1) { //result.resultCode == 201,result.status == 1
+                        alert("录入成功");
+                        window.location.href = '/prj001'; //    请求成功后跳转到项目主页
+                    } else {
                         alert("录入失败");
-                        // window.location.href = '/prj001/datainput';
                     }
-                });
-            })
-            // $("#file-submit").click(function () {
-            //     // alert($('#form1').serialize());
-            //     $.ajax({
-            //         url: "/prj001/file_upload", //用来处理ajax请求的函数的所在网址路径
-            //         method: "POST",
-            //         dataType: "json",
-            //         data: {
-            //             formdata: 
-            //         },
-            //         success: function (data) {
-            //             console.log("ajax result:", data);
-            //             if (data.status == 1) { //result.resultCode == 201,result.status == 1
-            //                 alert("SUCCESS");
-            //                // window.location.href = '/prj001'; //    请求成功后跳转到项目主页
-            //             } else {
-            //                 alert("录入失败");
-            //             }
-            //         },
-            //         error: function () {
-            //             alert("录入失败");
-            //             // window.location.href = '/prj001/datainput';
-            //         }
-            //     });
-            // })
+                },
+                error: function () {
+                    alert("处理有误");
+                    // window.location.href = '/prj001/datainput';
+                }
+            });
         })
+         /*$("#file-submit").click(function () {
+             var files = $('input[name="xlsFileTrans"]').prop('files');//获取到文件列表
+             //console.log(files);
+             if(files.length==0){//拦截空文件
+                 alert("请选择文件");
+             }else{
+                 var files_name=files[0].name;//获取文件名称
+                 var zh=(/[^\.]+$/);
+                 var files_name=files_name.match(zh);//中正则获取后缀名称
+                 //console.log(files_name[0]);
+                 if(files_name[0]!=='xls' || files_name[0]!=='xlsx'){//拦截不是excel表格的文件
+                     alert("请选择excel表格");
+                 }else {
+                     var xlsform = new FormData(document.getElementById("excelform"));
+                     $.ajax({
+                         url: "/prj001/file_upload", //用来处理ajax请求的函数的所在网址路径
+                         type: "POST",
+                         data: xlsform,
+                         async: false,
+                         cache: false,
+                         contentType: false,
+                         processData: false,
+                         success: function (data) {
+                             console.log("ajax result:", data);
+                             if (data.status == 1) { //result.resultCode == 201,result.status == 1
+                                 alert("SUCCESS");
+                                 // window.location.href = '/prj001'; //    请求成功后跳转到项目主页
+                             } else {
+                                 alert("录入失败");
+                             }
+                         },
+                         error: function () {
+                             alert("录入失败");
+                             // window.location.href = '/prj001/datainput';
+                         }
+                     });
+                 }
+         });*/
+
+    })
+</script>
+<!-- 导航 -->
+<div class="navbar navbar-default" id="navbar">
+    <script type="text/javascript">
+        try {
+            ace.settings.check('navbar', 'fixed')
+        } catch (e) {
+        }
     </script>
-    <!-- 导航 -->
-    <div class="navbar navbar-default" id="navbar">
-        <script type="text/javascript">
-            try {
-                ace.settings.check('navbar', 'fixed')
-            } catch (e) {}
-        </script>
 
         <div class="navbar-container" id="navbar-container">
             <div class="navbar-header pull-left">
@@ -150,12 +166,13 @@
         </div>
     </div>
 
-    <div class="main-container" id="main-container">
-        <script type="text/javascript">
-            try {
-                ace.settings.check('main-container', 'fixed')
-            } catch (e) {}
-        </script>
+<div class="main-container" id="main-container">
+    <script type="text/javascript">
+        try {
+            ace.settings.check('main-container', 'fixed')
+        } catch (e) {
+        }
+    </script>
 
         <div class="main-container-inner">
             <a class="menu-toggler" id="menu-toggler" href="#">
@@ -215,22 +232,22 @@
                     <div class="row">
                         <div class="col-xs-12">
 
-                            <h4 class="pink">
-                                <i class="icon-hand-right icon-animated-hand-pointer blue"></i>
-                                <a href="#modal-table" role="button" class="green" data-toggle="modal"> 点击添加基本信息 </a>
-                            </h4>
-                            <hr>
-                            <div id="modal-table" class="modal fade" tabindex="-1">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header no-padding">
-                                            <div class="table-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                                    <span class="white">&times;</span>
-                                                </button>
-                                                基本信息
-                                            </div>
+                        <h4 class="pink">
+                            <i class="icon-hand-right icon-animated-hand-pointer blue"></i>
+                            <a href="#modal-table" role="button" class="green" data-toggle="modal"> 1) 点击添加基本信息 </a>
+                        </h4>
+                        <hr>
+                        <div id="modal-table" class="modal fade" tabindex="-1">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header no-padding">
+                                        <div class="table-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                <span class="white">&times;</span>
+                                            </button>
+                                            基本信息
                                         </div>
+                                    </div>
 
                                         <form class="modal-body no-padding" id="form1">
                                             <table class="table table-striped table-bordered table-hover no-margin-bottom no-border-top">
@@ -376,19 +393,23 @@
                                                                         <label><input type="radio" value="病房" name="entrance" />病房</label>
                                                                     </p>
 
-                                                                    <p>
-                                                                        文化程度:
-                                                                        <p>
-                                                                            <label><input type="radio" value="文盲" name="culture" />文盲</label>
-                                                                            <label><input type="radio" value="小学及以下"
-                                                                                    name="culture" />小学及以下</label>
-                                                                            <label><input type="radio" value="中学与中专"
-                                                                                    name="culture" />中学与中专</label>
-                                                                            <label><input type="radio" value="大专" name="culture" />大专</label>
-                                                                            <label><input type="radio" value="本科" name="culture" />本科</label>
-                                                                            <label><input type="radio" value="研究生及以上"
-                                                                                    name="culture" />研究生及以上</label>
-                                                                        </p>
+                                                        <p>
+                                                            文化程度:
+
+                                                        <p>
+                                                            <label><input type="radio" value="文盲"
+                                                                          name="culture"/>文盲</label>
+                                                            <label><input type="radio" value="小学及以下"
+                                                                          name="culture"/>小学及以下</label>
+                                                            <label><input type="radio" value="中学或中专"
+                                                                          name="culture"/>中学或中专</label>
+                                                            <label><input type="radio" value="大专"
+                                                                          name="culture"/>大专</label>
+                                                            <label><input type="radio" value="本科"
+                                                                          name="culture"/>本科</label>
+                                                            <label><input type="radio" value="研究生及以上"
+                                                                          name="culture"/>研究生及以上</label>
+                                                        </p>
 
                                                                     </p>
                                                                     <p>
@@ -469,11 +490,15 @@
                             </div>
 
 
-                            <div class="row">
-                                <div class="col-sm-5">
-                                    <div class="widget-box">
-                                        <div class="widget-header">
-                                            <h6>通过Excel模板创建案例</h6>
+                        <h4 class="pink">
+                            <i class="icon-hand-right icon-animated-hand-pointer blue"></i>
+                            <a href="#" role="button" class="green" data-toggle="modal"> 2) 通过Excel模板创建案例 </a>
+                        </h4>
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <div class="widget-box">
+                                    <div class="widget-header">
+                                        <h5>请点击choose按钮选择要上传的excel数据文件</h5>
 
                                                 <span class="widget-toolbar">
                                                     <a href="#" data-action="collapse">
@@ -484,45 +509,36 @@
                                                         <i class="icon-remove"></i>
                                                     </a>
                                                 </span>
-                                            </div>
+                                    </div>
+                                    <div class="widget-body">
+                                        <div class="widget-main">
+                                            <form id="excelform" action="/prj001/file_upload" method="post" enctype="multipart/form-data">
+                                                <fieldset>
+                                                    <label>案例名称：</label>
+                                                    <input type="text" value="excel数据" placeholder="excel数据&hellip;" />
+                                                    <span class="help-block"></span>
+                                                </fieldset>
+                                                <input type="file" name="xlsFileTrans" id="id-input-file-2"/>
+                                                <br/>
 
-                                            <!-- <div class="widget-body">
-                                                <div class="widget-main">
-                                                    <fieldset>
-                                                        <label>上传名称：</label>
-
-                                                        <input type="text" placeholder="输入文件标记名称&hellip;" />
-                                                        <span class="help-block"></span>
-                                                    </fieldset>
-                                                    <input type="file" id="id-input-file-2" />
-                                                    <div class="center">
-                                                        <button type="button" class="btn btn-sm btn-success" id="file-submit">
-                                                            确定提交
-                                                            <i class="icon-arrow-right icon-on-right bigger-110"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div> -->
-                                            <div class="widget-body">
-                                            <div class="widget-main">
-                                            <form action="/prj001/file_upload" method="post" enctype="multipart/form-data">
-                                                <input type="file" name="image" size="80" />
-                                                <br />
                                                 <div class="center">
-                                                <input type="submit" value="提交" />
+                                                    <input type="submit" value="提交"/>
+                                                    <!--<button type="button" class="btn btn-sm btn-success" id="file-submit">
+                                                        确定提交
+                                                        <i class="icon-arrow-right icon-on-right bigger-110"></i>
+                                                    </button>-->
                                                 </div>
                                             </form>
-                                            </div>
-                                            </div>
-                                            <br />
                                         </div>
                                     </div>
                                 </div>
-                        
+                            </div>
                         </div>
+
                     </div>
                 </div>
             </div>
+        </div>
 
         </div><!-- /.main-container-inner -->
 

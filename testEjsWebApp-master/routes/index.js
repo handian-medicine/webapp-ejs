@@ -89,8 +89,7 @@ router.get('/home', function (req, res, next) {
 
 router.get('/logout', function (req, res, next){
     console.log(">>>Visting logout page!");
-    console.log(">>>res.cookies", res.cookies.usertoken);
-    res.clearCookie("userinfo", "prj001token", "usertoken", {expires: new Date(), path: '/' });
+    res.clearCookie("userinfo", "prj001token", "usertoken");
     res.render('logout');
 });
 module.exports = router;
