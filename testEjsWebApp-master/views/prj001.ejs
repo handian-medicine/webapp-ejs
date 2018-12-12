@@ -28,6 +28,24 @@
 <body>
 <script>
     $(document).ready(function () {
+        
+        $(".page-class").click(function () {
+            alert();
+            $.ajax({
+                    url: "/prj001",//路由，用来处理ajax请求的函数的所在地址
+                    method: "POST",
+                    data: {page_num:$(this).text()},
+                    success: function(){
+                        alert("success");
+                        // $("#infotable").text("");
+                    },
+                    error: function(){
+                        alert("wrong page");
+                    }
+
+                })
+            });
+
         $(".geninfo").click(function () {
             document.getElementById("form-geninfo").reset();
             //alert($(this).attr("geninfo-url"));
@@ -127,6 +145,7 @@
                 }
             });
         });
+
         $(".symptom").click(function () {
             //alert($(this).attr("symptom-url"))
             $.ajax({
@@ -145,6 +164,7 @@
                 }
             });
         });
+
         $(".other").click(function () {
             //alert($(this).attr("other-url"))
             $.ajax({
@@ -163,6 +183,7 @@
                 }
             });
         });
+
         $(".cc").click(function () {
             //alert($(this).attr("cc-url"))
             $.ajax({
@@ -196,7 +217,7 @@
                 <a href="../home" class="navbar-brand">
                     <small>
                         <i class="icon-leaf">
-                            中医妇产科临床流调数据中心
+                            中医妇产科临床流调数据中心 <%= archives[0].name %>
                         </i>
                     </small>
                 </a>
@@ -334,7 +355,7 @@
                                                 </tr>
                                             </thead>
 
-                                            <tbody>
+                                            <tbody id="infotable">
                                                 <% archives.forEach(function(archive){ %>
                                                 <tr>
                                                     <td><a href="../public/bingo.html">
@@ -448,11 +469,9 @@
                                                                     <i class="icon-double-angle-left"></i>
                                                                 </a >
                                                             </li>
-                                                            <li class="active">
-                                                                <a href="#">1</a >
-                                                            </li>
-                                                            <li><a href="#">2</a ></li>
-                                                            <li><a href="#">3</a ></li>
+                                                            <li class="active page-class" id="first-page"><a href="#">1</a ></li>
+                                                            <li class="page-class" id="second-page"><a href="#">2</a ></li>
+                                                            <li class="page-class" id="third-page"><a href="#">3</a ></li>
                                                             <li class="next">
                                                                 <a href="#">
                                                                     <i class="icon-double-angle-right"></i>
@@ -870,7 +889,7 @@
                                                     <div class="row">
                                                         <div class="col-xs-12 col-sm-12">
                                                     <p>
-                                                        出身情况:
+                                                        出生情况:
                                                     <p>
                                                         <label><input type="checkbox" value="true" name="born_zaochan"/>早产(28周-37周)</label>
                                                         <label><input type="checkbox" value="true" name="born_zuyuechan"/>足月产</label>
