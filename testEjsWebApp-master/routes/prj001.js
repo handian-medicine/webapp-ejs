@@ -42,6 +42,7 @@ router.get('/', function (req, res, next) {
         request(options, function (error, response, body) {
             if (!error && response.statusCode == 200) {
                 var archiveobjs = JSON.parse(body);
+                console.log(">>>prj001.js -> archiveobjs", archiveobjs);
 
                 /*  分页测试  */
                 var curPageNumber = 1;
@@ -62,8 +63,6 @@ router.get('/', function (req, res, next) {
                 } else {
                     var nextPage = curPageNumber;
                 }
-                // console.log("previousPage:",previousPage);
-                // console.log("nextPage:",nextPage);
 
                 res.render('prj001', {
                     title: '流调项目-排卵障碍性异常子宫出血',
@@ -75,18 +74,6 @@ router.get('/', function (req, res, next) {
                     nextpage: nextPage
                 });
                 /*   分页测试  */
-
-                console.log(">>>prj001.js -> archiveobjs.results: ", archiveobjs.results);
-                console.log(">>>prj001.js -> archiveobjs", archiveobjs);
-                
-                /*  分页测试代码删除后添加  */
-                // res.render('prj001', {
-                //     title: '流调项目-排卵障碍性异常子宫出血',
-                //     archives: archiveobjs.results,
-                //     username: req.cookies.userinfo.email
-                // });
-                /*  分页测试代码删除后添加  */
-
             } else {
                 console.log(">>>Getting archives met unknown error. " , error.error_description);
                 res.redirect("login");
@@ -148,13 +135,11 @@ router.get('/', function (req, res, next) {
                         headers: {
                             'Authorization': 'Bearer ' + authstring
                         },
-                        // form: {"page":2}
                     };
                     
                     request(options, function (error, response, body) {
                         if (!error && response.statusCode == 200) {
                             var archiveobjs = JSON.parse(body);
-                            console.log(">>>prj001.js -> archiveobjs.results: ", archiveobjs.results);
                             console.log(">>>prj001.js -> archiveobjs", archiveobjs);
                             /*  分页测试  */
                             var curPageNumber = 1;
@@ -163,11 +148,18 @@ router.get('/', function (req, res, next) {
                             }else {
                                 curPageNumber = params["page"];
                             }
-                            //var previousPage = "";
-                            var previousPage = curPageNumber - 1;
                         
-                            //var nextPage = "";
-                            var nextPage = curPageNumber + 1;
+                            if (curPageNumber > 1){
+                                var previousPage = curPageNumber - 1;
+                            } else {
+                                var previousPage = 1;
+                            }
+                        
+                            if (curPageNumber < archiveobjs.total_pages) {
+                                var nextPage = curPageNumber + 1 ;
+                            } else {
+                                var nextPage = curPageNumber;
+                            }
                         
                             res.render('prj001', {
                                 title: '流调项目-排卵障碍性异常子宫出血',
@@ -179,12 +171,6 @@ router.get('/', function (req, res, next) {
                                 nextpage: nextPage
                             });
                             /*   分页测试  */
-
-                            // res.render('prj001', {
-                            //     title: '流调项目-排卵障碍性异常子宫出血',
-                            //     archives: archiveobjs.results,
-                            //     username: req.cookies.userinfo.email
-                            // });
 
                         } else {
                             console.log(">>>Getting archives met unknown error. " + err.error_description);
