@@ -30,28 +30,10 @@
 <body>
 <script>
     $(document).ready(function () {
-        // $(".page-class").click(function () {
-        //     alert($(this).text());
-        //     $.ajax({
-        //             url: "/prj001",//路由，用来处理ajax请求的函数的所在地址
-        //             method: "POST",
-        //             data: {page_num: $(this).text()},
-        //             success: function(){
-        //                 alert("prj001.ejs success");
-        //                 // window.location.href = '/prj001';
-        //                 // $("#infotable").text("");
-        //                 $.cookie()
-        //             },
-        //             error: function(){
-        //                 alert("wrong page");
-        //             }
-
-        //         })
-        //     });
 
         $(".geninfoBtn").click(function () {
             $.ajax({
-                url: "/prj001/geninfo",
+                url: "/prj001/geninfo_save",
                 type: "PUT",
                 dataType: "json",
                 data: {
@@ -60,14 +42,15 @@
                 },
                 success:function (result) {
                     console.log("result", result);
-                    alert("PUT done")
+                    alert("保存成功！")
                 },
                 error: function (result) {
-                    if (result.statusCode == 403) {
-                        alert("Permission Denied!")
-                    }
                     //403,用户除了自己,对于其它用户只有查看权限,不能修改
-                    alert("PUT wrong")
+                    if (result.status == 403) {
+                        alert("无法修改")
+                    } else {
+                        alert("保存失败" + result.status)
+                    }
                 },
             })
         });
@@ -140,23 +123,22 @@
         $(".menstruationBtn").click(function () {
 
             $.ajax({
-                url: "/prj001/menstruation",
+                url: "/prj001/menstruation_save",
                 type: "PUT",
                 dataType: "json",
                 data: {
                     menstruation_url: $(this).attr("menstruationBtn-url"),
                 },
                 success:function () {
-                    alert("PUT done")
+                    alert("保存成功！")
                 },
-                error: function () {
-                    alert("Permission Denied!")
-                    // if (result.resultCode == 403) {
-                    //     alert("Permission Denied!")
-                    // }
-                    // if (results.status == )
+                error: function (result) {
                     //403,用户除了自己,对于其它用户只有查看权限,不能修改
-                    alert("PUT wrong")
+                    if (result.status == 403) {
+                        alert("无法修改")
+                    } else {
+                        alert("保存失败" + result.status)
+                    }
                 },
             })
 
@@ -164,6 +146,9 @@
         $(".menstruation").click(function () {
             document.getElementById("form-menstruation").reset();
             //alert($(this).attr("menstruation-url"));
+            if ($(this).attr("menstruation-url") == null) {
+                alert("准备创建新月经情况");
+            } else {
             $.ajax({
                 url: "/prj001/menstruation",//路由，用来处理ajax请求的函数的所在地址
                 type: "POST",
@@ -195,12 +180,13 @@
                 error: function () {
                     alert("Permission Denied!");
                 }
-            });
-        });
+                });
+            };
+        })
 
         $(".symptomBtn").click(function () {
             $.ajax({
-                url: "/prj001/symptom",
+                url: "/prj001/symptom_save",
                 method: "PUT",
                 dataType: "json",
                 data: {
@@ -208,17 +194,24 @@
                     form_symptom: $('#form-symptom').serialize()
                 },
                 success:function () {
-                    alert("PUT done")
+                    alert("保存成功！")
                 },
-                error: function () {
+                error: function (result) {
                     //403,用户除了自己,对于其它用户只有查看权限,不能修改
-                    alert("PUT wrong")
+                    if (result.status == 403) {
+                        alert("无法修改")
+                    } else {
+                        alert("保存失败" + result.status)
+                    }
                 },
             })
 
         });
         $(".symptom").click(function () {
             //alert($(this).attr("symptom-url"))
+            if ($(this).attr("symptom-url") == null) {
+                alert("准备创建新月经情况");
+            } else {
             $.ajax({
                 url: "/prj001/symptom",//路由，用来处理ajax请求的函数的所在地址
                 type: "POST",
@@ -425,11 +418,12 @@
                     alert("Permission Denied!");
                 }
             });
-        });
+        };
+    })
 
         $(".otherBtn").click(function () {
             $.ajax({
-                url: "/prj001/other",
+                url: "/prj001/other_save",
                 method: "PUT",
                 dataType: "json",
                 data: {
@@ -437,17 +431,24 @@
                     form_other: $('#form-other').serialize()
                 },
                 success:function () {
-                    alert("PUT done")
+                    alert("保存成功！")
                 },
-                error: function () {
+                error: function (result) {
                     //403,用户除了自己,对于其它用户只有查看权限,不能修改
-                    alert("PUT wrong")
+                    if (result.status == 403) {
+                        alert("无法修改")
+                    } else {
+                        alert("保存失败" + result.status)
+                    }
                 },
             })
 
         });
         $(".other").click(function () {
             //alert($(this).attr("other-url"))
+            if ($(this).attr("other-url") == null) {
+                alert("准备创建新月经情况");
+            } else {
             $.ajax({
                 url: "/prj001/other",//路由，用来处理ajax请求的函数的所在地址
                 type: "POST",
@@ -570,11 +571,12 @@
                     alert("Permission Denied!");
                 }
             });
-        });
-
+        };
+    })
+        
         $(".ccBtn").click(function () {
             $.ajax({
-                url: "/prj001/cc",
+                url: "/prj001/cc_save",
                 method: "PUT",
                 dataType: "json",
                 data: {
@@ -582,27 +584,33 @@
                     form_cc: $('#form-cc').serialize()
                 },
                 success:function () {
-                    alert("PUT done")
+                    alert("保存成功！")
                 },
-                error: function () {
+                error: function (result) {
                     //403,用户除了自己,对于其它用户只有查看权限,不能修改
-                    alert("PUT wrong")
+                    if (result.status == 403) {
+                        alert("无法修改")
+                    } else {
+                        alert("保存失败" + result.status)
+                    }
                 },
             })
 
         });
         $(".cc").click(function () {
             //alert($(this).attr("cc-url"))
+            if ($(this).attr("cc-url") == null) {
+                alert("准备创建新月经情况");
+            } else {
             $.ajax({
                 url: "/prj001/cc",//路由，用来处理ajax请求的函数的所在地址
                 type: "POST",
                 data: {cc_url: $(this).attr("cc-url")},
-                success: function(result){
+                success: function(result) {
                     if (result !== null) {
                         $('#ccBtn').attr("ccBtn-url", result["url"]);
                         // alert("代码调试中……");
-                    }else {
-                        alert("result.status wrong");
+                    } else {
                         $("input:checkbox[name='benglou']").attr('checked',result["benglou"]);
                         $("input:checkbox[name='yuejingguoduo']").attr('checked',result["yuejingguoduo"]);	
                         $("input:checkbox[name='yuejingxianqi']").attr('checked',result["yuejingxianqi"]);	
@@ -646,11 +654,13 @@
                 },
                 error: function () {
                     alert("Permission Denied!");
-                }
+                },
             });
-        });
-    });
+        };
+    })
+    })
 </script>
+
     <!-- 导航 -->
     <div class="navbar navbar-default" id="navbar">
         <script type="text/javascript">
@@ -912,9 +922,10 @@
                                                 <div class="col-sm-6"></div>
                                                 <div class="col-sm-6">
                                                     <div class="dataTables_paginate paging_bootstrap">
+                                                        <nav aria-label="Page navigation">
                                                         <ul class="pagination">
                                                             <% if (previouspage) { %>
-                                                            <li class="prev disabled">
+                                                            <li class="prev">
                                                                 <a href="?page=<%= previouspage %>">
                                                                     <i class="icon-double-angle-left"></i>
                                                                 </a >
@@ -928,18 +939,16 @@
                                                                 <li><a href="?page=<%= pg %>"><%= pg %></a></li>
                                                                 <% } %>
                                                             <% } %>
-                                                            <!-- <li class="active page-class" id="first-page"><a href="#">1</a ></li>
-                                                            <li class="page-class" id="second-page"><a href="#">2</a ></li>
-                                                            <li class="page-class" id="third-page"><a href="#">3</a ></li> -->
-                                                                <% if (nextpage) { %>
-                                                                <li class="next">
+                                                            
+                                                            <% if (nextpage) { %>
+                                                            <li class="next">
                                                                 <a href="?page=<%= nextpage %>">
                                                                     <i class="icon-double-angle-right"></i>
                                                                 </a >
                                                             </li>
                                                             <% } %>
-                                                           
                                                         </ul>
+                                                        </nav>
                                                     </div>
                                                 </div>
                                         </div>
@@ -1968,7 +1977,7 @@
 
     <script src="../public/js/ace-elements.min.js"></script>
     <script src="../public/js/ace.min.js"></script>
-	<!-- <script src="../public/js/myPagination.js"></script> --> -->
+	<!-- <script src="../public/js/myPagination.js"></script> -->
 	<!-- <script>
         window.onload = function () {
             new Page({

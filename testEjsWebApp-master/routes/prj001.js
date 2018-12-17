@@ -59,11 +59,10 @@ router.get('/', function (req, res, next) {
                 }
 
                 if (curPageNumber < archiveobjs.total_pages) {
-                    var nextPage = curPageNumber + 1 ;
+                    var nextPage = parseInt(curPageNumber) + 1 ;//如果不转换类型，"1" + 1="11"
                 } else {
                     var nextPage = curPageNumber;
                 }
-
                 res.render('prj001', {
                     title: '流调项目-排卵障碍性异常子宫出血',
                     archives: archiveobjs.results,
@@ -112,8 +111,6 @@ router.get('/', function (req, res, next) {
 
                     //进一步发起数据请求，获取所有prj001项目的案例
 
-                    // url = myconst.apiurl + "prj001/geninfo"; //分页测试代码删除后要添加这行
-                    
                     /*  分页测试  */
                     console.log(">>> req url: " + req.url);
                     var params = url_pack.parse(req.url, true).query;
@@ -156,11 +153,11 @@ router.get('/', function (req, res, next) {
                             }
                         
                             if (curPageNumber < archiveobjs.total_pages) {
-                                var nextPage = curPageNumber + 1 ;
+                                var nextPage = parseInt(curPageNumber) + 1 ;
                             } else {
                                 var nextPage = curPageNumber;
                             }
-                        
+                            
                             res.render('prj001', {
                                 title: '流调项目-排卵障碍性异常子宫出血',
                                 archives: archiveobjs.results,
@@ -186,41 +183,6 @@ router.get('/', function (req, res, next) {
             console.log(">>>Failed to find cookie with user info");
             res.redirect("login");
         }
-    }
-});
-/*        分页请求        */
-router.post('/', function (req, res, next) {
-    console.log(">>>prj001.js router.post方法");
-    if (req.cookies.prj001token) {
-        //直接发起数据请求，获取所有prj001项目的案例
-        var url = myconst.apiurl + "prj001/geninfo/";
-        var authstring = req.cookies.prj001token.access_token;
-        var page = req.body.page_num;
-        console.log(">>> prj001.js access_token: " + authstring);
-        console.log(">>>Page Num is:", page, typeof(page));
-        var options = {
-            url: url,
-            headers: {
-                'Authorization': 'Bearer ' + authstring
-            },
-            form: {"page":page}
-        };
-        request.all(options, function (error, response, body) {
-            // console.log(">>>response", response);
-            if (!error && response.statusCode == 200) {
-                var archiveobjs = JSON.parse(body);
-                console.log(">>>prj001.js -> archiveobjs: ", archiveobjs);
-                // res.render('error');
-                res.render('prj001', {
-                    title: '流调项目-排卵障碍性异常子宫出血',
-                    archives: archiveobjs.results,
-                    username: req.cookies.userinfo.email
-                });
-            } else {
-                console.log(">>>Getting archives met unknown error. " , error.error_description);
-                res.redirect("login");
-            }
-        });
     }
 });
 /*        数据采集        */
@@ -289,18 +251,18 @@ router.post('/file_upload', mutipartMiddeware, function (req, res, next) {
 
 });
 
-
 /*        数据展示        */
-/* 一般信息 */
+
+/* 前段请求 一般信息 */
 router.post('/geninfo', function (req, res, next){
     console.log(">>>prj001.js post method:", req.body.geninfo_url);
     //if (req.cookies.prj001token) {
         //var userid = req.body.userid;
         // var url = myconst.apiurl + "/prj001/geninfo/" + req.body.userid;
-        var url = req.body.geninfo_url;
+        var geninfo_url = req.body.geninfo_url;
         var authstring = req.cookies.prj001token.access_token;
         var options = {
-            url: url,
+            url: geninfo_url,
             headers: {
                 'Authorization': 'Bearer ' + authstring
             }
@@ -319,13 +281,14 @@ router.post('/geninfo', function (req, res, next){
         });
     //}
 });
-router.put('/geninfo', function (req, res, next){
+/* 前端请求保存 一般信息 修改 */
+router.put('/geninfo_save', function (req, res, next){
     console.log(">>>prj001.js put method:", req.body.geninfo_url);
     //if (req.cookies.prj001token) {
-        var url = req.body.geninfo_url;
+        var geninfo_url = req.body.geninfo_url;
         var authstring = req.cookies.prj001token.access_token;
         var options = {
-            url: url,
+            url: geninfo_url,
             headers: {
                 'Authorization': 'Bearer ' + authstring
             },
@@ -344,13 +307,14 @@ router.put('/geninfo', function (req, res, next){
         });
     //}
 });
-/* 月经情况 */
+
+/* 前段请求 月经情况 */
 router.post('/menstruation', function (req, res, next){
     console.log(">>>prj001.js post method:", req.body.menstruation_url);
-        var url = req.body.menstruation_url;
+        var menstruation_url = req.body.menstruation_url;
         var authstring = req.cookies.prj001token.access_token;
         var options = {
-            url: url,
+            url: menstruation_url,
             headers: {
                 'Authorization': 'Bearer ' + authstring
             }
@@ -368,13 +332,14 @@ router.post('/menstruation', function (req, res, next){
             }
         });
 });
-router.put('/menstruation', function (req, res, next){
+/* 前端请求保存 月经情况 修改 */
+router.put('/menstruation_save', function (req, res, next){
     console.log(">>>prj001.js put method:", req.body.menstruation_url);
     //if (req.cookies.prj001token) {
-        var url = req.body.menstruation_url;
+        var menstruation_url = req.body.menstruation_url;
         var authstring = req.cookies.prj001token.access_token;
         var options = {
-            url: url,
+            url: menstruation_url,
             headers: {
                 'Authorization': 'Bearer ' + authstring
             },
@@ -394,16 +359,17 @@ router.put('/menstruation', function (req, res, next){
         });
     //}
 });
-/* 全身症状 */
+
+/* 前段请求 全身症状 */
 router.post('/symptom', function (req, res, next){
     // console.log(">>>prj001.js/symptom/userid:", JSON.parse(req.body.userid))
     //if (req.cookies.prj001token) {
         //var userid = req.body.userid;
         // var url = myconst.apiurl + "/prj001/symptom/" + req.body.userid;
-        var url = req.body.symptom_url;
+        var symptom_url = req.body.symptom_url;
         var authstring = req.cookies.prj001token.access_token;
         var options = {
-            url: url,
+            url: symptom_url,
             headers: {
                 'Authorization': 'Bearer ' + authstring
             }
@@ -421,13 +387,14 @@ router.post('/symptom', function (req, res, next){
         });
     //}
 });
-router.put('/symptom', function (req, res, next){
+/* 前端请求保存 全身症状 修改 */
+router.put('/symptom_save', function (req, res, next){
     console.log(">>>prj001.js put method:", req.body.symptom_url);
     //if (req.cookies.prj001token) {
-        var url = req.body.symptom_url;
+        var symptom_url = req.body.symptom_url;
         var authstring = req.cookies.prj001token.access_token;
         var options = {
-            url: url,
+            url: symptom_url,
             headers: {
                 'Authorization': 'Bearer ' + authstring
             },
@@ -439,6 +406,7 @@ router.put('/symptom', function (req, res, next){
             if (!error && response.statusCode == 200) {
                 var user_geninfo = JSON.parse(body);
                 console.log(">>>prj001.js -> user_geninfo: ", user_geninfo);
+                // res.json({status:response.statusCode});                
                 res.json(user_geninfo);
             } else {
                 //console.log(">>>Getting archives met unknown error. " + error.error_description);
@@ -447,16 +415,17 @@ router.put('/symptom', function (req, res, next){
         });
     //}
 });
-/* 其它情况 */
+
+/* 前段请求 其它情况 */
 router.post('/other', function (req, res, next){
     // console.log(">>>prj001.js/other/userid:", JSON.parse(req.body.userid))
     //if (req.cookies.prj001token) {
         //var userid = req.body.userid;
         // var url = myconst.apiurl + "/prj001/other/" + req.body.userid;
-        var url = req.body.other_url;
+        var other_url = req.body.other_url;
         var authstring = req.cookies.prj001token.access_token;
         var options = {
-            url: url,
+            url: other_url,
             headers: {
                 'Authorization': 'Bearer ' + authstring
             }
@@ -474,13 +443,14 @@ router.post('/other', function (req, res, next){
         });
     //}
 });
-router.put('/other', function (req, res, next){
+/* 前端请求保存 其它情况 修改 */
+router.put('/other_save', function (req, res, next){
     console.log(">>>prj001.js put method:", req.body.other_url);
     //if (req.cookies.prj001token) {
-        var url = req.body.other_url;
+        var other_url = req.body.other_url;
         var authstring = req.cookies.prj001token.access_token;
         var options = {
-            url: url,
+            url: other_url,
             headers: {
                 'Authorization': 'Bearer ' + authstring
             },
@@ -500,16 +470,17 @@ router.put('/other', function (req, res, next){
         });
     //}
 });
-/* 临床诊断 */
+
+/* 前段请求 临床诊断 */
 router.post('/cc', function (req, res, next){
     // console.log(">>>prj001.js/cc/userid:", JSON.parse(req.body.userid))
     //if (req.cookies.prj001token) {
         //var userid = req.body.userid;
         // var url = myconst.apiurl + "/prj001/cc/" + req.body.userid;
-        var url = req.body.cc_url;
+        var cc_url = req.body.cc_url;
         var authstring = req.cookies.prj001token.access_token;
         var options = {
-            url: url,
+            url: cc_url,
             headers: {
                 'Authorization': 'Bearer ' + authstring
             }
@@ -527,13 +498,14 @@ router.post('/cc', function (req, res, next){
         });
     //}
 });
-router.put('/cc', function (req, res, next){
+/* 前端请求保存 临床诊断 修改 */
+router.put('/cc_save', function (req, res, next){
     console.log(">>>prj001.js put method:", req.body.cc_url);
     //if (req.cookies.prj001token) {
-        var url = req.body.cc_url;
+        var cc_url = req.body.cc_url;
         var authstring = req.cookies.prj001token.access_token;
         var options = {
-            url: url,
+            url: cc_url,
             headers: {
                 'Authorization': 'Bearer ' + authstring
             },
