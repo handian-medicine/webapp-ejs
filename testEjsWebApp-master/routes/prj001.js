@@ -207,7 +207,7 @@ router.post('/datainputoptr', function (req, res, next) {
             console.log("response:", response.body);
             // console.log("response.statusCode: ", response.statusCode);
             if (!error && response.statusCode == 201) {
-                // res.json({status:1, msg:"录入成功"});
+                res.json({status:1, msg:"录入成功"});
                 // console.log("prj001.js ajax result:", res);
                 //res.render('datainput',{username: req.cookies.userinfo.email});
             } else {
