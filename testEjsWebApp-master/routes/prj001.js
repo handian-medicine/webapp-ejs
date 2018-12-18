@@ -204,14 +204,14 @@ router.post('/datainputoptr', function (req, res, next) {
         console.log("prj001.js formdata:", req.body.formdata);
         console.log(">>>prj001.js -> options: ", options);
         request.post(options, function (error, response, body) {
-            // console.log("response:", response.body);
+            console.log("response:", response.body);
             // console.log("response.statusCode: ", response.statusCode);
             if (!error && response.statusCode == 201) {
                 // res.json({status:1, msg:"录入成功"});
-                console.log("prj001.js ajax result:", res);
+                // console.log("prj001.js ajax result:", res);
                 //res.render('datainput',{username: req.cookies.userinfo.email});
             } else {
-                console.log('response.statusCode', response.statusCode);
+                console.log('response.statusCode wrong');
             }
         })
         }
