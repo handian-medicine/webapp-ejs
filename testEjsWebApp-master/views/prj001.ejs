@@ -210,7 +210,7 @@
         $(".symptom").click(function () {
             //alert($(this).attr("symptom-url"))
             if ($(this).attr("symptom-url") == null) {
-                alert("准备创建新月经情况");
+                alert("准备创建新全身症状");
             } else {
             $.ajax({
                 url: "/prj001/symptom",//路由，用来处理ajax请求的函数的所在地址
@@ -447,7 +447,7 @@
         $(".other").click(function () {
             //alert($(this).attr("other-url"))
             if ($(this).attr("other-url") == null) {
-                alert("准备创建新月经情况");
+                alert("准备创建新其它情况");
             } else {
             $.ajax({
                 url: "/prj001/other",//路由，用来处理ajax请求的函数的所在地址
@@ -600,7 +600,7 @@
         $(".cc").click(function () {
             //alert($(this).attr("cc-url"))
             if ($(this).attr("cc-url") == null) {
-                alert("准备创建新月经情况");
+                alert("准备创建新临床诊断");
             } else {
             $.ajax({
                 url: "/prj001/cc",//路由，用来处理ajax请求的函数的所在地址
@@ -658,7 +658,25 @@
             });
         };
     })
-    })
+    
+// 检索功能
+        $(".searchBtn").click(function () {
+            $.ajax({
+                url:"/prj001/search",
+                method:"GET",
+                data: {
+                    search: $('#searchContent').val(),
+                },
+                success:function () {
+                    alert("success")
+                },
+                error:function () {
+                    alert("fail")
+                },
+            });
+        })
+
+})
 </script>
 
     <!-- 导航 -->
@@ -786,9 +804,9 @@
                                         <span class="input-icon align-middle">
                                             <i class="icon-search"></i>
 
-                                            <input type="text" class="search-query" placeholder="采集对象人员姓名" />
+                                            <input id="searchContent" type="text" class="search-query" placeholder="采集对象人员姓名" />
                                         </span>
-                                        <button class="btn btn-sm" onclick="return false;">检索</button>
+                                        <button id="searchBtn" type="submit" class="btn btn-sm searchBtn">检索</button>
                                     </form>
                                     <hr>
                                     <div class="table-responsive">
@@ -926,7 +944,7 @@
                                                         <ul class="pagination">
                                                             <% if (previouspage) { %>
                                                             <li class="prev">
-                                                                <a href="?page=<%= previouspage %>">
+                                                                <a href="?page=<%= previouspage %>&search=">
                                                                     <i class="icon-double-angle-left"></i>
                                                                 </a >
                                                             </li>
@@ -934,15 +952,15 @@
 
                                                             <% for (var pg=1;pg<=totalpagenumber;pg++){ %>
                                                                 <% if (curpage == pg) { %>
-                                                                <li class="active"><a href="?page=<%= pg %>"><%= pg %></a></li>
+                                                                <li class="active"><a href="?page=<%= pg %>&search="><%= pg %></a></li>
                                                                 <% }else {%>
-                                                                <li><a href="?page=<%= pg %>"><%= pg %></a></li>
+                                                                <li><a href="?page=<%= pg %>&search="><%= pg %></a></li>
                                                                 <% } %>
                                                             <% } %>
                                                             
                                                             <% if (nextpage) { %>
                                                             <li class="next">
-                                                                <a href="?page=<%= nextpage %>">
+                                                                <a href="?page=<%= nextpage %>&search=">
                                                                     <i class="icon-double-angle-right"></i>
                                                                 </a >
                                                             </li>

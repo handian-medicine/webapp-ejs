@@ -1,5 +1,5 @@
 // var apiurl = "http://47.94.22.221:9001/";
-// var apiurl = "http://10.17.1.108:8001/";//wifi108
+// var apiurl = "http://10.17.1.108:8001/";//wifi167
 var apiurl = "http://127.0.0.1:8000/";
 // var client_id = "kltPomF1a57dmdfDUWoiPoEiUiTx07PV4MbyCQGk";
 // var client_secret = "LMM9TDsSalgs2BxMRVHtvF1nuSZPSgyianzm15TYpPkDUMQvaUFUjM43XFQzwNqVDkbG6RKuU2kncPHk6L0pd6XYxJ6xAjaT3UpVA8e0m9lXGYNcNg5Neu4nEpzrXt2o";

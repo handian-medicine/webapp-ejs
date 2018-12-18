@@ -3,7 +3,6 @@ var express = require('express');
 var myconst = require("./const");
 var mutipart= require('connect-multiparty');
 var fs = require("fs");
-var math = require("mathjs");
 var url_pack = require("url");
 
 var router = express.Router();
@@ -39,6 +38,7 @@ router.get('/', function (req, res, next) {
                 'Authorization': 'Bearer ' + authstring
             }
         };
+        console.log("workurl:", workurl);
         request(options, function (error, response, body) {
             if (!error && response.statusCode == 200) {
                 var archiveobjs = JSON.parse(body);
@@ -213,7 +213,7 @@ router.post('/datainputoptr', function (req, res, next) {
             }
         })
         }
-    })
+})
 router.post('/file_upload', mutipartMiddeware, function (req, res, next) {
     console.log(req.files);
     //xlsFileTrans 是前端的form里面input的名称
@@ -526,4 +526,126 @@ router.put('/cc_save', function (req, res, next){
     //}
 });
 
+/* 数据搜索 */
+router.get('/search', function (req, res, next) {
+    console.log("In the search: req.cookies.prj001token", req.cookies.prj001token);
+    if (req.cookies.prj001token) {
+        console.log(">>>In the search req url: " + req.url);
+        console.log(">>>In the search req.query.search: ", req.query.search);
+
+        var search_url = "";
+        if (req.query.search == undefined) {
+            search_url = myconst.apiurl + "prj001/geninfo/";
+        }
+        else {
+            search_url = myconst.apiurl + "prj001/geninfo/?search=" + req.query.search;
+        }
+        console.log("search_url: ", search_url);
+        var authstring = req.cookies.prj001token.access_token;
+        var options = {
+            url: search_url,
+            headers: {
+                'Authorization': 'Bearer ' + authstring
+            }
+        };
+        request(options, function (error, response, body) {
+            console.log("In the search options:", options);
+            console.log("In the search body:", body);
+            if (!error && response.statusCode == 200) {
+                var archiveobjs = JSON.parse(body);
+                console.log(">>>In the search prj001.js -> archiveobjs", archiveobjs);
+                res.render('prj001', {
+                    title: '流调项目-排卵障碍性异常子宫出血',
+                    archives: archiveobjs.results,
+                    username: req.cookies.userinfo.email,
+                    totalpagenumber: 1,
+                    curpage: 1,
+                    previouspage: 1,
+                    nextpage: 1
+                });
+                console.log("do sth after render");
+            } else {
+                console.log("hhhhh");
+            }
+        })
+    } else {
+        if (req.cookies.userinfo) {
+            var url = myconst.apiurl + "o/token/";
+            var loginData = {
+                "username": req.cookies.userinfo.email,
+                "password": req.cookies.userinfo.password,
+                "grant_type": "password",
+                "scope": myconst.scope_prj001,
+                "client_id": myconst.client_id,
+                "client_secret": myconst.client_secret
+            };
+            console.log(">>>Info used for prj001 authentication: " + JSON.stringify(loginData));
+            request.post({url: url,form: loginData}, function (error, response, body) {
+                console.log(">>>Authentication results: " + body);
+                // console.log(">>>Page Num is:", page);
+                if (!error && response.statusCode == 200) {
+                    var obj = JSON.parse(body); //由JSON字符串转换为JSON对象
+                    // 成功后将token写入Cookie，maxAge为cookie过期时间
+                    res.cookie("prj001token", {
+                        "access_token": obj.access_token,
+                        "refresh_token": obj.refresh_token,
+                        "scope": obj.scope,
+                        "expires_in": obj.expires_in
+                    }, {
+                        maxAge: 1000 * 60 * 60 * 4,
+                        httpOnly: true
+                    }); //cookie 4小时有效时间
+
+                    //进一步发起数据请求，获取所有prj001项目的案例
+
+                    console.log(">>> req url: " + req.url);
+                    console.log(">>> req.query.search: ", req.query.search);
+
+                    var search_url = "";
+                    if (req.query.search == undefined) {
+                        search_url = myconst.apiurl + "prj001/geninfo/";
+                    }
+                    else {
+                        search_url = myconst.apiurl + "prj001/geninfo/?search=" + req.query.search;
+                    }
+                    console.log("search_url: ", search_url);
+                    var authstring = req.cookies.prj001token.access_token;
+                    var options = {
+                        url: search_url,
+                        headers: {
+                            'Authorization': 'Bearer ' + authstring
+                        }
+                    };
+                    
+                    request(options, function (error, response, body) {
+                        // if (!error && response.statusCode == 200) {
+                            var archiveobjs = JSON.parse(body);
+                            console.log(">>>In the search prj001.js -> archiveobjs", archiveobjs);
+                            res.render('prj001', {
+                                title: '流调项目-排卵障碍性异常子宫出血',
+                                archives: archiveobjs.results,
+                                username: req.cookies.userinfo.email,
+                                totalpagenumber: 1,
+                                curpage: 1,
+                                previouspage: 1,
+                                nextpage: 1
+                            });
+                            // res.redirect("home");
+                        // } else {
+                        //     console.log(">>>Getting archives met unknown error. " + err.error_description);
+                            console.log("hhhhh");
+                        //     res.redirect("login");
+                        // }
+                    });
+                } else {
+                    console.log(">>>Invoking access token met unknown error. " + err.error_description);
+                    res.redirect("login");
+                }
+            });
+        } else {
+            console.log(">>>Failed to find cookie with user info");
+            res.redirect("login");
+        }
+    }
+});
 module.exports = router;
