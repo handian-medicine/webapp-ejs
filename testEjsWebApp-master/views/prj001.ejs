@@ -121,19 +121,20 @@
         });
         
         $(".menstruationBtn").click(function () {
-
+            $('#person').val($(".geninfo").attr("geninfo-url"));
             $.ajax({
                 url: "/prj001/menstruation_save",
                 type: "PUT",
                 dataType: "json",
                 data: {
                     menstruation_url: $(this).attr("menstruationBtn-url"),
-                    form_menstruation: $('#form-menstruation').serialize()
+                    form_menstruation: $('#form-menstruation').serialize(),
                 },
                 success:function (result) {
                     //403,用户除了自己,对于其它用户只有查看权限,不能修改
-                    if (result.status == 200) {
+                    if (result.status == 200 || result.status == 201) {
                         alert("保存成功！")
+                        window.location.href = '/prj001';
                     } else {
                         if (result.status == 403)
                         alert("无法修改")
@@ -147,15 +148,21 @@
         });
         $(".menstruation").click(function () {
             document.getElementById("form-menstruation").reset();
-            //alert($(this).attr("menstruation-url"));
-            if ($(this).attr("menstruation-url") == null) {
+            // alert($(this).attr("menstruation-url"));
+            var tempFlag = $(this).attr("menstruation-url");
+            if (tempFlag == "") {
                 alert("准备创建新月经情况");
             } else {
             $.ajax({
                 url: "/prj001/menstruation",//路由，用来处理ajax请求的函数的所在地址
-                type: "POST",
-                data: {menstruation_url: $(this).attr("menstruation-url")},
+                method: "POST",
+                data: {menstruation_url: $(this).attr("menstruation-url"),
+                        hello:"hello"},
                 success: function(result){
+                    if (result.status == 0)
+                    {
+                        alert("create new menstruation");
+                    }
                     console.log("this url:",result["url"]);
                     // alert("person url:" + result["person"]);
                     // $('#person').val($('#setid').val());
@@ -874,7 +881,7 @@
                                                             <button id="geninfo" class="btn btn-xs btn-info geninfo" geninfo-url=<%= archive.url %>>
                                                                     <a href="#modal-table" class="color" role="button" data-toggle="modal">一般情况</a>
                                                             </button>
-                                                            <button id="menstruation" class="btn btn-xs btn-success menstruation" menstruation-url=<%= archive.menstruation %>>
+                                                            <button id="menstruation" class="btn btn-xs btn-success menstruation" menstruation-url="<%= archive.menstruation %>">
                                                                     <a href="#modal-table1" class="color" role="button" data-toggle="modal">月经情况</a>
                                                             </button>
                                                             <button id="symptom" class="btn btn-xs btn-danger symptom" symptom-url=<%= archive.symptom %>>
@@ -1220,7 +1227,7 @@
                                                 <div class="modal-body">
                                                     <div class="row">
                                                         <div class="col-xs-12 col-sm-12">
-                                                    <input type="hidden" name="person" id="person" value=""/>
+                                                    <input type="hidden" class="person" name="person" id="person" value=""/>
                                                     <p>
                                                         初潮年龄:
                                                         <input class="form-control" type="number" name="first_time" id="first_time"/>
@@ -1245,7 +1252,7 @@
                                                         <label><input type="radio" value="不足2天" name="cyclicity_sum"/>不足2天</label>
                                                         <label><input type="radio" value="3-7天" name="cyclicity_sum"/>3-7天</label>
                                                         <label><input type="radio" value="7天以上" name="cyclicity_sum"/>7天以上</label>
-                                                        <label><input type="radio" value="有时几日即净,有时7日以上甚至达半月余不净" name="cyclicity_sum"/>有时几日即净,有时7日以上甚至达半月余不净</label>
+                                                        <label><input type="radio" value="有时几日即净，有时7日以上甚至达半月余不净" name="cyclicity_sum"/>有时几日即净，有时7日以上甚至达半月余不净</label>
                                                     </p>
                                                     <p>
                                                         出血情况:
@@ -1321,6 +1328,7 @@
                                                 <div class="modal-body">
                                                     <div class="row">
                                                         <div class="col-xs-12 col-sm-12">
+                                                    <!-- <input type="hidden" class="person" name="person" id="person" value=""/>         -->
                                                     <p>
                                                         精神：
                                                     <p>
@@ -1644,6 +1652,7 @@
                                                 <div class="modal-body">
                                                     <div class="row">
                                                         <div class="col-xs-12 col-sm-12">
+                                                    <!-- <input type="hidden" class="person" name="person" id="person" value=""/> -->
                                                     <p>
                                                         出生情况:
                                                     <p>
@@ -1901,6 +1910,8 @@
                                                 <div class="modal-body">
                                                     <div class="row">
                                                         <div class="col-xs-12 col-sm-12">
+                                                    
+                                                    <!-- <input type="hidden" class="person" name="person" id="person" value=""/> -->
                                                     <p>
                                                         中医诊断：
                                                     <p>

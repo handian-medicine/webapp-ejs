@@ -312,7 +312,9 @@ router.put('/geninfo_save', function (req, res, next){
 
 /* 前段请求 月经情况 */
 router.post('/menstruation', function (req, res, next){
-    console.log(">>>prj001.js post method:", req.body.menstruation_url);
+    // console.log(">>>prj001.js post method:", req.body.menstruation_url);
+    console.log("look here",req.body);
+    console.log("type:",typeof(req.body.menstruation_url));
         var menstruation_url = req.body.menstruation_url;
         var authstring = req.cookies.prj001token.access_token;
         var options = {
@@ -336,8 +338,10 @@ router.post('/menstruation', function (req, res, next){
 });
 /* 前端请求保存 月经情况 修改 */
 router.put('/menstruation_save', function (req, res, next){
-    console.log(">>>prj001.js put method:", req.body.menstruation_url);
-    //if (req.cookies.prj001token) {
+    console.log("type: ", typeof(req.body.menstruation_url));
+    if ( req.body.menstruation_url != undefined) {
+        console.log("url不为空");
+        console.log(">>>prj001.js put method:", req.body.menstruation_url);
         var menstruation_url = req.body.menstruation_url;
         var authstring = req.cookies.prj001token.access_token;
         var options = {
@@ -347,7 +351,6 @@ router.put('/menstruation_save', function (req, res, next){
             },
             form: req.body.form_menstruation
         };
-        if (menstruation_url != null){
             console.log(">>>prj001.js put options: ", options);
             request.put(options, function (error, response, body) {
                 console.log(">>>prj001.js put method response.statusCode: ", response.statusCode);
@@ -369,23 +372,40 @@ router.put('/menstruation_save', function (req, res, next){
                     //{res.redirect("/prj001");}
                 }
             });
-        } 
-        // else {
-        //     console.log(">>>prj001.js put options: ", options);
-        //     request.post(options, function (error, response, body) {
-        //         console.log(">>>prj001.js put method response.statusCode: ", response.statusCode);
-        //         if (!error && response.statusCode == 200) {
-        //             var user_menstruation = JSON.parse(body);
-        //             console.log(">>>prj001.js put方法-> user_menstruation: ", body);
-        //             res.json(user_menstruation);
-        //         } else {
-        //             //console.log(">>>Getting archives met unknown error. " + error.error_description);
-        //             res.redirect("/prj001");
-        //         }
-        //     });
-        // }
-    //}
-});
+    } 
+    else 
+    {
+            console.log("url为空");
+            var menstruation_url = myconst.apiurl + "prj001/menstruation/";
+            var authstring = req.cookies.prj001token.access_token;
+            var options = {
+                url: menstruation_url,
+                headers: {
+                    'Authorization': 'Bearer ' + authstring
+                },
+                form: req.body.form_menstruation
+            };
+            console.log(">>>prj001.js put options: ", options);
+            request.post(options, function (error, response, body) {
+                console.log(">>>prj001.js put method response.statusCode: ", response.statusCode);
+                if (!error && response.statusCode == 201) {
+                    var user_menstruation = JSON.parse(body);
+                    console.log(">>>prj001.js put方法-> body: ", body);
+                    res.json({user_menstruation:user_menstruation, status: 201});
+                } else {
+                    if (response.statusCode == 403) {
+                        var user_menstruation = JSON.parse(body);
+                        console.log(">>>prj001.js put方法-> body: ", body);
+                        res.json({user_menstruation:user_menstruation, status: 403});
+                    }
+                    //console.log(">>>Getting archives met unknown error. " + error.error_description);
+                    else {
+                        console.log(">>>其它错误码的body: ", body);
+                    }
+                }
+    });
+    }
+})
 
 /* 前段请求 全身症状 */
 router.post('/symptom', function (req, res, next){
