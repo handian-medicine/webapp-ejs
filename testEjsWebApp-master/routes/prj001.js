@@ -357,41 +357,7 @@ router.put('/menstruation_save', function (req, res, next){
                 if (!error && response.statusCode == 200) {
                     var user_menstruation = JSON.parse(body);
                     console.log(">>>prj001.js put方法-> body: ", body);
-                    res.json({user_menstruation, status: 200});
-                } else {
-                    if (response.statusCode == 403) {
-                        var user_menstruation = JSON.parse(body);
-                        console.log(">>>prj001.js put方法-> body: ", body);
-                        res.json({user_menstruation, status: 403});
-                    }
-                    //console.log(">>>Getting archives met unknown error. " + error.error_description);
-                    else {
-                        console.log(">>>其它错误码的body: ", body);
-                    }
-                    
-                    //{res.redirect("/prj001");}
-                }
-            });
-    } 
-    else 
-    {
-            console.log("url为空");
-            var menstruation_url = myconst.apiurl + "prj001/menstruation/";
-            var authstring = req.cookies.prj001token.access_token;
-            var options = {
-                url: menstruation_url,
-                headers: {
-                    'Authorization': 'Bearer ' + authstring
-                },
-                form: req.body.form_menstruation
-            };
-            console.log(">>>prj001.js put options: ", options);
-            request.post(options, function (error, response, body) {
-                console.log(">>>prj001.js put method response.statusCode: ", response.statusCode);
-                if (!error && response.statusCode == 201) {
-                    var user_menstruation = JSON.parse(body);
-                    console.log(">>>prj001.js put方法-> body: ", body);
-                    res.json({user_menstruation:user_menstruation, status: 201});
+                    res.json({user_menstruation:user_menstruation, status: 200});
                 } else {
                     if (response.statusCode == 403) {
                         var user_menstruation = JSON.parse(body);
@@ -402,17 +368,47 @@ router.put('/menstruation_save', function (req, res, next){
                     else {
                         console.log(">>>其它错误码的body: ", body);
                     }
+                    
                 }
-    });
+            });
+    } 
+    else 
+    {
+        console.log("url为空");
+        var menstruation_url = myconst.apiurl + "prj001/menstruation/";
+        var authstring = req.cookies.prj001token.access_token;
+        var options = {
+            url: menstruation_url,
+            headers: {
+                'Authorization': 'Bearer ' + authstring
+            },
+            form: req.body.form_menstruation
+        };
+        console.log(">>>prj001.js put options: ", options);
+        request.post(options, function (error, response, body) {
+            console.log(">>>prj001.js put method response.statusCode: ", response.statusCode);
+            if (!error && response.statusCode == 201) {
+                var user_menstruation = JSON.parse(body);
+                console.log(">>>prj001.js put方法-> body: ", body);
+                res.json({user_menstruation:user_menstruation, status: 201});
+            } else {
+                if (response.statusCode == 403) {
+                    var user_menstruation = JSON.parse(body);
+                    console.log(">>>prj001.js put方法-> body: ", body);
+                    res.json({user_menstruation:user_menstruation, status: 403});
+                }
+                //console.log(">>>Getting archives met unknown error. " + error.error_description);
+                else {
+                    console.log(">>>其它错误码的body: ", body);
+                }
+            }
+        });
     }
 })
 
 /* 前段请求 全身症状 */
 router.post('/symptom', function (req, res, next){
     // console.log(">>>prj001.js/symptom/userid:", JSON.parse(req.body.userid))
-    //if (req.cookies.prj001token) {
-        //var userid = req.body.userid;
-        // var url = myconst.apiurl + "/prj001/symptom/" + req.body.userid;
         var symptom_url = req.body.symptom_url;
         var authstring = req.cookies.prj001token.access_token;
         var options = {
@@ -436,8 +432,10 @@ router.post('/symptom', function (req, res, next){
 });
 /* 前端请求保存 全身症状 修改 */
 router.put('/symptom_save', function (req, res, next){
-    console.log(">>>prj001.js put method:", req.body.symptom_url);
-    //if (req.cookies.prj001token) {
+    console.log("type: ", typeof(req.body.symptom_url));
+    if (req.body.symptom_url != undefined) {
+        console.log("url不为空");
+        console.log(">>>prj001.js put method:", req.body.symptom_url);
         var symptom_url = req.body.symptom_url;
         var authstring = req.cookies.prj001token.access_token;
         var options = {
@@ -451,24 +449,60 @@ router.put('/symptom_save', function (req, res, next){
         request.put(options, function (error, response, body) {
             console.log(">>>prj001.js put method response.statusCode: ", response.statusCode);
             if (!error && response.statusCode == 200) {
-                var user_geninfo = JSON.parse(body);
-                console.log(">>>prj001.js -> user_geninfo: ", user_geninfo);
-                // res.json({status:response.statusCode});                
-                res.json(user_geninfo);
+                var user_symptom = JSON.parse(body);
+                console.log(">>>prj001.js put方法-> body: ", body);
+                    // res.json({status:response.statusCode});                
+                res.json({user_symptom:user_symptom, status: 200});
             } else {
+                if (response.statusCode == 403) {
+                    var user_symptom = JSON.parse(body);
+                    console.log(">>>prj001.js put方法-> body: ", body);
+                    res.json({user_symptom:user_symptom, status: 403});
+                }
                 //console.log(">>>Getting archives met unknown error. " + error.error_description);
-                res.redirect("/prj001");
+                else {
+                    console.log(">>>其它错误码的body: ", body);
+                }
             }
         });
-    //}
+    } 
+    else 
+    {
+        console.log("url为空");
+        var symptom_url = myconst.apiurl + "prj001/symptom/";
+        var authstring = req.cookies.prj001token.access_token;
+        var options = {
+            url: symptom_url,
+            headers: {
+                'Authorization': 'Bearer ' + authstring
+            },
+            form: req.body.form_symptom
+        };
+        console.log(">>>prj001.js put options: ", options);
+        request.post(options, function (error, response, body) {
+            console.log(">>>prj001.js put method response.statusCode: ", response.statusCode);
+            if (!error && response.statusCode == 201) {
+                var user_symptom = JSON.parse(body);
+                console.log(">>>prj001.js put方法-> body: ", body);
+                res.json({user_symptom:user_symptom, status: 201});
+            } else {
+                if (response.statusCode == 403) {
+                    var user_symptom = JSON.parse(body);
+                    console.log(">>>prj001.js put方法-> body: ", body);
+                    res.json({user_symptom:user_symptom, status: 403});
+                }
+                //console.log(">>>Getting archives met unknown error. " + error.error_description);
+                else {
+                    console.log(">>>其它错误码的body: ", body);
+                }
+            }
+        });
+    }
 });
 
 /* 前段请求 其它情况 */
 router.post('/other', function (req, res, next){
     // console.log(">>>prj001.js/other/userid:", JSON.parse(req.body.userid))
-    //if (req.cookies.prj001token) {
-        //var userid = req.body.userid;
-        // var url = myconst.apiurl + "/prj001/other/" + req.body.userid;
         var other_url = req.body.other_url;
         var authstring = req.cookies.prj001token.access_token;
         var options = {
@@ -493,7 +527,7 @@ router.post('/other', function (req, res, next){
 /* 前端请求保存 其它情况 修改 */
 router.put('/other_save', function (req, res, next){
     console.log(">>>prj001.js put method:", req.body.other_url);
-    //if (req.cookies.prj001token) {
+    if (req.body.other_url != undefined) {
         var other_url = req.body.other_url;
         var authstring = req.cookies.prj001token.access_token;
         var options = {
@@ -507,23 +541,59 @@ router.put('/other_save', function (req, res, next){
         request.put(options, function (error, response, body) {
             console.log(">>>prj001.js put method response.statusCode: ", response.statusCode);
             if (!error && response.statusCode == 200) {
-                var user_geninfo = JSON.parse(body);
-                console.log(">>>prj001.js -> user_geninfo: ", user_geninfo);
-                res.json(user_geninfo);
+                var user_other = JSON.parse(body);
+                console.log(">>>prj001.js -> body: ", body);
+                res.json({user_other:user_other, status: 200});
             } else {
+                if (response.statusCode == 403) {
+                    var user_other = JSON.parse(body);
+                    console.log(">>>prj001.js put方法-> body: ", body);
+                    res.json({user_other:user_other, status: 403});
+                }
                 //console.log(">>>Getting archives met unknown error. " + error.error_description);
-                res.redirect("/prj001");
+                else {
+                    console.log(">>>其它错误码的body: ", body);
+                }
             }
         });
-    //}
+    } 
+    else 
+    {
+        console.log("url为空");
+        var other_url = myconst.apiurl + "prj001/other/";
+        var authstring = req.cookies.prj001token.access_token;
+        var options = {
+            url: other_url,
+            headers: {
+                'Authorization': 'Bearer ' + authstring
+            },
+            form: req.body.form_other
+        };
+        console.log(">>>prj001.js put options: ", options);
+        request.post(options, function (error, response, body) {
+            console.log(">>>prj001.js put method response.statusCode: ", response.statusCode);
+            if (!error && response.statusCode == 201) {
+                var user_other = JSON.parse(body);
+                console.log(">>>prj001.js put方法-> body: ", body);
+                res.json({user_other:user_other, status: 201});
+            } else {
+                if (response.statusCode == 403) {
+                    var user_other = JSON.parse(body);
+                    console.log(">>>prj001.js put方法-> body: ", body);
+                    res.json({user_other:user_other, status: 403});
+                }
+                //console.log(">>>Getting archives met unknown error. " + error.error_description);
+                else {
+                    console.log(">>>其它错误码的body: ", body);
+                }
+            }
+        });
+    }
 });
 
 /* 前段请求 临床诊断 */
 router.post('/cc', function (req, res, next){
     // console.log(">>>prj001.js/cc/userid:", JSON.parse(req.body.userid))
-    //if (req.cookies.prj001token) {
-        //var userid = req.body.userid;
-        // var url = myconst.apiurl + "/prj001/cc/" + req.body.userid;
         var cc_url = req.body.cc_url;
         var authstring = req.cookies.prj001token.access_token;
         var options = {
@@ -548,7 +618,7 @@ router.post('/cc', function (req, res, next){
 /* 前端请求保存 临床诊断 修改 */
 router.put('/cc_save', function (req, res, next){
     console.log(">>>prj001.js put method:", req.body.cc_url);
-    //if (req.cookies.prj001token) {
+    if (req.cookies.prj001token) {
         var cc_url = req.body.cc_url;
         var authstring = req.cookies.prj001token.access_token;
         var options = {
@@ -570,7 +640,39 @@ router.put('/cc_save', function (req, res, next){
                 res.redirect("/prj001");
             }
         });
-    //}
+    }
+    else 
+    {
+        console.log("url为空");
+        var menstruation_url = myconst.apiurl + "prj001/menstruation/";
+        var authstring = req.cookies.prj001token.access_token;
+        var options = {
+            url: menstruation_url,
+            headers: {
+                'Authorization': 'Bearer ' + authstring
+            },
+            form: req.body.form_menstruation
+        };
+        console.log(">>>prj001.js put options: ", options);
+        request.post(options, function (error, response, body) {
+            console.log(">>>prj001.js put method response.statusCode: ", response.statusCode);
+            if (!error && response.statusCode == 201) {
+                var user_menstruation = JSON.parse(body);
+                console.log(">>>prj001.js put方法-> body: ", body);
+                res.json({user_menstruation:user_menstruation, status: 201});
+            } else {
+                if (response.statusCode == 403) {
+                    var user_menstruation = JSON.parse(body);
+                    console.log(">>>prj001.js put方法-> body: ", body);
+                    res.json({user_menstruation:user_menstruation, status: 403});
+                }
+                //console.log(">>>Getting archives met unknown error. " + error.error_description);
+                else {
+                    console.log(">>>其它错误码的body: ", body);
+                }
+            }
+        });
+    }
 });
 
 /* 数据搜索 */

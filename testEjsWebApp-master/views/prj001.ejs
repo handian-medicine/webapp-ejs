@@ -151,53 +151,52 @@
             // alert($(this).attr("menstruation-url"));
             var tempFlag = $(this).attr("menstruation-url");
             if (tempFlag == "") {
-                alert("准备创建新月经情况");
+                alert("准备创建月经情况");
             } else {
-            $.ajax({
-                url: "/prj001/menstruation",//路由，用来处理ajax请求的函数的所在地址
-                method: "POST",
-                data: {menstruation_url: $(this).attr("menstruation-url"),
-                        hello:"hello"},
-                success: function(result){
-                    if (result.status == 0)
-                    {
-                        alert("create new menstruation");
-                    }
-                    console.log("this url:",result["url"]);
-                    // alert("person url:" + result["person"]);
-                    // $('#person').val($('#setid').val());
-                    $('#person').val(result["person"]);
-                    if (result !== null) {
-                        $('#menstruationBtn').attr("menstruationBtn-url", result["url"]);
-                        //alert("ajax success: ");
-                        $('#first_time').val(result["first_time"]);
-                        if (result["cyclicity"]== true){
-                            $("input[name='cyclicity'][value='true']").attr("checked",true);
-                        } else {
-                            $("input[name='cyclicity'][value='false']").attr("checked",true);
-                        }
+                $.ajax({
+                    url: "/prj001/menstruation",//路由，用来处理ajax请求的函数的所在地址
+                    method: "POST",
+                    data: {menstruation_url: $(this).attr("menstruation-url")},
+                    success: function(result){
+                        // if (result.status == 0)
+                        // {
+                        //     alert("create new menstruation");
+                        // }
+                        console.log("this url:",result["url"]);
+                        // alert("person url:" + result["person"]);
+                        // $('#person').val($('#setid').val());
+                        $('#person').val(result["person"]);
+                        if (result !== null) {
+                            $('#menstruationBtn').attr("menstruationBtn-url", result["url"]);
+                            $('#first_time').val(result["first_time"]);
+                            if (result["cyclicity"]== true){
+                                $("input[name='cyclicity'][value='true']").attr("checked",true);
+                            } else {
+                                $("input[name='cyclicity'][value='false']").attr("checked",true);
+                            }
+                            
+                            $('#normal').val(result["normal"]);
+                            $("input[name='abnormal'][value='"+result["abnormal"]+"']").attr("checked",true);
+                            $("input[name='cyclicity_sum'][value='"+result["cyclicity_sum"]+"']").attr("checked",true);
+                            $("input[name='blood_cond'][value='"+result["blood_cond"]+"']").attr("checked",true);
+                            $("input[name='blood_color'][value='"+result["blood_color"]+"']").attr("checked",true);
+                            $("input[name='blood_quality'][value='"+result["blood_quality"]+"']").attr("checked",true);
+                            $("input[name='blood_block'][value='"+result["blood_block"]+"']").attr("checked",true);
+                            $("input[name='blood_character'][value='"+result["blood_character"]+"']").attr("checked",true);
                         
-                        $('#normal').val(result["normal"]);
-                        $("input[name='abnormal'][value='"+result["abnormal"]+"']").attr("checked",true);
-                        $("input[name='cyclicity_sum'][value='"+result["cyclicity_sum"]+"']").attr("checked",true);
-                        $("input[name='blood_cond'][value='"+result["blood_cond"]+"']").attr("checked",true);
-                        $("input[name='blood_color'][value='"+result["blood_color"]+"']").attr("checked",true);
-                        $("input[name='blood_quality'][value='"+result["blood_quality"]+"']").attr("checked",true);
-                        $("input[name='blood_block'][value='"+result["blood_block"]+"']").attr("checked",true);
-                        $("input[name='blood_character'][value='"+result["blood_character"]+"']").attr("checked",true);
-
-                    }else {
-                        alert("result.status wrong");
+                        }else {
+                            alert("result.status wrong");
+                        }
+                    },
+                    error: function () {
+                        alert("您只有查看权限！");
                     }
-                },
-                error: function () {
-                    alert("您只有查看权限！");
-                }
                 });
             };
         })
 
         $(".symptomBtn").click(function () {
+            $('#person').val($(".geninfo").attr("geninfo-url"));
             $.ajax({
                 url: "/prj001/symptom_save",
                 method: "PUT",
@@ -206,33 +205,36 @@
                     symptom_url: $(this).attr("symptomBtn-url"),
                     form_symptom: $('#form-symptom').serialize()
                 },
-                success:function () {
-                    alert("保存成功！")
-                },
-                error: function (result) {
+                success:function (result) {
                     //403,用户除了自己,对于其它用户只有查看权限,不能修改
-                    if (result.status == 403) {
-                        alert("无法修改")
+                    if (result.status == 200 || result.status == 201) {
+                        alert("保存成功！")
+                        window.location.href = '/prj001';
                     } else {
-                        alert("保存失败" + result.status)
+                        if (result.status == 403)
+                        alert("无法修改")
                     }
+                },
+                error: function () {
+                    alert("保存失败")
                 },
             })
 
         });
         $(".symptom").click(function () {
             //alert($(this).attr("symptom-url"))
-            if ($(this).attr("symptom-url") == null) {
-                alert("准备创建新全身症状");
+            var tempFlag = $(this).attr("symptom-url");
+            if (tempFlag  == "") {
+                alert("准备创建全身症状");
             } else {
             $.ajax({
                 url: "/prj001/symptom",//路由，用来处理ajax请求的函数的所在地址
                 type: "POST",
                 data: {symptom_url: $(this).attr("symptom-url")},
                 success: function(result){
+                    $('#person').val(result["person"]);
                     if (result !== null) {
                         $('#symptomBtn').attr("symptomBtn-url", result["url"]);
-                        // alert("代码调试中……");
                         $("input:checkbox[name='spirit_jinglichongpei']").attr('checked',result["spirit_jinglichongpei"]);	
                         $("input:checkbox[name='spirit_jianwang']").attr('checked',result["spirit_jianwang"]);	
                         $("input:checkbox[name='spirit_jingshenbujizhong']").attr('checked',result["spirit_jingshenbujizhong"]);	
@@ -435,6 +437,7 @@
     })
 
         $(".otherBtn").click(function () {
+            $('#person').val($(".geninfo").attr("geninfo-url"));
             $.ajax({
                 url: "/prj001/other_save",
                 method: "PUT",
@@ -443,33 +446,36 @@
                     other_url: $(this).attr("otherBtn-url"),
                     form_other: $('#form-other').serialize()
                 },
-                success:function () {
-                    alert("保存成功！")
-                },
-                error: function (result) {
+                success:function (result) {
                     //403,用户除了自己,对于其它用户只有查看权限,不能修改
-                    if (result.status == 403) {
-                        alert("无法修改")
+                    if (result.status == 200 || result.status == 201) {
+                        alert("保存成功！")
+                        window.location.href = '/prj001';
                     } else {
-                        alert("保存失败" + result.status)
+                        if (result.status == 403)
+                        alert("无法修改")
                     }
+                },
+                error: function () {
+                    alert("保存失败")
                 },
             })
 
         });
         $(".other").click(function () {
             //alert($(this).attr("other-url"))
-            if ($(this).attr("other-url") == null) {
-                alert("准备创建新其它情况");
+            var tempFlag = $(this).attr("other-url");
+            if ($(this).attr("other-url") == "") {
+                alert("准备创建其它情况");
             } else {
             $.ajax({
                 url: "/prj001/other",//路由，用来处理ajax请求的函数的所在地址
                 type: "POST",
                 data: {other_url: $(this).attr("other-url")},
                 success: function(result){
+                    $('#person').val(result["person"]);
                     if (result !== null) {
                         $('#otherBtn').attr("otherBtn-url", result["url"]);
-                        // alert("代码调试中……");
                         $("input:checkbox[name='born_zaochan']").attr('checked',result["born_zaochan"]);
                         $("input:checkbox[name='born_zuyuechan']").attr('checked',result["born_zuyuechan"]);	
                         $("input:checkbox[name='born_yindaofenmian']").attr('checked',result["born_yindaofenmian"]);	
@@ -588,6 +594,7 @@
     })
         
         $(".ccBtn").click(function () {
+            $('#person').val($(".geninfo").attr("geninfo-url"));
             $.ajax({
                 url: "/prj001/cc_save",
                 method: "PUT",
@@ -596,34 +603,36 @@
                     cc_url: $(this).attr("ccBtn-url"),
                     form_cc: $('#form-cc').serialize()
                 },
-                success:function () {
-                    alert("保存成功！")
-                },
-                error: function (result) {
+                success:function (result) {
                     //403,用户除了自己,对于其它用户只有查看权限,不能修改
-                    if (result.status == 403) {
-                        alert("无法修改")
+                    if (result.status == 200 || result.status == 201) {
+                        alert("保存成功！")
+                        window.location.href = '/prj001';
                     } else {
-                        alert("保存失败" + result.status)
+                        if (result.status == 403)
+                        alert("无法修改")
                     }
+                },
+                error: function () {
+                    alert("保存失败")
                 },
             })
 
         });
         $(".cc").click(function () {
             //alert($(this).attr("cc-url"))
-            if ($(this).attr("cc-url") == null) {
-                alert("准备创建新临床诊断");
+            var tempFlag = $(this).attr("other-url");
+            if (tempFlag == "") {
+                alert("准备创建临床诊断");
             } else {
             $.ajax({
                 url: "/prj001/cc",//路由，用来处理ajax请求的函数的所在地址
                 type: "POST",
                 data: {cc_url: $(this).attr("cc-url")},
                 success: function(result) {
+                    $('#person').val(result["person"]);
                     if (result !== null) {
                         $('#ccBtn').attr("ccBtn-url", result["url"]);
-                        // alert("代码调试中……");
-                    } else {
                         $("input:checkbox[name='benglou']").attr('checked',result["benglou"]);
                         $("input:checkbox[name='yuejingguoduo']").attr('checked',result["yuejingguoduo"]);	
                         $("input:checkbox[name='yuejingxianqi']").attr('checked',result["yuejingxianqi"]);	
@@ -663,6 +672,8 @@
                         $("input:checkbox[name='gaomirusu']").attr('checked',result["gaomirusu"]);	
                         $("input:checkbox[name='dicuxingxianjisu']").attr('checked',result["dicuxingxianjisu"]);
                         $('#qita_west').val(result["qita_west"]);	
+                    } else {
+                        alert("result.status wrong");
                     }
                 },
                 error: function () {
@@ -829,8 +840,8 @@
                                         <table class="table table-striped table-bordered table-hover">
                                             <thead>
                                                 <tr>
-                                                    <th>名字</th>
-                                                    <th>名族</th>
+                                                    <th>姓名</th>
+                                                    <th>民族</th>
                                                     <th>年龄</th>
                                                     <th>身高cm</th>
                                                     <th>体重kg</th>
@@ -1328,7 +1339,7 @@
                                                 <div class="modal-body">
                                                     <div class="row">
                                                         <div class="col-xs-12 col-sm-12">
-                                                    <!-- <input type="hidden" class="person" name="person" id="person" value=""/>         -->
+                                                    <input type="hidden" class="person" name="person" id="person" value=""/>        
                                                     <p>
                                                         精神：
                                                     <p>
@@ -1652,7 +1663,7 @@
                                                 <div class="modal-body">
                                                     <div class="row">
                                                         <div class="col-xs-12 col-sm-12">
-                                                    <!-- <input type="hidden" class="person" name="person" id="person" value=""/> -->
+                                                    <input type="hidden" class="person" name="person" id="person" value=""/>
                                                     <p>
                                                         出生情况:
                                                     <p>
@@ -1911,7 +1922,7 @@
                                                     <div class="row">
                                                         <div class="col-xs-12 col-sm-12">
                                                     
-                                                    <!-- <input type="hidden" class="person" name="person" id="person" value=""/> -->
+                                                    <input type="hidden" class="person" name="person" id="person" value=""/>
                                                     <p>
                                                         中医诊断：
                                                     <p>
