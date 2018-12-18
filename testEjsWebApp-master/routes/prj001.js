@@ -205,11 +205,13 @@ router.post('/datainputoptr', function (req, res, next) {
         console.log(">>>prj001.js -> options: ", options);
         request.post(options, function (error, response, body) {
             // console.log("response:", response.body);
-            console.log("response.statusCode: ", response.statusCode);
+            // console.log("response.statusCode: ", response.statusCode);
             if (!error && response.statusCode == 201) {
                 // res.json({status:1, msg:"录入成功"});
                 console.log("prj001.js ajax result:", res);
                 //res.render('datainput',{username: req.cookies.userinfo.email});
+            } else {
+                console.log('response.statusCode', response.statusCode);
             }
         })
         }
@@ -554,10 +556,23 @@ router.get('/search', function (req, res, next) {
             if (!error && response.statusCode == 200) {
                 var archiveobjs = JSON.parse(body);
                 console.log(">>>In the search prj001.js -> archiveobjs", archiveobjs);
-                res.render('prj001', {
+                // console.log(">>>In the search prj001.js -> res", res);
+                
+                // res.render('prj001', {
+                //     title: '流调项目-排卵障碍性异常子宫出血',
+                //     archives: archiveobjs.results,
+                //     username: req.cookies.userinfo.email,
+                //     totalpagenumber: 1,
+                //     curpage: 1,
+                //     previouspage: 1,
+                //     nextpage: 1
+                // });
+                var aaa=123;
+                res.json({
                     title: '流调项目-排卵障碍性异常子宫出血',
-                    archives: archiveobjs.results,
+                    archives:archiveobjs.results, 
                     username: req.cookies.userinfo.email,
+                    temp:aaa,
                     totalpagenumber: 1,
                     curpage: 1,
                     previouspage: 1,
@@ -621,16 +636,27 @@ router.get('/search', function (req, res, next) {
                         // if (!error && response.statusCode == 200) {
                             var archiveobjs = JSON.parse(body);
                             console.log(">>>In the search prj001.js -> archiveobjs", archiveobjs);
-                            res.render('prj001', {
+                            res.json(archiveobjs.results);
+                            // res.render('prj001', {
+                            //     title: '流调项目-排卵障碍性异常子宫出血',
+                            //     archives: archiveobjs.results,
+                            //     username: req.cookies.userinfo.email,
+                            //     totalpagenumber: 1,
+                            //     curpage: 1,
+                            //     previouspage: 1,
+                            //     nextpage: 1
+                            // });
+                            var aaa=123;
+                            res.json({
                                 title: '流调项目-排卵障碍性异常子宫出血',
-                                archives: archiveobjs.results,
+                                archives:archiveobjs.results, 
                                 username: req.cookies.userinfo.email,
+                                temp:aaa,
                                 totalpagenumber: 1,
                                 curpage: 1,
                                 previouspage: 1,
                                 nextpage: 1
                             });
-                            // res.redirect("home");
                         // } else {
                         //     console.log(">>>Getting archives met unknown error. " + err.error_description);
                             console.log("hhhhh");

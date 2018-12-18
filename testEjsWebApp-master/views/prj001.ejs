@@ -660,21 +660,24 @@
     })
     
 // 检索功能
-        $(".searchBtn").click(function () {
-            $.ajax({
-                url:"/prj001/search",
-                method:"GET",
-                data: {
-                    search: $('#searchContent').val(),
-                },
-                success:function () {
-                    alert("success")
-                },
-                error:function () {
-                    alert("fail")
-                },
-            });
-        })
+        // $(".searchBtn").click(function () {
+        //     $.ajax({
+        //         url:"/prj001/search",
+        //         type:"GET",
+        //         data: {
+        //             search: $('#searchContent').val(),
+        //         },
+        //         success:function (result) {
+        //             alert("success")
+        //             alert("archivelist" + result)
+        //             // $("#archivelist").html("");
+        //             $("#archivelist").html(result);
+        //         },
+        //         error:function () {
+        //             alert("fail")
+        //         },
+        //     });
+        // })
 
 })
 </script>
@@ -703,7 +706,7 @@
             <ul class="nav ace-nav">
                 <li class="light-blue">
                     <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                        <img class="nav-user-photo" src="../public/avatars/user.jpg" alt="Jason's Photo">
+                        <img class="nav-user-photo" src="../public/avatars/0017030553263367_b.jpg" alt="Jason's Photo">
                         <span class="user-info">
                             <small>welcome,</small>
                             <%= username %>
@@ -806,11 +809,11 @@
 
                                             <input id="searchContent" type="text" class="search-query" placeholder="采集对象人员姓名" />
                                         </span>
-                                        <button id="searchBtn" type="submit" class="btn btn-sm searchBtn">检索</button>
+                                        <button id="searchBtn" type="button" class="btn btn-sm searchBtn">检索</button>
                                     </form>
                                     <hr>
                                     <div class="table-responsive">
-                                        <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                                        <table class="table table-striped table-bordered table-hover">
                                             <thead>
                                                 <tr>
                                                     <th>名字</th>
@@ -830,7 +833,7 @@
                                                 </tr>
                                             </thead>
 
-                                            <tbody id="infotable">
+                                            <tbody id="archivelist">
                                                 <% archives.forEach(function(archive){ %>
                                                 <tr>
                                                     <td><a href="../public/bingo.html">
@@ -1009,6 +1012,11 @@
                                                                 <label><input type="radio" value="主任医师" name="title" />主任医师</label>
                                                                 <label><input type="radio" value="副主任医师" name="title"/>副主任医师</label>
                                                                 <label><input type="radio" value="主治医师" name="title"/>主治医师</label>
+                                                                <!-- <select class="form-control">
+                                                                        <option value="主任医师" name="title">主任医师</option>
+                                                                        <option value="副主任医师" name="title">副主任医师</option>
+                                                                        <option value="主治医师" name="title">主治医师</option>
+                                                                </select> -->
                                                             </p>
                                                             <p>
                                                                 患者姓名:<input class="form-control" type="text" name="name" id="name" />
