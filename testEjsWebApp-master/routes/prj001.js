@@ -345,20 +345,45 @@ router.put('/menstruation_save', function (req, res, next){
             headers: {
                 'Authorization': 'Bearer ' + authstring
             },
-            form: req.body.form_menstruation,
+            form: req.body.form_menstruation
         };
-        console.log(">>>prj001.js put options: ", options);
-        request.put(options, function (error, response, body) {
-            console.log(">>>prj001.js put method response.statusCode: ", response.statusCode);
-            if (!error && response.statusCode == 200) {
-                var user_menstruation = JSON.parse(body);
-                console.log(">>>prj001.js put方法-> user_menstruation: ", body);
-                res.json(user_menstruation);
-            } else {
-                //console.log(">>>Getting archives met unknown error. " + error.error_description);
-                res.redirect("/prj001");
-            }
-        });
+        if (menstruation_url != null){
+            console.log(">>>prj001.js put options: ", options);
+            request.put(options, function (error, response, body) {
+                console.log(">>>prj001.js put method response.statusCode: ", response.statusCode);
+                if (!error && response.statusCode == 200) {
+                    var user_menstruation = JSON.parse(body);
+                    console.log(">>>prj001.js put方法-> body: ", body);
+                    res.json({user_menstruation, status: 200});
+                } else {
+                    if (response.statusCode == 403) {
+                        var user_menstruation = JSON.parse(body);
+                        console.log(">>>prj001.js put方法-> body: ", body);
+                        res.json({user_menstruation, status: 403});
+                    }
+                    //console.log(">>>Getting archives met unknown error. " + error.error_description);
+                    else {
+                        console.log(">>>其它错误码的body: ", body);
+                    }
+                    
+                    //{res.redirect("/prj001");}
+                }
+            });
+        } 
+        // else {
+        //     console.log(">>>prj001.js put options: ", options);
+        //     request.post(options, function (error, response, body) {
+        //         console.log(">>>prj001.js put method response.statusCode: ", response.statusCode);
+        //         if (!error && response.statusCode == 200) {
+        //             var user_menstruation = JSON.parse(body);
+        //             console.log(">>>prj001.js put方法-> user_menstruation: ", body);
+        //             res.json(user_menstruation);
+        //         } else {
+        //             //console.log(">>>Getting archives met unknown error. " + error.error_description);
+        //             res.redirect("/prj001");
+        //         }
+        //     });
+        // }
     //}
 });
 

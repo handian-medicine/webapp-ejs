@@ -38,7 +38,7 @@
                 dataType: "json",
                 data: {
                     geninfo_url: $(this).attr("geninfoBtn-url"),
-                    form_geninfo: $('#form-geninfo').serialize()
+                    form_geninfo: $('#form-geninfo').serialize(),
                 },
                 success:function (result) {
                     console.log("result", result);
@@ -65,7 +65,7 @@
                     if (result !== null) {
                         $('#geninfoBtn').attr("geninfoBtn-url", result["url"]);
                         //alert("ajax success: ");
-                        //$('#person').valu(result["id"])
+                        $('#setid').val(result["id"])
                         $('#recdate').val(result["recdate"]);
                         $('#serial').val(result["serial"]);
                         $('#hospital').val(result["hospital"]);
@@ -128,17 +128,19 @@
                 dataType: "json",
                 data: {
                     menstruation_url: $(this).attr("menstruationBtn-url"),
+                    form_menstruation: $('#form-menstruation').serialize()
                 },
-                success:function () {
-                    alert("保存成功！")
-                },
-                error: function (result) {
+                success:function (result) {
                     //403,用户除了自己,对于其它用户只有查看权限,不能修改
-                    if (result.status == 403) {
-                        alert("无法修改")
+                    if (result.status == 200) {
+                        alert("保存成功！")
                     } else {
-                        alert("保存失败" + result.status)
+                        if (result.status == 403)
+                        alert("无法修改")
                     }
+                },
+                error: function () {
+                    alert("保存失败")
                 },
             })
 
@@ -155,15 +157,19 @@
                 data: {menstruation_url: $(this).attr("menstruation-url")},
                 success: function(result){
                     console.log("this url:",result["url"]);
+                    // alert("person url:" + result["person"]);
+                    // $('#person').val($('#setid').val());
+                    $('#person').val(result["person"]);
                     if (result !== null) {
                         $('#menstruationBtn').attr("menstruationBtn-url", result["url"]);
                         //alert("ajax success: ");
                         $('#first_time').val(result["first_time"]);
                         if (result["cyclicity"]== true){
-                            $("input[name='cyclicity'][value='尚规律']").attr("checked",true);
+                            $("input[name='cyclicity'][value='true']").attr("checked",true);
                         } else {
-                            $("input[name='cyclicity'][value='不规律']").attr("checked",true);
+                            $("input[name='cyclicity'][value='false']").attr("checked",true);
                         }
+                        
                         $('#normal').val(result["normal"]);
                         $("input[name='abnormal'][value='"+result["abnormal"]+"']").attr("checked",true);
                         $("input[name='cyclicity_sum'][value='"+result["cyclicity_sum"]+"']").attr("checked",true);
@@ -994,7 +1000,7 @@
                                                 <div class="modal-body">
                                                     <div class="row">
                                                         <div class="col-xs-12 col-sm-12">
-                                                            <!-- <input type="hidden" name="person" value=""/> -->
+                                                                <input type="hidden" name="setid" id="setid" value=""/>
                                                             <p>
                                                                 日期：<input class="form-control" id="recdate" name="recdate"  type="text"/>
                                                             </p>
@@ -1214,14 +1220,15 @@
                                                 <div class="modal-body">
                                                     <div class="row">
                                                         <div class="col-xs-12 col-sm-12">
+                                                    <input type="hidden" name="person" id="person" value=""/>
                                                     <p>
                                                         初潮年龄:
                                                         <input class="form-control" type="number" name="first_time" id="first_time"/>
                                                     </p>
                                                     <p>
                                                         月经周期:
-                                                        <label><input type="radio" value="尚规律" name="cyclicity"/>尚规律</label>
-                                                        <label><input type="radio" value="不规律" name="cyclicity"/>不规律</label>
+                                                        <label><input type="radio" value="true" name="cyclicity"/>尚规律</label>
+                                                        <label><input type="radio" value="false" name="cyclicity"/>不规律</label>
                                                     </p>
                                                     <p>
                                                         月经规律间隔天数:
@@ -1288,7 +1295,7 @@
                                                 </div>
                                             </table>
                                             <div class="modal-footer">
-                                                <button type="submit" class="btn btn-primary menstruationBtn" id="menstruationBtn">提交</button>
+                                                <button type="button" class="btn btn-primary menstruationBtn" id="menstruationBtn">提交</button>
                                             </div>
                                         </form>
     
