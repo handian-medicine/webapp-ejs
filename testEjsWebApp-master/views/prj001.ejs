@@ -115,7 +115,7 @@
                     }
                 },
                 error: function () {
-                    alert("Permission Denied!");
+                    alert("您只有查看权限！");
                 }
             });
         });
@@ -178,7 +178,7 @@
                     }
                 },
                 error: function () {
-                    alert("Permission Denied!");
+                    alert("您只有查看权限！");
                 }
                 });
             };
@@ -415,7 +415,7 @@
                     }
                 },
                 error: function () {
-                    alert("Permission Denied!");
+                    alert("您只有查看权限！");
                 }
             });
         };
@@ -568,7 +568,7 @@
                     }
                 },
                 error: function () {
-                    alert("Permission Denied!");
+                    alert("您只有查看权限！");
                 }
             });
         };
@@ -653,31 +653,31 @@
                     }
                 },
                 error: function () {
-                    alert("Permission Denied!");
+                    alert("您只有查看权限！");
                 },
             });
         };
     })
     
 // 检索功能
-        // $(".searchBtn").click(function () {
-        //     $.ajax({
-        //         url:"/prj001/search",
-        //         type:"GET",
-        //         data: {
-        //             search: $('#searchContent').val(),
-        //         },
-        //         success:function (result) {
-        //             alert("success")
-        //             alert("archivelist" + result)
-        //             // $("#archivelist").html("");
-        //             $("#archivelist").html(result);
-        //         },
-        //         error:function () {
-        //             alert("fail")
-        //         },
-        //     });
-        // })
+        $(".searchBtn").click(function () {
+            $.ajax({
+                url:"/prj001/search",
+                type:"GET",
+                data: {
+                    search: $('#searchContent').val(),
+                },
+                success:function (result) {
+                    alert("success")
+                    alert("archivelist" + result)
+                    // $("#archivelist").html("");
+                    $("#archivelist").html(result);
+                },
+                error:function () {
+                    alert("fail")
+                },
+            });
+        })
 
 })
 </script>
