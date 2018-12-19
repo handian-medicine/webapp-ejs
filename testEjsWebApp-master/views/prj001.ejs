@@ -28,6 +28,23 @@
 </head>
 
 <body>
+    <script>
+                    // 测试代码
+                $.fn.ghostsf_serialize = function () {
+                var a = this.serializeArray();
+                var $radio = $('input[type=radio],input[type=checkbox]', this);
+                var temp = {};
+                $.each($radio, function () {
+                    if (!temp.hasOwnProperty(this.name)) {
+                        if ($("input[name='" + this.name + "']:checked").length == 0) {
+                            temp[this.name] = "";
+                            a.push({name: this.name, value: ""});
+                        }
+                    }
+                });
+                return jQuery.param(a);
+            };
+    </script>
 <script>
     $(document).ready(function () {
 
@@ -131,7 +148,8 @@
                 dataType: "json",
                 data: {
                     menstruation_url: $(this).attr("menstruationBtn-url"),
-                    form_menstruation: $('#form-menstruation').serialize(),
+                    // form_menstruation: $('#form-menstruation').serialize(),
+                    form_menstruation: $('#form-menstruation').ghostsf_serialize()
                 },
                 success:function (result) {
                     //403,用户除了自己,对于其它用户只有查看权限,不能修改
@@ -195,6 +213,7 @@
         })
 
         $(".symptomBtn").click(function () {
+
             var temp_geninfourl = $('#person-symptom').val();
             $('#person-symptom').val(temp_geninfourl);//如果url不为空，api服务器返回的数据有person字段
             $.ajax({
@@ -203,7 +222,8 @@
                 dataType: "json",
                 data: {
                     symptom_url: $(this).attr("symptomBtn-url"),
-                    form_symptom: $('#form-symptom').serialize()
+                    // form_symptom: $('#form-symptom').serialize(),
+                    form_symptom:$('#form-symptom').ghostsf_serialize()
                 },
                 success:function (result) {
                     //403,用户除了自己,对于其它用户只有查看权限,不能修改
@@ -452,7 +472,8 @@
                 dataType: "json",
                 data: {
                     other_url: $(this).attr("otherBtn-url"),
-                    form_other: $('#form-other').serialize()
+                    // form_other: $('#form-other').serialize(),
+                    form_other: $('#form-other').ghostsf_serialize()
                 },
                 success:function (result) {
                     //403,用户除了自己,对于其它用户只有查看权限,不能修改
@@ -615,7 +636,8 @@
                 dataType: "json",
                 data: {
                     cc_url: $(this).attr("ccBtn-url"),
-                    form_cc: $('#form-cc').serialize()
+                    // form_cc: $('#form-cc').serialize(),
+                    form_cc: $('#form-cc').ghostsf_serialize()
                 },
                 success:function (result) {
                     //403,用户除了自己,对于其它用户只有查看权限,不能修改
@@ -1907,7 +1929,7 @@
                                                     <label><input name="accessory_niaorenshen" type="checkbox" value="true"/>尿妊娠试验</label>
                                                     <label><input name="accessory_penqiangchaosheng" type="checkbox" value="true"/>盆腔超声检查</label>
                                                     <label><input name="accessory_jichutiwen" type="checkbox" value="true"/>基础体温测定</label>
-                                                    <label><input name="accessory_jisushuiping" type="checkbox" value=falsetrue"/>激素水平测定</label>
+                                                    <label><input name="accessory_jisushuiping" type="checkbox" value="true"/>激素水平测定</label>
                                                     <label><input name="accessory_guagong" type="checkbox" value="true"/>诊断性刮宫或宫腔镜下刮宫</label>
                                                     <label>其它说明:</label>
                                                         <input type="text" id="accessory_qita" name="accessory_qita" value="无"/>
