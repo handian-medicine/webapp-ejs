@@ -900,21 +900,22 @@
                                                     <td>
                                                         
                                                         <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
-                                                            <button id="geninfo" class="btn btn-xs btn-info geninfo" geninfo-url=<%= archive.url %>>
-                                                                    <a href="#modal-table" class="color" role="button" data-toggle="modal">一般情况</a>
+                                                            <button id="geninfo" data-toggle="modal" data-target="#modal-table" class="btn btn-xs btn-info geninfo" geninfo-url=<%= archive.url %>>
+                                                                    <!-- <a href="#modal-table" class="color" role="button" data-toggle="modal">一般情况</a> -->
+                                                                    一般情况
                                                             </button>
-                                                            <button id="menstruation"  class="btn btn-xs btn-success menstruation" geninfo-url=<%= archive.url %> menstruation-url=<%= archive.menstruation %>>
-                                                                    <a href="#modal-table1" class="color" role="button" data-toggle="modal">月经情况</a>
+                                                            <button id="menstruation"  data-toggle="modal" data-target="#modal-table1" class="btn btn-xs btn-success menstruation" geninfo-url=<%= archive.url %> menstruation-url=<%= archive.menstruation %>>
+                                                                    月经情况
                                                             </button>
-                                                            <button id="symptom" class="btn btn-xs btn-danger symptom" geninfo-url=<%= archive.url %> symptom-url=<%= archive.symptom %>>
-                                                                    <a href="#modal-table2" class="color" role="button" data-toggle="modal">全身症状</a>
+                                                            <button id="symptom" data-toggle="modal" data-target="#modal-table2" class="btn btn-xs btn-danger symptom" geninfo-url=<%= archive.url %> symptom-url=<%= archive.symptom %>>
+                                                                    全身症状
                                                                 </button>
         
-                                                                <button id="other" class="btn btn-xs btn-warning other" geninfo-url=<%= archive.url %> other-url=<%= archive.other %>>
-                                                                    <a href="#modal-table3" class="color" role="button" data-toggle="modal">其它情况</a>
+                                                                <button id="other" data-toggle="modal" data-target="#modal-table3" class="btn btn-xs btn-warning other" geninfo-url=<%= archive.url %> other-url=<%= archive.other %>>
+                                                                    其它情况
                                                                 </button>
-                                                                <button id="cc" class="btn btn-xs btn-info cc" geninfo-url=<%= archive.url %> cc-url=<%= archive.clinicalconclusion %>>
-                                                                    <a href="#modal-table4" class="color" role="button" data-toggle="modal">临床诊断</a>
+                                                                <button id="cc" data-toggle="modal" data-target="#modal-table4" class="btn btn-xs btn-info cc" geninfo-url=<%= archive.url %> cc-url=<%= archive.clinicalconclusion %>>
+                                                                    临床诊断
                                                                 </button>
                                                         </div>
                                                         <div class="visible-xs visible-sm hidden-md hidden-lg">
