@@ -106,16 +106,17 @@
                         $("input:checkbox[name='qiyou']").attr('checked',result["qiyou"]);
                         $("input:checkbox[name='wu']").attr('checked',result["wu"]);
 
-                        $('#menstruation').val(result["menstruation"]);
-                        $('#symptom').val(result["symptom"]);
-                        $('#other').val(result["other"]);
-                        $('#clinicalconclusion').val(result["clinicalconclusion"]);
+                        // $('#menstruation').val(result["menstruation"]);
+                        // $('#symptom').val(result["symptom"]);
+                        // $('#other').val(result["other"]);
+                        // $('#clinicalconclusion').val(result["clinicalconclusion"]);
                     } else {
                         alert("result.status wrong");
                     }
                 },
                 error: function () {
-                    alert("您只有查看权限！");
+                    alert("请求失败！");
+                    window.location.href = '/prj001';
                 }
             });
         });
@@ -186,7 +187,8 @@
                         }
                     },
                     error: function () {
-                        alert("您只有查看权限！");
+                        alert("请求失败！");
+                        window.location.href = '/prj001';
                     }
                 });
             };
@@ -197,7 +199,7 @@
             $('#person-symptom').val(temp_geninfourl);//如果url不为空，api服务器返回的数据有person字段
             $.ajax({
                 url: "/prj001/symptom_save",
-                method: "PUT",
+                type: "PUT",
                 dataType: "json",
                 data: {
                     symptom_url: $(this).attr("symptomBtn-url"),
@@ -243,6 +245,7 @@
                         $("input:checkbox[name='spirit_yalida']").attr('checked',result["spirit_yalida"]);	
                         $("input:checkbox[name='spirit_jiaodabiangu']").attr('checked',result["spirit_jiaodabiangu"]);
                         $("input:checkbox[name='spirit_beishangyuku']").attr('checked',result["spirit_beishangyuku"]);	
+                        
                         $("input:checkbox[name='mood_zhengchang']").attr('checked',result["mood_zhengchang"]);	
                         $("input:checkbox[name='mood_leguankailang']").attr('checked',result["mood_leguankailang"]);	
                         $("input:checkbox[name='mood_silvguodu']").attr('checked',result["mood_silvguodu"]);	
@@ -252,7 +255,9 @@
                         $("input:checkbox[name='mood_beishangyuku']").attr('checked',result["mood_beishangyuku"]);	
                         $("input:checkbox[name='mood_yiyu']").attr('checked',result["mood_yiyu"]);	
                         $("input:checkbox[name='mood_duosiduolv']").attr('checked',result["mood_duosiduolv"]);	
-                        $("input:checkbox[name='mood_qita']").attr('checked',result["mood_qita"]);	
+                        // $("input:checkbox[name='mood_qita']").attr('checked',result["mood_qita"]);
+                        $('#mood_qita').val(result["mood_qita"]);
+
                         $("input:checkbox[name='chillfever_zhengchang']").attr('checked',result["chillfever_zhengchang"]);	
                         $("input:checkbox[name='chillfever_weihan']").attr('checked',result["chillfever_weihan"]);	
                         $("input:checkbox[name='chillfever_wuxinfanre']").attr('checked',result["chillfever_wuxinfanre"]);	
@@ -431,7 +436,8 @@
                     }
                 },
                 error: function () {
-                    alert("您只有查看权限！");
+                    alert("请求失败！");
+                    window.location.href = '/prj001';
                 }
             });
         };
@@ -466,10 +472,9 @@
         });
         $(".other").click(function () {
             document.getElementById("form-other").reset();
-            //alert($(this).attr("other-url"))
             var tempFlag = $(this).attr("other-url");
             var temp_geninfourl = $(this).attr("geninfo-url");
-            if ($(this).attr("other-url") == "") {
+            if (tempFlag == "") {
                 alert("准备创建其它情况");
                 $('#person-other').val(temp_geninfourl);//如果url不为空，api服务器返回的数据有person字段
             } else {
@@ -567,7 +572,9 @@
                         $("input:checkbox[name='prevent_jieyuqi']").attr('checked',result["prevent_jieyuqi"]);	
                         $("input:checkbox[name='prevent_biyuntao']").attr('checked',result["prevent_biyuntao"]);	
                         $("input:checkbox[name='prevent_biyunyao']").attr('checked',result["prevent_biyunyao"]);	
-                        $("input:checkbox[name='prevent_biyunyao_time']").attr('checked',result["prevent_biyunyao_time"]);	
+
+                        $('#prevent_biyunyao_time').val(result["prevent_biyunyao_time"]);
+
                         $("input:checkbox[name='prevent_mafulong']").attr('checked',result["prevent_mafulong"]);	
                         $("input:checkbox[name='prevent_daying']").attr('checked',result["prevent_daying"]);
                         $("input:checkbox[name='prevent_yousiming']").attr('checked',result["prevent_yousiming"]);	
@@ -592,7 +599,8 @@
                     }
                 },
                 error: function () {
-                    alert("您只有查看权限！");
+                    alert("请求失败！");
+                    window.location.href = '/prj001';
                 }
             });
         };
@@ -686,7 +694,8 @@
                     }
                 },
                 error: function () {
-                    alert("您只有查看权限！");
+                    alert("请求失败！");
+                    window.location.href = '/prj001';
                 },
             });
         };
@@ -1376,8 +1385,8 @@
                                                     <label><input name="mood_beishangyuku" type="checkbox" value="true"/>悲伤欲哭</label>
                                                     <label><input name="mood_yiyu" type="checkbox" value="true"/>抑郁</label>
                                                     <label><input name="mood_duosiduolv" type="checkbox" value="true"/>多思多虑</label>
-                                                        <label><input name="mood_qita" type="checkbox" value="true"/>其它</label>
-                                                        其它说明:<input type="text" id="nameTxt10" value="无"/>
+                                                    <label>其它:</label>
+                                                    <input type="text" id="mood_qita" name="mood_qita" value="无"/>
                                                     </p>
                                                     <p>
                                                         寒热：
@@ -1695,9 +1704,9 @@
                                                     <p>
                                                         职业体力活动:
                                                     <p>
-                                                        <label><input type="radio" value="重体力劳动（如：搬运工、清洁工、农场工人、畜牧产工人等）" name="career_labor"/>重体力劳动（如：搬运工、清洁工、农场工人、畜牧产工人等）</label>
+                                                        <label><input type="radio" value="重体力劳动（如：搬运工、清洁工、农场工人、畜牧场工人等）" name="career_labor"/>重体力劳动（如：搬运工、清洁工、农场工人、畜牧场工人等）</label>
                                                         <label><input type="radio" value="中体力劳动（如：家政服务人员、服务生、厨师、护士等）" name="career_labor"/>中体力劳动（如：家政服务人员、服务生、厨师、护士等）</label>
-                                                        <label><input type="radio" value="中体力劳动（如：教师、美容美发师、批发商、职员等）" name="career_labor"/>中体力劳动（如：教师、美容美发师、批发商、职员等）</label>
+                                                        <label><input type="radio" value="轻体力劳动（如：教师、美容美发师、批发商、职员等）" name="career_labor"/>中体力劳动（如：教师、美容美发师、批发商、职员等）</label>
                                                         <label><input type="radio" value="坐式的工作（如：收银员、出纳员、接线员、秘书等）" name="career_labor"/>坐式的工作（如：收银员、出纳员、接线员、秘书等）</label>
                                                     </p>
                                                     <p>
@@ -1737,8 +1746,8 @@
                                                     <label><input name="hobbies_wu" type="checkbox" value="true"/>无</label>
                                                     <label><input name="hobbies_xiyan" type="checkbox" value="true"/>吸烟</label>
                                                     <label><input name="hobbies_yinjiu" type="checkbox" value="true"/>饮酒</label>
-                                                    <label><input name="hobbies_qita" type="checkbox" value="true"/>其它</label>
-                                                        其它说明:<input type="text" id="nameTxt11" value="无"/>
+                                                    <label>其它说明:</label>
+                                                    <input type="text" id="hobbies_qita" name="hobbies_qita" value="无"/>
                                                     </p>
                                                     <p>
                                                         减肥情况：
@@ -1747,10 +1756,10 @@
                                                     <label><input name="reducefat_yundong" type="checkbox" value="true"/>运动减肥</label>
                                                     <label><input name="reducefat_jieshi" type="checkbox" value="true"/>节食减肥</label>
                                                     <label><input name="reducefat_yaowu" type="checkbox" value="true"/>药物减肥</label>
-                                                    <label><input name="reducefat_qita" type="checkbox" value="true"/>其它</label>
-                                                            <p>
-                                                        其它说明:<input type="text" id="nameTxt12" value="无"/>
-                                                        减肥时长(月):<input  type="number" name="reducefat_persist"/>
+                                                    <label>其它说明:</label>
+                                                    <p>
+                                                        <input type="text" id="reducefat_qita" name="reducefat_qita" value="无"/>
+                                                        减肥时长(月):<input  type="number" id="reducefat_persist" name="reducefat_persist"/>
                                                     </p>
                                                     <p>
                                                         经期情况:
@@ -1813,8 +1822,8 @@
                                                     <label><input name="pasthistory_feipang" type="checkbox" value="true"/>肥胖</label>
                                                     <label><input name="pasthistory_ganyan" type="checkbox" value="true"/>肝炎</label>
                                                     <label><input name="pasthistory_jiehe" type="checkbox" value="true"/>结核</label>
-                                                    <label><input name="pasthistory_qita" type="checkbox" value="true"/>其它</label>
-                                                        其它说明:<input type="text" id="nameTxt13" value="无"/>
+                                                    <label>其它说明:</label>
+                                                        <input type="text" id="pasthistory_qita" name="pasthistory_qita" value="无"/>
                                                     </p>
                                                     <p>
                                                         月经不调病史：
@@ -1836,32 +1845,32 @@
                                                     <label><input name="pastfamily_xinzangbing" type="checkbox" value="true"/>心脏病</label>
                                                     <label><input name="pastfamily_duonangluanchao" type="checkbox" value="true"/>多囊卵巢综合征</label>
                                                     <label><input name="pastfamily_buxiang" type="checkbox" value="true"/>不详</label>
-                                                    <label><input name="pastfamily_qita" type="checkbox" value="true"/>其它</label>
+                                                    <label>其它说明:</label>
                                                         <p>
-                                                        其它说明:<input type="text" id="nameTxt14" value="无"/>
+                                                        <input type="text" id="pastfamily_qita" name="pastfamily_qita" value="无"/>
                                                     </p>
                                                     <p>
                                                         孕育史：
                                                     <p>
-                                                    孕次总数:<input class="form-control" type="number" name="pastpreg_yuncount"/>
+                                                    孕次总数:<input class="form-control" type="number" name="pastpreg_yuncount" id="pastpreg_yuncount"/>
                                                     <p>
-                                                    刨宫产次数:<input class="form-control" type="number" name="pastpreg_pougong"/>
+                                                    刨宫产次数:<input class="form-control" type="number" name="pastpreg_pougong" id="pastpreg_pougong"/>
                                                     <p>
-                                                    顺产次数:<input class="form-control" type="number" name="pastpreg_shunchan"/>
+                                                    顺产次数:<input class="form-control" type="number" name="pastpreg_shunchan" id="pastpreg_shunchan"/>
                                                     <p>
-                                                    药物流产次数:<input class="form-control" type="number" name="pastpreg_yaoliu"/>
+                                                    药物流产次数:<input class="form-control" type="number" name="pastpreg_yaoliu" id="pastpreg_yaoliu"/>
                                                     <p>
-                                                    人工流产次数:<input class="form-control" type="number" name="pastpreg_renliu"/>
+                                                    人工流产次数:<input class="form-control" type="number" name="pastpreg_renliu" id="pastpreg_renliu"/>
                                                     <p>
-                                                    自然流产次数:<input class="form-control" type="number" name="pastpreg_ziranliu"/>
+                                                    自然流产次数:<input class="form-control" type="number" name="pastpreg_ziranliu" id="pastpreg_ziranliu"/>
                                                     <p>
-                                                    生化妊娠次数:<input class="form-control" type="number" name="pastpreg_shenghuarenshen"/>
+                                                    生化妊娠次数:<input class="form-control" type="number" name="pastpreg_shenghuarenshen" id="pastpreg_shenghuarenshen"/>
                                                     <p>
-                                                    异位妊娠次数:<input class="form-control" type="number" name="pastpreg_yiweirenshen"/>
+                                                    异位妊娠次数:<input class="form-control" type="number" name="pastpreg_yiweirenshen" id="pastpreg_yiweirenshen"/>
                                                     <p>
-                                                    胎停育次数:<input class="form-control" type="number" name="pastpreg_taitingyu"/>
+                                                    胎停育次数:<input class="form-control" type="number" name="pastpreg_taitingyu" id="pastpreg_taitingyu"/>
                                                     <p>
-                                                    清宫术次数:<input class="form-control" type="number" name="pastpreg_qinggongshu"/>
+                                                    清宫术次数:<input class="form-control" type="number" name="pastpreg_qinggongshu" id="pastpreg_qinggongshu"/>
                                                     </p>
                                                     <p>
                                                         避孕措施：
@@ -1871,16 +1880,16 @@
                                                     <label><input name="prevent_biyuntao" type="checkbox" value="true"/>避孕套</label>
                                                     <label><input name="prevent_biyunyao" type="checkbox" value="true"/>口服避孕药</label>
                                                         <p>
-                                                        末次口服避孕药时间:<input class="form-control" type="number" name="prevent_biyunyao_time"/>
+                                                        末次口服避孕药时间:<input class="form-control" type="number" id="prevent_biyunyao_time" name="prevent_biyunyao_time"/>
                                                         <p>
                                                     <label><input name="prevent_mafulong" type="checkbox" value="true"/>去氧孕烯炔雌片（妈富隆）</label>
                                                     <label><input name="prevent_daying" type="checkbox" value="true"/>炔雌醇环丙孕酮片（达英-35）</label>
                                                     <label><input name="prevent_yousiming" type="checkbox" value="true"/>屈螺酮炔雌醇片（优思明）</label>
                                                     <label><input name="prevent_zuoque" type="checkbox" value="true"/>左炔诺孕酮复方左炔诺孕酮</label>
                                                     <label><input name="prevent_fufang" type="checkbox" value="true"/>复方左炔诺孕酮</label>
-                                                    <label><input name="prevent_qita" type="checkbox" value="true"/>其它</label>
+                                                    <label>其它说明:</label>
                                                             &nbsp
-                                                        其它说明:<input type="text" id="nameTxt15" value="无"/>
+                                                        <input type="text" id="prevent_qita" name="prevent_qita" value="无"/>
                                                     </p>
                                                     <p>
                                                         其它辅助检查：
@@ -1900,8 +1909,8 @@
                                                     <label><input name="accessory_jichutiwen" type="checkbox" value="true"/>基础体温测定</label>
                                                     <label><input name="accessory_jisushuiping" type="checkbox" value=falsetrue"/>激素水平测定</label>
                                                     <label><input name="accessory_guagong" type="checkbox" value="true"/>诊断性刮宫或宫腔镜下刮宫</label>
-                                                    <label><input name="accessory_qita" type="checkbox" value="true"/>其它</label>
-                                                        其它说明:<input type="text" id="nameTxt16" value="无"/>
+                                                    <label>其它说明:</label>
+                                                        <input type="text" id="accessory_qita" name="accessory_qita" value="无"/>
                                                     </p>
                                                         </div>
                                                     </div>
@@ -1958,8 +1967,8 @@
                                                     <label><input name="pishenyangxu" type="checkbox" value="true"/>脾肾阳虚症</label>
                                                     <label><input name="qixuekuixu" type="checkbox" value="true"/>气血亏虚症</label>
                                                     <label><input name="ganshenyinxu" type="checkbox" value="true"/>肝肾阴虚症</label>
-                                                    <label><input name="qita_asthenic" type="checkbox" value="true"/>其它</label>
-                                                    其它说明:<input type="text" id="nameTxt17" value="无"/>
+                                                    <label>其它说明:</label>
+                                                    <input type="text" id="qita_asthenic" name="qita_asthenic" value="无"/>
                                                 </p>
                                                 <p>
                                                     实证诊断：
@@ -1974,9 +1983,9 @@
                                                     <label><input name="xueyu" type="checkbox" value="true"/>血瘀症</label>
                                                     <label><input name="qizhixueyu" type="checkbox" value="true"/>气滞血瘀症</label>
                                                     <label><input name="hanningxueyu" type="checkbox" value="true"/>寒凝血淤症</label>
-                                                    <label><input name="qita_demonstration" type="checkbox" value="true"/>其它</label>
+                                                    <label>其它说明:</label>
                                                     <p>
-                                                    其它说明:<input type="text" id="nameTxt18" value="无"/>
+                                                    <input type="text" id="qita_demonstration" name="qita_demonstration" value="无"/>
                                                 </p>
 
                                                 <p>
@@ -1989,8 +1998,8 @@
                                                     <label><input name="yinxuxueyu" type="checkbox" value="true"/>阴虚血瘀症</label>
                                                     <label><input name="yinxuhuowang" type="checkbox" value="true"/>阴虚火旺症</label>
                                                     <label><input name="ganyupixu" type="checkbox" value="true"/>肝郁脾虚症</label>
-                                                    <label><input name="qita_def_ex" type="checkbox" value="true"/>其它</label>
-                                                    其它说明:<input type="text" id="nameTxt19" value="无"/>
+                                                    <label>其它说明:</label>
+                                                    <input type="text" id="qita_def_ex" name="qita_def_ex" value="无"/>
                                                 </p>
                                                 <p>
                                                     西医诊断：
@@ -1998,9 +2007,9 @@
                                                     <label><input name="duonangluanchao" type="checkbox" value="true"/>多囊卵巢综合症</label>
                                                     <label><input name="gaomirusu" type="checkbox" value="true"/>高泌乳素血症</label>
                                                     <label><input name="dicuxingxianjisu" type="checkbox" value="true"/>低促行线激素疾病</label>
-                                                    <label><input name="qita_west" type="checkbox" value="true"/>其它</label>
+                                                    <label>其它说明:</label>
                                                         <p>
-                                                        其它说明:<input type="text" id="nameTxt20" value="无"/>
+                                                        <input type="text" id="qita_west" name="qita_west" value="无"/>
                                                     </p>
                                                         </div>
                                                     </div>

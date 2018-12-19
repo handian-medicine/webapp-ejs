@@ -434,10 +434,8 @@ router.post('/symptom', function (req, res, next){
 });
 /* 前端请求保存 全身症状 修改 */
 router.put('/symptom_save', function (req, res, next){
-    console.log("type: ", typeof(req.body.symptom_url));
     if (req.body.symptom_url != undefined) {
         console.log("url不为空");
-        console.log(">>>prj001.js put method:", req.body.symptom_url);
         var symptom_url = req.body.symptom_url;
         var authstring = req.cookies.prj001token.access_token;
         var options = {
