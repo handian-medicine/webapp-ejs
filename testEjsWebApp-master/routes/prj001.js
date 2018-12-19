@@ -301,10 +301,17 @@ router.put('/geninfo_save', function (req, res, next){
             console.log(">>>prj001.js put method response.statusCode: ", response.statusCode);
             if (!error && response.statusCode == 200) {
                 var user_geninfo = JSON.parse(body);
-                res.json(user_geninfo);
+                res.json({user_geninfo: user_geninfo, status: 200});
             } else {
+                if (response.statusCode == 403) {
+                    var user_geninfo = JSON.parse(body);
+                    console.log(">>>prj001.js put方法-> body: ", body);
+                    res.json({user_geninfo:user_geninfo, status:403});
+                }
                 //console.log(">>>Getting archives met unknown error. " + error.error_description);
-                res.redirect("/prj001");
+                else {
+                    console.log(">>>其它错误码的body: ", body);
+                }
             }
         });
     //}

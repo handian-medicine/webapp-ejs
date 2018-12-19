@@ -41,22 +41,23 @@
                     form_geninfo: $('#form-geninfo').serialize(),
                 },
                 success:function (result) {
-                    console.log("result", result);
-                    alert("保存成功！")
+                    //403,用户除了自己,对于其它用户只有查看权限,不能修改
+                    if (result.status == 200 || result.status == 201) {
+                        alert("保存成功！")
+                        window.location.href = '/prj001';
+                    } else {
+                        if (result.status == 403)
+                        alert("无法修改")
+                    }
                 },
                 error: function (result) {
                     //403,用户除了自己,对于其它用户只有查看权限,不能修改
-                    if (result.status == 403) {
-                        alert("无法修改")
-                    } else {
                         alert("保存失败" + result.status)
-                    }
                 },
             })
         });
         $(".geninfo").click(function () {
             document.getElementById("form-geninfo").reset();
-            //alert($(this).attr("geninfo-url"));
             $.ajax({
                 url: "/prj001/geninfo",
                 type: "POST",
@@ -64,8 +65,7 @@
                 success: function(result){
                     if (result !== null) {
                         $('#geninfoBtn').attr("geninfoBtn-url", result["url"]);
-                        //alert("ajax success: ");
-                        $('#setid').val(result["id"])
+                        // $('#setid').val(result["id"])
                         $('#recdate').val(result["recdate"]);
                         $('#serial').val(result["serial"]);
                         $('#hospital').val(result["hospital"]);
@@ -120,8 +120,10 @@
             });
         });
         
+        // url为空， 请求修改数据
         $(".menstruationBtn").click(function () {
-            $('#person').val($(".geninfo").attr("geninfo-url"));
+            var temp_geninfourl = $('#person-menstruation').val();
+            $('#person-menstruation').val(temp_geninfourl);//如果url不为空，api服务器返回的数据有person字段
             $.ajax({
                 url: "/prj001/menstruation_save",
                 type: "PUT",
@@ -146,26 +148,21 @@
             })
 
         });
+        // url不为空，请求展示数据
         $(".menstruation").click(function () {
             document.getElementById("form-menstruation").reset();
-            // alert($(this).attr("menstruation-url"));
             var tempFlag = $(this).attr("menstruation-url");
+            var temp_geninfourl = $(this).attr("geninfo-url");
             if (tempFlag == "") {
                 alert("准备创建月经情况");
+                $('#person-menstruation').val(temp_geninfourl);//如果url不为空，api服务器返回的数据有person字段
             } else {
                 $.ajax({
                     url: "/prj001/menstruation",//路由，用来处理ajax请求的函数的所在地址
                     method: "POST",
                     data: {menstruation_url: $(this).attr("menstruation-url")},
                     success: function(result){
-                        // if (result.status == 0)
-                        // {
-                        //     alert("create new menstruation");
-                        // }
-                        console.log("this url:",result["url"]);
-                        // alert("person url:" + result["person"]);
-                        // $('#person').val($('#setid').val());
-                        $('#person').val(result["person"]);
+                        $('#person-menstruation').val(result["person"]);
                         if (result !== null) {
                             $('#menstruationBtn').attr("menstruationBtn-url", result["url"]);
                             $('#first_time').val(result["first_time"]);
@@ -196,7 +193,8 @@
         })
 
         $(".symptomBtn").click(function () {
-            $('#person').val($(".geninfo").attr("geninfo-url"));
+            var temp_geninfourl = $('#person-symptom').val();
+            $('#person-symptom').val(temp_geninfourl);//如果url不为空，api服务器返回的数据有person字段
             $.ajax({
                 url: "/prj001/symptom_save",
                 method: "PUT",
@@ -224,15 +222,17 @@
         $(".symptom").click(function () {
             //alert($(this).attr("symptom-url"))
             var tempFlag = $(this).attr("symptom-url");
+            var temp_geninfourl = $(this).attr("geninfo-url");
             if (tempFlag  == "") {
                 alert("准备创建全身症状");
+                $('#person-symptom').val(temp_geninfourl);//如果url不为空，api服务器返回的数据有person字段
             } else {
             $.ajax({
                 url: "/prj001/symptom",//路由，用来处理ajax请求的函数的所在地址
                 type: "POST",
                 data: {symptom_url: $(this).attr("symptom-url")},
                 success: function(result){
-                    $('#person').val(result["person"]);
+                    $('#person-symptom').val(result["person"]);
                     if (result !== null) {
                         $('#symptomBtn').attr("symptomBtn-url", result["url"]);
                         $("input:checkbox[name='spirit_jinglichongpei']").attr('checked',result["spirit_jinglichongpei"]);	
@@ -437,7 +437,8 @@
     })
 
         $(".otherBtn").click(function () {
-            $('#person').val($(".geninfo").attr("geninfo-url"));
+            var temp_geninfourl = $('#person-other').val();
+            $('#person-other').val(temp_geninfourl);//如果url不为空，api服务器返回的数据有person字段
             $.ajax({
                 url: "/prj001/other_save",
                 method: "PUT",
@@ -465,15 +466,17 @@
         $(".other").click(function () {
             //alert($(this).attr("other-url"))
             var tempFlag = $(this).attr("other-url");
+            var temp_geninfourl = $(this).attr("geninfo-url");
             if ($(this).attr("other-url") == "") {
                 alert("准备创建其它情况");
+                $('#person-other').val(temp_geninfourl);//如果url不为空，api服务器返回的数据有person字段
             } else {
             $.ajax({
                 url: "/prj001/other",//路由，用来处理ajax请求的函数的所在地址
                 type: "POST",
                 data: {other_url: $(this).attr("other-url")},
                 success: function(result){
-                    $('#person').val(result["person"]);
+                    $('#person-other').val(result["person"]);
                     if (result !== null) {
                         $('#otherBtn').attr("otherBtn-url", result["url"]);
                         $("input:checkbox[name='born_zaochan']").attr('checked',result["born_zaochan"]);
@@ -594,7 +597,8 @@
     })
         
         $(".ccBtn").click(function () {
-            $('#person').val($(".geninfo").attr("geninfo-url"));
+            var temp_geninfourl = $('#person-cc').val();
+            $('#person-cc').val(temp_geninfourl);//如果url不为空，api服务器返回的数据有person字段
             $.ajax({
                 url: "/prj001/cc_save",
                 method: "PUT",
@@ -622,15 +626,17 @@
         $(".cc").click(function () {
             //alert($(this).attr("cc-url"))
             var tempFlag = $(this).attr("other-url");
+            var temp_geninfourl = $(this).attr("geninfo-url");
             if (tempFlag == "") {
                 alert("准备创建临床诊断");
+                $('#person-cc').val(temp_geninfourl);//如果url不为空，api服务器返回的数据有person字段
             } else {
             $.ajax({
                 url: "/prj001/cc",//路由，用来处理ajax请求的函数的所在地址
                 type: "POST",
                 data: {cc_url: $(this).attr("cc-url")},
                 success: function(result) {
-                    $('#person').val(result["person"]);
+                    $('#person-cc').val(result["person"]);
                     if (result !== null) {
                         $('#ccBtn').attr("ccBtn-url", result["url"]);
                         $("input:checkbox[name='benglou']").attr('checked',result["benglou"]);
@@ -682,26 +688,26 @@
             });
         };
     })
-    
+
 // 检索功能
-        $(".searchBtn").click(function () {
-            $.ajax({
-                url:"/prj001/search",
-                type:"GET",
-                data: {
-                    search: $('#searchContent').val(),
-                },
-                success:function (result) {
-                    alert("success")
-                    alert("archivelist" + result)
-                    // $("#archivelist").html("");
-                    $("#archivelist").html(result);
-                },
-                error:function () {
-                    alert("fail")
-                },
-            });
-        })
+        // $(".searchBtn").click(function () {
+        //     $.ajax({
+        //         url:"/prj001/search",
+        //         type:"GET",
+        //         data: {
+        //             search: $('#searchContent').val(),
+        //         },
+        //         success:function (result) {
+        //             alert("success")
+        //             alert("archivelist" + result)
+        //             // $("#archivelist").html("");
+        //             $("#archivelist").html(result);
+        //         },
+        //         error:function () {
+        //             alert("fail")
+        //         },
+        //     });
+        // })
 
 })
 </script>
@@ -860,8 +866,10 @@
                                             <tbody id="archivelist">
                                                 <% archives.forEach(function(archive){ %>
                                                 <tr>
-                                                    <td><a href="../public/bingo.html">
-                                                        <%= archive.name %></a></td>
+                                                    <!-- <td><a href="../public/bingo.html"> -->
+                                                    <td>
+                                                        <%= archive.name %>
+                                                    </td>
                                                     <td>
                                                         <%= archive.nation %>
                                                     </td>
@@ -892,17 +900,17 @@
                                                             <button id="geninfo" class="btn btn-xs btn-info geninfo" geninfo-url=<%= archive.url %>>
                                                                     <a href="#modal-table" class="color" role="button" data-toggle="modal">一般情况</a>
                                                             </button>
-                                                            <button id="menstruation" class="btn btn-xs btn-success menstruation" menstruation-url="<%= archive.menstruation %>">
+                                                            <button id="menstruation"  class="btn btn-xs btn-success menstruation" geninfo-url=<%= archive.url %> menstruation-url=<%= archive.menstruation %>>
                                                                     <a href="#modal-table1" class="color" role="button" data-toggle="modal">月经情况</a>
                                                             </button>
-                                                            <button id="symptom" class="btn btn-xs btn-danger symptom" symptom-url=<%= archive.symptom %>>
+                                                            <button id="symptom" class="btn btn-xs btn-danger symptom" geninfo-url=<%= archive.url %> symptom-url=<%= archive.symptom %>>
                                                                     <a href="#modal-table2" class="color" role="button" data-toggle="modal">全身症状</a>
                                                                 </button>
         
-                                                                <button id="other" class="btn btn-xs btn-warning other" other-url=<%= archive.other %>>
+                                                                <button id="other" class="btn btn-xs btn-warning other" geninfo-url=<%= archive.url %> other-url=<%= archive.other %>>
                                                                     <a href="#modal-table3" class="color" role="button" data-toggle="modal">其它情况</a>
                                                                 </button>
-                                                                <button id="cc" class="btn btn-xs btn-info cc" cc-url=<%= archive.clinicalconclusion %>>
+                                                                <button id="cc" class="btn btn-xs btn-info cc" geninfo-url=<%= archive.url %> cc-url=<%= archive.clinicalconclusion %>>
                                                                     <a href="#modal-table4" class="color" role="button" data-toggle="modal">临床诊断</a>
                                                                 </button>
                                                         </div>
@@ -1018,7 +1026,7 @@
                                                 <div class="modal-body">
                                                     <div class="row">
                                                         <div class="col-xs-12 col-sm-12">
-                                                                <input type="hidden" name="setid" id="setid" value=""/>
+                                                                <!-- <input type="hidden" class="person" name="person" id="person-geninfo" value=""/> -->
                                                             <p>
                                                                 日期：<input class="form-control" id="recdate" name="recdate"  type="text"/>
                                                             </p>
@@ -1177,28 +1185,28 @@
                                                             <p>
                                                                 特殊工种环境：
                                                             <p>
-                                                            <label><input name="gaokong" type="checkbox" value="false"/>高空</label>
-                                                            <label><input name="diwen" type="checkbox" value="false"/>低温</label>
-                                                            <label><input name="zaosheng" type="checkbox" value="false"/>噪声</label>
-                                                            <label><input name="fushe" type="checkbox" value="false"/>辐射</label>
-                                                            <label><input name="huagongyinran" type="checkbox" value="false"/>化工污染</label>
-                                                            <label><input name="julieyundong" type="checkbox" value="false"/>剧烈运动</label>
-                                                            <label><input name="qiyou" type="checkbox" value="false"/>汽油</label>
-                                                            <label><input name="wu" type="checkbox" value="false"/>无</label>
+                                                            <label><input name="gaokong" type="checkbox" value="true"/>高空</label>
+                                                            <label><input name="diwen" type="checkbox" value="true"/>低温</label>
+                                                            <label><input name="zaosheng" type="checkbox" value="true"/>噪声</label>
+                                                            <label><input name="fushe" type="checkbox" value="true"/>辐射</label>
+                                                            <label><input name="huagongyinran" type="checkbox" value="true"/>化工污染</label>
+                                                            <label><input name="julieyundong" type="checkbox" value="true"/>剧烈运动</label>
+                                                            <label><input name="qiyou" type="checkbox" value="true"/>汽油</label>
+                                                            <label><input name="wu" type="checkbox" value="true"/>无</label>
                                                             </p>
                                                             <p>
                                                                 饮食偏好：
                                                             <p>
-                                                            <label><input name="wuteshu" type="checkbox" value="false"/>无特殊</label>
-                                                            <label><input name="sushi" type="checkbox" value="false"/>素食</label>
-                                                            <label><input name="suan" type="checkbox" value="false"/>酸</label>
-                                                            <label><input name="tian" type="checkbox" value="false"/>甜</label>
-                                                            <label><input name="xian" type="checkbox" value="false"/>咸</label>
-                                                            <label><input name="xinla" type="checkbox" value="false"/>辛辣</label>
-                                                            <label><input name="you" type="checkbox" value="false"/>油</label>
-                                                            <label><input name="shengleng" type="checkbox" value="false"/>生冷</label>
-                                                            <label><input name="kafei" type="checkbox" value="false"/>含咖啡因食物或饮品</label>
-                                                            <label><input name="qita" type="checkbox" value="false"/>其它</label>
+                                                            <label><input name="wuteshu" type="checkbox" value="true"/>无特殊</label>
+                                                            <label><input name="sushi" type="checkbox" value="true"/>素食</label>
+                                                            <label><input name="suan" type="checkbox" value="true"/>酸</label>
+                                                            <label><input name="tian" type="checkbox" value="true"/>甜</label>
+                                                            <label><input name="xian" type="checkbox" value="true"/>咸</label>
+                                                            <label><input name="xinla" type="checkbox" value="true"/>辛辣</label>
+                                                            <label><input name="you" type="checkbox" value="true"/>油</label>
+                                                            <label><input name="shengleng" type="checkbox" value="true"/>生冷</label>
+                                                            <label><input name="kafei" type="checkbox" value="true"/>含咖啡因食物或饮品</label>
+                                                            <label><input name="qita" type="checkbox" value="true"/>其它</label>
                                                             </p>
     
                                                             <p>
@@ -1238,7 +1246,7 @@
                                                 <div class="modal-body">
                                                     <div class="row">
                                                         <div class="col-xs-12 col-sm-12">
-                                                    <input type="hidden" class="person" name="person" id="person" value=""/>
+                                                    <!-- <input type="text" class="person" name="person" id="person-menstruation"/> -->
                                                     <p>
                                                         初潮年龄:
                                                         <input class="form-control" type="number" name="first_time" id="first_time"/>
@@ -1339,300 +1347,300 @@
                                                 <div class="modal-body">
                                                     <div class="row">
                                                         <div class="col-xs-12 col-sm-12">
-                                                    <input type="hidden" class="person" name="person" id="person" value=""/>        
+                                                    <!-- <input type="text" class="person" name="person" id="person-symptom"/> -->
                                                     <p>
                                                         精神：
                                                     <p>
-                                                    <label><input name="spirit_jinglichongpei" type="checkbox" value="false"/>精力充沛</label>
-                                                    <label><input name="spirit_jianwang" type="checkbox" value="false"/>健忘</label>
-                                                    <label><input name="spirit_jingshenbujizhong" type="checkbox" value="false"/>精神不集中</label>
-                                                    <label><input name="spirit_shenpifali" type="checkbox" value="false"/>神疲乏力</label>
-                                                    <label><input name="spirit_yalida" type="checkbox" value="false"/>学习、工作压力大</label>
-                                                    <label><input name="spirit_jiaodabiangu" type="checkbox" value="false"/>个人/家庭遭遇较大变故</label>
-                                                    <label><input name="spirit_beishangyuku" type="checkbox" value="false"/>悲伤欲哭</label>
+                                                    <label><input name="spirit_jinglichongpei" type="checkbox" value="true"/>精力充沛</label>
+                                                    <label><input name="spirit_jianwang" type="checkbox" value="true"/>健忘</label>
+                                                    <label><input name="spirit_jingshenbujizhong" type="checkbox" value="true"/>精神不集中</label>
+                                                    <label><input name="spirit_shenpifali" type="checkbox" value="true"/>神疲乏力</label>
+                                                    <label><input name="spirit_yalida" type="checkbox" value="true"/>学习、工作压力大</label>
+                                                    <label><input name="spirit_jiaodabiangu" type="checkbox" value="true"/>个人/家庭遭遇较大变故</label>
+                                                    <label><input name="spirit_beishangyuku" type="checkbox" value="true"/>悲伤欲哭</label>
                                                     </p>
                                                     <p>
                                                         情绪：
                                                     <p>
-                                                    <label><input name="mood_zhengchang" type="checkbox" value="false"/>正常</label>
-                                                    <label><input name="mood_leguankailang" type="checkbox" value="false"/>乐观开朗</label>
-                                                    <label><input name="mood_silvguodu" type="checkbox" value="false"/>思虑过度</label>
-                                                    <label><input name="mood_xinuwuchang" type="checkbox" value="false"/>喜怒无常</label>
-                                                    <label><input name="mood_fanzaoyinu" type="checkbox" value="false"/>烦躁易怒</label>
-                                                    <label><input name="mood_jiaolv" type="checkbox" value="false"/>焦虑</label>
-                                                    <label><input name="mood_beishangyuku" type="checkbox" value="false"/>悲伤欲哭</label>
-                                                    <label><input name="mood_yiyu" type="checkbox" value="false"/>抑郁</label>
-                                                    <label><input name="mood_duosiduolv" type="checkbox" value="false"/>多思多虑</label>
+                                                    <label><input name="mood_zhengchang" type="checkbox" value="true"/>正常</label>
+                                                    <label><input name="mood_leguankailang" type="checkbox" value="true"/>乐观开朗</label>
+                                                    <label><input name="mood_silvguodu" type="checkbox" value="true"/>思虑过度</label>
+                                                    <label><input name="mood_xinuwuchang" type="checkbox" value="true"/>喜怒无常</label>
+                                                    <label><input name="mood_fanzaoyinu" type="checkbox" value="true"/>烦躁易怒</label>
+                                                    <label><input name="mood_jiaolv" type="checkbox" value="true"/>焦虑</label>
+                                                    <label><input name="mood_beishangyuku" type="checkbox" value="true"/>悲伤欲哭</label>
+                                                    <label><input name="mood_yiyu" type="checkbox" value="true"/>抑郁</label>
+                                                    <label><input name="mood_duosiduolv" type="checkbox" value="true"/>多思多虑</label>
                                                         <label><input name="mood_qita" type="checkbox" value="true"/>其它</label>
                                                         其它说明:<input type="text" id="nameTxt10" value="无"/>
                                                     </p>
                                                     <p>
                                                         寒热：
                                                     <p>
-                                                    <label><input name="chillfever_zhengchang" type="checkbox" value="false"/>正常</label>
-                                                    <label><input name="chillfever_weihan" type="checkbox" value="false"/>畏寒</label>
-                                                    <label><input name="chillfever_wuxinfanre" type="checkbox" value="false"/>五心烦躁</label>
-                                                    <label><input name="chillfever_wuhouchaore" type="checkbox" value="false"/>午后潮热</label>
-                                                    <label><input name="chillfever_direbutui" type="checkbox" value="false"/>低热不退</label>
+                                                    <label><input name="chillfever_zhengchang" type="checkbox" value="true"/>正常</label>
+                                                    <label><input name="chillfever_weihan" type="checkbox" value="true"/>畏寒</label>
+                                                    <label><input name="chillfever_wuxinfanre" type="checkbox" value="true"/>五心烦躁</label>
+                                                    <label><input name="chillfever_wuhouchaore" type="checkbox" value="true"/>午后潮热</label>
+                                                    <label><input name="chillfever_direbutui" type="checkbox" value="true"/>低热不退</label>
                                                     </p>
                                                 <p>
                                                      出汗：
                                                 <p>
-                                                            <label><input name="sweat_zhengchang" type="checkbox" value="false"/>正常</label>
-                                                            <label><input name="sweat_duohan" type="checkbox" value="false"/>多汗</label>
-                                                            <label><input name="sweat_mingxian" type="checkbox" value="false"/>稍微活动则汗明显</label>
-                                                            <label><input name="sweat_zihan" type="checkbox" value="false"/>自汗</label>
-                                                            <label><input name="sweat_daohan" type="checkbox" value="false"/>盗汗</label>
-                                                            <label><input name="sweat_hongre" type="checkbox" value="false"/>烘热汗出</label>
-                                                            <label><input name="sweat_chaore" type="checkbox" value="false"/>潮热汗出</label>
+                                                            <label><input name="sweat_zhengchang" type="checkbox" value="true"/>正常</label>
+                                                            <label><input name="sweat_duohan" type="checkbox" value="true"/>多汗</label>
+                                                            <label><input name="sweat_mingxian" type="checkbox" value="true"/>稍微活动则汗明显</label>
+                                                            <label><input name="sweat_zihan" type="checkbox" value="true"/>自汗</label>
+                                                            <label><input name="sweat_daohan" type="checkbox" value="true"/>盗汗</label>
+                                                            <label><input name="sweat_hongre" type="checkbox" value="true"/>烘热汗出</label>
+                                                            <label><input name="sweat_chaore" type="checkbox" value="true"/>潮热汗出</label>
                                                 </p>
                                                         <p>
                                                             语音：
                                                         <p>
-                                                            <label><input name="sound_zhengchang" type="checkbox" value="false"/>正常</label>
-                                                            <label><input name="sound_qiduan" type="checkbox" value="false"/>气短</label>
-                                                            <label><input name="sound_xitanxi" type="checkbox" value="false"/>喜叹息</label>
-                                                            <label><input name="sound_shaoqilanyan" type="checkbox" value="false"/>少气懒言</label>
+                                                            <label><input name="sound_zhengchang" type="checkbox" value="true"/>正常</label>
+                                                            <label><input name="sound_qiduan" type="checkbox" value="true"/>气短</label>
+                                                            <label><input name="sound_xitanxi" type="checkbox" value="true"/>喜叹息</label>
+                                                            <label><input name="sound_shaoqilanyan" type="checkbox" value="true"/>少气懒言</label>
                                                         </p>
                                                         <p>
                                                             面色：
                                                         <p>
-                                                            <label><input name="face_zhengchang" type="checkbox" value="false"/>正常</label>
-                                                            <label><input name="face_danbaiwuhua" type="checkbox" value="false"/>淡白无华</label>
-                                                            <label><input name="face_cangbai" type="checkbox" value="false"/>苍白</label>
-                                                            <label><input name="face_qingbai" type="checkbox" value="false"/>青白</label>
-                                                            <label><input name="face_weihuang" type="checkbox" value="false"/>萎黄</label>
-                                                            <label><input name="face_huangzhong" type="checkbox" value="false"/>黄肿</label>
-                                                            <label><input name="face_chaohong" type="checkbox" value="false"/>潮红</label>
-                                                            <label><input name="face_huian" type="checkbox" value="false"/>晦黯</label>
-                                                            <label><input name="face_baierfuzhong" type="checkbox" value="false"/>白而浮肿</label>
-                                                            <label><input name="face_baierandan" type="checkbox" value="false"/>白而暗淡</label>
-                                                            <label><input name="face_mianmulihei" type="checkbox" value="false"/>面目黧黑</label>
-                                                            <label><input name="face_shaohua" type="checkbox" value="false"/>少华</label>
-                                                            <label><input name="face_wuhua" type="checkbox" value="false"/>无华</label>
+                                                            <label><input name="face_zhengchang" type="checkbox" value="true"/>正常</label>
+                                                            <label><input name="face_danbaiwuhua" type="checkbox" value="true"/>淡白无华</label>
+                                                            <label><input name="face_cangbai" type="checkbox" value="true"/>苍白</label>
+                                                            <label><input name="face_qingbai" type="checkbox" value="true"/>青白</label>
+                                                            <label><input name="face_weihuang" type="checkbox" value="true"/>萎黄</label>
+                                                            <label><input name="face_huangzhong" type="checkbox" value="true"/>黄肿</label>
+                                                            <label><input name="face_chaohong" type="checkbox" value="true"/>潮红</label>
+                                                            <label><input name="face_huian" type="checkbox" value="true"/>晦黯</label>
+                                                            <label><input name="face_baierfuzhong" type="checkbox" value="true"/>白而浮肿</label>
+                                                            <label><input name="face_baierandan" type="checkbox" value="true"/>白而暗淡</label>
+                                                            <label><input name="face_mianmulihei" type="checkbox" value="true"/>面目黧黑</label>
+                                                            <label><input name="face_shaohua" type="checkbox" value="true"/>少华</label>
+                                                            <label><input name="face_wuhua" type="checkbox" value="true"/>无华</label>
                                                         </p>
                                                         <p>
                                                             心：
                                                         <p>
-                                                            <label><input name="heart_zhengcheng" type="checkbox" value="false"/>正常</label>
-                                                            <label><input name="heart_xinfan" type="checkbox" value="false"/>心烦</label>
-                                                            <label><input name="heart_xinji" type="checkbox" value="false"/>心悸</label>
+                                                            <label><input name="heart_zhengcheng" type="checkbox" value="true"/>正常</label>
+                                                            <label><input name="heart_xinfan" type="checkbox" value="true"/>心烦</label>
+                                                            <label><input name="heart_xinji" type="checkbox" value="true"/>心悸</label>
                                                         </p>
                                                         <p>
                                                             乳房：
                                                         <p>
-                                                            <label><input name="breast_zhengchang" type="checkbox" value="false"/>正常</label>
-                                                            <label><input name="breast_biezhang" type="checkbox" value="false"/>憋涨</label>
-                                                            <label><input name="breast_citong" type="checkbox" value="false"/>刺痛</label>
-                                                            <label><input name="breast_zhangtong" type="checkbox" value="false"/>胀痛</label>
-                                                            <label><input name="breast_chutong" type="checkbox" value="false"/>触痛</label>
+                                                            <label><input name="breast_zhengchang" type="checkbox" value="true"/>正常</label>
+                                                            <label><input name="breast_biezhang" type="checkbox" value="true"/>憋涨</label>
+                                                            <label><input name="breast_citong" type="checkbox" value="true"/>刺痛</label>
+                                                            <label><input name="breast_zhangtong" type="checkbox" value="true"/>胀痛</label>
+                                                            <label><input name="breast_chutong" type="checkbox" value="true"/>触痛</label>
                                                         </p>
                                                         <p>
                                                             胸胁：
                                                         <p>
-                                                            <label><input name="chest_zhengchang" type="checkbox" value="false"/>正常</label>
-                                                            <label><input name="chest_zhangmen" type="checkbox" value="false"/>胀闷</label>
-                                                            <label><input name="chest_yintong" type="checkbox" value="false"/>隐痛</label>
-                                                            <label><input name="chest_citong" type="checkbox" value="false"/>刺痛</label>
+                                                            <label><input name="chest_zhengchang" type="checkbox" value="true"/>正常</label>
+                                                            <label><input name="chest_zhangmen" type="checkbox" value="true"/>胀闷</label>
+                                                            <label><input name="chest_yintong" type="checkbox" value="true"/>隐痛</label>
+                                                            <label><input name="chest_citong" type="checkbox" value="true"/>刺痛</label>
                                                         </p>
                                                         <p>
                                                             腰膝：
                                                         <p>
-                                                            <label><input name="waist_zhengchang" type="checkbox" value="false"/>正常</label>
-                                                            <label><input name="waist_suantong" type="checkbox" value="false"/>酸痛</label>
-                                                            <label><input name="waist_suanruan" type="checkbox" value="false"/>酸软</label>
-                                                            <label><input name="waist_suanleng" type="checkbox" value="false"/>酸冷</label>
-                                                            <label><input name="waist_lengtong" type="checkbox" value="false"/>冷痛</label>
-                                                            <label><input name="waist_yaotongrushe" type="checkbox" value="false"/>腰痛如折</label>
+                                                            <label><input name="waist_zhengchang" type="checkbox" value="true"/>正常</label>
+                                                            <label><input name="waist_suantong" type="checkbox" value="true"/>酸痛</label>
+                                                            <label><input name="waist_suanruan" type="checkbox" value="true"/>酸软</label>
+                                                            <label><input name="waist_suanleng" type="checkbox" value="true"/>酸冷</label>
+                                                            <label><input name="waist_lengtong" type="checkbox" value="true"/>冷痛</label>
+                                                            <label><input name="waist_yaotongrushe" type="checkbox" value="true"/>腰痛如折</label>
                                                         </p>
                                                         <p>
                                                             腹部：
                                                         <p>
-                                                            <label><input name="stomach_zhengchang" type="checkbox" value="false"/>正常</label>
-                                                            <label><input name="stomach_zhangtongjuan" type="checkbox" value="false"/>胀痛拒</label>
-                                                            <label><input name="stomach_xiaofuzhuizhang" type="checkbox" value="false"/>小腹坠胀</label>
-                                                            <label><input name="stomach_xiaofubiezhang" type="checkbox" value="false"/>小腹憋胀</label>
-                                                            <label><input name="stomach_xiaofulengtong" type="checkbox" value="false"/>小腹冷痛</label>
-                                                            <label><input name="stomach_xiaofuzhuotong" type="checkbox" value="false"/>小腹灼痛</label>
-                                                            <label><input name="stomach_yintongxian" type="checkbox" value="false"/>隐痛喜按</label>
-                                                            <label><input name="stomach_dewentongjian" type="checkbox" value="false"/>冷痛,得温痛减</label>
-                                                            <label><input name="stomach_tongruzhenci" type="checkbox" value="false"/>小腹结块,痛</label>
-                                                            <label><input name="stomach_kongzhui" type="checkbox" value="false"/>有空坠感</label>
+                                                            <label><input name="stomach_zhengchang" type="checkbox" value="true"/>正常</label>
+                                                            <label><input name="stomach_zhangtongjuan" type="checkbox" value="true"/>胀痛拒</label>
+                                                            <label><input name="stomach_xiaofuzhuizhang" type="checkbox" value="true"/>小腹坠胀</label>
+                                                            <label><input name="stomach_xiaofubiezhang" type="checkbox" value="true"/>小腹憋胀</label>
+                                                            <label><input name="stomach_xiaofulengtong" type="checkbox" value="true"/>小腹冷痛</label>
+                                                            <label><input name="stomach_xiaofuzhuotong" type="checkbox" value="true"/>小腹灼痛</label>
+                                                            <label><input name="stomach_yintongxian" type="checkbox" value="true"/>隐痛喜按</label>
+                                                            <label><input name="stomach_dewentongjian" type="checkbox" value="true"/>冷痛,得温痛减</label>
+                                                            <label><input name="stomach_tongruzhenci" type="checkbox" value="true"/>小腹结块,痛</label>
+                                                            <label><input name="stomach_kongzhui" type="checkbox" value="true"/>有空坠感</label>
                                                         </p>
                                                         <p>
                                                             头：
                                                         <p>
-                                                            <label><input name="head_zhengchang" type="checkbox" value="false"/>正常</label>
-                                                            <label><input name="head_touyun" type="checkbox" value="false"/>头晕</label>
-                                                            <label><input name="head_toutong" type="checkbox" value="false"/>头痛</label>
-                                                            <label><input name="head_touchenzhong" type="checkbox" value="false"/>头沉重</label>
+                                                            <label><input name="head_zhengchang" type="checkbox" value="true"/>正常</label>
+                                                            <label><input name="head_touyun" type="checkbox" value="true"/>头晕</label>
+                                                            <label><input name="head_toutong" type="checkbox" value="true"/>头痛</label>
+                                                            <label><input name="head_touchenzhong" type="checkbox" value="true"/>头沉重</label>
                                                         </p>
                                                         <p>
                                                             目：
                                                         <p>
-                                                            <label><input name="eyes_zhengchang" type="checkbox" value="false"/>正常</label>
-                                                            <label><input name="eyes_muxuan" type="checkbox" value="false"/>目眩</label>
-                                                            <label><input name="eyes_muse" type="checkbox" value="false"/>目涩</label>
-                                                            <label><input name="eyes_yanhua" type="checkbox" value="false"/>眼花</label>
-                                                            <label><input name="eyes_mutong" type="checkbox" value="false"/>目痛</label>
-                                                            <label><input name="eyes_muyang" type="checkbox" value="false"/>目痒</label>
-                                                            <label><input name="eyes_chenqifz" type="checkbox" value="false"/>晨起眼脸浮肿</label>
+                                                            <label><input name="eyes_zhengchang" type="checkbox" value="true"/>正常</label>
+                                                            <label><input name="eyes_muxuan" type="checkbox" value="true"/>目眩</label>
+                                                            <label><input name="eyes_muse" type="checkbox" value="true"/>目涩</label>
+                                                            <label><input name="eyes_yanhua" type="checkbox" value="true"/>眼花</label>
+                                                            <label><input name="eyes_mutong" type="checkbox" value="true"/>目痛</label>
+                                                            <label><input name="eyes_muyang" type="checkbox" value="true"/>目痒</label>
+                                                            <label><input name="eyes_chenqifz" type="checkbox" value="true"/>晨起眼脸浮肿</label>
                                                         </p>
                                                         <p>
                                                             耳：
                                                         <p>
-                                                            <label><input name="ear_erming" type="checkbox" value="false"/>耳鸣</label>
-                                                            <label><input name="ear_erlong" type="checkbox" value="false"/>耳聋</label>
-                                                            <label><input name="ear_tinglibq" type="checkbox" value="false"/>听力不清,</label>
+                                                            <label><input name="ear_erming" type="checkbox" value="true"/>耳鸣</label>
+                                                            <label><input name="ear_erlong" type="checkbox" value="true"/>耳聋</label>
+                                                            <label><input name="ear_tinglibq" type="checkbox" value="true"/>听力不清,</label>
                                                         </p>
                                                         <p>
                                                             咽喉：
                                                         <p>
-                                                            <label><input name="throat_zhengchang" type="checkbox" value="false"/>正常</label>
-                                                            <label><input name="throat_yangan" type="checkbox" value="false"/>咽干</label>
-                                                            <label><input name="throat_yantong" type="checkbox" value="false"/>咽痛</label>
-                                                            <label><input name="throat_yanyang" type="checkbox" value="false"/>烟痒</label>
-                                                            <label><input name="throat_yiwugan" type="checkbox" value="false"/>异物感</label>
+                                                            <label><input name="throat_zhengchang" type="checkbox" value="true"/>正常</label>
+                                                            <label><input name="throat_yangan" type="checkbox" value="true"/>咽干</label>
+                                                            <label><input name="throat_yantong" type="checkbox" value="true"/>咽痛</label>
+                                                            <label><input name="throat_yanyang" type="checkbox" value="true"/>烟痒</label>
+                                                            <label><input name="throat_yiwugan" type="checkbox" value="true"/>异物感</label>
                                                         </p>
                                                         <p>
                                                             口味：
                                                         <p>
-                                                            <label><input name="breath_wuyiwei" type="checkbox" value="false"/>口中无异味</label>
-                                                            <label><input name="breath_kouku" type="checkbox" value="false"/>口苦</label>
-                                                            <label><input name="breath_kougan" type="checkbox" value="false"/>口干</label>
-                                                            <label><input name="breath_koudan" type="checkbox" value="false"/>口淡</label>
-                                                            <label><input name="breath_kouxian" type="checkbox" value="false"/>口咸</label>
-                                                            <label><input name="breath_koutian" type="checkbox" value="false"/>口甜</label>
-                                                            <label><input name="breath_kounian" type="checkbox" value="false"/>口粘</label>
-                                                            <label><input name="breath_danyuss" type="checkbox" value="false"/>但欲漱水不</label>
+                                                            <label><input name="breath_wuyiwei" type="checkbox" value="true"/>口中无异味</label>
+                                                            <label><input name="breath_kouku" type="checkbox" value="true"/>口苦</label>
+                                                            <label><input name="breath_kougan" type="checkbox" value="true"/>口干</label>
+                                                            <label><input name="breath_koudan" type="checkbox" value="true"/>口淡</label>
+                                                            <label><input name="breath_kouxian" type="checkbox" value="true"/>口咸</label>
+                                                            <label><input name="breath_koutian" type="checkbox" value="true"/>口甜</label>
+                                                            <label><input name="breath_kounian" type="checkbox" value="true"/>口粘</label>
+                                                            <label><input name="breath_danyuss" type="checkbox" value="true"/>但欲漱水不</label>
                                                         </p>
                                                         <p>
                                                             饮食：
                                                         <p>
-                                                            <label><input name="diet_nadaishishao" type="checkbox" value="false"/>纳呆食少</label>
-                                                            <label><input name="diet_shiyuws" type="checkbox" value="false"/>食欲旺盛,多食</label>
-                                                            <label><input name="diet_yanshi" type="checkbox" value="false"/>厌食</label>
-                                                            <label><input name="diet_xireyin" type="checkbox" value="false"/>喜热饮</label>
-                                                            <label><input name="diet_xilengyin" type="checkbox" value="false"/>喜冷饮</label>
-                                                            <label><input name="diet_shiyujiantui" type="checkbox" value="false"/>食欲减退、食</label>
-                                                            <label><input name="diet_shihoufuzhang" type="checkbox" value="false"/>食后腹胀</label>
-                                                            <label><input name="diet_shixinla" type="checkbox" value="false"/>喜辛辣</label>
-                                                            <label><input name="diet_shishengleng" type="checkbox" value="false"/>喜生冷</label>
-                                                            <label><input name="diet_kebuduoyin" type="checkbox" value="false"/>渴不多饮</label>
+                                                            <label><input name="diet_nadaishishao" type="checkbox" value="true"/>纳呆食少</label>
+                                                            <label><input name="diet_shiyuws" type="checkbox" value="true"/>食欲旺盛,多食</label>
+                                                            <label><input name="diet_yanshi" type="checkbox" value="true"/>厌食</label>
+                                                            <label><input name="diet_xireyin" type="checkbox" value="true"/>喜热饮</label>
+                                                            <label><input name="diet_xilengyin" type="checkbox" value="true"/>喜冷饮</label>
+                                                            <label><input name="diet_shiyujiantui" type="checkbox" value="true"/>食欲减退、食</label>
+                                                            <label><input name="diet_shihoufuzhang" type="checkbox" value="true"/>食后腹胀</label>
+                                                            <label><input name="diet_shixinla" type="checkbox" value="true"/>喜辛辣</label>
+                                                            <label><input name="diet_shishengleng" type="checkbox" value="true"/>喜生冷</label>
+                                                            <label><input name="diet_kebuduoyin" type="checkbox" value="true"/>渴不多饮</label>
                                                         </p>
                                                         <p>
                                                             睡眠：
                                                         <p>
-                                                            <label><input name="sleep_zhengchang" type="checkbox" value="false"/>正常</label>
-                                                            <label><input name="sleep_yiban" type="checkbox" value="false"/>一般</label>
-                                                            <label><input name="sleep_duomengyixing" type="checkbox" value="false"/>多梦易醒</label>
-                                                            <label><input name="sleep_nanyirumian" type="checkbox" value="false"/>难以入眠</label>
-                                                            <label><input name="sleep_cheyebumian" type="checkbox" value="false"/>彻夜不眠</label>
-                                                            <label><input name="sleep_duomeng" type="checkbox" value="false"/>多梦</label>
-                                                            <label><input name="sleep_shishui" type="checkbox" value="false"/>嗜睡</label>
+                                                            <label><input name="sleep_zhengchang" type="checkbox" value="true"/>正常</label>
+                                                            <label><input name="sleep_yiban" type="checkbox" value="true"/>一般</label>
+                                                            <label><input name="sleep_duomengyixing" type="checkbox" value="true"/>多梦易醒</label>
+                                                            <label><input name="sleep_nanyirumian" type="checkbox" value="true"/>难以入眠</label>
+                                                            <label><input name="sleep_cheyebumian" type="checkbox" value="true"/>彻夜不眠</label>
+                                                            <label><input name="sleep_duomeng" type="checkbox" value="true"/>多梦</label>
+                                                            <label><input name="sleep_shishui" type="checkbox" value="true"/>嗜睡</label>
                                                         </p>
                                                         <p>
                                                             大便：
                                                         <p>
-                                                            <label><input name="stool_sehuang" type="checkbox" value="false"/>色黄,通畅,</label>
-                                                            <label><input name="stool_bianmi" type="checkbox" value="false"/>便秘</label>
-                                                            <label><input name="stool_zhixi" type="checkbox" value="false"/>质稀</label>
-                                                            <label><input name="stool_sgsx" type="checkbox" value="false"/>时干</label>
-                                                            <label><input name="stool_xiexie" type="checkbox" value="false"/>泄泻</label>
-                                                            <label><input name="stool_tlzqxiexie" type="checkbox" value="false"/>天亮前泄</label>
-                                                            <label><input name="stool_zhinian" type="checkbox" value="false"/>质粘,有排</label>
-                                                            <label><input name="stool_weixiaohua" type="checkbox" value="false"/>大便中夹</label>
+                                                            <label><input name="stool_sehuang" type="checkbox" value="true"/>色黄,通畅,</label>
+                                                            <label><input name="stool_bianmi" type="checkbox" value="true"/>便秘</label>
+                                                            <label><input name="stool_zhixi" type="checkbox" value="true"/>质稀</label>
+                                                            <label><input name="stool_sgsx" type="checkbox" value="true"/>时干</label>
+                                                            <label><input name="stool_xiexie" type="checkbox" value="true"/>泄泻</label>
+                                                            <label><input name="stool_tlzqxiexie" type="checkbox" value="true"/>天亮前泄</label>
+                                                            <label><input name="stool_zhinian" type="checkbox" value="true"/>质粘,有排</label>
+                                                            <label><input name="stool_weixiaohua" type="checkbox" value="true"/>大便中夹</label>
                                                         </p>
                                                         <p>
                                                             小便：
                                                         <p>
-                                                            <label><input name="urine_zhengchang" type="checkbox" value="false"/>正常</label>
-                                                            <label><input name="urine_duanchi" type="checkbox" value="false"/>短赤</label>
-                                                            <label><input name="urine_duanhuang" type="checkbox" value="false"/>短黄</label>
-                                                            <label><input name="urine_qingchang" type="checkbox" value="false"/>清长</label>
-                                                            <label><input name="urine_yeniaopin" type="checkbox" value="false"/>夜尿频</label>
-                                                            <label><input name="urine_xbpinshu" type="checkbox" value="false"/>小便频数</label>
-                                                            <label><input name="urine_niaoji" type="checkbox" value="false"/>尿急</label>
-                                                            <label><input name="urine_niaotong" type="checkbox" value="false"/>尿痛</label>
-                                                            <label><input name="urine_shaoniao" type="checkbox" value="false"/>少尿</label>
-                                                            <label><input name="urine_yulibujin" type="checkbox" value="false"/>余沥不尽</label>
+                                                            <label><input name="urine_zhengchang" type="checkbox" value="true"/>正常</label>
+                                                            <label><input name="urine_duanchi" type="checkbox" value="true"/>短赤</label>
+                                                            <label><input name="urine_duanhuang" type="checkbox" value="true"/>短黄</label>
+                                                            <label><input name="urine_qingchang" type="checkbox" value="true"/>清长</label>
+                                                            <label><input name="urine_yeniaopin" type="checkbox" value="true"/>夜尿频</label>
+                                                            <label><input name="urine_xbpinshu" type="checkbox" value="true"/>小便频数</label>
+                                                            <label><input name="urine_niaoji" type="checkbox" value="true"/>尿急</label>
+                                                            <label><input name="urine_niaotong" type="checkbox" value="true"/>尿痛</label>
+                                                            <label><input name="urine_shaoniao" type="checkbox" value="true"/>少尿</label>
+                                                            <label><input name="urine_yulibujin" type="checkbox" value="true"/>余沥不尽</label>
                                                         </p>
                                                         <p>
                                                             四肢：
                                                         <p>
-                                                            <label><input name="limb_zhengchang" type="checkbox" value="false"/>正常</label>
-                                                            <label><input name="limb_wuli" type="checkbox" value="false"/>无力</label>
-                                                            <label><input name="limb_mamu" type="checkbox" value="false"/>麻木</label>
-                                                            <label><input name="limb_kunzhong" type="checkbox" value="false"/>困重</label>
-                                                            <label><input name="limb_zhileng" type="checkbox" value="false"/>肢冷</label>
-                                                            <label><input name="limb_bingliang" type="checkbox" value="false"/>冰凉</label>
-                                                            <label><input name="limb_szxinre" type="checkbox" value="false"/>手足心热</label>
-                                                            <label><input name="limb_fuzhong" type="checkbox" value="false"/>浮肿</label>
+                                                            <label><input name="limb_zhengchang" type="checkbox" value="true"/>正常</label>
+                                                            <label><input name="limb_wuli" type="checkbox" value="true"/>无力</label>
+                                                            <label><input name="limb_mamu" type="checkbox" value="true"/>麻木</label>
+                                                            <label><input name="limb_kunzhong" type="checkbox" value="true"/>困重</label>
+                                                            <label><input name="limb_zhileng" type="checkbox" value="true"/>肢冷</label>
+                                                            <label><input name="limb_bingliang" type="checkbox" value="true"/>冰凉</label>
+                                                            <label><input name="limb_szxinre" type="checkbox" value="true"/>手足心热</label>
+                                                            <label><input name="limb_fuzhong" type="checkbox" value="true"/>浮肿</label>
 
                                                         </p>
                                                         <p>
                                                             其他：
                                                         <p>
-                                                            <label><input name="other_wu" type="checkbox" value="false"/>无</label>
-                                                            <label><input name="other_czjdanbai" type="checkbox" value="false"/>口唇爪甲淡白</label>
-                                                            <label><input name="other_xyjiantui" type="checkbox" value="false"/>性欲减退</label>
+                                                            <label><input name="other_wu" type="checkbox" value="true"/>无</label>
+                                                            <label><input name="other_czjdanbai" type="checkbox" value="true"/>口唇爪甲淡白</label>
+                                                            <label><input name="other_xyjiantui" type="checkbox" value="true"/>性欲减退</label>
                                                         </p>
                                                         <p>
                                                             舌质：
                                                         <p>
-                                                            <label><input name="texture_danhong" type="checkbox" value="false"/>淡红</label>
-                                                            <label><input name="texture_danbai" type="checkbox" value="false"/>淡白</label>
-                                                            <label><input name="texture_pianhong" type="checkbox" value="false"/>偏红</label>
-                                                            <label><input name="texture_danan" type="checkbox" value="false"/>淡黯</label>
-                                                            <label><input name="texture_zian" type="checkbox" value="false"/>紫黯</label>
-                                                            <label><input name="texture_yudian" type="checkbox" value="false"/>有淤点或淤斑</label>
+                                                            <label><input name="texture_danhong" type="checkbox" value="true"/>淡红</label>
+                                                            <label><input name="texture_danbai" type="checkbox" value="true"/>淡白</label>
+                                                            <label><input name="texture_pianhong" type="checkbox" value="true"/>偏红</label>
+                                                            <label><input name="texture_danan" type="checkbox" value="true"/>淡黯</label>
+                                                            <label><input name="texture_zian" type="checkbox" value="true"/>紫黯</label>
+                                                            <label><input name="texture_yudian" type="checkbox" value="true"/>有淤点或淤斑</label>
                                                         </p>
                                                         <p>
                                                             舌苔：
                                                         <p>
-                                                            <label><input name="coating_bai" type="checkbox" value="false"/>白</label>
-                                                            <label><input name="coating_huang" type="checkbox" value="false"/>黄</label>
-                                                            <label><input name="coating_ni" type="checkbox" value="false"/>腻</label>
-                                                            <label><input name="coating_bo" type="checkbox" value="false"/>薄</label>
-                                                            <label><input name="coating_hou" type="checkbox" value="false"/>厚</label>
-                                                            <label><input name="coating_run" type="checkbox" value="false"/>润</label>
-                                                            <label><input name="coating_hua" type="checkbox" value="false"/>滑</label>
-                                                            <label><input name="coating_hhouni" type="checkbox" value="false"/>黄厚腻</label>
-                                                            <label><input name="coating_bairun" type="checkbox" value="false"/>白润</label>
-                                                            <label><input name="coating_huangcao" type="checkbox" value="false"/>黄糙</label>
-                                                            <label><input name="coating_wutai" type="checkbox" value="false"/>无苔</label>
-                                                            <label><input name="coating_shaotai" type="checkbox" value="false"/>少苔</label>
-                                                            <label><input name="coating_huabo" type="checkbox" value="false"/>花剥</label>
+                                                            <label><input name="coating_bai" type="checkbox" value="true"/>白</label>
+                                                            <label><input name="coating_huang" type="checkbox" value="true"/>黄</label>
+                                                            <label><input name="coating_ni" type="checkbox" value="true"/>腻</label>
+                                                            <label><input name="coating_bo" type="checkbox" value="true"/>薄</label>
+                                                            <label><input name="coating_hou" type="checkbox" value="true"/>厚</label>
+                                                            <label><input name="coating_run" type="checkbox" value="true"/>润</label>
+                                                            <label><input name="coating_hua" type="checkbox" value="true"/>滑</label>
+                                                            <label><input name="coating_hhouni" type="checkbox" value="true"/>黄厚腻</label>
+                                                            <label><input name="coating_bairun" type="checkbox" value="true"/>白润</label>
+                                                            <label><input name="coating_huangcao" type="checkbox" value="true"/>黄糙</label>
+                                                            <label><input name="coating_wutai" type="checkbox" value="true"/>无苔</label>
+                                                            <label><input name="coating_shaotai" type="checkbox" value="true"/>少苔</label>
+                                                            <label><input name="coating_huabo" type="checkbox" value="true"/>花剥</label>
                                                         </p>
                                                         <p>
                                                             舌体：
                                                         <p>
-                                                            <label><input name="tongue_shoubo" type="checkbox" value="false"/>瘦薄</label>
-                                                            <label><input name="tongue_pangda" type="checkbox" value="false"/>胖大</label>
-                                                            <label><input name="tongue_bianjianhong" type="checkbox" value="false"/>边尖红</label>
-                                                            <label><input name="tongue_youchihen" type="checkbox" value="false"/>有齿痕</label>
-                                                            <label><input name="tongue_zhongyouliewen" type="checkbox" value="false"/>中有裂纹</label>
+                                                            <label><input name="tongue_shoubo" type="checkbox" value="true"/>瘦薄</label>
+                                                            <label><input name="tongue_pangda" type="checkbox" value="true"/>胖大</label>
+                                                            <label><input name="tongue_bianjianhong" type="checkbox" value="true"/>边尖红</label>
+                                                            <label><input name="tongue_youchihen" type="checkbox" value="true"/>有齿痕</label>
+                                                            <label><input name="tongue_zhongyouliewen" type="checkbox" value="true"/>中有裂纹</label>
                                                         </p>
                                                         <p>
                                                             脉象：
                                                         <p>
-                                                            <label><input name="pulse_shi" type="checkbox" value="false"/>实</label>
-                                                            <label><input name="pulse_fu" type="checkbox" value="false"/>浮</label>
-                                                            <label><input name="pulse_chen" type="checkbox" value="false"/>沉</label>
-                                                            <label><input name="pulse_chi" type="checkbox" value="false"/>迟</label>
-                                                            <label><input name="pulse_huan" type="checkbox" value="false"/>缓</label>
-                                                            <label><input name="pulse_xi" type="checkbox" value="false"/>细</label>
-                                                            <label><input name="pulse_ruo" type="checkbox" value="false"/>弱</label>
-                                                            <label><input name="pulse_shu" type="checkbox" value="false"/>数</label>
-                                                            <label><input name="pulse_hua" type="checkbox" value="false"/>滑</label>
-                                                            <label><input name="pulse_se" type="checkbox" value="false"/>涩</label>
-                                                            <label><input name="pulse_xian" type="checkbox" value="false"/>弦</label>
-                                                            <label><input name="pulse_jin" type="checkbox" value="false"/>紧</label>
-                                                            <label><input name="pulse_kou" type="checkbox" value="false"/>芤</label>
-                                                            <label><input name="pulse_ru" type="checkbox" value="false"/>濡</label>
-                                                            <label><input name="pulse_hong" type="checkbox" value="false"/>洪</label>
-                                                            <label><input name="pulse_youli" type="checkbox" value="false"/>有力</label>
-                                                            <label><input name="pulse_wuli" type="checkbox" value="false"/>无力</label>
+                                                            <label><input name="pulse_shi" type="checkbox" value="true"/>实</label>
+                                                            <label><input name="pulse_fu" type="checkbox" value="true"/>浮</label>
+                                                            <label><input name="pulse_chen" type="checkbox" value="true"/>沉</label>
+                                                            <label><input name="pulse_chi" type="checkbox" value="true"/>迟</label>
+                                                            <label><input name="pulse_huan" type="checkbox" value="true"/>缓</label>
+                                                            <label><input name="pulse_xi" type="checkbox" value="true"/>细</label>
+                                                            <label><input name="pulse_ruo" type="checkbox" value="true"/>弱</label>
+                                                            <label><input name="pulse_shu" type="checkbox" value="true"/>数</label>
+                                                            <label><input name="pulse_hua" type="checkbox" value="true"/>滑</label>
+                                                            <label><input name="pulse_se" type="checkbox" value="true"/>涩</label>
+                                                            <label><input name="pulse_xian" type="checkbox" value="true"/>弦</label>
+                                                            <label><input name="pulse_jin" type="checkbox" value="true"/>紧</label>
+                                                            <label><input name="pulse_kou" type="checkbox" value="true"/>芤</label>
+                                                            <label><input name="pulse_ru" type="checkbox" value="true"/>濡</label>
+                                                            <label><input name="pulse_hong" type="checkbox" value="true"/>洪</label>
+                                                            <label><input name="pulse_youli" type="checkbox" value="true"/>有力</label>
+                                                            <label><input name="pulse_wuli" type="checkbox" value="true"/>无力</label>
                                                         </p>
                                                         </div>
                                                     </div>
@@ -1663,7 +1671,7 @@
                                                 <div class="modal-body">
                                                     <div class="row">
                                                         <div class="col-xs-12 col-sm-12">
-                                                    <input type="hidden" class="person" name="person" id="person" value=""/>
+                                                    <!-- <input type="text" class="person" name="person" id="person-other"/> -->
                                                     <p>
                                                         出生情况:
                                                     <p>
@@ -1721,20 +1729,20 @@
                                                     <p>
                                                         特殊嗜好：
                                                     <p>
-                                                    <label><input name="hobbies_wu" type="checkbox" value="false"/>无</label>
-                                                    <label><input name="hobbies_xiyan" type="checkbox" value="false"/>吸烟</label>
-                                                    <label><input name="hobbies_yinjiu" type="checkbox" value="false"/>饮酒</label>
-                                                    <label><input name="hobbies_qita" type="checkbox" value="false"/>其它</label>
+                                                    <label><input name="hobbies_wu" type="checkbox" value="true"/>无</label>
+                                                    <label><input name="hobbies_xiyan" type="checkbox" value="true"/>吸烟</label>
+                                                    <label><input name="hobbies_yinjiu" type="checkbox" value="true"/>饮酒</label>
+                                                    <label><input name="hobbies_qita" type="checkbox" value="true"/>其它</label>
                                                         其它说明:<input type="text" id="nameTxt11" value="无"/>
                                                     </p>
                                                     <p>
                                                         减肥情况：
                                                     <p>
-                                                    <label><input name="reducefat_ever" type="checkbox" value="false"/>有减肥</label>
-                                                    <label><input name="reducefat_yundong" type="checkbox" value="false"/>运动减肥</label>
-                                                    <label><input name="reducefat_jieshi" type="checkbox" value="false"/>节食减肥</label>
-                                                    <label><input name="reducefat_yaowu" type="checkbox" value="false"/>药物减肥</label>
-                                                    <label><input name="reducefat_qita" type="checkbox" value="false"/>其它</label>
+                                                    <label><input name="reducefat_ever" type="checkbox" value="true"/>有减肥</label>
+                                                    <label><input name="reducefat_yundong" type="checkbox" value="true"/>运动减肥</label>
+                                                    <label><input name="reducefat_jieshi" type="checkbox" value="true"/>节食减肥</label>
+                                                    <label><input name="reducefat_yaowu" type="checkbox" value="true"/>药物减肥</label>
+                                                    <label><input name="reducefat_qita" type="checkbox" value="true"/>其它</label>
                                                             <p>
                                                         其它说明:<input type="text" id="nameTxt12" value="无"/>
                                                         减肥时长(月):<input  type="number" name="reducefat_persist"/>
@@ -1772,58 +1780,58 @@
                                                     <p>
                                                         平素带下情况：
                                                     <p>
-                                                    <label><input name="leucorrhea_liangshao" type="checkbox" value="false"/>带下量少</label>
-                                                    <label><input name="leucorrhea_liangke" type="checkbox" value="false"/>带下量可</label>
-                                                    <label><input name="leucorrhea_liangduo" type="checkbox" value="false"/>带下量多</label>
-                                                    <label><input name="leucorrhea_sehuang" type="checkbox" value="false"/>带下色黄</label>
-                                                    <label><input name="leucorrhea_sebai" type="checkbox" value="false"/>带下色白</label>
-                                                    <label><input name="leucorrhea_selv" type="checkbox" value="false"/>带下色绿</label>
-                                                    <label><input name="leucorrhea_zhiqingxi" type="checkbox" value="false"/>带下质清稀</label>
-                                                    <label><input name="leucorrhea_zhinianchou" type="checkbox" value="false"/>带下质黏稠</label>
+                                                    <label><input name="leucorrhea_liangshao" type="checkbox" value="true"/>带下量少</label>
+                                                    <label><input name="leucorrhea_liangke" type="checkbox" value="true"/>带下量可</label>
+                                                    <label><input name="leucorrhea_liangduo" type="checkbox" value="true"/>带下量多</label>
+                                                    <label><input name="leucorrhea_sehuang" type="checkbox" value="true"/>带下色黄</label>
+                                                    <label><input name="leucorrhea_sebai" type="checkbox" value="true"/>带下色白</label>
+                                                    <label><input name="leucorrhea_selv" type="checkbox" value="true"/>带下色绿</label>
+                                                    <label><input name="leucorrhea_zhiqingxi" type="checkbox" value="true"/>带下质清稀</label>
+                                                    <label><input name="leucorrhea_zhinianchou" type="checkbox" value="true"/>带下质黏稠</label>
                                                     </p>
                                                     <p>
                                                         既往病史：
                                                     <p>
-                                                    <label><input name="pasthistory_wu" type="checkbox" value="false"/>无</label>
-                                                    <label><input name="pasthistory_yuejingbutiao" type="checkbox" value="false"/>月经不调</label>
-                                                    <label><input name="pasthistory_yindaoyan" type="checkbox" value="false"/>阴道炎</label>
-                                                    <label><input name="pasthistory_zigongneimoyan" type="checkbox" value="false"/>子宫内膜炎</label>
-                                                    <label><input name="pasthistory_zigongneimoyiwei" type="checkbox" value="false"/>子宫内膜异位症</label>
-                                                    <label><input name="pasthistory_zigongxianjizheng" type="checkbox" value="false"/>子宫腺肌症</label>
-                                                    <label><input name="pasthistory_penqiangyan" type="checkbox" value="false"/>盆腔炎</label>
-                                                    <label><input name="pasthistory_zigongjiliu" type="checkbox" value="false"/>子宫肌瘤</label>
-                                                    <label><input name="pasthistory_luancaonangzhong" type="checkbox" value="false"/>卵巢囊肿</label>
-                                                    <label><input name="pasthistory_ruxianzengsheng" type="checkbox" value="false"/>乳腺增生</label>
-                                                    <label><input name="pasthistory_jiazhuangxian" type="checkbox" value="false"/>甲状腺相关疾病</label>
-                                                    <label><input name="pasthistory_shengzhiyichang" type="checkbox" value="false"/>生殖器官发育异常</label>
-                                                    <label><input name="pasthistory_naochuitiliu" type="checkbox" value="false"/>脑垂体瘤</label>
-                                                    <label><input name="pasthistory_feipang" type="checkbox" value="false"/>肥胖</label>
-                                                    <label><input name="pasthistory_ganyan" type="checkbox" value="false"/>肝炎</label>
-                                                    <label><input name="pasthistory_jiehe" type="checkbox" value="false"/>结核</label>
-                                                    <label><input name="pasthistory_qita" type="checkbox" value="false"/>其它</label>
+                                                    <label><input name="pasthistory_wu" type="checkbox" value="true"/>无</label>
+                                                    <label><input name="pasthistory_yuejingbutiao" type="checkbox" value="true"/>月经不调</label>
+                                                    <label><input name="pasthistory_yindaoyan" type="checkbox" value="true"/>阴道炎</label>
+                                                    <label><input name="pasthistory_zigongneimoyan" type="checkbox" value="true"/>子宫内膜炎</label>
+                                                    <label><input name="pasthistory_zigongneimoyiwei" type="checkbox" value="true"/>子宫内膜异位症</label>
+                                                    <label><input name="pasthistory_zigongxianjizheng" type="checkbox" value="true"/>子宫腺肌症</label>
+                                                    <label><input name="pasthistory_penqiangyan" type="checkbox" value="true"/>盆腔炎</label>
+                                                    <label><input name="pasthistory_zigongjiliu" type="checkbox" value="true"/>子宫肌瘤</label>
+                                                    <label><input name="pasthistory_luancaonangzhong" type="checkbox" value="true"/>卵巢囊肿</label>
+                                                    <label><input name="pasthistory_ruxianzengsheng" type="checkbox" value="true"/>乳腺增生</label>
+                                                    <label><input name="pasthistory_jiazhuangxian" type="checkbox" value="true"/>甲状腺相关疾病</label>
+                                                    <label><input name="pasthistory_shengzhiyichang" type="checkbox" value="true"/>生殖器官发育异常</label>
+                                                    <label><input name="pasthistory_naochuitiliu" type="checkbox" value="true"/>脑垂体瘤</label>
+                                                    <label><input name="pasthistory_feipang" type="checkbox" value="true"/>肥胖</label>
+                                                    <label><input name="pasthistory_ganyan" type="checkbox" value="true"/>肝炎</label>
+                                                    <label><input name="pasthistory_jiehe" type="checkbox" value="true"/>结核</label>
+                                                    <label><input name="pasthistory_qita" type="checkbox" value="true"/>其它</label>
                                                         其它说明:<input type="text" id="nameTxt13" value="无"/>
                                                     </p>
                                                     <p>
                                                         月经不调病史：
                                                     <p>
-                                                    <label><input name="pastmens_zhouqiwenluan" type="checkbox" value="false"/>月经周期絮乱</label>
-                                                    <label><input name="pastmens_liangduo" type="checkbox" value="false"/>月经量多</label>
-                                                    <label><input name="pastmens_zhouqisuoduan" type="checkbox" value="false"/>月经周期缩短</label>
-                                                    <label><input name="pastmens_yanhou" type="checkbox" value="false"/>月经延后</label>
-                                                    <label><input name="pastmens_yanchang" type="checkbox" value="false"/>行经期延长</label>
-                                                    <label><input name="pastmens_tingbi" type="checkbox" value="false"/>月经停闭</label>
-                                                    <label><input name="pastmens_chuxie" type="checkbox" value="false">经期间出血</label>
+                                                    <label><input name="pastmens_zhouqiwenluan" type="checkbox" value="true"/>月经周期絮乱</label>
+                                                    <label><input name="pastmens_liangduo" type="checkbox" value="true"/>月经量多</label>
+                                                    <label><input name="pastmens_zhouqisuoduan" type="checkbox" value="true"/>月经周期缩短</label>
+                                                    <label><input name="pastmens_yanhou" type="checkbox" value="true"/>月经延后</label>
+                                                    <label><input name="pastmens_yanchang" type="checkbox" value="true"/>行经期延长</label>
+                                                    <label><input name="pastmens_tingbi" type="checkbox" value="true"/>月经停闭</label>
+                                                    <label><input name="pastmens_chuxie" type="checkbox" value="true">经期间出血</label>
                                                     </p>
                                                     <p>
                                                         一级亲属其它病史：
                                                     <p>
-                                                    <label><input name="pastfamily_wu" type="checkbox" value="false"/>无</label>
-                                                    <label><input name="pastfamily_gaoxueya" type="checkbox" value="false"/>高血压</label>
-                                                    <label><input name="pastfamily_tangniaobing" type="checkbox" value="false"/>糖尿病</label>
-                                                    <label><input name="pastfamily_xinzangbing" type="checkbox" value="false"/>心脏病</label>
-                                                    <label><input name="pastfamily_duonangluanchao" type="checkbox" value="false"/>多囊卵巢综合征</label>
-                                                    <label><input name="pastfamily_buxiang" type="checkbox" value="false"/>不详</label>
-                                                    <label><input name="pastfamily_qita" type="checkbox" value="false"/>其它</label>
+                                                    <label><input name="pastfamily_wu" type="checkbox" value="true"/>无</label>
+                                                    <label><input name="pastfamily_gaoxueya" type="checkbox" value="true"/>高血压</label>
+                                                    <label><input name="pastfamily_tangniaobing" type="checkbox" value="true"/>糖尿病</label>
+                                                    <label><input name="pastfamily_xinzangbing" type="checkbox" value="true"/>心脏病</label>
+                                                    <label><input name="pastfamily_duonangluanchao" type="checkbox" value="true"/>多囊卵巢综合征</label>
+                                                    <label><input name="pastfamily_buxiang" type="checkbox" value="true"/>不详</label>
+                                                    <label><input name="pastfamily_qita" type="checkbox" value="true"/>其它</label>
                                                         <p>
                                                         其它说明:<input type="text" id="nameTxt14" value="无"/>
                                                     </p>
@@ -1853,19 +1861,19 @@
                                                     <p>
                                                         避孕措施：
                                                     <p>
-                                                    <label><input name="prevent_jieza" type="checkbox" value="false"/>结扎</label>
-                                                    <label><input name="prevent_jieyuqi" type="checkbox" value="false"/>宫内节育器</label>
-                                                    <label><input name="prevent_biyuntao" type="checkbox" value="false"/>避孕套</label>
-                                                    <label><input name="prevent_biyunyao" type="checkbox" value="false"/>口服避孕药</label>
+                                                    <label><input name="prevent_jieza" type="checkbox" value="true"/>结扎</label>
+                                                    <label><input name="prevent_jieyuqi" type="checkbox" value="true"/>宫内节育器</label>
+                                                    <label><input name="prevent_biyuntao" type="checkbox" value="true"/>避孕套</label>
+                                                    <label><input name="prevent_biyunyao" type="checkbox" value="true"/>口服避孕药</label>
                                                         <p>
                                                         末次口服避孕药时间:<input class="form-control" type="number" name="prevent_biyunyao_time"/>
                                                         <p>
-                                                    <label><input name="prevent_mafulong" type="checkbox" value="false"/>去氧孕烯炔雌片（妈富隆）</label>
-                                                    <label><input name="prevent_daying" type="checkbox" value="false"/>炔雌醇环丙孕酮片（达英-35）</label>
-                                                    <label><input name="prevent_yousiming" type="checkbox" value="false"/>屈螺酮炔雌醇片（优思明）</label>
-                                                    <label><input name="prevent_zuoque" type="checkbox" value="false"/>左炔诺孕酮复方左炔诺孕酮</label>
-                                                    <label><input name="prevent_fufang" type="checkbox" value="false"/>复方左炔诺孕酮</label>
-                                                    <label><input name="prevent_qita" type="checkbox" value="false"/>其它</label>
+                                                    <label><input name="prevent_mafulong" type="checkbox" value="true"/>去氧孕烯炔雌片（妈富隆）</label>
+                                                    <label><input name="prevent_daying" type="checkbox" value="true"/>炔雌醇环丙孕酮片（达英-35）</label>
+                                                    <label><input name="prevent_yousiming" type="checkbox" value="true"/>屈螺酮炔雌醇片（优思明）</label>
+                                                    <label><input name="prevent_zuoque" type="checkbox" value="true"/>左炔诺孕酮复方左炔诺孕酮</label>
+                                                    <label><input name="prevent_fufang" type="checkbox" value="true"/>复方左炔诺孕酮</label>
+                                                    <label><input name="prevent_qita" type="checkbox" value="true"/>其它</label>
                                                             &nbsp
                                                         其它说明:<input type="text" id="nameTxt15" value="无"/>
                                                     </p>
@@ -1878,16 +1886,16 @@
                                                         <label><input type="radio" value="61-90" name="accessory_hgb_value"/>61-90</label>
                                                         <label><input type="radio" value="30-60" name="accessory_hgb_value"/>30-60</label>
                                                     <p>
-                                                    <label><input name="accessory_quanxuexibaojishu" type="checkbox" value="false"/>全血细胞计数</label>
-                                                    <label><input name="accessory_chuxuexingjibing" type="checkbox" value="false"/>出血性疾病筛查（如女性血管性血友病）</label>
-                                                    <label><input name="accessory_ningxue" type="checkbox" value="false"/>凝血功能检查</label>
-                                                    <label><input name="accessory_jiazhuangxian" type="checkbox" value="false"/>甲状腺功能检测</label>
-                                                    <label><input name="accessory_niaorenshen" type="checkbox" value="false"/>尿妊娠试验</label>
-                                                    <label><input name="accessory_penqiangchaosheng" type="checkbox" value="false"/>盆腔超声检查</label>
-                                                    <label><input name="accessory_jichutiwen" type="checkbox" value="false"/>基础体温测定</label>
-                                                    <label><input name="accessory_jisushuiping" type="checkbox" value=false"false"/>激素水平测定</label>
-                                                    <label><input name="accessory_guagong" type="checkbox" value="false"/>诊断性刮宫或宫腔镜下刮宫</label>
-                                                    <label><input name="accessory_qita" type="checkbox" value="false"/>其它</label>
+                                                    <label><input name="accessory_quanxuexibaojishu" type="checkbox" value="true"/>全血细胞计数</label>
+                                                    <label><input name="accessory_chuxuexingjibing" type="checkbox" value="true"/>出血性疾病筛查（如女性血管性血友病）</label>
+                                                    <label><input name="accessory_ningxue" type="checkbox" value="true"/>凝血功能检查</label>
+                                                    <label><input name="accessory_jiazhuangxian" type="checkbox" value="true"/>甲状腺功能检测</label>
+                                                    <label><input name="accessory_niaorenshen" type="checkbox" value="true"/>尿妊娠试验</label>
+                                                    <label><input name="accessory_penqiangchaosheng" type="checkbox" value="true"/>盆腔超声检查</label>
+                                                    <label><input name="accessory_jichutiwen" type="checkbox" value="true"/>基础体温测定</label>
+                                                    <label><input name="accessory_jisushuiping" type="checkbox" value=falsetrue"/>激素水平测定</label>
+                                                    <label><input name="accessory_guagong" type="checkbox" value="true"/>诊断性刮宫或宫腔镜下刮宫</label>
+                                                    <label><input name="accessory_qita" type="checkbox" value="true"/>其它</label>
                                                         其它说明:<input type="text" id="nameTxt16" value="无"/>
                                                     </p>
                                                         </div>
@@ -1922,46 +1930,46 @@
                                                     <div class="row">
                                                         <div class="col-xs-12 col-sm-12">
                                                     
-                                                    <input type="hidden" class="person" name="person" id="person" value=""/>
+                                                    <!-- <input type="text" class="person" name="person" id="person-cc"/> -->
                                                     <p>
                                                         中医诊断：
                                                     <p>
-                                                    <label><input name="benglou" type="checkbox" value="false"/>崩漏</label>
-                                                    <label><input name="yuejingguoduo" type="checkbox" value="false"/>月经过多</label>
-                                                    <label><input name="yuejingxianqi" type="checkbox" value="false"/>月经先期</label>
-                                                    <label><input name="jingqiyanchang" type="checkbox" value="false"/>经期延长</label>
-                                                    <label><input name="jingjianqichuxie" type="checkbox" value="false"/>经间期出血</label>
+                                                    <label><input name="benglou" type="checkbox" value="true"/>崩漏</label>
+                                                    <label><input name="yuejingguoduo" type="checkbox" value="true"/>月经过多</label>
+                                                    <label><input name="yuejingxianqi" type="checkbox" value="true"/>月经先期</label>
+                                                    <label><input name="jingqiyanchang" type="checkbox" value="true"/>经期延长</label>
+                                                    <label><input name="jingjianqichuxie" type="checkbox" value="true"/>经间期出血</label>
                                                 </p>
                                                 <p>
                                                     虚证诊断：
                                                 <p>
-                                                    <label><input name="shenyin" type="checkbox" value="false"/>肾阴虚症</label>
-                                                    <label><input name="shenyang" type="checkbox" value="false"/>肾阳虚症</label>
-                                                    <label><input name="shenqi" type="checkbox" value="false"/>肾气虚症</label>
-                                                    <label><input name="piqi" type="checkbox" value="false"/>脾气虚症</label>
-                                                    <label><input name="qixuxiaxian" type="checkbox" value="false"/>气虚下陷症</label>
-                                                    <label><input name="xure" type="checkbox" value="false"/>虚热症</label>
-                                                    <label><input name="xinpiliangxu" type="checkbox" value="false"/>心脾两虚症</label>
-                                                    <label><input name="pishenyangxu" type="checkbox" value="false"/>脾肾阳虚症</label>
-                                                    <label><input name="qixuekuixu" type="checkbox" value="false"/>气血亏虚症</label>
-                                                    <label><input name="ganshenyinxu" type="checkbox" value="false"/>肝肾阴虚症</label>
-                                                    <label><input name="qita_asthenic" type="checkbox" value="false"/>其它</label>
+                                                    <label><input name="shenyin" type="checkbox" value="true"/>肾阴虚症</label>
+                                                    <label><input name="shenyang" type="checkbox" value="true"/>肾阳虚症</label>
+                                                    <label><input name="shenqi" type="checkbox" value="true"/>肾气虚症</label>
+                                                    <label><input name="piqi" type="checkbox" value="true"/>脾气虚症</label>
+                                                    <label><input name="qixuxiaxian" type="checkbox" value="true"/>气虚下陷症</label>
+                                                    <label><input name="xure" type="checkbox" value="true"/>虚热症</label>
+                                                    <label><input name="xinpiliangxu" type="checkbox" value="true"/>心脾两虚症</label>
+                                                    <label><input name="pishenyangxu" type="checkbox" value="true"/>脾肾阳虚症</label>
+                                                    <label><input name="qixuekuixu" type="checkbox" value="true"/>气血亏虚症</label>
+                                                    <label><input name="ganshenyinxu" type="checkbox" value="true"/>肝肾阴虚症</label>
+                                                    <label><input name="qita_asthenic" type="checkbox" value="true"/>其它</label>
                                                     其它说明:<input type="text" id="nameTxt17" value="无"/>
                                                 </p>
                                                 <p>
                                                     实证诊断：
                                                 <p>
-                                                    <label><input name="ganyuxuere" type="checkbox" value="false"/>肝郁血热症</label>
-                                                    <label><input name="yangshengxuere" type="checkbox" value="false"/>阳盛血热症</label>
-                                                    <label><input name="ganjingshire" type="checkbox" value="false"/>肝经湿热症</label>
-                                                    <label><input name="tanreyuzu" type="checkbox" value="false"/>痰热瘀阻症</label>
-                                                    <label><input name="tanshizuzhi" type="checkbox" value="false"/>痰湿阻滞症</label>
-                                                    <label><input name="tanyuzuzhi" type="checkbox" value="false"/>痰瘀阻滞症</label>
-                                                    <label><input name="yurehujie" type="checkbox" value="false"/>瘀热互结症</label>
-                                                    <label><input name="xueyu" type="checkbox" value="false"/>血瘀症</label>
-                                                    <label><input name="qizhixueyu" type="checkbox" value="false"/>气滞血瘀症</label>
-                                                    <label><input name="hanningxueyu" type="checkbox" value="false"/>寒凝血淤症</label>
-                                                    <label><input name="qita_demonstration" type="checkbox" value="false"/>其它</label>
+                                                    <label><input name="ganyuxuere" type="checkbox" value="true"/>肝郁血热症</label>
+                                                    <label><input name="yangshengxuere" type="checkbox" value="true"/>阳盛血热症</label>
+                                                    <label><input name="ganjingshire" type="checkbox" value="true"/>肝经湿热症</label>
+                                                    <label><input name="tanreyuzu" type="checkbox" value="true"/>痰热瘀阻症</label>
+                                                    <label><input name="tanshizuzhi" type="checkbox" value="true"/>痰湿阻滞症</label>
+                                                    <label><input name="tanyuzuzhi" type="checkbox" value="true"/>痰瘀阻滞症</label>
+                                                    <label><input name="yurehujie" type="checkbox" value="true"/>瘀热互结症</label>
+                                                    <label><input name="xueyu" type="checkbox" value="true"/>血瘀症</label>
+                                                    <label><input name="qizhixueyu" type="checkbox" value="true"/>气滞血瘀症</label>
+                                                    <label><input name="hanningxueyu" type="checkbox" value="true"/>寒凝血淤症</label>
+                                                    <label><input name="qita_demonstration" type="checkbox" value="true"/>其它</label>
                                                     <p>
                                                     其它说明:<input type="text" id="nameTxt18" value="无"/>
                                                 </p>
@@ -1969,23 +1977,23 @@
                                                 <p>
                                                     虚实夹杂诊断：
                                                 <p>
-                                                    <label><input name="shenxuxueyu" type="checkbox" value="false"/>肾虚血瘀症</label>
-                                                    <label><input name="shenxuyure" type="checkbox" value="false"/>肾虚瘀热症</label>
-                                                    <label><input name="shenxuganyu" type="checkbox" value="false"/>肾虚肝郁症</label>
-                                                    <label><input name="qixuxueyu" type="checkbox" value="false"/>气虚血瘀症</label>
-                                                    <label><input name="yinxuxueyu" type="checkbox" value="false"/>阴虚血瘀症</label>
-                                                    <label><input name="yinxuhuowang" type="checkbox" value="false"/>阴虚火旺症</label>
-                                                    <label><input name="ganyupixu" type="checkbox" value="false"/>肝郁脾虚症</label>
-                                                    <label><input name="qita_def_ex" type="checkbox" value="false"/>其它</label>
+                                                    <label><input name="shenxuxueyu" type="checkbox" value="true"/>肾虚血瘀症</label>
+                                                    <label><input name="shenxuyure" type="checkbox" value="true"/>肾虚瘀热症</label>
+                                                    <label><input name="shenxuganyu" type="checkbox" value="true"/>肾虚肝郁症</label>
+                                                    <label><input name="qixuxueyu" type="checkbox" value="true"/>气虚血瘀症</label>
+                                                    <label><input name="yinxuxueyu" type="checkbox" value="true"/>阴虚血瘀症</label>
+                                                    <label><input name="yinxuhuowang" type="checkbox" value="true"/>阴虚火旺症</label>
+                                                    <label><input name="ganyupixu" type="checkbox" value="true"/>肝郁脾虚症</label>
+                                                    <label><input name="qita_def_ex" type="checkbox" value="true"/>其它</label>
                                                     其它说明:<input type="text" id="nameTxt19" value="无"/>
                                                 </p>
                                                 <p>
                                                     西医诊断：
                                                 <p>
-                                                    <label><input name="duonangluanchao" type="checkbox" value="false"/>多囊卵巢综合症</label>
-                                                    <label><input name="gaomirusu" type="checkbox" value="false"/>高泌乳素血症</label>
-                                                    <label><input name="dicuxingxianjisu" type="checkbox" value="false"/>低促行线激素疾病</label>
-                                                    <label><input name="qita_west" type="checkbox" value="false"/>其它</label>
+                                                    <label><input name="duonangluanchao" type="checkbox" value="true"/>多囊卵巢综合症</label>
+                                                    <label><input name="gaomirusu" type="checkbox" value="true"/>高泌乳素血症</label>
+                                                    <label><input name="dicuxingxianjisu" type="checkbox" value="true"/>低促行线激素疾病</label>
+                                                    <label><input name="qita_west" type="checkbox" value="true"/>其它</label>
                                                         <p>
                                                         其它说明:<input type="text" id="nameTxt20" value="无"/>
                                                     </p>
