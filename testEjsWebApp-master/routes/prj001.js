@@ -343,10 +343,8 @@ router.post('/menstruation', function (req, res, next){
 });
 /* 前端请求保存 月经情况 修改 */
 router.put('/menstruation_save', function (req, res, next){
-    console.log("type: ", typeof(req.body.menstruation_url));
-    if ( req.body.menstruation_url != undefined) {
+    if (req.body.menstruation_url != undefined) {
         console.log("url不为空");
-        console.log(">>>prj001.js put method:", req.body.menstruation_url);
         var menstruation_url = req.body.menstruation_url;
         var authstring = req.cookies.prj001token.access_token;
         var options = {
@@ -506,7 +504,6 @@ router.put('/symptom_save', function (req, res, next){
 
 /* 前段请求 其它情况 */
 router.post('/other', function (req, res, next){
-    // console.log(">>>prj001.js/other/userid:", JSON.parse(req.body.userid))
         var other_url = req.body.other_url;
         var authstring = req.cookies.prj001token.access_token;
         var options = {
@@ -530,7 +527,6 @@ router.post('/other', function (req, res, next){
 });
 /* 前端请求保存 其它情况 修改 */
 router.put('/other_save', function (req, res, next){
-    console.log(">>>prj001.js put method:", req.body.other_url);
     if (req.body.other_url != undefined) {
         var other_url = req.body.other_url;
         var authstring = req.cookies.prj001token.access_token;

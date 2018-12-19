@@ -220,6 +220,7 @@
 
         });
         $(".symptom").click(function () {
+            document.getElementById("form-symptom").reset();
             //alert($(this).attr("symptom-url"))
             var tempFlag = $(this).attr("symptom-url");
             var temp_geninfourl = $(this).attr("geninfo-url");
@@ -464,6 +465,7 @@
 
         });
         $(".other").click(function () {
+            document.getElementById("form-other").reset();
             //alert($(this).attr("other-url"))
             var tempFlag = $(this).attr("other-url");
             var temp_geninfourl = $(this).attr("geninfo-url");
@@ -624,8 +626,9 @@
 
         });
         $(".cc").click(function () {
+            document.getElementById("form-cc").reset();
             //alert($(this).attr("cc-url"))
-            var tempFlag = $(this).attr("other-url");
+            var tempFlag = $(this).attr("cc-url");
             var temp_geninfourl = $(this).attr("geninfo-url");
             if (tempFlag == "") {
                 alert("准备创建临床诊断");
@@ -633,7 +636,7 @@
             } else {
             $.ajax({
                 url: "/prj001/cc",//路由，用来处理ajax请求的函数的所在地址
-                type: "POST",
+                method: "POST",
                 data: {cc_url: $(this).attr("cc-url")},
                 success: function(result) {
                     $('#person-cc').val(result["person"]);
@@ -1180,6 +1183,7 @@
                                                                 <label><input type="radio" value="已婚同居" name="marriage"/>已婚同居</label>
                                                                 <label><input type="radio" value="已婚分居" name="marriage"/>已婚分居</label>
                                                                 <label><input type="radio" value="离婚" name="marriage"/>离婚</label>
+                                                                <label><input type="radio" value="丧偶" name="marriage"/>丧偶</label>
                                                             </p>
     
                                                             <p>
@@ -1690,10 +1694,10 @@
                                                     <p>
                                                         职业体力活动:
                                                     <p>
-                                                        <label><input type="radio" value="重体力劳动（如：搬运工、清洁工、农场工人、畜牧产工人等）" name="career_labor"/>重体力劳动(如：搬运工、清洁工、农场工人、畜牧产工人等)</label>
-                                                        <label><input type="radio" value="中体力劳动（如：家政服务人员、服务生、厨师、护士等）" name="career_labor"/>中体力劳动(如：家政服务人员、服务生、厨师、护士等)</label>
-                                                        <label><input type="radio" value="中体力劳动（如：教师、美容美发师、批发商、职员等）" name="career_labor"/>中体力劳动(如：教师、美容美发师、批发商、职员等)</label>
-                                                        <label><input type="radio" value="坐式的工作（如：收银员、出纳员、接线员、秘书等）" name="career_labor"/>坐式的工作(如：收银员、出纳员、接线员、秘书等)</label>
+                                                        <label><input type="radio" value="重体力劳动（如：搬运工、清洁工、农场工人、畜牧产工人等）" name="career_labor"/>重体力劳动（如：搬运工、清洁工、农场工人、畜牧产工人等）</label>
+                                                        <label><input type="radio" value="中体力劳动（如：家政服务人员、服务生、厨师、护士等）" name="career_labor"/>中体力劳动（如：家政服务人员、服务生、厨师、护士等）</label>
+                                                        <label><input type="radio" value="中体力劳动（如：教师、美容美发师、批发商、职员等）" name="career_labor"/>中体力劳动（如：教师、美容美发师、批发商、职员等）</label>
+                                                        <label><input type="radio" value="坐式的工作（如：收银员、出纳员、接线员、秘书等）" name="career_labor"/>坐式的工作（如：收银员、出纳员、接线员、秘书等）</label>
                                                     </p>
                                                     <p>
                                                         贫血与否:
