@@ -28,23 +28,7 @@
 </head>
 
 <body>
-    <!-- <script>
-                    // 测试代码
-                $.fn.ghostsf_serialize = function () {
-                var a = this.serializeArray();
-                var $radio = $('input[type=radio],input[type=checkbox]', this);
-                var temp = {};
-                $.each($radio, function () {
-                    if (!temp.hasOwnProperty(this.name)) {
-                        if ($("input[name='" + this.name + "']:checked").length == 0) {
-                            temp[this.name] = "";
-                            a.push({name: this.name, value: ""});
-                        }
-                    }
-                });
-                return jQuery.param(a);
-            };
-    </script> -->
+
 <script>
     $(document).ready(function () {
 
@@ -274,7 +258,6 @@
                         $("input:checkbox[name='mood_beishangyuku']").attr('checked',result["mood_beishangyuku"]);	
                         $("input:checkbox[name='mood_yiyu']").attr('checked',result["mood_yiyu"]);	
                         $("input:checkbox[name='mood_duosiduolv']").attr('checked',result["mood_duosiduolv"]);	
-                        // $("input:checkbox[name='mood_qita']").attr('checked',result["mood_qita"]);
                         $('#mood_qita').val(result["mood_qita"]);
 
                         $("input:checkbox[name='chillfever_zhengchang']").attr('checked',result["chillfever_zhengchang"]);	
@@ -282,6 +265,7 @@
                         $("input:checkbox[name='chillfever_wuxinfanre']").attr('checked',result["chillfever_wuxinfanre"]);	
                         $("input:checkbox[name='chillfever_wuhouchaore']").attr('checked',result["chillfever_wuhouchaore"]);	
                         $("input:checkbox[name='chillfever_direbutui']").attr('checked',result["chillfever_direbutui"]);	
+                        
                         $("input:checkbox[name='sweat_zhengchang']").attr('checked',result["sweat_zhengchang"]);	
                         $("input:checkbox[name='sweat_duohan']").attr('checked',result["sweat_duohan"]);	
                         $("input:checkbox[name='sweat_mingxian']").attr('checked',result["sweat_mingxian"]);	
@@ -289,10 +273,12 @@
                         $("input:checkbox[name='sweat_daohan']").attr('checked',result["sweat_daohan"]);	
                         $("input:checkbox[name='sweat_hongre']").attr('checked',result["sweat_hongre"]);	
                         $("input:checkbox[name='sweat_chaore']").attr('checked',result["sweat_chaore"]);	
+                        
                         $("input:checkbox[name='sound_zhengchang']").attr('checked',result["sound_zhengchang"]);	
                         $("input:checkbox[name='sound_qiduan']").attr('checked',result["sound_qiduan"]);	
                         $("input:checkbox[name='sound_xitanxi']").attr('checked',result["sound_xitanxi"]);	
                         $("input:checkbox[name='sound_shaoqilanyan']").attr('checked',result["sound_shaoqilanyan"]);	
+                        
                         $("input:checkbox[name='face_zhengchang']").attr('checked',result["face_zhengchang"]);	
                         $("input:checkbox[name='face_danbaiwuhua']").attr('checked',result["face_danbaiwuhua"]);	
                         $("input:checkbox[name='face_cangbai']").attr('checked',result["face_cangbai"]);	
@@ -306,24 +292,29 @@
                         $("input:checkbox[name='face_mianmulihei']").attr('checked',result["face_mianmulihei"]);	
                         $("input:checkbox[name='face_shaohua']").attr('checked',result["face_shaohua"]);	
                         $("input:checkbox[name='face_wuhua']").attr('checked',result["face_wuhua"]);	
+                        
                         $("input:checkbox[name='heart_zhengcheng']").attr('checked',result["heart_zhengcheng"]);	
                         $("input:checkbox[name='heart_xinfan']").attr('checked',result["heart_xinfan"]);	
                         $("input:checkbox[name='heart_xinji']").attr('checked',result["heart_xinji"]);	
+                       
                         $("input:checkbox[name='breast_zhengchang']").attr('checked',result["breast_zhengchang"]);	
                         $("input:checkbox[name='breast_biezhang']").attr('checked',result["breast_biezhang"]);	
                         $("input:checkbox[name='breast_citong']").attr('checked',result["breast_citong"]);	
                         $("input:checkbox[name='breast_zhangtong']").attr('checked',result["breast_zhangtong"]);	
                         $("input:checkbox[name='breast_chutong']").attr('checked',result["breast_chutong"]);	
+                        
                         $("input:checkbox[name='chest_zhengchang']").attr('checked',result["chest_zhengchang"]);	
                         $("input:checkbox[name='chest_zhangmen']").attr('checked',result["chest_zhangmen"]);	
                         $("input:checkbox[name='chest_yintong']").attr('checked',result["chest_yintong"]);	
                         $("input:checkbox[name='chest_citong']").attr('checked',result["chest_citong"]);	
+                        
                         $("input:checkbox[name='waist_zhengchang']").attr('checked',result["waist_zhengchang"]);	
                         $("input:checkbox[name='waist_suantong']").attr('checked',result["waist_suantong"]);	
                         $("input:checkbox[name='waist_suanruan']").attr('checked',result["waist_suanruan"]);	
                         $("input:checkbox[name='waist_suanleng']").attr('checked',result["waist_suanleng"]);	
                         $("input:checkbox[name='waist_lengtong']").attr('checked',result["waist_lengtong"]);	
                         $("input:checkbox[name='waist_yaotongrushe']").attr('checked',result["waist_yaotongrushe"]);	
+                        
                         $("input:checkbox[name='stomach_zhengchang']").attr('checked',result["stomach_zhengchang"]);	
                         $("input:checkbox[name='stomach_zhangtongjuan']").attr('checked',result["stomach_zhangtongjuan"]);	
                         $("input:checkbox[name='stomach_xiaofuzhuizhang']").attr('checked',result["stomach_xiaofuzhuizhang"]);	
@@ -334,10 +325,12 @@
                         $("input:checkbox[name='stomach_dewentongjian']").attr('checked',result["stomach_dewentongjian"]);
                         $("input:checkbox[name='stomach_tongruzhenci']").attr('checked',result["stomach_tongruzhenci"]);
                         $("input:checkbox[name='stomach_kongzhui']").attr('checked',result["stomach_kongzhui"]);	
+                        
                         $("input:checkbox[name='head_zhengchang']").attr('checked',result["head_zhengchang"]);	
                         $("input:checkbox[name='head_touyun']").attr('checked',result["head_touyun"]);	
                         $("input:checkbox[name='head_toutong']").attr('checked',result["head_toutong"]);	
                         $("input:checkbox[name='head_touchenzhong']").attr('checked',result["head_touchenzhong"]);	
+                        
                         $("input:checkbox[name='eyes_zhengchang']").attr('checked',result["eyes_zhengchang"]);	
                         $("input:checkbox[name='eyes_muxuan']").attr('checked',result["eyes_muxuan"]);	
                         $("input:checkbox[name='eyes_muse']").attr('checked',result["eyes_muse"]);	
@@ -345,14 +338,17 @@
                         $("input:checkbox[name='eyes_mutong']").attr('checked',result["eyes_mutong"]);	
                         $("input:checkbox[name='eyes_muyang']").attr('checked',result["eyes_muyang"]);	
                         $("input:checkbox[name='eyes_chenqifz']").attr('checked',result["eyes_chenqifz"]);	
+                        
                         $("input:checkbox[name='ear_erming']").attr('checked',result["ear_erming"]);	
                         $("input:checkbox[name='ear_erlong']").attr('checked',result["ear_erlong"]);	
                         $("input:checkbox[name='ear_tinglibq']").attr('checked',result["ear_tinglibq"]);
+                        
                         $("input:checkbox[name='throat_zhengchang']").attr('checked',result["throat_zhengchang"]);	
                         $("input:checkbox[name='throat_yangan']").attr('checked',result["throat_yangan"]);	
                         $("input:checkbox[name='throat_yantong']").attr('checked',result["throat_yantong"]);	
                         $("input:checkbox[name='throat_yanyang']").attr('checked',result["throat_yanyang"]);	
                         $("input:checkbox[name='throat_yiwugan']").attr('checked',result["throat_yiwugan"]);	
+                        
                         $("input:checkbox[name='breath_wuyiwei']").attr('checked',result["breath_wuyiwei"]);	
                         $("input:checkbox[name='breath_kouku']").attr('checked',result["breath_kouku"]);	
                         $("input:checkbox[name='breath_kougan']").attr('checked',result["breath_kougan"]);	
@@ -361,6 +357,7 @@
                         $("input:checkbox[name='breath_koutian']").attr('checked',result["breath_koutian"]);	
                         $("input:checkbox[name='breath_kounian']").attr('checked',result["breath_kounian"]);	
                         $("input:checkbox[name='breath_danyuss']").attr('checked',result["breath_danyuss"]);	
+                        
                         $("input:checkbox[name='diet_nadaishishao']").attr('checked',result["diet_nadaishishao"]);	
                         $("input:checkbox[name='diet_shiyuws']").attr('checked',result["diet_shiyuws"]);
                         $("input:checkbox[name='diet_yanshi']").attr('checked',result["diet_yanshi"]);	
@@ -371,6 +368,7 @@
                         $("input:checkbox[name='diet_shixinla']").attr('checked',result["diet_shixinla"]);	
                         $("input:checkbox[name='diet_shishengleng']").attr('checked',result["diet_shishengleng"]);	
                         $("input:checkbox[name='diet_kebuduoyin']").attr('checked',result["diet_kebuduoyin"]);	
+                        
                         $("input:checkbox[name='sleep_zhengchang']").attr('checked',result["sleep_zhengchang"]);	
                         $("input:checkbox[name='sleep_yiban']").attr('checked',result["sleep_yiban"]);	
                         $("input:checkbox[name='sleep_duomengyixing']").attr('checked',result["sleep_duomengyixing"]);	
@@ -378,6 +376,7 @@
                         $("input:checkbox[name='sleep_cheyebumian']").attr('checked',result["sleep_cheyebumian"]);	
                         $("input:checkbox[name='sleep_duomeng']").attr('checked',result["sleep_duomeng"]);	
                         $("input:checkbox[name='sleep_shishui']").attr('checked',result["sleep_shishui"]);	
+                        
                         $("input:checkbox[name='stool_sehuang']").attr('checked',result["stool_sehuang"]);
                         $("input:checkbox[name='stool_bianmi']").attr('checked',result["stool_bianmi"]);	
                         $("input:checkbox[name='stool_zhixi']").attr('checked',result["stool_zhixi"]);	
@@ -386,6 +385,7 @@
                         $("input:checkbox[name='stool_tlzqxiexie']").attr('checked',result["stool_tlzqxiexie"]);	
                         $("input:checkbox[name='stool_zhinian']").attr('checked',result["stool_zhinian"]);
                         $("input:checkbox[name='stool_weixiaohua']").attr('checked',result["stool_weixiaohua"]);	
+                        
                         $("input:checkbox[name='urine_zhengchang']").attr('checked',result["urine_zhengchang"]);	
                         $("input:checkbox[name='urine_duanchi']").attr('checked',result["urine_duanchi"]);	
                         $("input:checkbox[name='urine_duanhuang']").attr('checked',result["urine_duanhuang"]);	
@@ -396,6 +396,7 @@
                         $("input:checkbox[name='urine_niaotong']").attr('checked',result["urine_niaotong"]);	
                         $("input:checkbox[name='urine_shaoniao']").attr('checked',result["urine_shaoniao"]);	
                         $("input:checkbox[name='urine_yulibujin']").attr('checked',result["urine_yulibujin"]);	
+                        
                         $("input:checkbox[name='limb_zhengchang']").attr('checked',result["limb_zhengchang"]);	
                         $("input:checkbox[name='limb_wuli']").attr('checked',result["limb_wuli"]);	
                         $("input:checkbox[name='limb_mamu']").attr('checked',result["limb_mamu"]);	
@@ -404,15 +405,18 @@
                         $("input:checkbox[name='limb_bingliang']").attr('checked',result["limb_bingliang"]);	
                         $("input:checkbox[name='limb_szxinre']").attr('checked',result["limb_szxinre"]);	
                         $("input:checkbox[name='limb_fuzhong']").attr('checked',result["limb_fuzhong"]);	
-                        $('#other_wu').val(result["other_wu"]);	
+                    
+                        $("input:checkbox[name='other_wu']").attr('checked',result["other_wu"]);
                         $("input:checkbox[name='other_czjdanbai']").attr('checked',result["other_czjdanbai"]);	
                         $("input:checkbox[name='other_xyjiantui']").attr('checked',result["other_xyjiantui"]);	
+                        
                         $("input:checkbox[name='texture_danhong']").attr('checked',result["texture_danhong"]);	
                         $("input:checkbox[name='texture_danbai']").attr('checked',result["texture_danbai"]);	
                         $("input:checkbox[name='texture_pianhong']").attr('checked',result["texture_pianhong"]);	
                         $("input:checkbox[name='texture_danan']").attr('checked',result["texture_danan"]);	
                         $("input:checkbox[name='texture_zian']").attr('checked',result["texture_zian"]);	
                         $("input:checkbox[name='texture_yudian']").attr('checked',result["texture_yudian"]);	
+                        
                         $("input:checkbox[name='coating_bai']").attr('checked',result["coating_bai"]);	
                         $("input:checkbox[name='coating_huang']").attr('checked',result["coating_huang"]);	
                         $("input:checkbox[name='coating_ni']").attr('checked',result["coating_ni"]);	
@@ -426,11 +430,13 @@
                         $("input:checkbox[name='coating_wutai']").attr('checked',result["coating_wutai"]);	
                         $("input:checkbox[name='coating_shaotai']").attr('checked',result["coating_shaotai"]);	
                         $("input:checkbox[name='coating_huabo']").attr('checked',result["coating_huabo"]);	
+                        
                         $("input:checkbox[name='tongue_shoubo']").attr('checked',result["tongue_shoubo"]);	
                         $("input:checkbox[name='tongue_pangda']").attr('checked',result["tongue_pangda"]);	
                         $("input:checkbox[name='tongue_bianjianhong']").attr('checked',result["tongue_bianjianhong"]);	
                         $("input:checkbox[name='tongue_youchihen']").attr('checked',result["tongue_youchihen"]);	
                         $("input:checkbox[name='tongue_zhongyouliewen']").attr('checked',result["tongue_zhongyouliewen"]);	
+                        
                         $("input:checkbox[name='pulse_shi']").attr('checked',result["pulse_shi"]);	
                         $("input:checkbox[name='pulse_fu']").attr('checked',result["pulse_fu"]);	
                         $("input:checkbox[name='pulse_chen']").attr('checked',result["pulse_chen"]);	
@@ -448,8 +454,6 @@
                         $("input:checkbox[name='pulse_hong']").attr('checked',result["pulse_hong"]);	
                         $("input:checkbox[name='pulse_youli']").attr('checked',result["pulse_youli"]);	
                         $("input:checkbox[name='pulse_wuli']").attr('checked',result["pulse_wuli"]);	
-                        // $("input:checkbox[name='person']").attr('checked',result["person"]); 
-                        
                     }else {
                         alert("result.status wrong");
                     }
@@ -728,7 +732,7 @@
         //         url:"/prj001/search",
         //         type:"GET",
         //         data: {
-        //             search: $('#searchContent').val(),
+        //             keyword: $('#schname').val(),
         //         },
         //         success:function (result) {
         //             alert("success")
@@ -744,6 +748,78 @@
 
 })
 </script>
+
+                                    <!-- 以下测试代码 -->
+<script>
+        function get_data(arg){
+            var page = 1;
+            var keyword = $("#schname").val();
+            $.ajax({
+                url: "/prj001/search",
+                type: "POST",
+                dataType: "json",
+                data:{
+                    "keyword": keyword,
+                    "page": page
+                },
+                success: function (data) {
+                    alert("Ajax原始返回数据: "+data["title"] +", "+data["curpage"]+ ", "+data["searchname"]);
+                    // show_archives_detail(data);
+                },
+                error: function () {
+                    alert("检索失败");
+                }
+            });
+        }
+        function show_archives_detail(callback_data) {
+            var workdata = callback_data;
+            $("#myarchiveslist").empty();
+            var html_code = "";
+            for(var i in workdata["archives"]){
+                var per_record = workdata["archives"][i];
+                //alert(">>>name: "+per_record["name"]);
+                html_code += '<tr><td>'+per_record.name+'</td><td>'+per_record.url +'</td><tr>';
+            }
+            $("#myarchiveslist").append(html_code);
+            $("#page").empty();
+            $("#page").append('<li></li>');
+            $("#page li:first").before('<li><a href="#" class="delete_mark" ' +
+                'onclick="go_to_page(this)" current_page_num="1">' + "&laquo;" + '</a></li>');
+            for(var i=1; i<=Number(workdata.totalpagenumber);i++){
+                var page_num = Number(i);
+                if(Number(workdata.curpage) == page_num) {   // 说明是当前页，那么进行高亮显示，把class设置为active
+                    $("#page li:last").before('<li class="active" ><a href="#" class="delete_mark" ' +
+                        'onclick="go_to_page(this)" current_page_num="' + page_num + '">' + page_num + '</a></li>');
+                }else {    // 说明不是当前页，那么不进行高亮显示
+                    $("#page li:last").before('<li><a href="#" class="delete_mark" ' +
+                        'onclick="go_to_page(this)" current_page_num="' + page_num + '">' + page_num + '</a></li>');
+                }
+            }
+            $("#page li:last").after('<li><a href="#" class="delete_mark" ' +
+                'onclick="go_to_page(this)" current_page_num="'+ Number(workdata.totalpagenumber) +'">' + "&raquo;" + '</a></li>');
+        }
+        function go_to_page(arg) {   // 获取指定页的内容
+            var page = $(arg).attr('current_page_num');
+            var keyword = $("#schname").val();
+            alert(">>>click page number: "+page+", "+keyword);
+            $.ajax({
+                url:'/prj001/search',
+                type:'post',
+                dataType:'json',
+                data:{
+                    "keyword": keyword,
+                    "page":page
+                },
+                success: function(data){
+                    console.log(data);
+                    show_archives_detail(data);
+                },
+                error: function(){
+                }
+            })
+        }
+</script>
+                                    <!-- 以上测试代码 -->
 
     <!-- 导航 -->
     <div class="navbar navbar-default" id="navbar">
@@ -865,15 +941,15 @@
 
                             <div class="row">
                                 <div class="col-xs-12">
+                                    <div class="searchbox">
+                                            <span class="input-icon align-middle">
+                                                    <i class="icon-search"></i>
+                                            <input type="text" class="search-query" id="schname" name="schname" 
+                                                    value=""  placeholder="采集对象人员姓名" class="text"/></li>
+                                            <button  class="btn btn-sm" type="button" id="searchBtn" onclick="get_data(this)">查询</button>
+                                            </span>
+                                    </div>
 
-                                    <form class="form-search" id="sample-table-2_filter">
-                                        <span class="input-icon align-middle">
-                                            <i class="icon-search"></i>
-
-                                            <input id="searchContent" type="text" class="search-query" placeholder="采集对象人员姓名" />
-                                        </span>
-                                        <button id="searchBtn" type="button" class="btn btn-sm searchBtn">检索</button>
-                                    </form>
                                     <hr>
                                     <div class="table-responsive">
                                         <table class="table table-striped table-bordered table-hover">
@@ -1007,7 +1083,7 @@
                                         <!-- <div id="pagination" class="pagination"></div> -->
                                         
                                         <div class="row">
-                                                <div class="col-sm-6"></div>
+                                                <div class="col-sm-6">共有 <%= totalCount %> 条</div>
                                                 <div class="col-sm-6">
                                                     <div class="dataTables_paginate paging_bootstrap">
                                                         <nav aria-label="Page navigation">
@@ -1043,6 +1119,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <!--一般情况-->
                             <div id="modal-table" class="modal fade" tabindex="-1">
                                 <div class="modal-dialog">
@@ -1493,14 +1570,14 @@
                                                             腹部：
                                                         <p>
                                                             <label><input name="stomach_zhengchang" type="checkbox" value="true"/>正常</label>
-                                                            <label><input name="stomach_zhangtongjuan" type="checkbox" value="true"/>胀痛拒</label>
+                                                            <label><input name="stomach_zhangtongjuan" type="checkbox" value="true"/>胀痛拒按</label>
                                                             <label><input name="stomach_xiaofuzhuizhang" type="checkbox" value="true"/>小腹坠胀</label>
                                                             <label><input name="stomach_xiaofubiezhang" type="checkbox" value="true"/>小腹憋胀</label>
                                                             <label><input name="stomach_xiaofulengtong" type="checkbox" value="true"/>小腹冷痛</label>
                                                             <label><input name="stomach_xiaofuzhuotong" type="checkbox" value="true"/>小腹灼痛</label>
                                                             <label><input name="stomach_yintongxian" type="checkbox" value="true"/>隐痛喜按</label>
-                                                            <label><input name="stomach_dewentongjian" type="checkbox" value="true"/>冷痛,得温痛减</label>
-                                                            <label><input name="stomach_tongruzhenci" type="checkbox" value="true"/>小腹结块,痛</label>
+                                                            <label><input name="stomach_dewentongjian" type="checkbox" value="true"/>冷痛，得温痛减</label>
+                                                            <label><input name="stomach_tongruzhenci" type="checkbox" value="true"/>小腹结块，痛如针刺</label>
                                                             <label><input name="stomach_kongzhui" type="checkbox" value="true"/>有空坠感</label>
                                                         </p>
                                                         <p>
@@ -1520,7 +1597,7 @@
                                                             <label><input name="eyes_yanhua" type="checkbox" value="true"/>眼花</label>
                                                             <label><input name="eyes_mutong" type="checkbox" value="true"/>目痛</label>
                                                             <label><input name="eyes_muyang" type="checkbox" value="true"/>目痒</label>
-                                                            <label><input name="eyes_chenqifz" type="checkbox" value="true"/>晨起眼脸浮肿</label>
+                                                            <label><input name="eyes_chenqifz" type="checkbox" value="true"/>晨起眼睑浮肿</label>
                                                         </p>
                                                         <p>
                                                             耳：
@@ -1535,7 +1612,7 @@
                                                             <label><input name="throat_zhengchang" type="checkbox" value="true"/>正常</label>
                                                             <label><input name="throat_yangan" type="checkbox" value="true"/>咽干</label>
                                                             <label><input name="throat_yantong" type="checkbox" value="true"/>咽痛</label>
-                                                            <label><input name="throat_yanyang" type="checkbox" value="true"/>烟痒</label>
+                                                            <label><input name="throat_yanyang" type="checkbox" value="true"/>咽痒</label>
                                                             <label><input name="throat_yiwugan" type="checkbox" value="true"/>异物感</label>
                                                         </p>
                                                         <p>
@@ -1554,11 +1631,11 @@
                                                             饮食：
                                                         <p>
                                                             <label><input name="diet_nadaishishao" type="checkbox" value="true"/>纳呆食少</label>
-                                                            <label><input name="diet_shiyuws" type="checkbox" value="true"/>食欲旺盛,多食</label>
+                                                            <label><input name="diet_shiyuws" type="checkbox" value="true"/>食欲旺盛，多食易饥</label>
                                                             <label><input name="diet_yanshi" type="checkbox" value="true"/>厌食</label>
                                                             <label><input name="diet_xireyin" type="checkbox" value="true"/>喜热饮</label>
                                                             <label><input name="diet_xilengyin" type="checkbox" value="true"/>喜冷饮</label>
-                                                            <label><input name="diet_shiyujiantui" type="checkbox" value="true"/>食欲减退、食</label>
+                                                            <label><input name="diet_shiyujiantui" type="checkbox" value="true"/>食欲减退，食少</label>
                                                             <label><input name="diet_shihoufuzhang" type="checkbox" value="true"/>食后腹胀</label>
                                                             <label><input name="diet_shixinla" type="checkbox" value="true"/>喜辛辣</label>
                                                             <label><input name="diet_shishengleng" type="checkbox" value="true"/>喜生冷</label>
@@ -1578,14 +1655,14 @@
                                                         <p>
                                                             大便：
                                                         <p>
-                                                            <label><input name="stool_sehuang" type="checkbox" value="true"/>色黄,通畅,</label>
+                                                            <label><input name="stool_sehuang" type="checkbox" value="true"/>色黄，通畅，成形不干燥</label>
                                                             <label><input name="stool_bianmi" type="checkbox" value="true"/>便秘</label>
                                                             <label><input name="stool_zhixi" type="checkbox" value="true"/>质稀</label>
                                                             <label><input name="stool_sgsx" type="checkbox" value="true"/>时干</label>
                                                             <label><input name="stool_xiexie" type="checkbox" value="true"/>泄泻</label>
                                                             <label><input name="stool_tlzqxiexie" type="checkbox" value="true"/>天亮前泄</label>
-                                                            <label><input name="stool_zhinian" type="checkbox" value="true"/>质粘,有排</label>
-                                                            <label><input name="stool_weixiaohua" type="checkbox" value="true"/>大便中夹</label>
+                                                            <label><input name="stool_zhinian" type="checkbox" value="true"/>质黏，有排不尽之感</label>
+                                                            <label><input name="stool_weixiaohua" type="checkbox" value="true"/>大便中夹有未消化食物</label>
                                                         </p>
                                                         <p>
                                                             小便：
@@ -1744,9 +1821,9 @@
                                                     <p>
                                                         <label><input type="radio" value="很少（≤1次/周）" name="phycial_exercise"/>很少（≤1次/周）</label>
                                                         <label><input type="radio" value="偶尔（≤3次/周）" name="phycial_exercise"/>偶尔（≤3次/周）</label>
-                                                        <label><input type="radio" value="经常（≥4次/周）" name="phycial_exercise"/>经常（≥4次/周）</label>
-                                                        <label><input type="radio" value="一般（少量出汗，心率≤120次/分）" name="phycial_exercise"/>一般（少量出汗，心率≤120次/分）</label>
-                                                        <label><input type="radio" value="高强度（大汗淋漓，心率>120次/分）" name="phycial_exercise"/>高强度（大汗淋漓，心率>120次/分）</label>
+                                                        <label><input type="radio" value="经常（（≥4次/周）" name="phycial_exercise"/>经常（（≥4次/周）</label>
+                                                        <label><input type="radio" value="一般(少量出汗，心率≤120次/分)" name="phycial_exercise"/>一般(少量出汗，心率≤120次/分)</label>
+                                                        <label><input type="radio" value="高强度(大汗淋漓，心率>120次/分)" name="phycial_exercise"/>高强度(大汗淋漓，心率>120次/分)</label>
                                                     </p>
                                                     <p>
                                                         一级亲属（母亲、姐妹、女儿）异常子宫出血史:
