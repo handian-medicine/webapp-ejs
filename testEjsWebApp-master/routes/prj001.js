@@ -828,4 +828,17 @@ router.get('/search', function (req, res, next) {
         }
     }
 });
+
+// router.get('/patientInfo', function (req, res, next){
+//     var patient_id = "";
+//     var patient_url;
+//     patient_url = myconst.apiurl + "prj001/patientInfo/" + patient_id;
+//     var authstring = req.cookies.prj001token.access_token;
+//         var options = {
+//             url: search_url,
+//             headers: {
+//                 'Authorization': 'Bearer ' + authstring
+//             }
+//         };
+// })
 module.exports = router;

@@ -602,16 +602,16 @@
                         $("input:checkbox[name='prevent_fufang']").attr('checked',result["prevent_fufang"]);	
                         $('#prevent_qita').val(result["prevent_qita"]);
 
-                        $("input:checkbox[name='accessory_hgb_value']").attr('checked',result["accessory_hgb_value"]);	
-                        $("input:checkbox[name='accessory_quanxuexibaojishu']").attr('checked',result["accessory_quanxuexibaojishu"]);	
-                        $("input:checkbox[name='accessory_chuxuexingjibing']").attr('checked',result["accessory_chuxuexingjibing"]);	
-                        $("input:checkbox[name='accessory_ningxue']").attr('checked',result["accessory_ningxue"]);	
-                        $("input:checkbox[name='accessory_jiazhuangxian']").attr('checked',result["accessory_jiazhuangxian"]);	
-                        $("input:checkbox[name='accessory_niaorenshen']").attr('checked',result["accessory_niaorenshen"]);	
-                        $("input:checkbox[name='accessory_penqiangchaosheng']").attr('checked',result["accessory_penqiangchaosheng"]);	
-                        $("input:checkbox[name='accessory_jichutiwen']").attr('checked',result["accessory_jichutiwen"]);	
-                        $("input:checkbox[name='accessory_jisushuiping']").attr('checked',result["accessory_jisushuiping"]);	
-                        $("input:checkbox[name='accessory_guagong']").attr('checked',result["accessory_guagong"]);	
+                        $("input[name='accessory_hgb_value'][value='"+result["accessory_hgb_value"]+"']").attr("checked",true);	
+                        $('#accessory_quanxuexibaojishu').val(result["accessory_quanxuexibaojishu"]);
+                        $('#accessory_chuxuexingjibing').val(result["accessory_chuxuexingjibing"]);
+                        $('#accessory_ningxue').val(result["accessory_ningxue"]);
+                        $('#accessory_jiazhuangxian').val(result["accessory_jiazhuangxian"]);
+                        $('#accessory_niaorenshen').val(result["accessory_niaorenshen"]);
+                        $('#accessory_penqiangchaosheng').val(result["accessory_penqiangchaosheng"]);
+                        $('#accessory_jichutiwen').val(result["accessory_jichutiwen"]);
+                        $('#accessory_jisushuiping').val(result["accessory_jisushuiping"]);
+                        $('#accessory_guagong').val(result["accessory_guagong"]);
                         $('#accessory_qita').val(result["accessory_qita"]);
                         // person
                     }else {
@@ -899,7 +899,8 @@
                                             <tbody id="archivelist">
                                                 <% archives.forEach(function(archive){ %>
                                                 <tr>
-                                                    <!-- <td><a href="../public/bingo.html"> -->
+                                                    <!-- <a href="../public/bingo.html"> -->
+                                                        <!-- <a href="../prj001/patientInfo"></a> -->
                                                     <td>
                                                         <%= archive.name %>
                                                     </td>
@@ -1920,19 +1921,17 @@
                                                         <label><input type="radio" value="91-110" name="accessory_hgb_value"/>91-110</label>
                                                         <label><input type="radio" value="61-90" name="accessory_hgb_value"/>61-90</label>
                                                         <label><input type="radio" value="30-60" name="accessory_hgb_value"/>30-60</label>
-                                                    <p>
-                                                    <label><input name="accessory_quanxuexibaojishu" type="checkbox" value="true"/>全血细胞计数</label>
-                                                    <label><input name="accessory_chuxuexingjibing" type="checkbox" value="true"/>出血性疾病筛查（如女性血管性血友病）</label>
-                                                    <label><input name="accessory_ningxue" type="checkbox" value="true"/>凝血功能检查</label>
-                                                    <label><input name="accessory_jiazhuangxian" type="checkbox" value="true"/>甲状腺功能检测</label>
-                                                    <label><input name="accessory_niaorenshen" type="checkbox" value="true"/>尿妊娠试验</label>
-                                                    <label><input name="accessory_penqiangchaosheng" type="checkbox" value="true"/>盆腔超声检查</label>
-                                                    <label><input name="accessory_jichutiwen" type="checkbox" value="true"/>基础体温测定</label>
-                                                    <label><input name="accessory_jisushuiping" type="checkbox" value="true"/>激素水平测定</label>
-                                                    <label><input name="accessory_guagong" type="checkbox" value="true"/>诊断性刮宫或宫腔镜下刮宫</label>
-                                                    <label>其它说明:</label>
-                                                        <input type="text" id="accessory_qita" name="accessory_qita" value="无"/>
-                                                    </p>
+                                                
+                                                    <p>全血细胞计数:<input class="form-control" id="accessory_quanxuexibaojishu" name="accessory_quanxuexibaojishu" value="红细胞计数(RBC)5.0*10^12/L" type="text"/></p>
+                                                    <p>出血性疾病筛查（如女性血管性血友病）:<input class="form-control" id="accessory_chuxuexingjibing" name="accessory_chuxuexingjibing" value="无" type="text"/></p>
+                                                    <p>凝血功能检查:<input class="form-control" id="accessory_ningxue" name="accessory_ningxue" value="无" type="text"/></p>
+                                                    <p>甲状腺功能检测:<input class="form-control" id="accessory_jiazhuangxian" name="accessory_jiazhuangxian" value="无" type="text"/></p>
+                                                    <p>尿妊娠试验:<input class="form-control" id="accessory_niaorenshen" name="accessory_niaorenshen" value="无" type="text"/></p>
+                                                    <p>盆腔超声检查:<input class="form-control" id="accessory_penqiangchaosheng" name="accessory_penqiangchaosheng" value="无" type="text"/></p>
+                                                    <p>基础体温测定:<input class="form-control" id="accessory_jichutiwen" name="accessory_jichutiwen" value="无" type="text"/></p>
+                                                    <p>激素水平测定:<input class="form-control" id="accessory_jisushuiping" name="accessory_jisushuiping" value="无" type="text"/></p>
+                                                    <p>诊断性刮宫或宫腔镜下刮宫:<input class="form-control" id="accessory_guagong" name="accessory_guagong" value="无" type="text"/></p>
+                                                    <label>其它说明:</label><input id="accessory_qita" name="accessory_qita" value="无" type="text"/>
                                                         </div>
                                                     </div>
                                                 </div>
