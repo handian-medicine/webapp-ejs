@@ -71,7 +71,7 @@ router.get('/', function (req, res, next) {
                     curpage: curPageNumber,
                     previouspage: previousPage,
                     nextpage: nextPage,
-                    totalCount: archiveobjs.totalCount
+                    // totalCount: archiveobjs.totalCount
                 });
                 /*   分页测试  */
             } else {
