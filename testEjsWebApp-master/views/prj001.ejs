@@ -28,7 +28,7 @@
 </head>
 
 <body>
-    <script>
+    <!-- <script>
                     // 测试代码
                 $.fn.ghostsf_serialize = function () {
                 var a = this.serializeArray();
@@ -44,7 +44,7 @@
                 });
                 return jQuery.param(a);
             };
-    </script>
+    </script> -->
 <script>
     $(document).ready(function () {
 
@@ -148,8 +148,8 @@
                 dataType: "json",
                 data: {
                     menstruation_url: $(this).attr("menstruationBtn-url"),
-                    // form_menstruation: $('#form-menstruation').serialize(),
-                    form_menstruation: $('#form-menstruation').ghostsf_serialize()
+                    form_menstruation: $('#form-menstruation').serialize(),
+                    // form_menstruation: $('#form-menstruation').ghostsf_serialize()
                 },
                 success:function (result) {
                     //403,用户除了自己,对于其它用户只有查看权限,不能修改
@@ -213,7 +213,6 @@
         })
 
         $(".symptomBtn").click(function () {
-
             var temp_geninfourl = $('#person-symptom').val();
             $('#person-symptom').val(temp_geninfourl);//如果url不为空，api服务器返回的数据有person字段
             $.ajax({
@@ -222,8 +221,8 @@
                 dataType: "json",
                 data: {
                     symptom_url: $(this).attr("symptomBtn-url"),
-                    // form_symptom: $('#form-symptom').serialize(),
-                    form_symptom:$('#form-symptom').ghostsf_serialize()
+                    form_symptom: $('#form-symptom').serialize(),
+                    // form_symptom:$('#form-symptom').ghostsf_serialize()
                 },
                 success:function (result) {
                     //403,用户除了自己,对于其它用户只有查看权限,不能修改
@@ -472,8 +471,8 @@
                 dataType: "json",
                 data: {
                     other_url: $(this).attr("otherBtn-url"),
-                    // form_other: $('#form-other').serialize(),
-                    form_other: $('#form-other').ghostsf_serialize()
+                    form_other: $('#form-other').serialize(),
+                    // form_other: $('#form-other').ghostsf_serialize()
                 },
                 success:function (result) {
                     //403,用户除了自己,对于其它用户只有查看权限,不能修改
@@ -636,8 +635,8 @@
                 dataType: "json",
                 data: {
                     cc_url: $(this).attr("ccBtn-url"),
-                    // form_cc: $('#form-cc').serialize(),
-                    form_cc: $('#form-cc').ghostsf_serialize()
+                    form_cc: $('#form-cc').serialize(),
+                    // form_cc: $('#form-cc').ghostsf_serialize()
                 },
                 success:function (result) {
                     //403,用户除了自己,对于其它用户只有查看权限,不能修改
