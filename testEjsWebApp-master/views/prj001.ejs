@@ -534,10 +534,10 @@
                         $('#reducefat_qita').val(result["reducefat_qita"]);
                         $('#reducefat_persist').val(result["reducefat_persist"]);
 
-                        $("input:checkbox[name='mens_yundong']").attr('checked',result["mens_yundong"]);	
-                        $("input:checkbox[name='mens_ganmao']").attr('checked',result["mens_ganmao"]);	
-                        $("input:checkbox[name='mens_tongfang']").attr('checked',result["mens_tongfang"]);	
-                        $("input:checkbox[name='mens_zhaoliang']").attr('checked',result["mens_zhaoliang"]);
+                        $("input[name='mens_yundong'][value='"+result["mens_yundong"]+"']").attr("checked",true);
+                        $("input[name='mens_ganmao'][value='"+result["mens_ganmao"]+"']").attr("checked",true);
+                        $("input[name='mens_tongfang'][value='"+result["mens_tongfang"]+"']").attr("checked",true);
+                        $("input[name='mens_zhaoliang'][value='"+result["mens_zhaoliang"]+"']").attr("checked",true);
 
                         $("input:checkbox[name='leucorrhea_liangshao']").attr('checked',result["leucorrhea_liangshao"]);	
                         $("input:checkbox[name='leucorrhea_liangke']").attr('checked',result["leucorrhea_liangke"]);	
@@ -1862,6 +1862,7 @@
                                                     </p>
                                                     <p>
                                                         经期情况:
+
                                                     <p>
                                                         经期运动：
                                                         <label><input type="radio" value="有" name="mens_yundong"/>有</label>
