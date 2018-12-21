@@ -71,12 +71,14 @@
                         alert("保存成功！")
                         window.location.href = '/prj001' + '/?page=' + '<%= curpage %>';
                     } else {
-                        if (result.status == 403)
-                        alert("无法修改")
+                        if (result.status == 403) {
+                            // alert("您无法修改此条信心, 请联系用户 " + result.user_geninfo.name)
+                            alert("" + result.user_geninfo.detail)
+                        }
+                        
                     }
                 },
                 error: function (result) {
-                    //403,用户除了自己,对于其它用户只有查看权限,不能修改
                         alert("保存失败" + result.status)
                 },
             })
@@ -166,7 +168,7 @@
                         window.location.href = '/prj001' + '/?page=' + '<%= curpage %>';
                     } else {
                         if (result.status == 403)
-                        alert("无法修改")
+                        alert("" + result.user_menstruation.detail)
                     }
                 },
                 error: function () {
@@ -239,7 +241,7 @@
                         window.location.href = '/prj001' + '/?page=' + '<%= curpage %>';
                     } else {
                         if (result.status == 403)
-                        alert("无法修改")
+                        alert("" + result.user_symptom.detail)
                     }
                 },
                 error: function () {
@@ -509,7 +511,7 @@
                         window.location.href = '/prj001' + '/?page=' + '<%= curpage %>';
                     } else {
                         if (result.status == 403)
-                        alert("无法修改")
+                        alert("" + result.user_other.detail)
                     }
                 },
                 error: function () {
@@ -673,7 +675,7 @@
                         window.location.href = '/prj001' + '/?page=' + '<%= curpage %>';
                     } else {
                         if (result.status == 403)
-                        alert("无法修改")
+                        alert("" + result.user_cc.detail)
                     }
                 },
                 error: function () {
