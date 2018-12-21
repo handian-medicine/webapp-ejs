@@ -65,7 +65,7 @@
         
             //验证，判断日期格式
             if ((iIdNo.length != 8) && !v) {
-                strReturn = "日期格式错误，提示：19990101或1999-01-01";
+                strReturn = "日期格式错误，提示：20180101或2018-01-01";
                 alert(strReturn);
                 // document.getElementById(id).select();
                 return false;
@@ -124,10 +124,8 @@
         function dateStyle(){
             var explorerName = getExploreName();
             if (explorerName == 'IE') {
-                alert("IE Browser")
                 $("#recdate").attr("type", "text")
             } else {
-                alert("Other Browser")
                 $("#recdate").attr("type", "date")
                 $("#recdate").removeAttr("onblur");
             }
@@ -322,7 +320,8 @@
                                                         <div class="col-xs-12 col-sm-12">
                                                             <p>
                                                             日期：
-                                                            <input type="text" id="recdate" name="recdate" class="form-control hasDatepicker" onblur="date('recdate')">
+                                                            <input type="text" id="recdate" name="recdate" class="form-control hasDatepicker" 
+                                                                   placeholder="日期格式: 20180101或2018-01-01" onblur="date('recdate')" />
                                                             <!-- <input type="text" id="recdate-ie" name="recdate" class="form-control hasDatepicker" onblur="date('recdate-ie')" /> -->
                                                             <!-- <input type="date" id="recdate-other" name="recdate" class="form-control hasDatepicker"/> -->
                                                             </p>
@@ -340,11 +339,11 @@
                                                             </p>
                                                             <p>
                                                                 职称:
-                                                    <select name="title" class="form-control">
-                                                        <option value="主任医师">主任医师</option>
-                                                        <option value="副主任医师">副主任医师</option>
-                                                        <option value="主治医师">主治医师</option>
-                                                    </select>
+                                                                    <select name="title" class="form-control">
+                                                                        <option value="主任医师">主任医师</option>
+                                                                        <option value="副主任医师">副主任医师</option>
+                                                                        <option value="主治医师">主治医师</option>
+                                                                    </select>
                                                             </p>
                                                             <p>
                                                                 患者姓名:<input class="form-control" id="name" name="name"
