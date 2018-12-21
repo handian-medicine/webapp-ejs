@@ -17,13 +17,37 @@
     <script src="../public/js/ace-extra.min.js"></script>
     <script src="../public/javascripts/jquery.min.js"></script>
     <script src="../public/js/respond.min.js"></script>
-        <style>
-        .color{
-            color: #fff;
-        }
-        :hover.color {
-            color: #fff;
-        }
+    <script src="../public/js/jquery.pagination.min.js"></script>
+
+    <style>
+    .color{
+        color: #fff;
+    }
+    :hover.color {
+        color: #fff;
+    }
+    .page{
+        height: 35px;
+        font-size: 13px;
+        text-align: center;
+        line-height: 35px;
+        width: 40%;
+    }
+    .ui-pagination-container{
+        height: 40px;
+    }
+    .ui-pagination-container a{
+        display: inline-block;
+        border: 1px solid #DDD;
+        width: 11%;
+        height: 35px;
+        float: left;
+    }
+    .ui-pagination-container .active{
+        background: #6fb3e0;
+        color: white;
+    }
+
     </style>
 </head>
 
@@ -45,7 +69,7 @@
                     //403,用户除了自己,对于其它用户只有查看权限,不能修改
                     if (result.status == 200 || result.status == 201) {
                         alert("保存成功！")
-                        window.location.href = '/prj001';
+                        window.location.href = '/prj001' + '/?page=' + '<%= curpage %>';
                     } else {
                         if (result.status == 403)
                         alert("无法修改")
@@ -139,7 +163,7 @@
                     //403,用户除了自己,对于其它用户只有查看权限,不能修改
                     if (result.status == 200 || result.status == 201) {
                         alert("保存成功！")
-                        window.location.href = '/prj001';
+                        window.location.href = '/prj001' + '/?page=' + '<%= curpage %>';
                     } else {
                         if (result.status == 403)
                         alert("无法修改")
@@ -212,7 +236,7 @@
                     //403,用户除了自己,对于其它用户只有查看权限,不能修改
                     if (result.status == 200 || result.status == 201) {
                         alert("保存成功！")
-                        window.location.href = '/prj001';
+                        window.location.href = '/prj001' + '/?page=' + '<%= curpage %>';
                     } else {
                         if (result.status == 403)
                         alert("无法修改")
@@ -482,7 +506,7 @@
                     //403,用户除了自己,对于其它用户只有查看权限,不能修改
                     if (result.status == 200 || result.status == 201) {
                         alert("保存成功！")
-                        window.location.href = '/prj001';
+                        window.location.href = '/prj001' + '/?page=' + '<%= curpage %>';
                     } else {
                         if (result.status == 403)
                         alert("无法修改")
@@ -646,7 +670,7 @@
                     //403,用户除了自己,对于其它用户只有查看权限,不能修改
                     if (result.status == 200 || result.status == 201) {
                         alert("保存成功！")
-                        window.location.href = '/prj001';
+                        window.location.href = '/prj001' + '/?page=' + '<%= curpage %>';
                     } else {
                         if (result.status == 403)
                         alert("无法修改")
@@ -732,7 +756,7 @@
         //         url:"/prj001/search",
         //         type:"GET",
         //         data: {
-        //             keyword: $('#schname').val(),
+        //             search: $('#schname').val(),
         //         },
         //         success:function (result) {
         //             alert("success")
@@ -750,10 +774,11 @@
 </script>
 
                                     <!-- 以下测试代码 -->
-<!-- <script>
+<script>
         function get_data(arg){
             var page = 1;
             var keyword = $("#schname").val();
+            alert("搜索关键字：" + keyword);
             $.ajax({
                 url: "/prj001/search",
                 type: "POST",
@@ -763,7 +788,7 @@
                     "page": page
                 },
                 success: function (data) {
-                    alert("Ajax原始返回数据: "+data["title"] +", "+data["curpage"]+ ", "+data["searchname"]);
+                    // alert("Ajax原始返回数据: " + data["curpage"]+ ", "+data["searchname"]);
                     // show_archives_detail(data);
                 },
                 error: function () {
@@ -818,7 +843,7 @@
                 }
             })
         }
-</script> -->
+</script>
                                     <!-- 以上测试代码 -->
 
     <!-- 导航 -->
@@ -946,7 +971,7 @@
                                                     <i class="icon-search"></i>
                                             <input type="text" class="search-query" id="schname" name="schname" 
                                                     value=""  placeholder="采集对象人员姓名" class="text"/></li>
-                                            <button  class="btn btn-sm" type="button" id="searchBtn" onclick="get_data(this)">查询</button>
+                                            <button  class="btn btn-sm" type="button" id="searchBtn" onclick="get_data1(this)">查询</button>
                                             </span>
                                     </div>
 
@@ -1083,14 +1108,31 @@
                                         <!-- <div id="pagination" class="pagination"></div> -->
                                         
                                         <div class="row">
-                                                <div class="col-sm-6"></div>
-                                                <div class="col-sm-6">
+                                                <div class="col-sm-6">共有 <%= totalCount %> 条</div>
+
+                                                <div id="pagination" class="col-sm-6 page">
+                                                <!-- <input id="curpage" type="hidden" value="<%= curpage %>"/> -->
+                                                <!-- <input id="totalpagenumber" type="hidden" value=""/> -->
+                                                <script>
+                                                    // 调用父页面的方法改变菜单指示
+                                                    $(function(){
+                                                        $("#pagination").pagination({
+                                                            currentPage: <%= curpage %>,
+                                                            totalPage: <%= totalpagenumber %>,
+                                                            callback: function(current) {
+                                                                window.location.href = "/prj001/?page=" + current;
+                                                            }
+                                                        });
+                                                    });
+                                                </script>
+
+                                                <!-- <div class="col-sm-6">
                                                     <div class="dataTables_paginate paging_bootstrap">
                                                         <nav aria-label="Page navigation">
                                                         <ul class="pagination">
                                                             <% if (previouspage) { %>
                                                             <li class="prev">
-                                                                <a href="?page=<%= previouspage %>&search=">
+                                                                <a href="?page=<%= previouspage %>">
                                                                     <i class="icon-double-angle-left"></i>
                                                                 </a >
                                                             </li>
@@ -1098,15 +1140,15 @@
 
                                                             <% for (var pg=1;pg<=totalpagenumber;pg++){ %>
                                                                 <% if (curpage == pg) { %>
-                                                                <li class="active"><a href="?page=<%= pg %>&search="><%= pg %></a></li>
+                                                                <li class="active"><a href="?page=<%= pg %>"><%= pg %></a></li>
                                                                 <% }else {%>
-                                                                <li><a href="?page=<%= pg %>&search="><%= pg %></a></li>
+                                                                <li><a href="?page=<%= pg %>"><%= pg %></a></li>
                                                                 <% } %>
                                                             <% } %>
                                                             
                                                             <% if (nextpage) { %>
                                                             <li class="next">
-                                                                <a href="?page=<%= nextpage %>&search=">
+                                                                <a href="?page=<%= nextpage %>">
                                                                     <i class="icon-double-angle-right"></i>
                                                                 </a >
                                                             </li>
@@ -1114,7 +1156,7 @@
                                                         </ul>
                                                         </nav>
                                                     </div>
-                                                </div>
+                                                </div> -->
                                         </div>
                                     </div>
                                 </div>
@@ -1861,7 +1903,6 @@
                                                     </p>
                                                     <p>
                                                         经期情况:
-
                                                     <p>
                                                         经期运动：
                                                         <label><input type="radio" value="有" name="mens_yundong"/>有</label>

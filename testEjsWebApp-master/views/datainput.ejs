@@ -6,46 +6,35 @@
     <title>数据采集</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- basic styles -->
-
     <link rel="stylesheet" href="../public/css/bootstrap.min.css">
     <link rel="stylesheet" href="../public/css/font-awesome.min.css">
 
-    <!--[if IE 7]>
-    <link rel="stylesheet" href="../public/css/font-awesome-ie7.min.css" />
-    <![endif]-->
-
-    <!-- page specific plugin styles -->
     <link rel="stylesheet" href="../public/css/jquery-ui-1.10.3.custom.min.css" />
     <link rel="stylesheet" href="../public/css/chosen.css" />
     <link rel="stylesheet" href="../public/css/datepicker.css" />
     <link rel="stylesheet" href="../public/css/bootstrap-timepicker.css" />
     <link rel="stylesheet" href="../public/css/daterangepicker.css" />
     <link rel="stylesheet" href="../public/css/colorpicker.css" />
-    <!-- fonts -->
 
-    <!-- ace styles -->
     <link rel="stylesheet" href="../public/css/ace.min.css">
     <link rel="stylesheet" href="../public/css/ace-rtl.min.css">
     <link rel="stylesheet" href="../public/css/ace-skins.min.css">
-    <!--[if lte IE 8]>
-    <link rel="stylesheet" href="../public/css/ace-ie.min.css" />
-    <![endif]-->
-
-    <!-- inline styles related to this page -->
-
-    <!-- ace settings handler -->
 
     <script src="../public/js/ace-extra.min.js"></script>
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-
-    <!--[if lt IE 9]>
-    <script src="../public/../public/js/html5shiv.js"></script>
-    <script src="../public/../public/js/respond.min.js"></script>
-    <![endif]-->
     <script src="/public/javascripts/jquery.min.js"></script>
     <script src="/public/javascripts/jquery.form.min.js"></script>
+
+    <!-- 新日期控件 -->
+    <!-- <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $( function() {
+          $( "#recdate" ).datepicker();
+          $( "#recdate" ).datepicker("option", "dateFormat", "yy-mm-dd" );
+        } );
+    </script> -->
+    <!-- 新日期控件 -->
 </head>
 
 <body>
@@ -74,45 +63,6 @@
                 }
             });
         })
-         /*$("#file-submit").click(function () {
-             var files = $('input[name="xlsFileTrans"]').prop('files');//获取到文件列表
-             //console.log(files);
-             if(files.length==0){//拦截空文件
-                 alert("请选择文件");
-             }else{
-                 var files_name=files[0].name;//获取文件名称
-                 var zh=(/[^\.]+$/);
-                 var files_name=files_name.match(zh);//中正则获取后缀名称
-                 //console.log(files_name[0]);
-                 if(files_name[0]!=='xls' || files_name[0]!=='xlsx'){//拦截不是excel表格的文件
-                     alert("请选择excel表格");
-                 }else {
-                     var xlsform = new FormData(document.getElementById("excelform"));
-                     $.ajax({
-                         url: "/prj001/file_upload", //用来处理ajax请求的函数的所在网址路径
-                         type: "POST",
-                         data: xlsform,
-                         async: false,
-                         cache: false,
-                         contentType: false,
-                         processData: false,
-                         success: function (data) {
-                             console.log("ajax result:", data);
-                             if (data.status == 1) { //result.resultCode == 201,result.status == 1
-                                 alert("SUCCESS");
-                                 // window.location.href = '/prj001'; //    请求成功后跳转到项目主页
-                             } else {
-                                 alert("录入失败");
-                             }
-                         },
-                         error: function () {
-                             alert("录入失败");
-                             // window.location.href = '/prj001/datainput';
-                         }
-                     });
-                 }
-         });*/
-
     })
 </script>
 <!-- 导航 -->
@@ -269,10 +219,9 @@
                                                 <div class="modal-body">
                                                     <div class="row">
                                                         <div class="col-xs-12 col-sm-12">
-
+                                                            <p>
                                                             日期：
                                                             <input type="date" id="recdate" name="recdate" class="form-control hasDatepicker">
-
                                                             </p>
                                                             <p>
                                                                 问卷编码:<input class="form-control" id="serial" name="serial"
@@ -545,20 +494,9 @@
         </a>
     </div>
 
-
-    <!--[if !IE]> -->
-
     <script type="text/javascript">
         window.jQuery || document.write("<script src='../public/js/jquery-2.0.3.min.js'>" + "<" + "/script>");
     </script>
-
-    <!-- <![endif]-->
-
-    <!--[if IE]>
-<script type="text/javascript">
-    window.jQuery || document.write("<script src='../public/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
-</script>
-<![endif]-->
 
     <script type="text/javascript">
         if ("ontouchend" in document) document.write("<script src='../public/js/jquery.mobile.custom.min.js'>" + "<" +
@@ -584,17 +522,10 @@
     <script src="../public/js/jquery.inputlimiter.1.3.1.min.js"></script>
     <script src="../public/js/jquery.maskedinput.min.js"></script>
     <script src="../public/js/bootstrap-tag.min.js"></script>
-    <!-- ace scripts -->
-
-
-    <!--[if lte IE 8]>
-<script src="../public/js/excanvas.min.js"></script>
-<![endif]-->
-
     <script src="../public/js/ace-elements.min.js"></script>
     <script src="../public/js/ace.min.js"></script>
 
-    <!-- inline scripts related to this page -->
+
 
     <script type="text/javascript">
         jQuery(function ($) {
