@@ -10,52 +10,20 @@
     <link rel="stylesheet" href="../public/css/bootstrap.min.css">
     <link rel="stylesheet" href="../public/css/font-awesome.min.css">
 
-    <!--[if IE 7]>
-    <link rel="stylesheet" href="css/font-awesome-ie7.min.css" />
-    <![endif]-->
-
-    <!-- page specific plugin styles -->
-
-    <!-- fonts -->
-
-    <!-- ace styles -->
     <link rel="stylesheet" href="../public/css/ace.min.css">
     <link rel="stylesheet" href="../public/css/ace-rtl.min.css">
     <link rel="stylesheet" href="../public/css/ace-skins.min.css">
-    <!--[if lte IE 8]>
-    <link rel="stylesheet" href="css/ace-ie.min.css" />
-    <![endif]-->
 
-    <!-- inline styles related to this page -->
 
-    <!--form-->
-    <link rel="stylesheet" type="text/css" href="../public/css/hdw.css"/>
-    <!--<script type="text/javascript" src="js/jquery-1.6.4.min.js"></script>-->
-    <!--<script type="text/javascript" src="js/hdw.js"></script>-->
 
-    <!-- ace settings handler -->
 
     <script src="../public/js/ace-extra.min.js"></script>
 
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
-    <!--[if lt IE 9]>
-    <script src="js/html5shiv.js"></script>
-    <script src="js/respond.min.js"></script>
-    <![endif]-->
-
-    <!--[if lt IE 9]>
-    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
     <style>
-        .btn1 {
-            padding: 6px 12px;
-            font-size: 14px;
-            font-weight: normal;
-            /*line-height: 1.428571429;*/
-            text-align: center;
-            white-space: nowrap;
-            user-select: none;
+        .page-content1 {
+            margin: 0;
+            padding: 8px 20px 24px;
         }
     </style>
 </head>
@@ -84,7 +52,7 @@
                 <a data-toggle="dropdown" href="#" class="dropdown-toggle">
                     <img class="nav-user-photo" src="../public/avatars/0017030553263367_b.jpg" alt="Jason's Photo">
                     <span class="user-info">
-                        <small>welcome,</small>
+                        <small>欢迎,</small>
                         admin
                     </span>
 
@@ -98,7 +66,7 @@
                     <li>
                         <a href="../logout">
                             <i class="icon-off"></i>
-                            Logout
+                            注销
                         </a>
                     </li>
                 </ul>
@@ -108,24 +76,29 @@
 </div>
 
 <!-- 登录 -->
-<form method="post" action="">
-    <div class="one">
-        <label >旧密码：</label>
-        <input type="text" id="username" class="a1" />
+<div class="page-content1">
+    <div class="row">
+        <div class="col-xs-6">
+            <table>
+                <tbody>
+                <tr>
+                    <th><label for="">旧密码:</label></th>
+                    <td><input type="text" name="" maxlength="50" required="" id=""></td>
+                </tr>
+                <tr>
+                    <th><label for="">新密码:</label></th>
+                    <td><input type="password" name="" required="" id=""></td>
+                </tr>
+                <tr>
+                    <th><label for="">确认新密码:</label></th>
+                    <td><input type="password" name="" required="" id=""></td>
+                </tr>
+                </tbody>
+            </table>
+            <button type="submit" id="">登录</button>
+        </div>
     </div>
-    <div class="one">
-        <label>新密码：</label>
-        <input type="password" class="a1" />
-    </div>
-    <div class="one">
-        <label>确认新密码：</label>
-        <input type="password" class="a1" />
-    </div>
-    <div class="two">
-        <input class="btn1 btn-primary" type="submit" id="send" value="提交">
-        <!--<a href="register.html" class="register">快速注册</a>-->
-    </div>
-</form>
+</div>
 
 
 <!--[if !IE]> -->
