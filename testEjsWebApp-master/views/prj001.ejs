@@ -19,6 +19,7 @@
     <script src="../public/js/respond.min.js"></script>
     <script src="../public/js/jquery.pagination.min.js"></script>
 
+    <!-- 分页格式 -->
     <style>
     .color{
         color: #fff;
@@ -47,8 +48,13 @@
         background: #6fb3e0;
         color: white;
     }
-
+    .btn-blue {
+    background-color: white; 
+    color: black; 
+    border: 2px solid #008CBA;
+}
     </style>
+    <!-- 分页格式 -->
 </head>
 
 <body>
@@ -109,6 +115,11 @@
                         $("input[name='blood_type'][value='"+result["blood_type"]+"']").attr("checked",true);
                         $("input[name='nation'][value='"+result["nation"]+"']").attr("checked",true);
                         $("input[name='career'][value='"+result["career"]+"']").attr("checked",true);
+                        // $("#title").find("option[value='"+result["title"]+"']").attr("selected",true);
+                        // $("#blood_type").find("option[value='"+result["blood_type"]+"']").attr("selected",true);
+                        // $("#nation").find("option[value='"+result["nation"]+"']").attr("selected",true);
+                        // $("#career").find("option[value='"+result["career"]+"']").attr("selected",true);
+                        
 
                         $("input[name='entrance'][value='"+result["entrance"]+"']").attr("checked",true);
                         $("input[name='culture'][value='"+result["culture"]+"']").attr("checked",true);
@@ -751,101 +762,9 @@
         };
     })
 
-// 检索功能
-        // $(".searchBtn").click(function () {
-        //     $.ajax({
-        //         url:"/prj001/search",
-        //         type:"GET",
-        //         data: {
-        //             search: $('#schname').val(),
-        //         },
-        //         success:function (result) {
-        //             alert("success")
-        //             alert("archivelist" + result)
-        //             // $("#archivelist").html("");
-        //             $("#archivelist").html(result);
-        //         },
-        //         error:function () {
-        //             alert("fail")
-        //         },
-        //     });
-        // })
-
+    // 检索功能
 })
 </script>
-
-                                    <!-- 以下测试代码 -->
-<script>
-        function get_data(arg){
-            var page = 1;
-            var keyword = $("#schname").val();
-            alert("搜索关键字：" + keyword);
-            $.ajax({
-                url: "/prj001/search",
-                type: "POST",
-                dataType: "json",
-                data:{
-                    "keyword": keyword,
-                    "page": page
-                },
-                success: function (data) {
-                    // alert("Ajax原始返回数据: " + data["curpage"]+ ", "+data["searchname"]);
-                    // show_archives_detail(data);
-                },
-                error: function () {
-                    alert("检索失败");
-                }
-            });
-        }
-        function show_archives_detail(callback_data) {
-            var workdata = callback_data;
-            $("#myarchiveslist").empty();
-            var html_code = "";
-            for(var i in workdata["archives"]){
-                var per_record = workdata["archives"][i];
-                //alert(">>>name: "+per_record["name"]);
-                html_code += '<tr><td>'+per_record.name+'</td><td>'+per_record.url +'</td><tr>';
-            }
-            $("#myarchiveslist").append(html_code);
-            $("#page").empty();
-            $("#page").append('<li></li>');
-            $("#page li:first").before('<li><a href="#" class="delete_mark" ' +
-                'onclick="go_to_page(this)" current_page_num="1">' + "&laquo;" + '</a></li>');
-            for(var i=1; i<=Number(workdata.totalpagenumber);i++){
-                var page_num = Number(i);
-                if(Number(workdata.curpage) == page_num) {   // 说明是当前页，那么进行高亮显示，把class设置为active
-                    $("#page li:last").before('<li class="active" ><a href="#" class="delete_mark" ' +
-                        'onclick="go_to_page(this)" current_page_num="' + page_num + '">' + page_num + '</a></li>');
-                }else {    // 说明不是当前页，那么不进行高亮显示
-                    $("#page li:last").before('<li><a href="#" class="delete_mark" ' +
-                        'onclick="go_to_page(this)" current_page_num="' + page_num + '">' + page_num + '</a></li>');
-                }
-            }
-            $("#page li:last").after('<li><a href="#" class="delete_mark" ' +
-                'onclick="go_to_page(this)" current_page_num="'+ Number(workdata.totalpagenumber) +'">' + "&raquo;" + '</a></li>');
-        }
-        function go_to_page(arg) {   // 获取指定页的内容
-            var page = $(arg).attr('current_page_num');
-            var keyword = $("#schname").val();
-            alert(">>>click page number: "+page+", "+keyword);
-            $.ajax({
-                url:'/prj001/search',
-                type:'post',
-                dataType:'json',
-                data:{
-                    "keyword": keyword,
-                    "page":page
-                },
-                success: function(data){
-                    console.log(data);
-                    show_archives_detail(data);
-                },
-                error: function(){
-                }
-            })
-        }
-</script>
-                                    <!-- 以上测试代码 -->
 
     <!-- 导航 -->
     <div class="navbar navbar-default" id="navbar">
@@ -967,17 +886,22 @@
 
                             <div class="row">
                                 <div class="col-xs-12">
+                                    <!-- 搜索框 -->
                                     <div class="searchbox">
-                                            <span class="input-icon align-middle">
+                                        <span class="input-icon align-middle">
+                                            <form role="form" method='get' action="/prj001/">
+                                                <input type="search" class="search-query" id="keyword" name="keyword" style="width:180px; height:36px;"
+                                                    value="<%= searchname %>"  placeholder="采集对象人员姓名"/>
+                                                <button  class="btn btn-sm" type="submit" id="searchBtn">
                                                     <i class="icon-search"></i>
-                                            <input type="text" class="search-query" id="schname" name="schname" 
-                                                    value=""  placeholder="采集对象人员姓名" class="text"/></li>
-                                            <button  class="btn btn-sm" type="button" id="searchBtn" onclick="get_data1(this)">查询</button>
-                                            </span>
+                                                </button>
+                                            </form>
+                                        </span>
                                     </div>
-
+                                    <!-- 搜索框 -->
                                     <hr>
                                     <div class="table-responsive">
+                                        <!-- 信息列表框 -->
                                         <table class="table table-striped table-bordered table-hover">
                                             <thead>
                                                 <tr>
@@ -1106,59 +1030,30 @@
                                                 <% }) %>
                                             </tbody>
                                         </table>
-                                        <!-- <div id="pagination" class="pagination"></div> -->
+                                        <!-- 信息列表框 -->
                                         
+                                        <!-- 分页框 -->
                                         <div class="row">
                                                 <div class="col-sm-6">共有 <%= totalCount %> 条</div>
 
-                                                <div id="pagination" class="col-sm-6 page">
+                                                <div id="pagination" class="col-sm-6 page"  style="float:right">
                                                 <!-- <input id="curpage" type="hidden" value="<%= curpage %>"/> -->
                                                 <!-- <input id="totalpagenumber" type="hidden" value=""/> -->
-                                                <script>
+                                                    <script>
                                                     // 调用父页面的方法改变菜单指示
                                                     $(function(){
                                                         $("#pagination").pagination({
                                                             currentPage: <%= curpage %>,
                                                             totalPage: <%= totalpagenumber %>,
                                                             callback: function(current) {
-                                                                window.location.href = "/prj001/?page=" + current;
+                                                                window.location.href = "/prj001/?page=" + current + "&keyword=" + <%= searchname %>;
                                                             }
                                                         });
                                                     });
-                                                </script>
-
-                                                <!-- <div class="col-sm-6">
-                                                    <div class="dataTables_paginate paging_bootstrap">
-                                                        <nav aria-label="Page navigation">
-                                                        <ul class="pagination">
-                                                            <% if (previouspage) { %>
-                                                            <li class="prev">
-                                                                <a href="?page=<%= previouspage %>">
-                                                                    <i class="icon-double-angle-left"></i>
-                                                                </a >
-                                                            </li>
-                                                            <% } %>
-
-                                                            <% for (var pg=1;pg<=totalpagenumber;pg++){ %>
-                                                                <% if (curpage == pg) { %>
-                                                                <li class="active"><a href="?page=<%= pg %>"><%= pg %></a></li>
-                                                                <% }else {%>
-                                                                <li><a href="?page=<%= pg %>"><%= pg %></a></li>
-                                                                <% } %>
-                                                            <% } %>
-                                                            
-                                                            <% if (nextpage) { %>
-                                                            <li class="next">
-                                                                <a href="?page=<%= nextpage %>">
-                                                                    <i class="icon-double-angle-right"></i>
-                                                                </a >
-                                                            </li>
-                                                            <% } %>
-                                                        </ul>
-                                                        </nav>
-                                                    </div>
-                                                </div> -->
+                                                    </script>
+                                                </div>
                                         </div>
+                                        <!-- 分页框 -->
                                     </div>
                                 </div>
                             </div>
@@ -1199,10 +1094,10 @@
                                                                 <label><input type="radio" value="主任医师" name="title" />主任医师</label>
                                                                 <label><input type="radio" value="副主任医师" name="title"/>副主任医师</label>
                                                                 <label><input type="radio" value="主治医师" name="title"/>主治医师</label>
-                                                                <!-- <select class="form-control">
-                                                                        <option value="主任医师" name="title">主任医师</option>
-                                                                        <option value="副主任医师" name="title">副主任医师</option>
-                                                                        <option value="主治医师" name="title">主治医师</option>
+                                                                <!-- <select id="title" name="title">
+                                                                        <option value="主任医师">主任医师</option>
+                                                                        <option value="副主任医师">副主任医师</option>
+                                                                        <option value="主治医师">主治医师</option>
                                                                 </select> -->
                                                             </p>
                                                             <p>
@@ -2169,11 +2064,10 @@
             </div><!-- /.main-content -->
 
         </div><!-- /.main-container-inner -->
-
-        <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
-            <i class="icon-double-angle-up icon-only bigger-110"></i>
-        </a>
     </div>
+    <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+            <i class="icon-double-angle-up icon-only bigger-110"></i>
+    </a>
 
     <script type="text/javascript">
         window.jQuery || document.write("<script src='../public/js/jquery-2.0.3.min.js'>" + "<" + "/script>");
@@ -2193,27 +2087,6 @@
 
     <script src="../public/js/ace-elements.min.js"></script>
     <script src="../public/js/ace.min.js"></script>
-	<!-- <script src="../public/js/myPagination.js"></script> -->
-	<!-- <script>
-        window.onload = function () {
-            new Page({
-                id: 'pagination',
-                pageTotal: 50, //必填,总页数
-                pageAmount: 10,  //每页多少条
-                dataTotal: 500, //总共多少条数据
-                curPage:1, //初始页码,不填默认为1
-                pageSize: 5, //分页个数,不填默认为5
-                showPageTotalFlag:true, //是否显示数据统计,不填默认不显示
-                showSkipInputFlag:true, //是否支持跳转,不填默认不显示
-                getPage: function (page) {
-                    //获取当前页数
-                    console.log(page);
-                }
-            })
-        }
-    </script>
-
-    <!-- inline scripts related to this page -->
     <script type="text/javascript">
         jQuery(function ($) {
             var oTable1 = $('#sample-table-2').dataTable({
