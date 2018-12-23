@@ -1046,7 +1046,13 @@
                                                             currentPage: <%= curpage %>,
                                                             totalPage: <%= totalpagenumber %>,
                                                             callback: function(current) {
-                                                                window.location.href = "/prj001/?page=" + current + "&keyword=" + <%= searchname %>;
+                                                                if (($("#keyword").val()) == "") {
+                                                                    window.location.href = "/prj001/?page=" + current;
+                                                                } else {
+                                                                    window.location.href = "/prj001/?page=" + current  + "&keyword=" + $("#keyword").val();
+                                                                };
+                                                                // window.location.href = "/prj001/?page=" + current;
+                                                                // window.location.href = "/prj001/?page=" + current  + "&keyword=" + $("#keyword").val();
                                                             }
                                                         });
                                                     });

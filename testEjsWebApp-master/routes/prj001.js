@@ -22,17 +22,17 @@ router.get('/', function (req, res, next) {
         var params = url_pack.parse(req.url, true).query;
         console.log(">>>2. req url params: " + params["page"] + ", " + params["keyword"]);
         var workurl = "";
-        if (params["page"] == undefined) {
+        if ( (params["page"] == undefined) || (params["page"] == "") ) {
             workurl = myconst.apiurl + "prj001/geninfo/";
         }
         else {
             workurl = myconst.apiurl + "prj001/geninfo/?page=" + params["page"];
         }
 
-        if (params["keyword"] == undefined) {
+        if ( (params["keyword"] == undefined) || (params["keyword"] == "") ) {
             workurl = workurl;
         } else {
-            if (params["page"] == undefined) {
+            if ( (params["page"] == undefined) || (params["page"] == "") ) {
                 workurl = workurl + "?search=" + params["keyword"];
             }
             else {
@@ -85,7 +85,7 @@ router.get('/', function (req, res, next) {
                 }
 
                 var retschname = "";
-                if (params["keyword"] == undefined) {
+                if ( (params["keyword"] == undefined) || (params["keyword"] =="") ) {
                     retschname = "";
                     res.render('prj001', {
                         title: '流调项目-排卵障碍性异常子宫出血',
