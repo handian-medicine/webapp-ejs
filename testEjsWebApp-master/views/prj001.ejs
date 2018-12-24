@@ -53,6 +53,18 @@
     color: black; 
     border: 2px solid #008CBA;
 }
+    .input-icon>[class*="icon-"] {
+        padding: 0 3px;
+        z-index: 2;
+        position: absolute;
+        top: 4px;
+        bottom: 1px;
+        left: 3px;
+        line-height: 28px;
+        display: inline-block;
+        color: #909090;
+        font-size: 16px
+}
     </style>
     <!-- 分页格式 -->
 </head>
@@ -78,10 +90,11 @@
                         window.location.href = '/prj001' + '/?page=' + '<%= curpage %>';
                     } else {
                         if (result.status == 403) {
-                            // alert("您无法修改此条信心, 请联系用户 " + result.user_geninfo.name)
+                            // alert("您无法修改此条信息, 请联系用户 " + result.user_geninfo.name)
                             alert("" + result.user_geninfo.detail)
+                        } else {
+                            alert("保存失败" + result.status)
                         }
-                        
                     }
                 },
                 error: function (result) {
@@ -177,8 +190,11 @@
                         alert("保存成功！")
                         window.location.href = '/prj001' + '/?page=' + '<%= curpage %>';
                     } else {
-                        if (result.status == 403)
-                        alert("" + result.user_menstruation.detail)
+                        if (result.status == 403) {
+                            alert("" + result.user_menstruation.detail)
+                        } else {
+                            alert("保存失败" + result.status)
+                        }
                     }
                 },
                 error: function () {
@@ -250,8 +266,11 @@
                         alert("保存成功！")
                         window.location.href = '/prj001' + '/?page=' + '<%= curpage %>';
                     } else {
-                        if (result.status == 403)
-                        alert("" + result.user_symptom.detail)
+                        if (result.status == 403){
+                            alert("" + result.user_symptom.detail)
+                        } else {
+                            alert("保存失败" + result.status)
+                        }
                     }
                 },
                 error: function () {
@@ -520,8 +539,11 @@
                         alert("保存成功！")
                         window.location.href = '/prj001' + '/?page=' + '<%= curpage %>';
                     } else {
-                        if (result.status == 403)
-                        alert("" + result.user_other.detail)
+                        if (result.status == 403) {
+                            alert("" + result.user_other.detail)
+                        } else {
+                            alert("保存失败" + result.status)
+                        }
                     }
                 },
                 error: function () {
@@ -684,8 +706,11 @@
                         alert("保存成功！")
                         window.location.href = '/prj001' + '/?page=' + '<%= curpage %>';
                     } else {
-                        if (result.status == 403)
-                        alert("" + result.user_cc.detail)
+                        if (result.status == 403) {
+                            alert("" + result.user_cc.detail)
+                        } else {
+                            alert("保存失败" + result.status)
+                        }
                     }
                 },
                 error: function () {
@@ -888,7 +913,7 @@
                                 <div class="col-xs-12">
                                     <!-- 搜索框 -->
                                     <div class="searchbox">
-                                        <span class="input-icon align-middle">
+                                        <!-- <span class="input-icon align-middle">
                                             <form role="form" method='get' action="/prj001/">
                                                 <input type="search" class="search-query" id="keyword" name="keyword" style="width:180px; height:36px;"
                                                     value="<%= searchname %>"  placeholder="采集对象人员姓名"/>
@@ -896,7 +921,16 @@
                                                     <i class="icon-search"></i>
                                                 </button>
                                             </form>
-                                        </span>
+                                        </span> -->
+                                        <form class="form-search">
+                                            <span class="input-icon align-middle" role="form" method='get' action="/prj001/">
+                                                <i class="icon-search"></i>
+                                                <input type="search" class="search-query" id="keyword" name="keyword" value="<%= searchname %>" placeholder="采集对象人员姓名" style="width:180px; height:36px;"/>
+                                            </span>
+                                            <button class="btn btn-sm" type="submit" id="searchBtn">
+                                                检索
+                                            </button>
+                                        </form>
                                     </div>
                                     <!-- 搜索框 -->
                                     <hr>

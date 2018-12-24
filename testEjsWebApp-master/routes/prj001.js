@@ -977,15 +977,45 @@ router.post('/search', function (req, res, next) {
 });
 
 // router.get('/patientInfo', function (req, res, next){
-//     var patient_id = "";
-//     var patient_url;
-//     patient_url = myconst.apiurl + "prj001/patientInfo/" + patient_id;
-//     var authstring = req.cookies.prj001token.access_token;
+//     if (req.cookies.prj001token) {
+//         var patient_id = "295";
+//         var patient_url;
+//         patient_url = myconst.apiurl + "prj001/patientInfo/" + patient_id;
+//         var authstring = req.cookies.prj001token.access_token;
 //         var options = {
 //             url: search_url,
 //             headers: {
 //                 'Authorization': 'Bearer ' + authstring
 //             }
 //         };
-// })
+    
+
+//         var authstring = req.cookies.prj001token.access_token;
+//         var options = {
+//             url: d1url,
+//             headers: {
+//                 'Authorization': 'Bearer ' + authstring
+//             }
+//         };
+
+//         request(options, function (error, response, body) {
+//             if (!error && response.statusCode == 200) {
+//                 var archiveobjs = JSON.parse(body);
+//                 console.log(">>>4. prj001.js -> archiveobjs", archiveobjs);
+//                 // var retschname = "";
+//                     res.render('prj001', {
+//                         title: '流调项目-排卵障碍性异常子宫出血',
+//                         archives: archiveobjs.results,
+//                         username: req.cookies.userinfo.email,
+//                         totalpagenumber: archiveobjs.total_pages,
+//                         curpage: curPageNumber,
+//                         previouspage: previousPage,
+//                         nextpage: nextPage,
+//                         totalCount: archiveobjs.totalCount,
+//                         searchname: retschname
+//                     });
+//             }
+//         })
+//     }
+// });
 module.exports = router;
