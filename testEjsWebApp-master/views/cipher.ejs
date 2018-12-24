@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="../public/css/ace.min.css">
     <link rel="stylesheet" href="../public/css/ace-rtl.min.css">
     <link rel="stylesheet" href="../public/css/ace-skins.min.css">
-
+    <script src="/public/javascripts/jquery.min.js"></script>
 
 
 
@@ -28,34 +28,41 @@
     </style>
 </head>
 <body>
-        <script>
-                $(document).ready(function () {
-                $("#userLogin").click(function () {
-                    $.ajax({
-                        url: "/index/cipher",//路由，用来处理ajax请求的函数的所在地址
-                        type: "POST",
-                        data: {
-                            oldcode: $("#oldcode").val(),    //    用户邮箱和密码
-                            newcode: $("#newcode").val(),
-                            affirmcode: $("#affirmcode").val()
-
-                        },
-                        success: function (data) {
-                            if (data.status == 1) {
-                                window.location.href = '/home';    //    请求成功后跳转到你的主页
-                            } else {
-                                alert(data.msg);
-                            }
-        
-                        },
-                        error: function () {
-                            alert("登录失败");
-                            window.location.href = '/';
+    <script>
+        $(document).ready(function () {
+            $("#codeBtn").click(function () {
+                if ($("#oldcode").val() == $("#newcode").val() ) {
+                    alert("新密码不能与旧密码相同，请重新输入");
+                } else {
+                    if ( $("#newcode").val()== $("#affirmcode").val() ) {
+                        alert("两次输入的密码不同，请重新输入");
+                    }
+                }
+                $.ajax({
+                    url: "/cipher",//路由，用来处理ajax请求的函数的所在地址
+                    type: "PUT",
+                    data: {
+                        oldcode: $("#oldcode").val(),   
+                        newcode: $("#newcode").val(),
+                        affirmcode: $("#affirmcode").val()
+                    },
+                    success: function (data) {
+                        if (data.status == 1) {
+                            alert("密码修改成功,请重新登录")
+                            window.location.href = '/';    //    请求成功后跳转到你的主页
+                        } else {
+                            alert("密码修改失败");
+                            window.location.href = '/cipher';
                         }
-                    });
+                    },
+                    error: function () {
+                        alert("修改失败");
+                        window.location.href = '/cipher';
+                    }
                 });
             });
-        </script>
+        });
+    </script>
 <!-- 导航 -->
 <div class="navbar navbar-default" id="navbar">
     <script type="text/javascript">
@@ -64,7 +71,7 @@
 
     <div class="navbar-container" id="navbar-container">
         <div class="navbar-header pull-left">
-            <a href="#" class="navbar-brand">
+            <a href="../home" class="navbar-brand">
                 <small>
                     <i class="icon-leaf">
                         中医妇产科临床流调数据中心
@@ -81,7 +88,7 @@
                     <img class="nav-user-photo" src="../public/avatars/0017030553263367_b.jpg" alt="Jason's Photo">
                     <span class="user-info">
                         <small>欢迎,</small>
-                        admin
+                        <%= username %>
                     </span>
 
                     <i class="icon-caret-down"></i>
@@ -110,20 +117,20 @@
             <table>
                 <tbody>
                 <tr>
-                    <th><label for="">旧密码:</label></th>
+                    <th><label for="oldcode">旧密码:</label></th>
                     <td><input type="text" name="oldcode" maxlength="50" required="" id="oldcode"></td>
                 </tr>
                 <tr>
-                    <th><label for="">新密码:</label></th>
+                    <th><label for="newcode">新密码:</label></th>
                     <td><input type="password" name="newcode" required="" id="newcode"></td>
                 </tr>
                 <tr>
-                    <th><label for="">确认新密码:</label></th>
+                    <th><label for="affirmcode">确认新密码:</label></th>
                     <td><input type="password" name="affirmcode" required="" id="affirmcode"></td>
                 </tr>
                 </tbody>
             </table>
-            <button type="submit" id="">登录</button>
+            <button type="submit" id="codeBtn">确认修改</button>
         </div>
     </div>
 </div>

@@ -92,4 +92,48 @@ router.get('/logout', function (req, res, next){
     res.clearCookie("userinfo", "prj001token", "usertoken");
     res.render('logout');
 });
+
+router.get('/cipher',  function (req, res, next){
+    console.log(">>>修改密码页面");
+    res.render('cipher',{username: req.cookies.userinfo.email});
+});
+router.put('/cipher',  function (req, res, next){
+    console.log("1看这里", req.headers["cookie"]);
+    console.log("2看这里", req.cookies.userid.id)
+    var id = req.cookies.userid.id;
+    var url = myconst.apiurl + "/users/" + id +"/changepassword/";
+    var codeData = {
+        "old_password": req.body.oldcode,
+        "new_password": req.body.newcode,
+        // "grant_type": "password",
+        // "scope": myconst.scope_users,
+        // "client_id": myconst.client_id,
+        // "client_secret": myconst.client_secret
+    };
+    console.log("3看这里", url);
+    console.log("4看这里", req.cookies);
+    var authstring = req.cookies.usertoken.access_token;
+    var options = {
+        url: url,
+        headers: {
+            'Authorization': 'Bearer ' + authstring
+        },
+        form: codeData
+    };
+    console.log("5看这里", options);
+    request.put(options, function (error, response, body) {
+        console.log("6. cipher response.body", body);
+        if (!error && response.statusCode == 200) {
+            var obj = JSON.parse(body); //由JSON字符串转换为JSON对象
+            console.log("7. json body ", obj);        
+            res.json({status:1});
+            //res.render("home", {title: 'Chinese Clinical Investigation Center', prjs: 'empty'});
+        }
+        else {
+            var err = JSON.parse(body); //由JSON字符串转换为JSON对象
+
+            res.json({status:0, msg:err.error_description});
+        }
+    });
+});
 module.exports = router;
