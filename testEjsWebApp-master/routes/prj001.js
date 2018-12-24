@@ -319,12 +319,24 @@ router.post('/file_upload', mutipartMiddeware, function (req, res, next) {
     };
 
     request.post(options, function optionalCallback(err, response, body) {
+        console.log("上传文件: response.statusCode:", response.statusCode);
         if (!err && response.statusCode == 200) {
             console.log('Upload successful!  Server responded with:', body);
             //给浏览器返回一个成功提示。
-            res.redirect("/prj001");
+            var upload_info = JSON.parse(body);
+            console.log(">>>上传信息 -> upload_info: ", upload_info);
+            // alert("haha",response.statusCode);
+            console.log("haha",response.statusCode);
+            
+            if (upload_info.code == 403) {
+                res.json(upload_info);//权限问题
+            }  else {
+                res.redirect("/prj001");//上传成功
+            }
         }
         else {
+            // alert("err",response.statusCode);
+            console.log("err",response.statusCode);
             return console.error('upload failed:', err);
             res.send('上传失败!');
         }
@@ -976,6 +988,7 @@ router.post('/search', function (req, res, next) {
     }
 });
 
+/* 病例详细信息 */
 router.get('/patientInfo', function (req, res, next){
     if (req.cookies.prj001token) {
         var patient_id = "97";
@@ -993,18 +1006,12 @@ router.get('/patientInfo', function (req, res, next){
             console.log("10. response.statusCode:", response.statusCode)
             if (!error && response.statusCode == 200) {
                 var archiveobjs = JSON.parse(body);
-                console.log(">>>4. prj001.js -> archiveobjs", archiveobjs);
-                // var retschname = "";
-                    res.render('prj001', {
-                        title: '流调项目-排卵障碍性异常子宫出血',
-                        archives: archiveobjs.results,
+                console.log("11. 病例所有信息", archiveobjs);
+                console.log("12. recdate", archiveobjs[0].recdate);
+                    res.render('patientInfo', {
+                        // title: '流调项目-排卵障碍性异常子宫出血',
+                        archives: archiveobjs,
                         username: req.cookies.userinfo.email,
-                        totalpagenumber: archiveobjs.total_pages,
-                        curpage: curPageNumber,
-                        previouspage: previousPage,
-                        nextpage: nextPage,
-                        totalCount: archiveobjs.totalCount,
-                        searchname: retschname
                     });
             }
         })

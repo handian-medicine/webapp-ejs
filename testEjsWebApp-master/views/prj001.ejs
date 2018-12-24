@@ -913,16 +913,7 @@
                                 <div class="col-xs-12">
                                     <!-- 搜索框 -->
                                     <div class="searchbox">
-                                        <!-- <span class="input-icon align-middle">
-                                            <form role="form" method='get' action="/prj001/">
-                                                <input type="search" class="search-query" id="keyword" name="keyword" style="width:180px; height:36px;"
-                                                    value="<%= searchname %>"  placeholder="采集对象人员姓名"/>
-                                                <button  class="btn btn-sm" type="submit" id="searchBtn">
-                                                    <i class="icon-search"></i>
-                                                </button>
-                                            </form>
-                                        </span> -->
-                                        <form class="form-search">
+                                        <form class="form-search" role="form" method='get' action="/prj001/">
                                             <span class="input-icon align-middle" role="form" method='get' action="/prj001/">
                                                 <i class="icon-search"></i>
                                                 <input type="search" class="search-query" id="keyword" name="keyword" value="<%= searchname %>" placeholder="采集对象人员姓名" style="width:180px; height:36px;"/>
@@ -960,9 +951,9 @@
                                             <tbody id="archivelist">
                                                 <% archives.forEach(function(archive){ %>
                                                 <tr>
-                                                    <!-- <a href="../public/bingo.html"> -->
-                                                        <!-- <a href="../prj001/patientInfo"></a> -->
                                                     <td>
+                                                        <!-- <%= archive.id %> -->
+                                                        <!-- <a href="../prj001/patientInfo"><%= archive.name %></a> -->
                                                         <%= archive.name %>
                                                     </td>
                                                     <td>

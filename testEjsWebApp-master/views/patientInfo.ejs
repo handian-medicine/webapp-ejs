@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>bingo</title>
+    <title>病例信息</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- basic styles -->
@@ -177,25 +177,25 @@
 
                                 <div class="tab-content">
                                     <div id="home4" class="tab-pane in active">
-                                        <p>日期：</p>
-                                        <p>问卷编码：</p>
-                                        <p>医院名称：</p>
-                                        <p>填表专家姓名：</p>
-                                        <p>职称：</p>
-                                        <p>患者姓名：</p>
-                                        <p>电话：</p>
-                                        <p>年龄：</p>
-                                        <p>身高cm：</p>
-                                        <p>体重kg：</p>
-                                        <p>血型：</p>
-                                        <p>民族：</p>
-                                        <p>职业：</p>
-                                        <p>病人现住址：</p>
-                                        <p>病人来源：</p>
-                                        <p>文化程度：</p>
-                                        <p>婚姻状况：</p>
-                                        <p>特殊工种环境：</p>
-                                        <p>饮食偏好：</p>
+                                        <p>日期：<%= archives[0].recdate %></p> 
+                                        <p>问卷编码：<%= archives[0].serial %></p>
+                                        <p>医院名称：<%= archives[0].hospital %></p>
+                                        <p>填表专家姓名：<%= archives[0].expert %></p>
+                                        <p>职称：<%= archives[0].title %></p>
+                                        <p>患者姓名：<%= archives[0].name %></p>
+                                        <p>电话：<%= archives[0].telephone %></p>
+                                        <p>年龄：<%= archives[0].age %></p>
+                                        <p>身高cm：<%= archives[0].height %></p>
+                                        <p>体重kg：<%= archives[0].weight %></p>
+                                        <p>血型：<%= archives[0].blood_type %></p>
+                                        <p>民族：<%= archives[0].nation %></p>
+                                        <p>职业：<%= archives[0].career %></p>
+                                        <p>病人现住址：<%= archives[0].address %></p>
+                                        <p>病人来源：<%= archives[0].entrance %></p>
+                                        <p>文化程度：<%= archives[0].culture %></p>
+                                        <p>婚姻状况：<%= archives[0].marriage %></p>
+                                        <p>特殊工种环境：<%= archives[0].recdate %></p>
+                                        <p>饮食偏好：<%= archives[0].recdate %></p>
                                     </div>
 
                                     <div id="profile4" class="tab-pane">
