@@ -20,8 +20,15 @@
     <link rel="stylesheet" href="../public/css/ace-rtl.min.css">
     <link rel="stylesheet" href="../public/css/ace-skins.min.css">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.css">
     <script src="../public/js/ace-extra.min.js"></script>
     <script src="/public/javascripts/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.js"></script>
+    <script>
+        function dateStyle(){
+            $('#recdate').datepicker({format:"yyyy-mm-dd"});
+        }
+    </script>
     <script src="/public/javascripts/jquery.form.min.js"></script>
 
     <!-- 新日期控件 -->
@@ -37,7 +44,7 @@
     <!-- 新日期控件 -->
 
     <!-- 日期正则表达式判断 -->
-    <script>
+    <!-- <script>
         function date(id) {
  
             var idvalue = document.getElementById(id).value;   //通过查找元素
@@ -74,7 +81,7 @@
         function trim(str) {
             return str.replace(/(^\s*)|(\s*$)/g, "");
 }
-    </script>
+    </script> -->
     <!-- 日期正则表达式判断 -->
 
     <!-- 浏览器类型判断 -->
@@ -95,7 +102,7 @@
         if (Sys.opera) document.write('Opera: ' + Sys.opera);
         if (Sys.safari) document.write('Safari: ' + Sys.safari);
     </script> --> 
-    <script>
+    <!-- <script>
         function getExploreName(){
             var userAgent = navigator.userAgent;
             if(userAgent.indexOf("Opera") > -1 || userAgent.indexOf("OPR") > -1){
@@ -116,11 +123,11 @@
               return 'Unkonwn';
             }
         }
-    </script>
+    </script> -->
     <!-- 浏览器类型判断 -->
 
     <!-- 根据不同浏览器设置不同的date输入方式 -->
-    <script>
+    <!-- <script>
         function dateStyle(){
             var explorerName = getExploreName();
             if (explorerName == 'IE') {
@@ -130,7 +137,7 @@
                 $("#recdate").removeAttr("onblur");
             }
         }
-    </script>
+    </script> -->
     <!-- 根据不同浏览器设置不同的date输入方式 -->
 
 </head>
@@ -177,7 +184,7 @@
                 <a href="../home" class="navbar-brand">
                     <small>
                         <i class="icon-leaf">
-                            中医妇产科临床流调数据中心
+                            中医妇科临床流调数据中心
                         </i>
                     </small>
                 </a>
@@ -318,10 +325,13 @@
                                                 <div class="modal-body">
                                                     <div class="row">
                                                         <div class="col-xs-12 col-sm-12">
+                                                                
                                                             <p>
                                                             日期：
-                                                            <input type="text" id="recdate" name="recdate" class="form-control hasDatepicker" 
-                                                                   placeholder="日期格式: 20180101或2018-01-01" onblur="date('recdate')" />
+							     <input id="recdate" name="recdate" type="text" class="form-control datepicker" />
+
+                                                            <!-- <input type="text" id="recdate" name="recdate" class="form-control hasDatepicker" 
+                                                                   placeholder="日期格式: 20180101或2018-01-01" onblur="date('recdate')" /> -->
                                                             <!-- <input type="text" id="recdate-ie" name="recdate" class="form-control hasDatepicker" onblur="date('recdate-ie')" /> -->
                                                             <!-- <input type="date" id="recdate-other" name="recdate" class="form-control hasDatepicker"/> -->
                                                             </p>
@@ -611,7 +621,7 @@
     <script src="../public/js/jquery.ui.touch-punch.min.js"></script>
     <script src="../public/js/chosen.jquery.min.js"></script>
     <script src="../public/js/fuelux/fuelux.spinner.min.js"></script>
-    <script src="../public/js/date-time/bootstrap-datepicker.min.js"></script>
+    
     <script src="../public/js/date-time/bootstrap-timepicker.min.js"></script>
     <script src="../public/js/date-time/moment.min.js"></script>
     <script src="../public/js/date-time/daterangepicker.min.js"></script>

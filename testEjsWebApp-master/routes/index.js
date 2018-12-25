@@ -13,7 +13,7 @@ router.get('/', function (req, res, next) {
     res.clearCookie('userinfo');
     res.clearCookie('usertoken');
     res.clearCookie('prj001token');
-    res.render('login', {title: '中医妇产科临床流调数据中心'});
+    res.render('login', {title: '中医妇科临床流调数据中心'});
 });
 //Chinese Clinical Investigation Center
 
@@ -127,7 +127,6 @@ router.put('/cipher',  function (req, res, next){
             var obj = JSON.parse(body); //由JSON字符串转换为JSON对象
             console.log("7. json body ", obj);        
             res.json({status:1});
-            //res.render("home", {title: 'Chinese Clinical Investigation Center', prjs: 'empty'});
         }
         else {
             var err = JSON.parse(body); //由JSON字符串转换为JSON对象

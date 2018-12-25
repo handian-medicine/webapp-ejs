@@ -7,22 +7,22 @@
 
     <!-- basic styles -->
 
-    <link rel="stylesheet" href="../public/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../public/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../public/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../public/css/font-awesome.min.css">
 
     <!--[if IE 7]>
     <link rel="stylesheet" href="../public/css/font-awesome-ie7.min.css" />
     <![endif]-->
 
     <!-- page specific plugin styles -->
-    <link rel="stylesheet" href="../public/css/jquery-ui-1.10.3.custom.min.css" />
-    <link rel="stylesheet" href="../public/css/jquery.gritter.css" />
+    <link rel="stylesheet" href="../../public/css/jquery-ui-1.10.3.custom.min.css" />
+    <link rel="stylesheet" href="../../public/css/jquery.gritter.css" />
     <!-- fonts -->
 
     <!-- ace styles -->
-    <link rel="stylesheet" href="../public/css/ace.min.css">
-    <link rel="stylesheet" href="../public/css/ace-rtl.min.css">
-    <link rel="stylesheet" href="../public/css/ace-skins.min.css">
+    <link rel="stylesheet" href="../../public/css/ace.min.css">
+    <link rel="stylesheet" href="../../public/css/ace-rtl.min.css">
+    <link rel="stylesheet" href="../../public/css/ace-skins.min.css">
     <!--[if lte IE 8]>
     <link rel="stylesheet" href="../public/css/ace-ie.min.css" />
     <![endif]-->
@@ -31,7 +31,7 @@
 
     <!-- ace settings handler -->
 
-    <script src="../public/js/ace-extra.min.js"></script>
+    <script src="../../public/js/ace-extra.min.js"></script>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
@@ -53,7 +53,7 @@
 
     <div class="navbar-container" id="navbar-container">
         <div class="navbar-header pull-left">
-            <a href="../home" class="navbar-brand">
+            <a href="../../home" class="navbar-brand">
                 <small>
                     <i class="icon-leaf">
                         中医妇产科临床流调数据中心
@@ -67,7 +67,7 @@
         <ul class="nav ace-nav">
             <li class="light-blue">
                 <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                    <img class="nav-user-photo" src="../public/avatars/0017030553263367_b.jpg" alt="Jason's Photo">
+                    <img class="nav-user-photo" src="../../public/avatars/0017030553263367_b.jpg" alt="Jason's Photo">
                     <span class="user-info">
                         <small>欢迎,</small>
                         <%= username %>
@@ -110,28 +110,28 @@
 
             <ul class="nav nav-list">
                 <li>
-                    <a href="../prj001">
+                    <a href="../../prj001">
                         <i class="icon-dashboard"></i>
                         <span class="menu-text"> 数据展示 </span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="../prj001/datainput">
+                    <a href="../../prj001/datainput">
                         <i class="icon-text-width"></i>
                         <span class="menu-text"> 数据采集 </span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="../public/dataana.html">
+                    <a href="../../public/dataana.html">
                         <i class="icon-list-alt"></i>
                         <span class="menu-text"> 数据分析 </span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="../public/about.html">
+                    <a href="../../public/about.html">
                         <i class="icon-tag"></i>
                         <span class="menu-text"> 关于 </span>
                     </a>
@@ -177,67 +177,69 @@
 
                                 <div class="tab-content">
                                     <div id="home4" class="tab-pane in active">
-                                        <p>日期：<%= archives[0].recdate %></p> 
-                                        <p>问卷编码：<%= archives[0].serial %></p>
-                                        <p>医院名称：<%= archives[0].hospital %></p>
-                                        <p>填表专家姓名：<%= archives[0].expert %></p>
-                                        <p>职称：<%= archives[0].title %></p>
-                                        <p>患者姓名：<%= archives[0].name %></p>
-                                        <p>电话：<%= archives[0].telephone %></p>
-                                        <p>年龄：<%= archives[0].age %></p>
-                                        <p>身高cm：<%= archives[0].height %></p>
-                                        <p>体重kg：<%= archives[0].weight %></p>
-                                        <p>血型：<%= archives[0].blood_type %></p>
-                                        <p>民族：<%= archives[0].nation %></p>
-                                        <p>职业：<%= archives[0].career %></p>
-                                        <p>病人现住址：<%= archives[0].address %></p>
-                                        <p>病人来源：<%= archives[0].entrance %></p>
-                                        <p>文化程度：<%= archives[0].culture %></p>
-                                        <p>婚姻状况：<%= archives[0].marriage %></p>
-                                        <p>特殊工种环境：<%= archives[0].recdate %></p>
-                                        <p>饮食偏好：<%= archives[0].recdate %></p>
+                                        <p>日期：<%= archives.geninfo.recdate %></p> 
+                                        <p>问卷编码：<%= archives.geninfo.serial %></p>
+                                        <p>医院名称：<%= archives.geninfo.hospital %></p>
+                                        <p>填表专家姓名：<%= archives.geninfo.expert %></p>
+                                        <p>职称：<%= archives.geninfo.title %></p>
+                                        <p>患者姓名：<%= archives.geninfo.name %></p>
+                                        <p>电话：<%= archives.geninfo.telephone %></p>
+                                        <p>年龄：<%= archives.geninfo.age %></p>
+                                        <p>身高cm：<%= archives.geninfo.height %></p>
+                                        <p>体重kg：<%= archives.geninfo.weight %></p>
+                                        <p>血型：<%= archives.geninfo.blood_type %></p>
+                                        <p>民族：<%= archives.geninfo.nation %></p>
+                                        <p>职业：<%= archives.geninfo.career %></p>
+                                        <p>病人现住址：<%= archives.geninfo.address %></p>
+                                        <p>病人来源：<%= archives.geninfo.entrance %></p>
+                                        <p>文化程度：<%= archives.geninfo.culture %></p>
+                                        <p>婚姻状况：<%= archives.geninfo.marriage %></p>
+                                        <p>特殊工种环境：<%= archives.geninfo.special_env %></p>
+                                        <p>饮食偏好：<%= archives.geninfo.food_favor %></p>
                                     </div>
 
                                     <div id="profile4" class="tab-pane">
-                                        <p>初潮年龄：</p>
-                                        <p>月经周期：</p>
-                                        <p>月经规律间隔天数：</p>
-                                        <p>月经不规律：</p>
-                                        <p>行经天数：</p>
-                                        <p>出血情况：</p>
-                                        <p>出血颜色：</p>
-                                        <p>出血质地：</p>
-                                        <p>血块：</p>
-                                        <p>出血特点：</p>
+                                            
+                                        <p>初潮年龄：<%= archives.menstruation.first_time %></p>
+                                        <p>月经周期：<%= archives.menstruation.cyclicity %></p>
+                                        <p>月经规律间隔天数：<%= archives.menstruation.normal %></p>
+                                        <p>月经不规律：<%= archives.menstruation.abnormal %></p>
+                                        <p>行经天数：<%= archives.menstruation.blood_cond %></p>
+                                        <p>出血情况：<%= archives.menstruation.cyclicity_sum %></p>
+                                        <p>出血颜色：<%= archives.menstruation.blood_color %></p>
+                                        <p>出血质地：<%= archives.menstruation.blood_quality %></p>
+                                        <p>血块：<%= archives.menstruation.blood_block %></p>
+                                        <p>出血特点：<%= archives.menstruation.blood_character %></p>
                                     </div>
 
                                     <div id="dropdown14" class="tab-pane">
-                                        <p>精神：</p>
-                                        <p>情绪：</p>
-                                        <p>寒热：</p>
-                                        <p>出汗：</p>
-                                        <p>语音：</p>
-                                        <p>面色：</p>
-                                        <p>心：</p>
-                                        <p>乳房：</p>
-                                        <p>胸胁：</p>
-                                        <p>腰膝：</p>
-                                        <p>腹部：</p>
-                                        <p>头：</p>
-                                        <p>目：</p>
-                                        <p>耳：</p>
-                                        <p>咽喉：</p>
-                                        <p>口味：</p>
-                                        <p>饮食：</p>
-                                        <p>睡眠：</p>
-                                        <p>大便：</p>
-                                        <p>小便：</p>
-                                        <p>四肢：</p>
-                                        <p>其他：</p>
-                                        <p>舌质：</p>
-                                        <p>舌苔：</p>
-                                        <p>舌体：</p>
-                                        <p>脉象：</p>
+                                            
+                                        <p>精神：<%= archives.symptom.spirit %></p>
+                                        <p>情绪：<%= archives.symptom.mood %></p>
+                                        <p>寒热：<%= archives.symptom.chillfever %></p>
+                                        <p>出汗：<%= archives.symptom.sweat %></p>
+                                        <p>语音：<%= archives.symptom.sound %></p>
+                                        <p>面色：<%= archives.symptom.face %></p>
+                                        <p>心：<%= archives.symptom.heart %> </p>
+                                        <p>乳房：<%= archives.symptom.breast %></p>
+                                        <p>胸胁：<%= archives.symptom.chest %></p>
+                                        <p>腰膝：<%= archives.symptom.waist %></p>
+                                        <p>腹部：<%= archives.symptom.stomach %></p>
+                                        <p>头：<%= archives.symptom.head %> </p>
+                                        <p>目：<%= archives.symptom.eyes %> </p>
+                                        <p>耳：<%= archives.symptom.ear %> </p>
+                                        <p>咽喉：<%= archives.symptom.throat %></p>
+                                        <p>口味：<%= archives.symptom.breath %></p>
+                                        <p>饮食：<%= archives.symptom.diet %></p>
+                                        <p>睡眠：<%= archives.symptom.sleep %></p>
+                                        <p>大便：<%= archives.symptom.stool %></p>
+                                        <p>小便：<%= archives.symptom.urine %></p>
+                                        <p>四肢：<%= archives.symptom.limb %></p>
+                                        <p>其他：<%= archives.symptom.other %></p>
+                                        <p>舌质：<%= archives.symptom.texture %></p>
+                                        <p>舌苔：<%= archives.symptom.coating %></p>
+                                        <p>舌体：<%= archives.symptom.tongue %></p>
+                                        <p>脉象：<%= archives.symptom.pulse %></p>
                                     </div>
 
                                     <div id="profile5" class="tab-pane">
@@ -279,11 +281,11 @@
                                     </div>
 
                                     <div id="dropdown15" class="tab-pane">
-                                        <p>中医诊断：</p>
-                                        <p>虚证诊断：</p>
-                                        <p>实证诊断：</p>
-                                        <p>虚实夹杂诊断：</p>
-                                        <p>西医诊断：</p>
+                                        <p>中医诊断：<%= archives.cc.chinese_medicine %></p>
+                                        <p>虚证诊断：<%= archives.cc.asthenic %></p>
+                                        <p>实证诊断：<%= archives.cc.demonstration %></p>
+                                        <p>虚实夹杂诊断：<%= archives.cc.def_ex %></p>
+                                        <p>西医诊断：<%= archives.cc.west %></p>
                                     </div>
                                 </div>
                             </div>
@@ -304,7 +306,7 @@
 <!--[if !IE]> -->
 
 <script type="text/javascript">
-    window.jQuery || document.write("<script src='../public/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
+    window.jQuery || document.write("<script src='../../public/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
 </script>
 
 <!-- <![endif]-->
@@ -316,10 +318,10 @@
 <![endif]-->
 
 <script type="text/javascript">
-    if("ontouchend" in document) document.write("<script src='../public/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+    if("ontouchend" in document) document.write("<script src='../../public/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
 </script>
-<script src="../public/js/bootstrap.min.js"></script>
-<script src="../public/js/typeahead-bs2.min.js"></script>
+<script src="../../public/js/bootstrap.min.js"></script>
+<script src="../../public/js/typeahead-bs2.min.js"></script>
 
 <!-- page specific plugin scripts -->
 
@@ -328,16 +330,16 @@
 <script src="../public/js/excanvas.min.js"></script>
 <![endif]-->
 
-<script src="../public/js/jquery-ui-1.10.3.custom.min.js"></script>
-<script src="../public/js/jquery.ui.touch-punch.min.js"></script>
-<script src="../public/js/bootbox.min.js"></script>
-<script src="../public/js/jquery.easy-pie-chart.min.js"></script>
-<script src="../public/js/jquery.gritter.min.js"></script>
-<script src="../public/js/spin.min.js"></script>
+<script src="../../public/js/jquery-ui-1.10.3.custom.min.js"></script>
+<script src="../../public/js/jquery.ui.touch-punch.min.js"></script>
+<script src="../../public/js/bootbox.min.js"></script>
+<script src="../../public/js/jquery.easy-pie-chart.min.js"></script>
+<script src="../../public/js/jquery.gritter.min.js"></script>
+<script src="../../public/js/spin.min.js"></script>
 <!-- ace scripts -->
 
-<script src="../public/js/ace-elements.min.js"></script>
-<script src="../public/js/ace.min.js"></script>
+<script src="../../public/js/ace-elements.min.js"></script>
+<script src="../../public/js/ace.min.js"></script>
 
 <!-- inline scripts related to this page -->
 

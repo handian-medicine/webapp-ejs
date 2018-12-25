@@ -4,21 +4,14 @@
     <meta charset="UTF-8">
     <title>修改密码</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <!-- basic styles -->
-
     <link rel="stylesheet" href="../public/css/bootstrap.min.css">
     <link rel="stylesheet" href="../public/css/font-awesome.min.css">
-
     <link rel="stylesheet" href="../public/css/ace.min.css">
     <link rel="stylesheet" href="../public/css/ace-rtl.min.css">
     <link rel="stylesheet" href="../public/css/ace-skins.min.css">
     <script src="/public/javascripts/jquery.min.js"></script>
-
-
-
     <script src="../public/js/ace-extra.min.js"></script>
-
 
     <style>
         .page-content1 {
@@ -29,15 +22,51 @@
 </head>
 <body>
     <script>
+        $(".tip").hide();
+        function checkpas1(){//当第一个密码框失去焦点时，触发checkpas1事件
+          var pas1=document.getElementById("newcode").value;
+          var pas2=document.getElementById("affirmcode").value;//获取两个密码框的值
+          if(pas1!=pas2&&pas2!="")//此事件当两个密码不相等且第二个密码是空的时候会显示错误信息
+            $(".tip").show();
+          else
+            $(".tip").hide();//若两次输入的密码相等且都不为空时，不显示错误信息。
+          }
+        function checkpas(){//当第一个密码框失去焦点时，触发checkpas2件
+          var pas1=document.getElementById("newcode").value;
+          var pas2=document.getElementById("affirmcode").value;//获取两个密码框的值
+          if(pas1!=pas2){
+            $(".tip").show();//当两个密码不相等时则显示错误信息
+          }else{
+            $(".tip").hide();
+          }
+          }
+        function checkpas2(){//点击提交按钮时，触发checkpas2事件，会进行弹框提醒以防无视错误信息提交
+          var pas3=document.getElementById("newcode").value;
+          var pas4=document.getElementById("affirmcode").value;
+          if(pas3!=pas4){
+            alert("两次输入的密码不一致！");
+            return false;
+          }
+        }
+    </script>
+    <script>
         $(document).ready(function () {
+                // var is_valid = invalue.match(/^[\w_-]{6,16}$/);
+                // alert($("#oldcode").val()+ "new"+ $("#newcode").val()+ "affirm" + $("#affirmcode").val());
+                // if ($("#oldcode").val() == $("#newcode").val() ) {
+                //     alert("新密码不能与旧密码相同，请重新输入");
+                //     $("#codeBtn").attr("disabled", true);
+                //     // $("#newcode").val("");
+                // } else {
+                //     if ( $("#newcode").val() != $("#affirmcode").val() ) {
+                //         alert("两次输入的密码不同，请重新输入");
+                //         $("#codeBtn").attr("disabled", true);
+                //         // $("#affirmcode").val("");
+                //     } else {
+                //         $("#codeBtn").attr("disabled", false);
+                //     }
+                // }
             $("#codeBtn").click(function () {
-                if ($("#oldcode").val() == $("#newcode").val() ) {
-                    alert("新密码不能与旧密码相同，请重新输入");
-                } else {
-                    if ( $("#newcode").val()== $("#affirmcode").val() ) {
-                        alert("两次输入的密码不同，请重新输入");
-                    }
-                }
                 $.ajax({
                     url: "/cipher",//路由，用来处理ajax请求的函数的所在地址
                     type: "PUT",
@@ -57,7 +86,7 @@
                     },
                     error: function () {
                         alert("修改失败");
-                        window.location.href = '/cipher';
+                        window.location.href = '/home';
                     }
                 });
             });
@@ -74,7 +103,7 @@
             <a href="../home" class="navbar-brand">
                 <small>
                     <i class="icon-leaf">
-                        中医妇产科临床流调数据中心
+                        中医妇科临床流调数据中心
                     </i>
                 </small>
             </a>
@@ -130,6 +159,7 @@
                 </tr>
                 </tbody>
             </table>
+            <!-- <span class="tip" style="color: red;">两次输入的密码不一致</span><br> -->
             <button type="submit" id="codeBtn">确认修改</button>
         </div>
     </div>

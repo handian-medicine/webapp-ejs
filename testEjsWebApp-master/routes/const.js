@@ -6,8 +6,8 @@ var client_secret = "kn5Rq9rD4x6L1LoCvjVmcMBeVoTTNQYH9Wc6shpI7BO48tUrlF3EmhhSzFK
 //测试服务器
 // var apiurl = "http://10.17.1.108:8001/";//wifi167
 // var apiurl = "http://127.0.0.1:8000/";
-// var client_id = "CWrbfzmJOhtG4cF0suVf0/rGYSiJDWXeQBWxnne3g";
-// var client_secret = "REmyfsiy3egeWWy3/JF631S2kURtz9QbvdWnhptSx6011I9e1fyttmvZ9r9PiixZvvvcWQlvPFWtKHI9i5HfEVNC6e8a1BhTlfAtzqIa1KJySln3nMbJ4ri0Jkk9PS9x3";
+// var client_id = "CWrbfzmJOhtG4cF0suVf0rGYSiJDWXeQBWxnne3g";
+// var client_secret = "REmyfsiy3egeWWy3JF631S2kURtz9QbvdWnhptSx6011I9e1fyttmvZ9r9PiixZvvvcWQlvPFWtKHI9i5HfEVNC6e8a1BhTlfAtzqIa1KJySln3nMbJ4ri0Jkk9PS9x3";
 
 var scope_prj001 = "prj001";
 var scope_users = "users";
