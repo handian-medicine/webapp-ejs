@@ -243,49 +243,66 @@
                                     </div>
 
                                     <div id="profile5" class="tab-pane">
-                                        <p>出生情况：</p>
-                                        <p>特殊嗜好：</p>
-                                        <p>体力状况：</p>
-                                        <p>职业体力活动：</p>
-                                        <p>贫血与否：</p>
-                                        <p>体育锻炼：</p>
-                                        <p>一级亲属：</p>
-                                        <p>是否为排卵障碍性：</p>
-                                        <p>特殊嗜好：</p>
-                                        <b>减肥情况：</b>
-                                        <p>减肥时长(月)：</p>
-                                        <b>经期情况：</b>
-                                        <p>经期运动：</p>
-                                        <p>经期感冒：</p>
-                                        <p>经期同房：</p>
-                                        <p>经期着凉：</p>
-                                        <p>平素带下情况：</p>
-                                        <p>既往病史：</p>
-                                        <p>月经不调病史：</p>
-                                        <p>一级亲属其它病史：</p>
-                                        <b>孕育史：</b>
-                                        <p>孕次总数：</p>
-                                        <p>刨宫产次数：</p>
-                                        <p>顺产次数：</p>
-                                        <p>药物流产次数：</p>
-                                        <p>人工流产次数：</p>
-                                        <p>自然流产次数：</p>
-                                        <p>生化妊娠次数:：</p>
-                                        <p>异位妊娠次数：</p>
-                                        <p>胎停育次数：</p>
-                                        <p>清宫术次数：</p>
-                                        <b>避孕措施：</b>
-                                        <p>末次口服避孕药时间：</p>
-                                        <b>其它辅助检查：</b>
-                                        <p>血红蛋白值：</p>
+                                        <p>出生情况：<%= archives.other.born %></p>
+                                        <p>特殊嗜好：<%= archives.other.hobbies %></p>
+                                        <p>体力状况：<%= archives.other.body_cond %></p>
+                                        <p>职业体力活动：<%= archives.other.career_labor %></p>
+                                        <p>贫血与否：<%= archives.other.poor_blood %></p>
+                                        <p>体育锻炼：<%= archives.other.phycial_exercise %></p>
+                                        <p>一级亲属（母亲、姐妹、女儿）异常子宫出血史：<%= archives.other.womb_blood %></p>
+                                        <p>是否为排卵障碍性：<%= archives.other.ovulation %></p>
+
+                                        <b>减肥情况：<%= archives.other.reducefat %></b>
+                                        <p>减肥时长(月)：<%= archives.other.reducefat_persist %></p>
+
+                                        <b>经期情况</b>
+                                        <p>经期运动：<%= archives.other.mens_yundong %></p>
+                                        <p>经期感冒：<%= archives.other.mens_ganmao %></p>
+                                        <p>经期同房：<%= archives.other.mens_tongfang %></p>
+                                        <p>经期着凉：<%= archives.other.mens_zhaoliang %></p>
+
+                                        <p>平素带下情况：<%= archives.other.leucorrhea %></p>
+                                        <p>既往病史：<%= archives.other.pasthistory %></p>
+                                        <p>月经不调病史：<%= archives.other.pastmens %></p>
+                                        <p>一级亲属其它病史：<%= archives.other.pastfamily %></p>
+
+                                        <b>孕育史</b>
+                                        <p>孕次总数：<%= archives.other.pastpreg_yuncount %></p>
+                                        <p>刨宫产次数：<%= archives.other.pastpreg_pougong %></p>
+                                        <p>顺产次数：<%= archives.other.pastpreg_shunchan %></p>
+                                        <p>药物流产次数：<%= archives.other.pastpreg_yaoliu %></p>
+                                        <p>人工流产次数：<%= archives.other.pastpreg_renliu %></p>
+                                        <p>自然流产次数：<%= archives.other.pastpreg_ziranliu %></p>
+                                        <p>生化妊娠次数：<%= archives.other.pastpreg_shenghuarenshen %></p>
+                                        <p>异位妊娠次数：<%= archives.other.pastpreg_yiweirenshen %></p>
+                                        <p>胎停育次数：<%= archives.other.pastpreg_taitingyu %></p>
+                                        <p>清宫术次数：<%= archives.other.pastpreg_qinggongshu %></p>
+
+                                        <b>避孕措施：<%= archives.other.prevent %></b>
+                                        <p>避孕药：<%= archives.other.biyunyao %></p>
+                                        <p>末次口服避孕药时间：<%= archives.other.biyunyao_time %></p>
+
+                                        <b>其它辅助检查</b>
+                                        <p>血红蛋白值：<%= archives.other.accessory_hgb_value %></p>
+                                        <p>全血细胞计数：<%= archives.other.accessory_quanxuexibaojishu %></p>
+                                        <p>出血性疾病筛查（如女性血管性血友病）：<%= archives.other.accessory_chuxuexingjibing %></p>
+                                        <p>凝血功能检查：<%= archives.other.accessory_ningxue %></p>
+                                        <p>甲状腺功能检测：<%= archives.other.accessory_jiazhuangxian %></p>
+                                        <p>尿妊娠试验：<%= archives.other.accessory_niaorenshen %></p>
+                                        <p>盆腔超声检查：<%= archives.other.accessory_penqiangchaosheng %></p>
+                                        <p>基础体温测定：<%= archives.other.accessory_jichutiwen %></p>
+                                        <p>激素水平测定：<%= archives.other.accessory_jisushuiping %></p>
+                                        <p>诊断性刮宫或宫腔镜下刮宫：<%= archives.other.accessory_guagong %></p>
+                                        <p>其它说明：<%= archives.other.accessory_qita %></p>
+
                                     </div>
 
                                     <div id="dropdown15" class="tab-pane">
-                                        <p>中医诊断：<%= archives.cc.chinese_medicine %></p>
-                                        <p>虚证诊断：<%= archives.cc.asthenic %></p>
-                                        <p>实证诊断：<%= archives.cc.demonstration %></p>
-                                        <p>虚实夹杂诊断：<%= archives.cc.def_ex %></p>
-                                        <p>西医诊断：<%= archives.cc.west %></p>
+                                        <p>中医诊断：<%= archives.clinicalconclusion.chinese_medicine %></p>
+                                        <p>虚证诊断：<%= archives.clinicalconclusion.asthenic %></p>
+                                        <p>实证诊断：<%= archives.clinicalconclusion.demonstration %></p>
+                                        <p>虚实夹杂诊断：<%= archives.clinicalconclusion.def_ex %></p>
+                                        <p>西医诊断：<%= archives.clinicalconclusion.west %></p>
                                     </div>
                                 </div>
                             </div>

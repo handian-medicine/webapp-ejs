@@ -1009,10 +1009,11 @@ router.get('/patientInfo', function (req, res, next){
                 var archiveobjs = JSON.parse(body);
                 archiveobjs = archiveobjs[0];
                 archiveobjs.geninfo = {};
-                // var excel_obj = "";
                 // console.log("11. 病例所有信息", archiveobjs);
                 // console.log("12. 类型", typeof(archiveobjs["recdate"]));
                 // console.log("13. 类型", typeof(archiveobjs["menstruation"]));
+
+                //把一般信息打包到geninfo
                 for (var i in archiveobjs) {
                     // console.log(typeof(archiveobjs[i]));
                     if ( typeof(archiveobjs[i]) != "object") {
@@ -1020,6 +1021,7 @@ router.get('/patientInfo', function (req, res, next){
                         delete archiveobjs[i];
                     }
                 }
+
                 var dict_table = {
                     "recdate": '日期',
                     "serial": '问卷编码',
@@ -1397,21 +1399,397 @@ router.get('/patientInfo', function (req, res, next){
                     'dicuxingxianjisu': '低促行线激素疾病',
                     'qita_west': '其它西医诊断',
                 };
-                console.log("12. 病例所有信息", archiveobjs);
-                console.log("13. ", archiveobjs["geninfo"]["gaokong"]==true);
+                var archiveobjs_empty = {
+                    //一般信息
+                    geninfo:{
+                        recdate: "",
+                        serial: "",
+                        hospital: "",
+                        expert: "",
+                        title: "",
+                        name: "",
+                        telephone: "",
+                        age: "",
+                        height: "",
+                        weight: "",
+                        blood_type: "",
+                        nation: "",
+                        career: "",
+                
+                        //特殊工种环境
+                        special_env:"",
+                
+                        address: "",
+                        entrance: "",
+                        culture: "",
+                        marriage: "",
+                
+                        //饮食偏好
+                        food_favor:"",
+                    },
+                    // 月经信息
+                    menstruation:{
+                        first_time: "",
+                        cyclicity: "",
+                        normal: "",
+                        abnormal: "",
+                        blood_cond: "",
+                        cyclicity_sum: "",
+                        blood_color: "",
+                        blood_quality: "",
+                        blood_block: "",
+                        blood_character: "",
+                    },
+                    // 全身症状
+                    symptom:{
+                        spirit_jinglichongpei: '',
+                        spirit_jianwang: '',
+                        spirit_jingshenbujizhong: '',
+                        spirit_shenpifali: '',
+                        spirit_yalida: '',
+                        spirit_jiaodabiangu: '',
+                        spirit_beishangyuku: '',
+                        mood_zhengchang: '',
+                        mood_leguankailang: '',
+                        mood_silvguodu: '',
+                        mood_xinuwuchang: '',
+                        mood_fanzaoyinu: '',
+                        mood_jiaolv: '',
+                        mood_beishangyuku: '',
+                        mood_yiyu: '',
+                        mood_duosiduolv: '',
+                        mood_qita: '',
+                        chillfever_zhengchang: '',
+                        chillfever_weihan: '',
+                        chillfever_wuxinfanre: '',
+                        chillfever_wuhouchaore: '',
+                        chillfever_direbutui: '',
+                        sweat_zhengchang: '',
+                        sweat_duohan: '',
+                        sweat_mingxian: '',
+                        sweat_zihan: '',
+                        sweat_daohan: '',
+                        sweat_hongre: '',
+                        sweat_chaore: '',
+                        sound_zhengchang: '',
+                        sound_qiduan: '',
+                        sound_xitanxi: '',
+                        sound_shaoqilanyan: '',
+                        face_zhengchang: '',
+                        face_danbaiwuhua: '',
+                        face_cangbai: '',
+                        face_qingbai: '',
+                        face_weihuang: '',
+                        face_huangzhong: '',
+                        face_chaohong: '',
+                        face_huian: '',
+                        face_baierfuzhong: '',
+                        face_baierandan: '',
+                        face_mianmulihei: '',
+                        face_shaohua: '',
+                        face_wuhua: '',
+                        heart_zhengcheng: '',
+                        heart_xinfan: '',
+                        heart_xinji: '',
+                        breast_zhengchang: '',
+                        breast_biezhang: '',
+                        breast_citong: '',
+                        breast_zhangtong: '',
+                        breast_chutong: '',
+                        chest_zhengchang: '',
+                        chest_zhangmen: '',
+                        chest_yintong: '',
+                        chest_citong: '',
+                        waist_zhengchang: '',
+                        waist_suantong: '',
+                        waist_suanruan: '',
+                        waist_suanleng: '',
+                        waist_lengtong: '',
+                        waist_yaotongrushe: '',
+                        stomach_zhengchang: '',
+                        stomach_zhangtongjuan: '',
+                        stomach_xiaofuzhuizhang: '',
+                        stomach_xiaofubiezhang: '',
+                        stomach_xiaofulengtong: '',
+                        stomach_xiaofuzhuotong: '',
+                        stomach_yintongxian: '',
+                        stomach_dewentongjian: '',
+                        stomach_tongruzhenci: '',
+                        stomach_kongzhui: '',
+                        head_zhengchang: '',
+                        head_touyun: '',
+                        head_toutong: '',
+                        head_touchenzhong: '',
+                        eyes_zhengchang: '',
+                        eyes_muxuan: '',
+                        eyes_muse: '',
+                        eyes_yanhua: '',
+                        eyes_mutong: '',
+                        eyes_muyang: '',
+                        eyes_chenqifz: '',
+                        ear_erming: '',
+                        ear_erlong: '',
+                        ear_tinglibq: '',
+                        throat_zhengchang: '',
+                        throat_yangan: '',
+                        throat_yantong: '',
+                        throat_yanyang: '',
+                        throat_yiwugan: '',
+                        breath_wuyiwei: '',
+                        breath_kouku: '',
+                        breath_kougan: '',
+                        breath_koudan: '',
+                        breath_kouxian: '',
+                        breath_koutian: '',
+                        breath_kounian: '',
+                        breath_danyuss: '',
+                        diet_nadaishishao: '',
+                        diet_shiyuws: '',
+                        diet_yanshi: '',
+                        diet_xireyin: '',
+                        diet_xilengyin: '',
+                        diet_shiyujiantui: '',
+                        diet_shihoufuzhang: '',
+                        diet_shixinla: '',
+                        diet_shishengleng: '',
+                        diet_kebuduoyin: '',
+                        sleep_zhengchang: '',
+                        sleep_yiban: '',
+                        sleep_duomengyixing: '',
+                        sleep_nanyirumian: '',
+                        sleep_cheyebumian: '',
+                        sleep_duomeng: '',
+                        sleep_shishui: '',
+                        stool_sehuang: '',
+                        stool_bianmi: '',
+                        stool_zhixi: '',
+                        stool_sgsx: '',
+                        stool_xiexie: '',
+                        stool_tlzqxiexie: '',
+                        stool_zhinian: '',
+                        stool_weixiaohua: '',
+                        urine_zhengchang: '',
+                        urine_duanchi: '',
+                        urine_duanhuang: '',
+                        urine_qingchang: '',
+                        urine_yeniaopin: '',
+                        urine_xbpinshu: '',
+                        urine_niaoji: '',
+                        urine_niaotong: '',
+                        urine_shaoniao: '',
+                        urine_yulibujin: '',
+                        limb_zhengchang: '',
+                        limb_wuli: '',
+                        limb_mamu: '',
+                        limb_kunzhong: '',
+                        limb_zhileng: '',
+                        limb_bingliang: '',
+                        limb_szxinre: '',
+                        limb_fuzhong: '',
+                        other_wu: '',
+                        other_czjdanbai: '',
+                        other_xyjiantui: '',
+                        texture_danhong: '',
+                        texture_danbai: '',
+                        texture_pianhong: '',
+                        texture_danan: '',
+                        texture_zian: '',
+                        texture_yudian: '',
+                        coating_bai: '',
+                        coating_huang: '',
+                        coating_ni: '',
+                        coating_bo: '',
+                        coating_hou: '',
+                        coating_run: '',
+                        coating_hua: '',
+                        coating_hhouni: '',
+                        coating_bairun: '',
+                        coating_huangcao: '',
+                        coating_wutai: '',
+                        coating_shaotai: '',
+                        coating_huabo: '',
+                        tongue_shoubo: '',
+                        tongue_pangda: '',
+                        tongue_bianjianhong: '',
+                        tongue_youchihen: '',
+                        tongue_zhongyouliewen: '',
+                        pulse_shi: '',
+                        pulse_fu: '',
+                        pulse_chen: '',
+                        pulse_chi: '',
+                        pulse_huan: '',
+                        pulse_xi: '',
+                        pulse_ruo: '',
+                        pulse_shu: '',
+                        pulse_hua: '',
+                        pulse_se: '',
+                        pulse_xian: '',
+                        pulse_jin: '',
+                        pulse_kou: '',
+                        pulse_ru: '',
+                        pulse_hong: '',
+                        pulse_youli: '',
+                        pulse_wuli: '',
+                    },
+                    // 其他
+                    other:{
+                        born_zaochan: '',
+                        born_zuyuechan: '',
+                        born_yindaofenmian: '',
+                        born_pougongchan: '',
+                        hobbies_wu: '',
+                        hobbies_xiyan: '',
+                        hobbies_yinjiu: '',
+                        hobbies_qita: '',
+                        body_cond: '',
+                        career_labor: '',
+                        poor_blood: '',
+                        phycial_exercise: '',
+                        reducefat_ever: '',
+                        reducefat_yundong: '',
+                        reducefat_jieshi: '',
+                        reducefat_yaowu: '',
+                        reducefat_qita: '',
+                        reducefat_persist: '',
+                        mens_yundong: '',
+                        mens_ganmao: '',
+                        mens_tongfang: '',
+                        mens_zhaoliang: '',
+                        leucorrhea_liangshao: '',
+                        leucorrhea_liangke: '',
+                        leucorrhea_liangduo: '',
+                        leucorrhea_sehuang: '',
+                        leucorrhea_sebai: '',
+                        leucorrhea_selv: '',
+                        leucorrhea_zhiqingxi: '',
+                        leucorrhea_zhinianchou: '',
+                        pasthistory_wu: '',
+                        pasthistory_yuejingbutiao: '',
+                        pasthistory_yindaoyan: '',
+                        pasthistory_zigongneimoyan: '',
+                        pasthistory_zigongneimoyiwei: '',
+                        pasthistory_zigongxianjizheng: '',
+                        pasthistory_penqiangyan: '',
+                        pasthistory_zigongjiliu: '',
+                        pasthistory_luancaonangzhong: '',
+                        pasthistory_ruxianzengsheng: '',
+                        pasthistory_jiazhuangxian: '',
+                        pasthistory_shengzhiyichang: '',
+                        pasthistory_naochuitiliu: '',
+                        pasthistory_feipang: '',
+                        pasthistory_ganyan: '',
+                        pasthistory_jiehe: '',
+                        pasthistory_qita: '',
+                        pastmens_zhouqiwenluan: '',
+                        pastmens_liangduo: '',
+                        pastmens_zhouqisuoduan: '',
+                        pastmens_yanhou: '',
+                        pastmens_yanchang: '',
+                        pastmens_tingbi: '',
+                        pastmens_chuxie: '',
+                        womb_blood: '',
+                        ovulation: '',
+                        pastfamily_wu: '',
+                        pastfamily_gaoxueya: '',
+                        pastfamily_tangniaobing: '',
+                        pastfamily_xinzangbing: '',
+                        pastfamily_duonangluanchao: '',
+                        pastfamily_buxiang: '',
+                        pastfamily_qita: '',
+                        pastpreg_yuncount: '',
+                        pastpreg_pougong: '',
+                        pastpreg_shunchan: '',
+                        pastpreg_yaoliu: '',
+                        pastpreg_renliu: '',
+                        pastpreg_ziranliu: '',
+                        pastpreg_shenghuarenshen: '',
+                        pastpreg_yiweirenshen: '',
+                        pastpreg_taitingyu: '',
+                        pastpreg_qinggongshu: '',
+                        prevent_jieza: '',
+                        prevent_jieyuqi: '',
+                        prevent_biyuntao: '',
+                        prevent_biyunyao: '',
+                        prevent_biyunyao_time: '',
+                        prevent_mafulong: '',
+                        prevent_daying: '',
+                        prevent_yousiming: '',
+                        prevent_zuoque: '',
+                        prevent_fufang: '',
+                        prevent_qita: '',
+                        accessory_hgb_value: '',
+                        accessory_quanxuexibaojishu: '',
+                        accessory_chuxuexingjibing: '',
+                        accessory_ningxue: '',
+                        accessory_jiazhuangxian: '',
+                        accessory_niaorenshen: '',
+                        accessory_penqiangchaosheng: '',
+                        accessory_jichutiwen: '',
+                        accessory_jisushuiping: '',
+                        accessory_guagong: '',
+                        accessory_qita: '',
+                    },
+                    //临床
+                    clinicalconclusion:{
+                        benglou: '',
+                        yuejingguoduo: '',
+                        yuejingxianqi: '',
+                        jingqiyanchang: '',
+                        jingjianqichuxie: '',
+                        shenyin: '',
+                        shenyang: '',
+                        shenqi: '',
+                        piqi: '',
+                        qixuxiaxian: '',
+                        xure: '',
+                        xinpiliangxu: '',
+                        pishenyangxu: '',
+                        qixuekuixu: '',
+                        ganshenyinxu: '',
+                        qita_asthenic: '',
+                        ganyuxuere: '',
+                        yangshengxuere: '',
+                        ganjingshire: '',
+                        tanreyuzu: '',
+                        tanshizuzhi: '',
+                        tanyuzuzhi: '',
+                        yurehujie: '',
+                        xueyu: '',
+                        qizhixueyu: '',
+                        hanningxueyu: '',
+                        qita_demonstration: '',
+                        shenxuxueyu: '',
+                        shenxuyure: '',
+                        shenxuganyu: '',
+                        qixuxueyu: '',
+                        yinxuxueyu: '',
+                        yinxuhuowang: '',
+                        ganyupixu: '',
+                        qita_def_ex: '',
+                        duonangluanchao: '',
+                        gaomirusu: '',
+                        dicuxingxianjisu: '',
+                        qita_west: '',
+                    },
+                }  
+                console.log("12. 病例所有信息", archiveobjs);                                         
                 for (var i in archiveobjs) {
-                    for (var j in archiveobjs[i]) {
-                        // console.log(excel_key[j]);
-                        if ( typeof(archiveobjs[i][j])=="boolean" ) {
-                            if (archiveobjs[i][j]==true) {
-                                archiveobjs[i][j] = dict_table[j];
-                            } else {
-                                archiveobjs[i][j] = "";
+                    if (archiveobjs[i]==null) {
+                        archiveobjs[i] = archiveobjs_empty[i];
+                        // console.log("13.", archiveobjs[i]);
+                    } else {
+                        for (var j in archiveobjs[i]) {
+                            // console.log(excel_key[j]);
+                            if ( typeof(archiveobjs[i][j])=="boolean" ) {
+                                if (archiveobjs[i][j]==true) {
+                                    archiveobjs[i][j] = dict_table[j];
+                                } else {
+                                    archiveobjs[i][j] = "";
+                                }
                             }
                         }
-                    }
+                    }                   
                 }
-
                 var patient_archive = {
                     //一般信息
                     geninfo:{
@@ -1430,7 +1808,7 @@ router.get('/patientInfo', function (req, res, next){
                     "career": archiveobjs.geninfo.career,
                 
                 //特殊工种环境
-                    special_env:
+                    'special_env':
                       archiveobjs.geninfo.gaokong + " "
                     + archiveobjs.geninfo.diwen + " "
                     + archiveobjs.geninfo.zaosheng + " "
@@ -1446,7 +1824,7 @@ router.get('/patientInfo', function (req, res, next){
                     "marriage": archiveobjs.geninfo.marriage,
                 
                 //饮食偏好
-                    food_favor:
+                    'food_favor':
                       archiveobjs.geninfo.wuteshu + " "
                     + archiveobjs.geninfo.sushi + " "
                     + archiveobjs.geninfo.suan + " "
@@ -1456,8 +1834,8 @@ router.get('/patientInfo', function (req, res, next){
                     + archiveobjs.geninfo.you + " "
                     + archiveobjs.geninfo.shengleng + " "
                     + archiveobjs.geninfo.kafei + " "
-                    + archiveobjs.geninfo.qita + " ",},
-                
+                    + archiveobjs.geninfo.qita + " ",
+                    },
                     // 月经信息
                     menstruation:{
                     'first_time': archiveobjs.menstruation.first_time,
@@ -1469,11 +1847,11 @@ router.get('/patientInfo', function (req, res, next){
                     'blood_color': archiveobjs.menstruation.blood_color,
                     'blood_quality': archiveobjs.menstruation.blood_quality,
                     'blood_block': archiveobjs.menstruation.blood_block,
-                    'blood_character': archiveobjs.menstruation.blood_character,},
-                
+                    'blood_character': archiveobjs.menstruation.blood_character,
+                    },
                     // 全身症状
                     symptom:{
-                    spirit:
+                    'spirit':
                       archiveobjs.symptom.spirit_jinglichongpei + " "
                     + archiveobjs.symptom.spirit_jianwang + " "
                     + archiveobjs.symptom.spirit_jingshenbujizhong + " "
@@ -1482,7 +1860,7 @@ router.get('/patientInfo', function (req, res, next){
                     + archiveobjs.symptom.spirit_jiaodabiangu + " "
                     + archiveobjs.symptom.spirit_beishangyuku + " ",
                 
-                    mood:
+                    'mood':
                       archiveobjs.symptom.mood_zhengchang + " "
                     + archiveobjs.symptom.mood_leguankailang + " "
                     + archiveobjs.symptom.mood_silvguodu + " "
@@ -1494,8 +1872,8 @@ router.get('/patientInfo', function (req, res, next){
                     + archiveobjs.symptom.mood_duosiduolv + " "
                     + archiveobjs.symptom.mood_qita + " ",
                 
-                    chillfever:
-                    archiveobjs.symptom.chillfever_zhengchang + " "
+                    'chillfever':
+                      archiveobjs.symptom.chillfever_zhengchang + " "
                     + archiveobjs.symptom.chillfever_weihan + " "
                     + archiveobjs.symptom.chillfever_wuxinfanre + " "
                     + archiveobjs.symptom.chillfever_wuhouchaore + " "
@@ -1713,131 +2091,127 @@ router.get('/patientInfo', function (req, res, next){
                     + archiveobjs.symptom.pulse_youli + " "
                     + archiveobjs.symptom.pulse_wuli + " ",
                     },
-                
                     // 其他
                     other:{
-                    born:{
-                    'born_zaochan': '早产',
-                    'born_zuyuechan': '足月产',
-                    'born_yindaofenmian': '阴道分娩',
-                    'born_pougongchan': '剖宫产'},
+                    born:
+                    archiveobjs.other.born_zaochan + " "
+                    + archiveobjs.other.born_zuyuechan + " "
+                    + archiveobjs.other.born_yindaofenmian + " "
+                    + archiveobjs.other.born_pougongchan + " ",
                 
-                    hobbies:{
-                    'hobbies_wu': '无',
-                    'hobbies_xiyan': '吸烟',
-                    'hobbies_yinjiu': '饮酒',
-                    'hobbies_qita': '其他嗜好'},
+                    hobbies:
+                     archiveobjs.other.hobbies_wu + " "
+                    + archiveobjs.other.hobbies_xiyan + " "
+                    + archiveobjs.other.hobbies_yinjiu + " "
+                    + archiveobjs.other.hobbies_qita + " ",
                 
-                    'body_cond': '体力状况',
-                    'career_labor': '职业体力活动',
-                    'poor_blood': '贫血与否',
-                    'phycial_exercise': '体育锻炼',
+                    'body_cond': archiveobjs.other.body_cond,
+                    'career_labor': archiveobjs.other.career_labor,
+                    'poor_blood': archiveobjs.other.poor_blood,
+                    'phycial_exercise': archiveobjs.other.phycial_exercise,
                 
-                    reducefat:{
-                    'reducefat_ever': '有减肥',
-                    'reducefat_yundong': '运动减肥',
-                    'reducefat_jieshi': '节食减肥',
-                    'reducefat_yaowu': '药物减肥',
-                    'reducefat_qita': '其他减肥',
-                    'reducefat_persist': '减肥时长'},
+                    reducefat:
+                     archiveobjs.other.reducefat_ever + " "
+                    + archiveobjs.other.reducefat_yundong + " "
+                    + archiveobjs.other.reducefat_jieshi + " "
+                    + archiveobjs.other.reducefat_yaowu + " "
+                    + archiveobjs.other.reducefat_qita + " ",
+                    'reducefat_persist': archiveobjs.other.reducefat_persist,
                 
-                    mens:{
-                    'mens_yundong': '经期运动',
-                    'mens_ganmao': '经期感冒',
-                    'mens_tongfang': '经期同房',
-                    'mens_zhaoliang': '经期着凉'},
+                    'mens_yundong':archiveobjs.other.mens_yundong,
+                    'mens_ganmao':archiveobjs.other.mens_ganmao,
+                    'mens_tongfang':archiveobjs.other.mens_tongfang,
+                    'mens_zhaoliang':archiveobjs.other.mens_zhaoliang,
                 
-                    leucorrhea:{
-                    'leucorrhea_liangshao': '带下量少',
-                    'leucorrhea_liangke': '带下量可',
-                    'leucorrhea_liangduo': '带下量多',
-                    'leucorrhea_sehuang': '带下色黄',
-                    'leucorrhea_sebai': '带下色白',
-                    'leucorrhea_selv': '带下色绿',
-                    'leucorrhea_zhiqingxi': '带下质清稀',
-                    'leucorrhea_zhinianchou': '带下质粘稠'},
+                    leucorrhea:
+                     archiveobjs.other.leucorrhea_liangshao + " "
+                    + archiveobjs.other.leucorrhea_liangke + " "
+                    + archiveobjs.other.leucorrhea_liangduo + " "
+                    + archiveobjs.other.leucorrhea_sehuang + " "
+                    + archiveobjs.other.leucorrhea_sebai + " "
+                    + archiveobjs.other.leucorrhea_selv + " "
+                    + archiveobjs.other.leucorrhea_zhiqingxi + " "
+                    + archiveobjs.other.leucorrhea_zhinianchou + " ",
                 
-                    pasthistory:{
-                    'pasthistory_wu': '无',
-                    'pasthistory_yuejingbutiao': '月经不调',
-                    'pasthistory_yindaoyan': '阴道炎',
-                    'pasthistory_zigongneimoyan': '子宫内膜炎',
-                    'pasthistory_zigongneimoyiwei': '子宫内膜异位症',
-                    'pasthistory_zigongxianjizheng': '子宫腺肌症',
-                    'pasthistory_penqiangyan': '盆腔炎',
-                    'pasthistory_zigongjiliu': '子宫肌瘤',
-                    'pasthistory_luancaonangzhong': '卵巢囊肿',
-                    'pasthistory_ruxianzengsheng': '乳腺增生',
-                    'pasthistory_jiazhuangxian': '甲状腺相关疾病',
-                    'pasthistory_shengzhiyichang': '生殖器官发育异常',
-                    'pasthistory_naochuitiliu': '脑垂体瘤',
-                    'pasthistory_feipang': '肥胖',
-                    'pasthistory_ganyan': '肝炎',
-                    'pasthistory_jiehe': '结核',
-                    'pasthistory_qita': '其他病史'},
+                    pasthistory:
+                     archiveobjs.other.pasthistory_wu + " "
+                    + archiveobjs.other.pasthistory_yuejingbutiao + " "
+                    + archiveobjs.other.pasthistory_yindaoyan + " "
+                    + archiveobjs.other.pasthistory_zigongneimoyan + " "
+                    + archiveobjs.other.pasthistory_zigongneimoyiwei + " "
+                    + archiveobjs.other.pasthistory_zigongxianjizheng + " "
+                    + archiveobjs.other.pasthistory_penqiangyan + " "
+                    + archiveobjs.other.pasthistory_zigongjiliu + " "
+                    + archiveobjs.other.pasthistory_luancaonangzhong + " "
+                    + archiveobjs.other.pasthistory_ruxianzengsheng + " "
+                    + archiveobjs.other.pasthistory_jiazhuangxian + " "
+                    + archiveobjs.other.pasthistory_shengzhiyichang + " "
+                    + archiveobjs.other.pasthistory_naochuitiliu + " "
+                    + archiveobjs.other.pasthistory_feipang + " "
+                    + archiveobjs.other.pasthistory_ganyan + " "
+                    + archiveobjs.other.pasthistory_jiehe + " "
+                    + archiveobjs.other.pasthistory_qita + " ",
                 
-                    pastmens:{
-                    'pastmens_zhouqiwenluan': '月经周期紊乱',
-                    'pastmens_liangduo': '月经量多',
-                    'pastmens_zhouqisuoduan': '月经周期缩短',
-                    'pastmens_yanhou': '月经延后',
-                    'pastmens_yanchang': '行经期延长',
-                    'pastmens_tingbi': '月经停闭',
-                    'pastmens_chuxie': '经间期出血'},
+                    pastmens:
+                     archiveobjs.other.pastmens_zhouqiwenluan + " "
+                    + archiveobjs.other.pastmens_liangduo + " "
+                    + archiveobjs.other.pastmens_zhouqisuoduan + " "
+                    + archiveobjs.other.pastmens_yanhou + " "
+                    + archiveobjs.other.pastmens_yanchang + " "
+                    + archiveobjs.other.pastmens_tingbi + " "
+                    + archiveobjs.other.pastmens_chuxie + " ",
                 
-                    'womb_blood': '一级亲属（母亲、姐妹、女儿）异常子宫出血史',
-                    'ovulation': '是否为排卵障碍性',
+                    'womb_blood': archiveobjs.other.womb_blood,
+                    'ovulation': archiveobjs.other.ovulation,
                 
-                    pastfamily:{
-                    'pastfamily_wu': '无',
-                    'pastfamily_gaoxueya': '高血压',
-                    'pastfamily_tangniaobing': '糖尿病',
-                    'pastfamily_xinzangbing': '心脏病',
-                    'pastfamily_duonangluanchao': '多囊卵巢综合征',
-                    'pastfamily_buxiang': '不详',
-                    'pastfamily_qita': '其他'},
+                    pastfamily:
+                     archiveobjs.other.pastfamily_wu + " "
+                    + archiveobjs.other.pastfamily_gaoxueya + " "
+                    + archiveobjs.other.pastfamily_tangniaobing + " "
+                    + archiveobjs.other.pastfamily_xinzangbing + " "
+                    + archiveobjs.other.pastfamily_duonangluanchao + " "
+                    + archiveobjs.other.pastfamily_buxiang + " "
+                    + archiveobjs.other.pastfamily_qita + " ",
                 
-                    pastpreg:{
-                    'pastpreg_yuncount': '孕次总数',
-                    'pastpreg_pougong': '剖宫产次数',
-                    'pastpreg_shunchan': '顺产次数',
-                    'pastpreg_yaoliu': '药物流产次数',
-                    'pastpreg_renliu': '人工流产次数',
-                    'pastpreg_ziranliu': '自然流产次数',
-                    'pastpreg_shenghuarenshen': '生化妊娠次数',
-                    'pastpreg_yiweirenshen': '异位妊娠次数',
-                    'pastpreg_taitingyu': '胎停育次数',
-                    'pastpreg_qinggongshu': '清宫术次数'},
+                    'pastpreg_yuncount':archiveobjs.other.pastpreg_yuncount,
+                    'pastpreg_pougong':archiveobjs.other.pastpreg_pougong,
+                    'pastpreg_shunchan':archiveobjs.other.pastpreg_shunchan,
+                    'pastpreg_yaoliu':archiveobjs.other.pastpreg_yaoliu,
+                    'pastpreg_renliu':archiveobjs.other.pastpreg_renliu,
+                    'pastpreg_ziranliu':archiveobjs.other.pastpreg_ziranliu,
+                    'pastpreg_shenghuarenshen':archiveobjs.other.pastpreg_shenghuarenshen,
+                    'pastpreg_yiweirenshen':archiveobjs.other.pastpreg_yiweirenshen,
+                    'pastpreg_taitingyu':archiveobjs.other.pastpreg_taitingyu,
+                    'pastpreg_qinggongshu':archiveobjs.other.pastpreg_qinggongshu,
                 
-                    prevent:{
-                    'prevent_jieza': '结扎',
-                    'prevent_jieyuqi': '宫内节育器',
-                    'prevent_biyuntao': '避孕套',
-                    'prevent_biyunyao': '口服避孕药',
-                    'prevent_biyunyao_time': '末次口服避孕药时间',
-                    'prevent_mafulong': '去氧孕烯炔雌片（妈富隆）',
-                    'prevent_daying': '炔雌醇环丙孕酮片（达英-35）',
-                    'prevent_yousiming': '屈螺酮炔雌醇片（优思明）',
-                    'prevent_zuoque': '左炔诺孕酮',
-                    'prevent_fufang': '复方左炔诺孕酮',
-                    'prevent_qita': '其它口服'},
+                    prevent:
+                      archiveobjs.other.prevent_jieza + " "
+                    + archiveobjs.other.prevent_jieyuqi + " "
+                    + archiveobjs.other.prevent_biyuntao + " "
+                    + archiveobjs.other.prevent_biyunyao + " ",
+                    'biyunyao_time':archiveobjs.other.prevent_biyunyao_time,
+                    'biyunyao':
+                      archiveobjs.other.prevent_mafulong + " "
+                    + archiveobjs.other.prevent_daying + " "
+                    + archiveobjs.other.prevent_yousiming + " "
+                    + archiveobjs.other.prevent_zuoque + " "
+                    + archiveobjs.other.prevent_fufang + " "
+                    + archiveobjs.other.prevent_qita + " ",
                 
-                    accessory:{
-                    'accessory_hgb_value': '血红蛋白值',
-                    'accessory_quanxuexibaojishu': '全血细胞计数',
-                    'accessory_chuxuexingjibing': '出血性疾病筛查（如女性血管性血友病）',
-                    'accessory_ningxue': '凝血功能检查',
-                    'accessory_jiazhuangxian': '甲状腺功能检测',
-                    'accessory_niaorenshen': '尿妊娠试验',
-                    'accessory_penqiangchaosheng': '盆腔超声检查',
-                    'accessory_jichutiwen': '基础体温测定',
-                    'accessory_jisushuiping': '激素水平测定',
-                    'accessory_guagong': '诊断性刮宫或宫腔镜下刮宫',
-                    'accessory_qita': '其它辅助检查'},
+                    'accessory_hgb_value':archiveobjs.other.accessory_hgb_value,
+                    'accessory_quanxuexibaojishu':archiveobjs.other.accessory_quanxuexibaojishu,
+                    'accessory_chuxuexingjibing':archiveobjs.other.accessory_chuxuexingjibing,
+                    'accessory_ningxue':archiveobjs.other.accessory_ningxue,
+                    'accessory_jiazhuangxian':archiveobjs.other.accessory_jiazhuangxian,
+                    'accessory_niaorenshen':archiveobjs.other.accessory_niaorenshen,
+                    'accessory_penqiangchaosheng':archiveobjs.other.accessory_penqiangchaosheng,
+                    'accessory_jichutiwen':archiveobjs.other.accessory_jichutiwen,
+                    'accessory_jisushuiping':archiveobjs.other.accessory_jisushuiping,
+                    'accessory_guagong':archiveobjs.other.accessory_guagong,
+                    'accessory_qita':archiveobjs.other.accessory_qita,
                     },
-                
                     //临床
-                    cc:{
+                    clinicalconclusion:{
                     chinese_medicine:
                      archiveobjs.clinicalconclusion.benglou + " "
                     + archiveobjs.clinicalconclusion.yuejingguoduo + " "
@@ -1889,6 +2263,7 @@ router.get('/patientInfo', function (req, res, next){
                     },
                 }
                 console.log("14. 病例所有信息", archiveobjs);
+
                 res.render('patientInfo', {
                     // title: '流调项目-排卵障碍性异常子宫出血',
                     archives: patient_archive,//archiveobjs,
