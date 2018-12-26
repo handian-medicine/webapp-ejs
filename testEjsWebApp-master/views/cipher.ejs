@@ -24,15 +24,16 @@
     <script>
         $(".tip").hide();
         function checknewcode(){//当第一个密码框失去焦点时，触发checkpas1事件
+            $(".tip").hide();
           var pas1=document.getElementById("newcode").value;
           var pas2=document.getElementById("affirmcode").value;//获取两个密码框的值
         //   var reg = new RegExp(/^.*(?=.{8,32})(?=.*\d)(?=.*[A-Z]{2,})(?=.*[a-z]{1,}).*$/);
         //   if (!reg.test(pas1)) {
         //     $(".tip-newcode").show();
         //   }
-          if(pas1!=pas2)//此事件当两个密码不相等且第二个密码是空的时候会显示错误信息
-            $(".tip").show();
-          else
+          if(pas1!=pas2){//此事件当两个密码不相等且第二个密码是空的时候会显示错误信息
+            $(".tip").show();}
+          else {
             $(".tip").hide();//若两次输入的密码相等且都不为空时，不显示错误信息。
           }
         function checkaffirmcode(){//当第一个密码框失去焦点时，触发checkpas2件
@@ -55,21 +56,6 @@
     </script>
     <script>
         $(document).ready(function () {
-                // var is_valid = invalue.match(/^[\w_-]{6,16}$/);
-                // alert($("#oldcode").val()+ "new"+ $("#newcode").val()+ "affirm" + $("#affirmcode").val());
-                // if ($("#oldcode").val() == $("#newcode").val() ) {
-                //     alert("新密码不能与旧密码相同，请重新输入");
-                //     $("#codeBtn").attr("disabled", true);
-                //     // $("#newcode").val("");
-                // } else {
-                //     if ( $("#newcode").val() != $("#affirmcode").val() ) {
-                //         alert("两次输入的密码不同，请重新输入");
-                //         $("#codeBtn").attr("disabled", true);
-                //         // $("#affirmcode").val("");
-                //     } else {
-                //         $("#codeBtn").attr("disabled", false);
-                //     }
-                // }
             $("#codeBtn").click(function () {
                 $.ajax({
                     url: "/cipher",//路由，用来处理ajax请求的函数的所在地址
@@ -146,7 +132,7 @@
 <!-- 登录 -->
 <div class="page-content1">
     <div class="row">
-        <div class="col-xs-2">
+        <div class="col-xs-3">
             <table>
                 <tbody>
                 <tr>
@@ -156,7 +142,7 @@
                 <tr>
                     <th><label for="newcode">新密码:</label></th>
                     <td><input type="password" name="newcode" required="true" id="newcode" onblur="checknewcode();">
-                        <!-- <span class="tip-newcode" style="color: red;">密码长度不能超过16位，且必须包含字母</span><br> -->
+                        
                     </td>
                     
                 </tr>
@@ -166,7 +152,6 @@
                 </tr>
                 </tbody>
             </table>
-            <span class="tip" style="color: red;">两次输入的密码不一致</span><br>
             <button type="submit" id="codeBtn">确认修改</button>
             </div>
                     <p style="color:darkgray">你的密码不能与其他个人信息太相似。</p>
