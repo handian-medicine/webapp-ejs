@@ -101,7 +101,7 @@ router.put('/cipher',  function (req, res, next){
     console.log("1看这里", req.headers["cookie"]);
     console.log("2看这里", req.cookies.userid.id)
     var id = req.cookies.userid.id;
-    var url = myconst.apiurl + "/users/" + id +"/changepassword/";
+    var url = myconst.apiurl + "users/" + id +"/changepassword/";
     var codeData = {
         "old_password": req.body.oldcode,
         "new_password": req.body.newcode,

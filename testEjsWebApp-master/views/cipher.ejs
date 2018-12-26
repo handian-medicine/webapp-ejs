@@ -23,15 +23,19 @@
 <body>
     <script>
         $(".tip").hide();
-        function checkpas1(){//当第一个密码框失去焦点时，触发checkpas1事件
+        function checknewcode(){//当第一个密码框失去焦点时，触发checkpas1事件
           var pas1=document.getElementById("newcode").value;
           var pas2=document.getElementById("affirmcode").value;//获取两个密码框的值
-          if(pas1!=pas2&&pas2!="")//此事件当两个密码不相等且第二个密码是空的时候会显示错误信息
+        //   var reg = new RegExp(/^.*(?=.{8,32})(?=.*\d)(?=.*[A-Z]{2,})(?=.*[a-z]{1,}).*$/);
+        //   if (!reg.test(pas1)) {
+        //     $(".tip-newcode").show();
+        //   }
+          if(pas1!=pas2)//此事件当两个密码不相等且第二个密码是空的时候会显示错误信息
             $(".tip").show();
           else
             $(".tip").hide();//若两次输入的密码相等且都不为空时，不显示错误信息。
           }
-        function checkpas(){//当第一个密码框失去焦点时，触发checkpas2件
+        function checkaffirmcode(){//当第一个密码框失去焦点时，触发checkpas2件
           var pas1=document.getElementById("newcode").value;
           var pas2=document.getElementById("affirmcode").value;//获取两个密码框的值
           if(pas1!=pas2){
@@ -142,26 +146,35 @@
 <!-- 登录 -->
 <div class="page-content1">
     <div class="row">
-        <div class="col-xs-6">
+        <div class="col-xs-2">
             <table>
                 <tbody>
                 <tr>
                     <th><label for="oldcode">旧密码:</label></th>
-                    <td><input type="text" name="oldcode" maxlength="50" required="" id="oldcode"></td>
+                    <td><input type="password" name="oldcode" maxlength="50" required="" id="oldcode"></td>
                 </tr>
                 <tr>
                     <th><label for="newcode">新密码:</label></th>
-                    <td><input type="password" name="newcode" required="" id="newcode"></td>
+                    <td><input type="password" name="newcode" required="true" id="newcode" onblur="checknewcode();">
+                        <!-- <span class="tip-newcode" style="color: red;">密码长度不能超过16位，且必须包含字母</span><br> -->
+                    </td>
+                    
                 </tr>
                 <tr>
                     <th><label for="affirmcode">确认新密码:</label></th>
-                    <td><input type="password" name="affirmcode" required="" id="affirmcode"></td>
+                    <td><input type="password" name="affirmcode" required="true" id="affirmcode" onblur="checkaffirmcode();"></td>
                 </tr>
                 </tbody>
             </table>
-            <!-- <span class="tip" style="color: red;">两次输入的密码不一致</span><br> -->
+            <span class="tip" style="color: red;">两次输入的密码不一致</span><br>
             <button type="submit" id="codeBtn">确认修改</button>
-        </div>
+            </div>
+                    <p style="color:darkgray">你的密码不能与其他个人信息太相似。</p>
+                    <p style="color:darkgray">你的密码必须包含至少 8 个字符。</p>
+                    <p style="color:darkgray">你的密码不能是大家都爱用的常见密码。</p>
+                    <p style="color:darkgray">你的密码不能全部为数字。</p>
+
+            </div>
     </div>
 </div>
 

@@ -993,7 +993,7 @@ router.get('/patientInfo', function (req, res, next){
         var id = req.query.id;
         // var id = req.params.id; //router.get('/patientInfo/:id'...
         console.log("id", id);
-        var patient_url = myconst.apiurl + "prj001/patientInfo/" + id;
+        var patient_url = myconst.apiurl + "prj001/patientInfo/" + id +'/';
     
         var authstring = req.cookies.prj001token.access_token;
         var options = {
@@ -1004,7 +1004,7 @@ router.get('/patientInfo', function (req, res, next){
         };
 
         request(options, function (error, response, body) {
-            console.log("10. response.statusCode:", response.statusCode)
+            // console.log("10. response.statusCode:", response.statusCode)
             if (!error && response.statusCode == 200) {
                 var archiveobjs = JSON.parse(body);
                 archiveobjs = archiveobjs[0];
