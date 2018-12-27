@@ -159,11 +159,13 @@
                         alert("录入成功");
                         window.location.href = '/prj001'; //    请求成功后跳转到项目主页
                     } else {
-                        alert("录入失败");
+                        if (data.status == 0) {
+                            alert(data.msg);
+                        }
                     }
                 },
                 error: function () {
-                    alert("处理有误");
+                    alert("请重新录入");
                     // window.location.href = '/prj001/datainput';
                 }
             });

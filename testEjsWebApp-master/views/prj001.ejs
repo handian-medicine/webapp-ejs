@@ -80,7 +80,10 @@
 
 <script>
     $(document).ready(function () {
-
+        var set_input = document.getElementsByTagName('input');
+		for(var i=0;i<set_input.length;i++){
+			set_input[i].focus();
+		}
         $(".geninfoBtn").click(function () {
             $.ajax({
                 url: "/prj001/geninfo_save",
@@ -119,10 +122,10 @@
                 data: {geninfo_url: $(this).attr("geninfo-url")},
                 success: function(result){
                     if (result !== null) {
-					var set_input = document.getElementsByTagName('input');
-							for(var i=0;i<set_input.length;i++){
-								set_input[i].focus();
-							}
+					// var set_input = document.getElementsByTagName('input');
+					// 		for(var i=0;i<set_input.length;i++){
+					// 			set_input[i].focus();
+					// 		}
                         $('#geninfoBtn').attr("geninfoBtn-url", result["url"]);
                         // $('#setid').val(result["id"])
                         $('#recdate').val(result["recdate"]);
