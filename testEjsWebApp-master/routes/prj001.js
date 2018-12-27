@@ -1782,9 +1782,17 @@ router.get('/patientInfo', function (req, res, next){
                             // console.log(excel_key[j]);
                             if ( typeof(archiveobjs[i][j])=="boolean" ) {
                                 if (archiveobjs[i][j]==true) {
-                                    archiveobjs[i][j] = dict_table[j];
+                                    if (j=="cyclicity") {
+                                        archiveobjs[i][j] = "尚规律";
+                                    } else {
+                                        archiveobjs[i][j] = dict_table[j];
+                                    }
                                 } else {
-                                    archiveobjs[i][j] = "";
+                                    if (j=="cyclicity") {
+                                        archiveobjs[i][j] = "不规律";
+                                    } else {
+                                        archiveobjs[i][j] = "";
+                                    }
                                 }
                             }
                         }

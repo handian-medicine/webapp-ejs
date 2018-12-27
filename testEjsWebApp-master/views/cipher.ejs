@@ -22,35 +22,18 @@
 </head>
 <body>
     <script>
-        $(".tip").hide();
-        function checknewcode(){//当第一个密码框失去焦点时，触发checkpas1事件
-          var pas1=document.getElementById("newcode").value;
-          var pas2=document.getElementById("affirmcode").value;//获取两个密码框的值
-        //   var reg = new RegExp(/^.*(?=.{8,32})(?=.*\d)(?=.*[A-Z]{2,})(?=.*[a-z]{1,}).*$/);
-        //   if (!reg.test(pas1)) {
-        //     $(".tip-newcode").show();
-        //   }
-          if(pas1!=pas2 && pas2!=""){//此事件当两个密码不相等且第二个密码是空的时候会显示错误信息
-            $(".tip").show();}
-          else {
-            $(".tip").hide();//若两次输入的密码相等且都不为空时，不显示错误信息。
-          }
-        function checkaffirmcode(){//当第一个密码框失去焦点时，触发checkpas2件
-          var pas1=document.getElementById("newcode").value;
-          var pas2=document.getElementById("affirmcode").value;//获取两个密码框的值
-          if(pas1!=pas2){
-            $(".tip").show();//当两个密码不相等时则显示错误信息
-          }else{
-            $(".tip").hide();
-          }
-          }
-        function checkpas2(){//点击提交按钮时，触发checkpas2事件，会进行弹框提醒以防无视错误信息提交
-          var pas3=document.getElementById("newcode").value;
-          var pas4=document.getElementById("affirmcode").value;
-          if(pas3!=pas4){
-            alert("两次输入的密码不一致！");
-            return false;
-          }
+        function validate() {                  
+            var pwd = $("#newcode").val();
+            var pwd1 = $("#affirmcode").val();
+            if (pwd == pwd1) {
+                $("#tip").html("两次密码相同");
+                 $("#tip").css("color","green");
+            $("#codeBtn").removeAttr("disabled");
+            } else {
+                $("#tip").html("两次密码不相同");
+                 $("#tip").css("color","red")
+                  $("#codeBtn").attr("disabled","disabled");  
+            }
         }
     </script>
     <script>
@@ -141,16 +124,15 @@
                 </tr>
                 <tr>
                     <th><label for="newcode">新密码:</label></th>
-                    <td><input type="password" name="newcode" required="true" id="newcode" onblur="checknewcode();"/>
-                    </td>
-                    
+                    <td><input type="password" name="newcode" required="true" id="newcode"/></td>                   
                 </tr>
                 <tr>
                     <th><label for="affirmcode">确认新密码:</label></th>
-                    <td><input type="password" name="affirmcode" required="true" id="affirmcode" onblur="checkaffirmcode();"/></td>
+                    <td><input type="password" name="affirmcode" required="true" id="affirmcode" onkeyup="validate();"/></td>
                 </tr>
                 </tbody>
             </table>
+            <span id="tip"></span>
             <br>
             <button type="submit" id="codeBtn">确认修改</button>
             </div>
