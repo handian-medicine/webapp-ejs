@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="../public/css/ace-skins.min.css">
     <script src="/public/javascripts/jquery.min.js"></script>
     <script src="../public/js/ace-extra.min.js"></script>
-
+    <script src="../public/js/jquery.cookie.js"></script>
     <style>
         .page-content1 {
             margin: 0;
@@ -50,8 +50,11 @@
                     success: function (data) {
                         if (data.status == 1) {
                             alert("密码修改成功,请重新登录")
+                            $.removeCookie("userinfo", { path: '/' });  //密码修改成功后删除原cookie
+                            $.removeCookie("prj001token", { path: '/' });
+                            $.removeCookie("usertoken", { path: '/' });
+                            $.removeCookie("userid", { path: '/' });
                             window.location.href = '/';    //    请求成功后跳转到你的主页
-                            $.cookie('the_cookie', '', { expires: -1 });  //密码修改成功后删除原cookie
                         } else {
                             alert("密码修改失败");
                             window.location.href = '/cipher';

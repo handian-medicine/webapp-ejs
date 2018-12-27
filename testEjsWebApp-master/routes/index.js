@@ -89,7 +89,7 @@ router.get('/home', function (req, res, next) {
 
 router.get('/logout', function (req, res, next){
     console.log(">>>Visting logout page!");
-    res.clearCookie("userinfo", "prj001token", "usertoken");
+    res.clearCookie("userinfo", "prj001token", "usertoken", "userid");
     res.render('logout');
 });
 

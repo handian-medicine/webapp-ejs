@@ -388,19 +388,24 @@ router.put('/geninfo_save', function (req, res, next){
         };
         console.log(">>>prj001.js put options: ", options);
         request.put(options, function (error, response, body) {
+            // var dict = myconst.dict_table;
             console.log(">>>prj001.js put method response.statusCode: ", response.statusCode);
+            var user_geninfo = JSON.parse(body);            
             if (!error && response.statusCode == 200) {
-                var user_geninfo = JSON.parse(body);
                 res.json({user_geninfo: user_geninfo, status: 200});
             } else {
                 if (response.statusCode == 403) {
-                    var user_geninfo = JSON.parse(body);
-                    console.log(">>>prj001.js put方法-> body: ", body);
+                    console.log(">>>prj001.js put方法-> body: ", user_geninfo);
                     res.json({user_geninfo:user_geninfo, status:403});
                 }
                 //console.log(">>>Getting archives met unknown error. " + error.error_description);
                 else {
-                    console.log(">>>其它错误码的body: ", body);
+                    console.log(">>>其它错误码的body: ", user_geninfo);
+                    // var info_cn = {};
+                    // for (var i in user_geninfo) {
+                    //     info_cn[dict[i]] = user_geninfo[i][0];
+                    // }
+                    res.json({user_geninfo: user_geninfo, status:1400});
                 }
             }
         });
@@ -1007,7 +1012,7 @@ router.get('/patientInfo', function (req, res, next){
             // console.log("10. response.statusCode:", response.statusCode)
             if (!error && response.statusCode == 200) {
                 var archiveobjs = JSON.parse(body);
-                archiveobjs = archiveobjs[0];//提交代码这行要删掉！
+                // archiveobjs = archiveobjs[0];//提交代码这行要删掉！
                 archiveobjs.geninfo = {};
                 // console.log("11. 病例所有信息", archiveobjs);
                 // console.log("12. 类型", typeof(archiveobjs["recdate"]));

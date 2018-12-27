@@ -98,9 +98,11 @@
                     } else {
                         if (result.status == 403) {
                             // alert("您无法修改此条信息, 请联系用户 " + result.user_geninfo.name)
-                            alert("" + result.user_geninfo.detail)
+                            alert("" + result.user_geninfo.detail);
                         } else {
-                            alert("保存失败" + result.status)
+                            if (result.status == 1400){
+                                alert("您有未填字段");
+                            }
                         }
                     }
                 },
