@@ -1007,7 +1007,7 @@ router.get('/patientInfo', function (req, res, next){
             // console.log("10. response.statusCode:", response.statusCode)
             if (!error && response.statusCode == 200) {
                 var archiveobjs = JSON.parse(body);
-                archiveobjs = archiveobjs[0];
+                archiveobjs = archiveobjs[0];//提交代码这行要删掉！
                 archiveobjs.geninfo = {};
                 // console.log("11. 病例所有信息", archiveobjs);
                 // console.log("12. 类型", typeof(archiveobjs["recdate"]));

@@ -24,14 +24,13 @@
     <script>
         $(".tip").hide();
         function checknewcode(){//当第一个密码框失去焦点时，触发checkpas1事件
-            $(".tip").hide();
           var pas1=document.getElementById("newcode").value;
           var pas2=document.getElementById("affirmcode").value;//获取两个密码框的值
         //   var reg = new RegExp(/^.*(?=.{8,32})(?=.*\d)(?=.*[A-Z]{2,})(?=.*[a-z]{1,}).*$/);
         //   if (!reg.test(pas1)) {
         //     $(".tip-newcode").show();
         //   }
-          if(pas1!=pas2){//此事件当两个密码不相等且第二个密码是空的时候会显示错误信息
+          if(pas1!=pas2 && pas2!=""){//此事件当两个密码不相等且第二个密码是空的时候会显示错误信息
             $(".tip").show();}
           else {
             $(".tip").hide();//若两次输入的密码相等且都不为空时，不显示错误信息。
@@ -69,13 +68,14 @@
                         if (data.status == 1) {
                             alert("密码修改成功,请重新登录")
                             window.location.href = '/';    //    请求成功后跳转到你的主页
+                            $.cookie('the_cookie', '', { expires: -1 });  //密码修改成功后删除原cookie
                         } else {
                             alert("密码修改失败");
                             window.location.href = '/cipher';
                         }
                     },
                     error: function () {
-                        alert("修改失败");
+                        alert("密码修改失败");
                         window.location.href = '/home';
                     }
                 });
@@ -151,6 +151,7 @@
                 </tr>
                 </tbody>
             </table>
+            <br>
             <button type="submit" id="codeBtn">确认修改</button>
             </div>
                     <p style="color:darkgray">你的密码不能与其他个人信息太相似。</p >

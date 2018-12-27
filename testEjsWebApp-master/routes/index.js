@@ -125,7 +125,8 @@ router.put('/cipher',  function (req, res, next){
         console.log("6. cipher response.body", body);
         if (!error && response.statusCode == 200) {
             var obj = JSON.parse(body); //由JSON字符串转换为JSON对象
-            console.log("7. json body ", obj);        
+            console.log("7. json body ", obj);
+            // res.clearCookie("userinfo", "prj001token", "usertoken");        
             res.json({status:1});
         }
         else {

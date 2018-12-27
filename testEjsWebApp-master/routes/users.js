@@ -53,7 +53,7 @@ router.post('/login', function (req, res, next) {
                 message: 'Sorry, you provided wrong login information!',
                 error: err.error_description
             });*/
-            res.json({status:0, msg:err.error_description});
+            res.json({status:0, msg:"密码或账户错误"});
         }
     });
 });
