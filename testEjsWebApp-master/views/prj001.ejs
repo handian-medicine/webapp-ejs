@@ -259,25 +259,25 @@
                                                     <td>
                                                         
                                                         <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
-                                                            <button id="geninfo" data-toggle="modal" data-target="#modal-table" class="btn btn-xs btn-info geninfo" geninfo-url=<%= archive.url %>>
+                                                            <button id="geninfo" data-toggle="modal" data-target="#modal-table" class="btn btn-xs btn-default geninfo" geninfo-url=<%= archive.url %>>
                                                         	    基本信息
                                                             </button>
-                                                            <button id="summary"  data-toggle="modal" data-target="#modal-table1" class="btn btn-xs btn-success summary" geninfo-url=<%= archive.url %> summary-url=<%= archive.summary %>>
+                                                            <button id="summary"  data-toggle="modal" data-target="#modal-table1" class="btn btn-xs btn-primary summary" geninfo-url=<%= archive.url %> summary-url=<%= archive.summary %>>
                                                                 病情概要
                                                             </button>
-                                                            <button id="history" data-toggle="modal" data-target="#modal-table2" class="btn btn-xs btn-danger history" geninfo-url=<%= archive.url %> history-url=<%= archive.history %>>
+                                                            <button id="history" data-toggle="modal" data-target="#modal-table2" class="btn btn-xs btn-warning history" geninfo-url=<%= archive.url %> history-url=<%= archive.history %>>
                                                                 患者病史
                                                             </button>
-                                                            <button id="relevant" data-toggle="modal" data-target="#modal-table3" class="btn btn-xs btn-warning relevant" geninfo-url=<%= archive.url %> relevant-url=<%= archive.relevant %>>
+                                                            <button id="relevant" data-toggle="modal" data-target="#modal-table3" class="btn btn-xs btn-danger relevant" geninfo-url=<%= archive.url %> relevant-url=<%= archive.relevant %>>
                                                                 相关检查
                                                             </button>
                                                             <button id="cc" data-toggle="modal" data-target="#modal-table4" class="btn btn-xs btn-info cc" geninfo-url=<%= archive.url %> cc-url=<%= archive.cc %>>
                                                                     临床诊断
                                                             </button>
-                                                            <button id="cure" data-toggle="modal" data-target="#modal-table5" class="btn btn-xs btn-warning cure" geninfo-url=<%= archive.url %> cure-url=<%= archive.cure %>>
+                                                            <button id="cure" data-toggle="modal" data-target="#modal-table5" class="btn btn-xs btn-success cure" geninfo-url=<%= archive.url %> cure-url=<%= archive.cure %>>
                                                                     中西治疗
                                                             </button>
-                                                            <button id="results" data-toggle="modal" data-target="#modal-table6" class="btn btn-xs btn-info results" geninfo-url=<%= archive.url %> results-url=<%= archive.results %>>
+                                                            <button id="results" data-toggle="modal" data-target="#modal-table6" class="btn btn-xs btn-primary results" geninfo-url=<%= archive.url %> results-url=<%= archive.results %>>
                                                                     疗效情况
                                                             </button>
                                                         </div>
@@ -291,15 +291,15 @@
                                                                     <li>
                                                                         <a href="#modal-table" data-toggle="modal" class="tooltip-info geninfo"
                                                                             geninfo-url=<%= archive.url %>>
-                                                                            <span class="blue">
-                                                                                基本信息
+                                                                            <span class="" style="color:#777">
+                                                                                    基本信息
                                                                             </span>
                                                                         </a>
                                                                     </li>
                                                                     <li>
                                                                         <a href="#modal-table1" data-toggle="modal" class="tooltip-success summary" 
                                                                         geninfo-url=<%= archive.url %> summary-url=<%= archive.summary %> >
-                                                                            <span class="green">
+                                                                            <span class="" style="color: #204d74">
                                                                                 病情概要
                                                                             </span>
                                                                         </a>
@@ -307,7 +307,7 @@
                                                                     <li>
                                                                         <a href="#modal-table2" data-toggle="modal" class="tooltip-error history" 
                                                                         geninfo-url=<%= archive.url %> history-url=<%= archive.history %> >
-                                                                            <span class="red">
+                                                                            <span class="orange">
                                                                                 患者病史
                                                                             </span>
                                                                         </a>
@@ -315,7 +315,7 @@
                                                                     <li>
                                                                         <a href="#modal-table3" data-toggle="modal" class="tooltip-info relevant"  
                                                                         geninfo-url=<%= archive.url %> relevant-url=<%= archive.relevant %> >
-                                                                            <span class="orange">
+                                                                            <span class="red">
                                                                                 相关检查
                                                                             </span>
                                                                         </a>
@@ -331,7 +331,7 @@
                                                                     <li>
                                                                         <a href="#modal-table5" data-toggle="modal" class="tooltip-info cure" 
                                                                         geninfo-url=<%= archive.url %> cure-url=<%= archive.cure %> >
-                                                                            <span class="blue">
+                                                                            <span class="green">
                                                                                 中西治疗
                                                                             </span>
                                                                         </a>
@@ -339,7 +339,7 @@
                                                                     <li>
                                                                         <a href="#modal-table6" data-toggle="modal" class="tooltip-info results" 
                                                                         geninfo-url=<%= archive.url %> results-url=<%= archive.results %> >
-                                                                            <span class="blue">
+                                                                            <span class="" style="color: #204d74">
                                                                                 疗效情况
                                                                             </span>
                                                                         </a>
@@ -577,10 +577,12 @@
                                                             出血量:     
 															<p>
 														
-                                                            <label><input type="radio" value="出血量中等,每次约需5-20张卫生巾" name="blood_cond"/>出血量中等,每次约需5-20张卫生巾</label>
-                                                            <label><input type="radio" value="出血量多,每次多于20张卫生巾" name="blood_cond"/>出血量多,每次多于20张卫生巾</label>
-                                                            <label><input type="radio" value="经量少,每次少于5张卫生巾" name="blood_cond"/>经量少,每次少于5张卫生巾</label>
+                                                            <label><input type="radio" value="出血量中等,每次约需2-4张卫生巾" name="blood_cond"/>出血量中等,每次约需2-4张卫生巾</label>
+                                                            <label><input type="radio" value="出血量多,每次多于5-10张卫生巾" name="blood_cond"/>出血量多,每次多于5-10张卫生巾</label>
+							    <label><input type="radio" value="出血量极多,每次多于10张卫生巾" name="blood_cond"/>出血量极多,每次多于10张卫生巾</label>
+                                                            <label><input type="radio" value="经量少,每次少于1张卫生巾" name="blood_cond"/>经量少,每次少于1张卫生巾</label>
                                                             <label><input type="radio" value="经量极少,几乎不用卫生巾,用护垫即可" name="blood_cond"/>经量极少,几乎不用卫生巾,用护垫即可</label>
+							    <label><input type="radio" value="其他" name="blood_cond"/>其他</label>
                                                         </p>
                                                         <p>
                                                             出血颜色:
@@ -1926,7 +1928,7 @@
             <i class="icon-double-angle-up icon-only bigger-110"></i>
     </a>
 
-    <script type="text/javascript">s
+    <script type="text/javascript">
         window.jQuery || document.write("<script src='../public/js/jquery-2.0.3.min.js'>" + "<" + "/script>");
     </script>
 
