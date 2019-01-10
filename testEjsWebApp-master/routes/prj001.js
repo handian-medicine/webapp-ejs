@@ -2253,4 +2253,41 @@ router.get('/patientInfo', function (req, res, next){
     }//第一个if结束
 
 });
+/* 审核 */
+router.get('/check', function (req, res, next){
+    var id = req.query.id;
+    // var id = req.params.id; //router.get('/patientInfo/:id'...
+    console.log("id", id);
+    var check_url = myconst.apiurl + "prj001/info/" + id +'/checked/';
+
+    var authstring = req.cookies.prj001token.access_token;
+    var options = {
+        url: check_url,
+        headers: {
+            'Authorization': 'Bearer ' + authstring
+        }
+    };
+    request.post(options, function (error, response, body) {
+        var user_geninfo = JSON.parse(body); 
+        console.log("check",response.statusCode)           
+        if (!error && response.statusCode == 200) {
+            // res.json({user_geninfo: user_geninfo, status: 200});
+            res.redirect("/prj001");
+        } else {
+            if (response.statusCode == 403) {
+                console.log(">>>prj001.js put方法-> body: ", user_geninfo);
+                res.json({user_geninfo:user_geninfo, status:403});
+            }
+            //console.log(">>>Getting archives met unknown error. " + error.error_description);
+            else {
+                console.log(">>>其它错误码的body: ", user_geninfo);
+                // var info_cn = {};
+                // for (var i in user_geninfo) {
+                //     info_cn[dict[i]] = user_geninfo[i][0];
+                // }
+                res.json({user_geninfo: user_geninfo, status:1400});
+            }
+        }
+    });
+});
 module.exports = router;

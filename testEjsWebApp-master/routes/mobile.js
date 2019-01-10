@@ -47,7 +47,7 @@ router.post('/login', function (req, res, next) {
             res.json({status:0, msg:"密码或账户错误"});
         }
     });
-    res.render("");//res.redirect()
+    res.render("mobile");//res.redirect()
 })
 
 router.post('/input', function (req, res, next) {

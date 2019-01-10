@@ -29,7 +29,6 @@
     <script src="../public/js/prj001-info.js"></script>
     <script>var curpage_global = '<%= curpage %>' ;
             var totalpagenumber_global = '<%= totalpagenumber %>';</script>
-
     <!-- 分页格式 -->
     <style>
     .color{
@@ -257,30 +256,58 @@
                                                         <%= archive.owner %>
                                                         </td>
                                                     <td>
-                                                        
-                                                        <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
-                                                            <button id="geninfo" data-toggle="modal" data-target="#modal-table" class="btn btn-xs btn-default geninfo" geninfo-url=<%= archive.url %>>
-                                                        	    基本信息
-                                                            </button>
-                                                            <button id="summary"  data-toggle="modal" data-target="#modal-table1" class="btn btn-xs btn-primary summary" geninfo-url=<%= archive.url %> summary-url=<%= archive.summary %>>
-                                                                病情概要
-                                                            </button>
-                                                            <button id="history" data-toggle="modal" data-target="#modal-table2" class="btn btn-xs btn-warning history" geninfo-url=<%= archive.url %> history-url=<%= archive.history %>>
-                                                                患者病史
-                                                            </button>
-                                                            <button id="relevant" data-toggle="modal" data-target="#modal-table3" class="btn btn-xs btn-danger relevant" geninfo-url=<%= archive.url %> relevant-url=<%= archive.relevant %>>
-                                                                相关检查
-                                                            </button>
-                                                            <button id="cc" data-toggle="modal" data-target="#modal-table4" class="btn btn-xs btn-info cc" geninfo-url=<%= archive.url %> cc-url=<%= archive.cc %>>
+                                                            <% if (archive.owner == null) { %>
+                                                            <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
+                                                                <button id="geninfo"  checked-info="no" data-toggle="modal" data-target="#modal-table" class="btn btn-xs btn-success geninfo" geninfo-url=<%= archive.url %>>
+                                                        	        基本信息
+                                                                </button>
+                                                                <button id="summary"  checked-info="no" data-toggle="modal" data-target="#modal-table1" class="btn btn-xs btn-primary summary" geninfo-url=<%= archive.url %> summary-url=<%= archive.summary %>>
+                                                                    病情概要
+                                                                </button>
+                                                                <button id="history" checked-info="no" data-toggle="modal" data-target="#modal-table2" class="btn btn-xs btn-warning history" geninfo-url=<%= archive.url %> history-url=<%= archive.history %>>
+                                                                    患者病史
+                                                                </button>
+                                                                <button id="relevant" checked-info="no" data-toggle="modal" data-target="#modal-table3" class="btn btn-xs btn-danger relevant" geninfo-url=<%= archive.url %> relevant-url=<%= archive.relevant %>>
+                                                                    相关检查
+                                                                </button>
+                                                                <button id="cc" checked-info="no" data-toggle="modal" data-target="#modal-table4" class="btn btn-xs btn-info cc" geninfo-url=<%= archive.url %> cc-url=<%= archive.cc %>>
                                                                     临床诊断
-                                                            </button>
-                                                            <button id="cure" data-toggle="modal" data-target="#modal-table5" class="btn btn-xs btn-success cure" geninfo-url=<%= archive.url %> cure-url=<%= archive.cure %>>
+                                                                </button>
+                                                                <button id="cure" checked-info="no" data-toggle="modal" data-target="#modal-table5" class="btn btn-xs btn-success cure" geninfo-url=<%= archive.url %> cure-url=<%= archive.cure %>>
                                                                     中西治疗
-                                                            </button>
-                                                            <button id="results" data-toggle="modal" data-target="#modal-table6" class="btn btn-xs btn-primary results" geninfo-url=<%= archive.url %> results-url=<%= archive.results %>>
+                                                                </button>
+                                                                <button id="results" checked-info="no" data-toggle="modal" data-target="#modal-table6" class="btn btn-xs btn-primary results" geninfo-url=<%= archive.url %> results-url=<%= archive.results %>>
                                                                     疗效情况
-                                                            </button>
-                                                        </div>
+                                                                </button>
+                                                                <button type="button" id="check" class="btn btn-xs btn-default check" geninfo-url=<%= archive.url %> patient-id=<%= archive.id %> >
+                                                                    <a href="/prj001/check/?id=<%= archive.id %>">未审核</a>
+                                                                </button>
+                                                            </div>
+                                                            <% } else { %>
+                                                            <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
+                                                                    <button id="geninfo" checked-info="yes" data-toggle="modal" data-target="#modal-table" class="btn btn-xs btn-success geninfo" geninfo-url=<%= archive.url %>>
+                                                                        基本信息
+                                                                    </button>
+                                                                    <button id="summary"  checked-info="yes" data-toggle="modal" data-target="#modal-table1" class="btn btn-xs btn-primary summary" geninfo-url=<%= archive.url %> summary-url=<%= archive.summary %>>
+                                                                        病情概要
+                                                                    </button>
+                                                                    <button id="history" checked-info="yes" data-toggle="modal" data-target="#modal-table2" class="btn btn-xs btn-warning history" geninfo-url=<%= archive.url %> history-url=<%= archive.history %>>
+                                                                        患者病史
+                                                                    </button>
+                                                                    <button id="relevant" checked-info="yes" data-toggle="modal" data-target="#modal-table3" class="btn btn-xs btn-danger relevant" geninfo-url=<%= archive.url %> relevant-url=<%= archive.relevant %>>
+                                                                        相关检查
+                                                                    </button>
+                                                                    <button id="cc" checked-info="yes" data-toggle="modal" data-target="#modal-table4" class="btn btn-xs btn-info cc" geninfo-url=<%= archive.url %> cc-url=<%= archive.cc %>>
+                                                                        临床诊断
+                                                                    </button>
+                                                                    <button id="cure" checked-info="yes" data-toggle="modal" data-target="#modal-table5" class="btn btn-xs btn-success cure" geninfo-url=<%= archive.url %> cure-url=<%= archive.cure %>>
+                                                                        中西治疗
+                                                                    </button>
+                                                                    <button id="results" checked-info="yes" data-toggle="modal" data-target="#modal-table6" class="btn btn-xs btn-primary results" geninfo-url=<%= archive.url %> results-url=<%= archive.results %>>
+                                                                        疗效情况
+                                                                    </button>
+                                                            </div>
+                                                            <% } %>
                                                         <div class="visible-xs visible-sm hidden-md hidden-lg">
                                                             <div class="inline position-relative">
                                                                 <button class="btn btn-minier btn-primary dropdown-toggle"
@@ -344,6 +371,14 @@
                                                                             </span>
                                                                         </a>
                                                                         </li>
+                                                                    <li>
+                                                                            <a href="#modal-table7" data-toggle="modal" class="tooltip-info check" 
+                                                                            geninfo-url=<%= archive.url %> check-owner=<%= username %> >
+                                                                                <span class="" style="color: #204d74">
+                                                                                    未审核
+                                                                                </span>
+                                                                            </a>
+                                                                            </li>
                                                                 </ul>
                                                             </div>
                                                         </div>
@@ -502,16 +537,16 @@
                                                         <p>
                                                             特殊工种环境：
                                                         <p>
-                                                            <label><input name="gaowen" type="checkbox" value="true" class="ace"/><span class="lbl">高温</span></label>
-                                                            <label><input name="diwen" type="checkbox" value="true" class="ace"/><span class="lbl">低温</span></label>
-                                                            <label><input name="yeban" type="checkbox" value="true" class="ace"/><span class="lbl">夜班/熬夜</span></label>
-                                                            <label><input name="zaosheng" type="checkbox" value="true" class="ace"/><span class="lbl">噪声</span></label>
-                                                            <label><input name="fushe" type="checkbox" value="true" class="ace"/><span class="lbl">辐射</span></label>
-                                                            <label><input name="huagongyinran" type="checkbox" value="true" class="ace"/><span class="lbl">化工污染</span></label>
-                                                            <label><input name="julieyundong" type="checkbox" value="true" class="ace"/><span class="lbl">剧烈运动</span></label>
-                                                            <label><input name="qiyou" type="checkbox" value="true" class="ace"/><span class="lbl">汽油</span></label>
-                                                            <label><input name="gaokong" type="checkbox" value="true" class="ace"/><span class="lbl">高空</span></label>
-                                                            <label><input name="wu" type="checkbox" value="true" class="ace"/><span class="lbl">无</span></label>
+                                                            <label><input name="gaowen" type="checkbox" value="true"/><span class="lbl">高温</span></label>
+                                                            <label><input name="diwen" type="checkbox" value="true"/><span class="lbl">低温</span></label>
+                                                            <label><input name="yeban" type="checkbox" value="true"/><span class="lbl">夜班/熬夜</span></label>
+                                                            <label><input name="zaosheng" type="checkbox" value="true"/><span class="lbl">噪声</span></label>
+                                                            <label><input name="fushe" type="checkbox" value="true"/><span class="lbl">辐射</span></label>
+                                                            <label><input name="huagongyinran" type="checkbox" value="true"/><span class="lbl">化工污染</span></label>
+                                                            <label><input name="julieyundong" type="checkbox" value="true"/><span class="lbl">剧烈运动</span></label>
+                                                            <label><input name="qiyou" type="checkbox" value="true"/><span class="lbl">汽油</span></label>
+                                                            <label><input name="gaokong" type="checkbox" value="true"/><span class="lbl">高空</span></label>
+                                                            <label><input name="wu" type="checkbox" value="true"/><span class="lbl">无</span></label>
                                                         </p>
                                                         <p>
                                                             饮食偏好：
@@ -577,12 +612,12 @@
                                                             出血量:     
 															<p>
 														
-                                                            <label><input type="radio" value="出血量中等,每次约需2-4张卫生巾" name="blood_cond"/>出血量中等,每次约需2-4张卫生巾</label>
-                                                            <label><input type="radio" value="出血量多,每次多于5-10张卫生巾" name="blood_cond"/>出血量多,每次多于5-10张卫生巾</label>
-							    <label><input type="radio" value="出血量极多,每次多于10张卫生巾" name="blood_cond"/>出血量极多,每次多于10张卫生巾</label>
-                                                            <label><input type="radio" value="经量少,每次少于1张卫生巾" name="blood_cond"/>经量少,每次少于1张卫生巾</label>
+                                                            <label><input type="radio" value="出血量中等,每天约需2-4张卫生巾" name="blood_cond"/>出血量中等,每天约需2-4张卫生巾</label>
+                                                            <label><input type="radio" value="出血量多,每天约需5-10张卫生巾" name="blood_cond"/>出血量多,每天约需5-10张卫生巾</label>
+							                                <label><input type="radio" value="出血量极多,每天多于10张卫生巾" name="blood_cond"/>出血量极多,每天多于10张卫生巾</label>
+                                                            <label><input type="radio" value="经量少,每天少于1张卫生巾" name="blood_cond"/>经量少,每天少于1张卫生巾</label>
                                                             <label><input type="radio" value="经量极少,几乎不用卫生巾,用护垫即可" name="blood_cond"/>经量极少,几乎不用卫生巾,用护垫即可</label>
-							    <label><input type="radio" value="其他" name="blood_cond"/>其他</label>
+							                                <label><input type="radio" value="其他" name="blood_cond"/>其他</label>
                                                         </p>
                                                         <p>
                                                             出血颜色:
@@ -1469,6 +1504,7 @@
                                     </form>
                                 </div>
                             </div>
+                        </div>
                         <!--相关检查-->
                         <div id="modal-table3" class="modal fade" tabindex="-1">
                             <div class="modal-dialog">
@@ -1917,6 +1953,7 @@
                                 </div>
                             </div>
                         </div>
+                        <!--审核-->
                     </div><!-- /.col -->
                 </div><!-- /.row -->
             </div><!-- /.page-content -->

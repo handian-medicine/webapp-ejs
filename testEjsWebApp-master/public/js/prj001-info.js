@@ -39,6 +39,12 @@
         });
         $(".geninfo").click(function () {
             document.getElementById("form-geninfo").reset();
+            //判断是否审核状态,未审核false则disable掉geninfoBtn
+            if ($(this).attr("checked-info") == "no") {
+                $(".geninfoBtn").attr("disabled", true);
+            } else {
+                $(".geninfoBtn").removeAttr("disabled");
+            }
             $.ajax({
                 url: "/prj001/geninfo",
                 type: "POST",
@@ -140,6 +146,14 @@
         });
         $(".summary").click(function () {
             document.getElementById("form-summary").reset();
+
+            //判断是否审核状态,未审核false则disable掉geninfoBtn
+            if ($(this).attr("checked-info") == "no") {
+                $(".summaryBtn").attr("disabled", true);
+            } else {
+                $(".summaryBtn").removeAttr("disabled");
+            }
+
             var tempFlag = $(this).attr("summary-url");
             var temp_geninfourl = $(this).attr("geninfo-url");
             if (tempFlag == "") {
@@ -416,6 +430,14 @@
         });
         $(".history").click(function () {
             document.getElementById("form-history").reset();
+
+            //判断是否审核状态,未审核false则disable掉geninfoBtn
+            if ($(this).attr("checked-info") == "no") {
+                $(".historyBtn").attr("disabled", true);
+            } else {
+                $(".historyBtn").removeAttr("disabled");
+            }
+
             var tempFlag = $(this).attr("history-url");
             var temp_geninfourl = $(this).attr("geninfo-url");
             if (tempFlag == "") {
@@ -644,6 +666,14 @@
         });
         $(".relevant").click(function () {
             document.getElementById("form-relevant").reset();
+
+            //判断是否审核状态,未审核false则disable掉geninfoBtn
+            if ($(this).attr("checked-info") == "no") {
+                $(".relevantBtn").attr("disabled", true);
+            } else {
+                $(".relevantBtn").removeAttr("disabled");
+            }
+
             var tempFlag = $(this).attr("relevant-url");
             var temp_geninfourl = $(this).attr("geninfo-url");
             if (tempFlag == "") {
@@ -722,6 +752,14 @@
         });
         $(".cc").click(function () {
             document.getElementById("form-cc").reset();
+
+            //判断是否审核状态,未审核false则disable掉geninfoBtn
+            if ($(this).attr("checked-info") == "no") {
+                $(".ccBtn").attr("disabled", true);
+            } else {
+                $(".ccBtn").removeAttr("disabled");
+            }
+
             var tempFlag = $(this).attr("cc-url");
             var temp_geninfourl = $(this).attr("geninfo-url");
             if (tempFlag == "") {
@@ -834,6 +872,14 @@
         });
         $(".cure").click(function () {
             document.getElementById("form-cure").reset();
+
+            //判断是否审核状态,未审核false则disable掉geninfoBtn
+            if ($(this).attr("checked-info") == "no") {
+                $(".cureBtn").attr("disabled", true);
+            } else {
+                $(".cureBtn").removeAttr("disabled");
+            }
+
             var tempFlag = $(this).attr("cure-url");
             var temp_geninfourl = $(this).attr("geninfo-url");
             if (tempFlag == "") {
@@ -1038,6 +1084,14 @@
         });
         $(".results").click(function () {
             document.getElementById("form-results").reset();
+
+            //判断是否审核状态,未审核false则disable掉geninfoBtn
+            if ($(this).attr("checked-info") == "no") {
+                $(".resultsBtn").attr("disabled", true);
+            } else {
+                $(".resultsBtn").removeAttr("disabled");
+            }
+
             var tempFlag = $(this).attr("results-url");
             var temp_geninfourl = $(this).attr("geninfo-url");
             if (tempFlag == "") {
@@ -1071,5 +1125,5 @@
                 });
             };
         })
-        
+        //审核
 })
