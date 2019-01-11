@@ -7,6 +7,8 @@
 
         //基本信息
         $(".geninfoBtn").click(function () {
+            // $('#waistline').val();
+            // $('#hipline').val();
             $.ajax({
                 url: "/prj001/geninfo_save",
                 type: "PUT",
@@ -23,7 +25,6 @@
                         window.location.href = '/prj001' + '/?page=' + curpage_global;
                     } else {
                         if (result.status == 403) {
-                            // alert("您无法修改此条信息, 请联系用户 " + result.user_geninfo.name)
                             alert("" + result.user_geninfo.detail);
                         } else {
                             if (result.status == 1400){
@@ -132,7 +133,7 @@
                         window.location.href = '/prj001' + '/?page=' + curpage_global;
                     } else {
                         if (result.status == 403) {
-                            alert("" + result.user_summary.detail)
+                            alert("" + result.user_summary.msg)
                         } else {
                             alert("保存失败" + result.status)
                         }
@@ -274,7 +275,7 @@
                             $("input:checkbox[name='stomach_xiaofubiezhang']").prop('checked',result["stomach_xiaofubiezhang"]);
                             $("input:checkbox[name='stomach_zhuotong']").prop('checked',result["stomach_zhuotong"]);
                             $("input:checkbox[name='stomach_xiaofulengtong']").prop('checked',result["stomach_xiaofulengtong"]);
-                            $("input:checkbox[name='stomach_xiaofucitong']").prop('checked',result["stomach_xiaofucitong"]);$("input:checkbox[name='sound_zhengchang']").prop('checked',result["sound_zhengchang"]);
+                            $("input:checkbox[name='stomach_xiaofucitong']").prop('checked',result["stomach_xiaofucitong"]);
                             $("input:checkbox[name='stomach_yaosuan']").prop('checked',result["stomach_yaosuan"]);
                             $("input:checkbox[name='stomach_yaoleng']").prop('checked',result["stomach_yaoleng"]);
                             $("input:checkbox[name='stomach_qita']").prop('checked',result["stomach_qita"]);
@@ -285,7 +286,7 @@
                             $("input:checkbox[name='limb_mamu']").prop('checked',result["limb_mamu"]);
                             $("input:checkbox[name='limb_kunzhong']").prop('checked',result["limb_kunzhong"]);
                             $("input:checkbox[name='limb_zhileng']").prop('checked',result["limb_zhileng"]);
-                            $("input:checkbox[name='limb_fuzhong']").prop('checked',result["limb_fuzhong"]);$("input:checkbox[name='sound_zhengchang']").prop('checked',result["sound_zhengchang"]);
+                            $("input:checkbox[name='limb_fuzhong']").prop('checked',result["limb_fuzhong"]);
                             $("input:checkbox[name='limb_szxinre']").prop('checked',result["limb_szxinre"]);
                             $("input:checkbox[name='limb_qita']").prop('checked',result["limb_qita"]);
 
@@ -296,8 +297,8 @@
                             $("input:checkbox[name='diet_xireyin']").prop('checked',result["diet_xireyin"]);
                             $("input:checkbox[name='diet_xilengyin']").prop('checked',result["diet_xilengyin"]);
                             $("input:checkbox[name='diet_shixinla']").prop('checked',result["diet_shixinla"]);
-                            $("input:checkbox[name='diet_bushu']").prop('checked',result["diet_bushu"]);$("input:checkbox[name='sound_zhengchang']").prop('checked',result["sound_zhengchang"]);
-                            $("input:checkbox[name='diet_qita']").prop('checked',result["diet_qita"]);
+                            $("input:checkbox[name='diet_bushu']").prop('checked',result["diet_bushu"]);
+                            $('#diet_qita').val(result["diet_qita"]);
 
                             /* 睡眠 */
                             $("input:checkbox[name='sleep_zhengchang']").prop('checked',result["sleep_zhengchang"]);
@@ -309,7 +310,7 @@
                             $("input:checkbox[name='sleep_qita']").prop('checked',result["sleep_qita"]);
 
                             /* 性欲 */
-                            $("input:checkbox[name='sex_zhengchang']").prop('checked',result["sex_zhengchang"]);$("input:checkbox[name='sound_zhengchang']").prop('checked',result["sound_zhengchang"]);
+                            $("input:checkbox[name='sex_zhengchang']").prop('checked',result["sex_zhengchang"]);
                             $("input:checkbox[name='sex_xywangsheng']").prop('checked',result["sex_xywangsheng"]);
                             $("input:checkbox[name='sex_xyjiantui']").prop('checked',result["sex_xyjiantui"]);
 
@@ -320,7 +321,7 @@
                             $("input:checkbox[name='stool_sgsx']").prop('checked',result["stool_sgsx"]);
                             $("input:checkbox[name='stool_xiexie']").prop('checked',result["stool_xiexie"]);
                             $("input:checkbox[name='stool_tlzqxiexie']").prop('checked',result["stool_tlzqxiexie"]);
-                            $("input:checkbox[name='stool_zhinian']").prop('checked',result["stool_zhinian"]);$("input:checkbox[name='sound_zhengchang']").prop('checked',result["sound_zhengchang"]);
+                            $("input:checkbox[name='stool_zhinian']").prop('checked',result["stool_zhinian"]);
                             $("input:checkbox[name='stool_weixiaohua']").prop('checked',result["stool_weixiaohua"]);
                             $("input:checkbox[name='stool_qita']").prop('checked',result["stool_qita"]);
 
@@ -331,7 +332,7 @@
                             $("input:checkbox[name='urine_xbpinshu']").prop('checked',result["urine_xbpinshu"]);
                             $("input:checkbox[name='urine_niaoji']").prop('checked',result["urine_niaoji"]);
                             $("input:checkbox[name='urine_niaotong']").prop('checked',result["urine_niaotong"]);
-                            $("input:checkbox[name='urine_shaoniao']").prop('checked',result["urine_shaoniao"]);$("input:checkbox[name='sound_zhengchang']").prop('checked',result["sound_zhengchang"]);
+                            $("input:checkbox[name='urine_shaoniao']").prop('checked',result["urine_shaoniao"]);
                             $("input:checkbox[name='urine_yulibujin']").prop('checked',result["urine_yulibujin"]);
                             $("input:checkbox[name='urine_yeniaopin']").prop('checked',result["urine_yeniaopin"]);
                             $("input:checkbox[name='urine_qita']").prop('checked',result["urine_qita"]);
@@ -342,7 +343,7 @@
                             $("input:checkbox[name='texture_pianhong']").prop('checked',result["texture_pianhong"]);
                             $("input:checkbox[name='texture_shenhong']").prop('checked',result["texture_shenhong"]);
                             $("input:checkbox[name='texture_zihong']").prop('checked',result["texture_zihong"]);
-                            $("input:checkbox[name='texture_anhong']").prop('checked',result["texture_anhong"]);$("input:checkbox[name='sound_zhengchang']").prop('checked',result["sound_zhengchang"]);
+                            $("input:checkbox[name='texture_anhong']").prop('checked',result["texture_anhong"]);
                             $("input:checkbox[name='texture_danan']").prop('checked',result["texture_danan"]);
                             $("input:checkbox[name='texture_zian']").prop('checked',result["texture_zian"]);
                             $("input:checkbox[name='texture_yudian']").prop('checked',result["texture_yudian"]);
@@ -416,7 +417,7 @@
                         window.location.href = '/prj001' + '/?page=' + curpage_global;
                     } else {
                         if (result.status == 403) {
-                            alert("" + result.user_history.detail)
+                            alert("" + result.user_history.msg)
                         } else {
                             alert("保存失败" + result.status)
                         }
@@ -455,8 +456,28 @@
                             for(var i=0;i<set_input.length;i++){
                                 set_input[i].focus();
                             }
+                            
                             $('#historyBtn').attr("historyBtn-url", result["url"]);
-                                
+                            //既往史
+                            $("input:checkbox[name='pasthistory_wu']").prop('checked',result["pasthistory_wu"]);
+                            $("input:checkbox[name='pasthistory_yindaoyan']").prop('checked',result["pasthistory_yindaoyan"]);
+                            $("input:checkbox[name='pasthistory_zigongneimoyan']").prop('checked',result["pasthistory_zigongneimoyan"]);
+                            $("input:checkbox[name='pasthistory_zigongneimoyiwei']").prop('checked',result["pasthistory_zigongneimoyiwei"]);
+                            $("input:checkbox[name='pasthistory_zigongxianjizheng']").prop('checked',result["pasthistory_zigongxianjizheng"]);
+                            $("input:checkbox[name='pasthistory_penqiangyan']").prop('checked',result["pasthistory_penqiangyan"]);
+                            $("input:checkbox[name='pasthistory_zigongjiliu']").prop('checked',result["pasthistory_zigongjiliu"]);
+                            $("input:checkbox[name='pasthistory_luancaonangzhong']").prop('checked',result["pasthistory_luancaonangzhong"]);
+                            $("input:checkbox[name='pasthistory_ruxianzengsheng']").prop('checked',result["pasthistory_ruxianzengsheng"]);
+                            $("input:checkbox[name='pasthistory_shengzhiyichang']").prop('checked',result["pasthistory_shengzhiyichang"]);
+                            $("input:checkbox[name='pasthistory_jiazhuangxian']").prop('checked',result["pasthistory_jiazhuangxian"]);
+                            $("input:checkbox[name='pasthistory_shenshangxian']").prop('checked',result["pasthistory_shenshangxian"]);
+                            $("input:checkbox[name='pasthistory_xueye']").prop('checked',result["pasthistory_xueye"]);
+                            $("input:checkbox[name='pasthistory_naochuitiliu']").prop('checked',result["pasthistory_naochuitiliu"]);
+                            $("input:checkbox[name='pasthistory_tangniaobing']").prop('checked',result["pasthistory_tangniaobing"]);
+                            $("input:checkbox[name='pasthistory_feipang']").prop('checked',result["pasthistory_feipang"]);
+                            $("input:checkbox[name='pasthistory_ganyan']").prop('checked',result["pasthistory_ganyan"]);
+                            $("input:checkbox[name='pasthistory_jiehe']").prop('checked',result["pasthistory_jiehe"]);
+                            $('#pasthistory_qita').val(result["pasthistory_qita"]);
                             /* 出血量 */
                             $("input[name='blood_cond'][value='"+result["blood_cond"]+"']").prop("checked",true);
                             /* 出血颜色 */
@@ -487,7 +508,7 @@
                             $("input:checkbox[name='body_leg']").prop('checked',result["body_leg"]);
                             $("input:checkbox[name='body_waist']").prop('checked',result["body_waist"]);
                             $('#body_qita').val(result["body_qita"]);
-                            
+
                             $("input:checkbox[name='face_head_cangbai']").prop("checked",result["face_head_cangbai"]);
                             $("input:checkbox[name='face_head_huangbai']").prop("checked",result["face_head_huangbai"]);
                             $("input:checkbox[name='face_head_weihuang']").prop("checked",result["face_head_weihuang"]);
@@ -495,9 +516,10 @@
                             $("input:checkbox[name='face_head_anban']").prop("checked",result["face_head_anban"]);
                             $("input:checkbox[name='face_head_zhizhong']").prop("checked",result["face_head_zhizhong"]);
                             $("input:checkbox[name='face_head_chunhong']").prop("checked",result["face_head_chunhong"]);
-                            $("input:checkbox[name='face_head_kouku']").prop("checked",result["face_head_kouku"]);
-                            $("input:checkbox[name='face_head_erming']").prop("checked",result["face_head_erming"]);
-                            $("input:checkbox[name='face_head_yanghua']").prop("checked",result["face_head_yanghua"]);
+
+                            $("input[name='face_head_kouku'][value='"+result["face_head_kouku"]+"']").prop("checked",true);
+                            $("input[name='face_head_erming'][value='"+result["face_head_erming"]+"']").prop("checked",true);
+                            $("input[name='face_head_yanghua'][value='"+result["face_head_yanghua"]+"']").prop("checked",true);
                             $('#face_head_qita').val(result["face_head_qita"]);
                             
                             $("input[name='belly_fanmen'][value='"+result["belly_fanmen"]+"']").prop("checked",true);
@@ -551,22 +573,17 @@
                             $("input:checkbox[name='leucorrhea_seqing']").prop('checked',result["leucorrhea_seqing"]);
                             $("input:checkbox[name='leucorrhea_zhiqingxi']").prop('checked',result["leucorrhea_zhiqingxi"]);
                             $("input:checkbox[name='leucorrhea_zhinianchou']").prop('checked',result["leucorrhea_zhinianchou"]);
-                            $("input:checkbox[name='marriage_nosex']").prop('checked',result["marriage_nosex"]);
-                            $("input:checkbox[name='marriage_havesex']").prop('checked',result["marriage_havesex"]);
-                            $("input:checkbox[name='marriage_tongju']").prop('checked',result["marriage_tongju"]);
-                            $("input:checkbox[name='marriage_fenju']").prop('checked',result["marriage_fenju"]);
-                            $("input:checkbox[name='marriage_lihun']").prop('checked',result["marriage_lihun"]);
-                            $("input:checkbox[name='marriage_sangou']").prop('checked',result["marriage_sangou"]);
-                            
-                            $("input[name='pastpreg_yuncount'][value='"+result["pastpreg_yuncount"]+"']").prop("checked",true);
-                            $("input[name='pastpreg_shunchan'][value='"+result["pastpreg_shunchan"]+"']").prop("checked",true);
-                            $("input[name='pastpreg_pougong'][value='"+result["pastpreg_pougong"]+"']").prop("checked",true);
-                            $("input[name='pastpreg_yaoliu'][value='"+result["pastpreg_yaoliu"]+"']").prop("checked",true);
-                            $("input[name='pastpreg_renliu'][value='"+result["pastpreg_renliu"]+"']").prop("checked",true);
-                            $("input[name='pastpreg_ziranliu'][value='"+result["pastpreg_ziranliu"]+"']").prop("checked",true);
-                            $("input[name='pastpreg_zaochan'][value='"+result["pastpreg_zaochan"]+"']").prop("checked",true);
-                            $("input[name='pastpreg_yiweirenshen'][value='"+result["pastpreg_yiweirenshen"]+"']").prop("checked",true);
-                            $("input[name='pastpreg_qinggongshu'][value='"+result["pastpreg_qinggongshu"]+"']").prop("checked",true);
+                            $("input[name='marriage'][value='"+result["marriage"]+"']").prop("checked",true);
+
+                            $('#pastpreg_yuncount').val(result["pastpreg_yuncount"]);
+                            $('#pastpreg_shunchan').val(result["pastpreg_shunchan"]);
+                            $('#pastpreg_pougong').val(result["pastpreg_pougong"]);
+                            $('#pastpreg_yaoliu').val(result["pastpreg_yaoliu"]);
+                            $('#pastpreg_renliu').val(result["pastpreg_renliu"]);
+                            $('#pastpreg_ziranliu').val(result["pastpreg_ziranliu"]);
+                            $('#pastpreg_zaochan').val(result["pastpreg_zaochan"]);
+                            $('#pastpreg_yiweirenshen').val(result["pastpreg_yiweirenshen"]);
+                            $('#pastpreg_qinggongshu').val(result["pastpreg_qinggongshu"]);
                             $('#pastpreg_qita').val(result["pastpreg_qita"]);
                             
                             $("input:checkbox[name='prevent_jieza']").prop('checked',result["prevent_jieza"]);
@@ -620,6 +637,8 @@
                             $("input:checkbox[name='reducefat_jieshi']").prop('checked',result["reducefat_jieshi"]);
                             $("input:checkbox[name='reducefat_yaowu']").prop('checked',result["reducefat_yaowu"]);
                             $('#reducefat_qita').val(result["reducefat_qita"]);
+
+                            display_accompany();
                         } else {
                             alert("result.status wrong");
                         }
@@ -652,7 +671,7 @@
                         window.location.href = '/prj001' + '/?page=' + curpage_global;
                     } else {
                         if (result.status == 403) {
-                            alert("" + result.user_relevant.detail)
+                            alert("" + result.user_relevant.msg)
                         } else {
                             alert("保存失败" + result.status)
                         }
@@ -697,7 +716,7 @@
                             $("input:checkbox[name='body_check']").prop('checked',result["body_check"]);
                             $("input:checkbox[name='accessory_chaosheng']").prop('checked',result["accessory_chaosheng"]);
                             $("input:checkbox[name='accessory_quanxuexibaojishu']").prop('checked',result["accessory_quanxuexibaojishu"]);
-
+                            $("input[name='accessory_hgb_value'][value='"+result["accessory_hgb_value"]+"']").prop("checked",true);
                             $("input:checkbox[name='accessory_ningxue']").prop('checked',result["accessory_ningxue"]);
                             $("input:checkbox[name='accessory_niaorenshen']").prop('checked',result["accessory_niaorenshen"]);
                             $("input:checkbox[name='accessory_jichutiwen']").prop('checked',result["accessory_jichutiwen"]);
@@ -738,7 +757,7 @@
                         window.location.href = '/prj001' + '/?page=' + curpage_global;
                     } else {
                         if (result.status == 403) {
-                            alert("" + result.user_cc.detail)
+                            alert("" + result.user_cc.msg)
                         } else {
                             alert("保存失败" + result.status)
                         }
@@ -858,7 +877,7 @@
                         window.location.href = '/prj001' + '/?page=' + curpage_global;
                     } else {
                         if (result.status == 403) {
-                            alert("" + result.user_cure.detail)
+                            alert("" + result.user_cure.msg)
                         } else {
                             alert("保存失败" + result.status)
                         }
@@ -953,7 +972,6 @@
                             $("input:checkbox[name='pre_shi_wenjing']").prop('checked',result["pre_shi_wenjing"]);
                             $("input:checkbox[name='pre_shi_wuyao']").prop('checked',result["pre_shi_wuyao"]);
                             $("input:checkbox[name='pre_shi_erchen']").prop('checked',result["pre_shi_erchen"]);
-                            $("input:checkbox[name='pre_shi_daotan']").prop('checked',result["pre_shi_daotan"]);
                             $("input:checkbox[name='pre_shi_baoyin']").prop('checked',result["pre_shi_baoyin"]);
                             $("input:checkbox[name='pre_shi_taohong']").prop('checked',result["pre_shi_taohong"]);
                             $("input:checkbox[name='pre_shi_siwu']").prop('checked',result["pre_shi_siwu"]);
@@ -971,6 +989,7 @@
                             $("input:checkbox[name='pre_xushi_liangdi']").prop('checked',result["pre_xushi_liangdi"]);
                             $("input:checkbox[name='pre_xushi_qingjing']").prop('checked',result["pre_xushi_qingjing"]);
                             $('#pre_xushi_qita').val(result["pre_xushi_qita"]);
+                            $('#xushi_qita').val(result["xushi_qita"]);
 
                             $("input:checkbox[name='zhong_xu_buzhong']").prop('checked',result["zhong_xu_buzhong"]);
                             $("input:checkbox[name='zhong_xu_renshen']").prop('checked',result["zhong_xu_renshen"]);
@@ -1070,7 +1089,7 @@
                         window.location.href = '/prj001' + '/?page=' + curpage_global;
                     } else {
                         if (result.status == 403) {
-                            alert("" + result.user_results.detail)
+                            alert("" + result.user_results.msg)
                         } else {
                             alert("保存失败" + result.status)
                         }

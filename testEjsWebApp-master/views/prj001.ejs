@@ -29,6 +29,19 @@
     <script src="../public/js/prj001-info.js"></script>
     <script>var curpage_global = '<%= curpage %>' ;
             var totalpagenumber_global = '<%= totalpagenumber %>';</script>
+
+    <!-- 患者病史 选择显示 -->
+    <script>
+        function display_accompany(){
+        var val = $('input[name="menstruation_is_accompany"]:checked').val();
+        if (val=="true") {
+            $('.accompany').show();
+        } else {
+            $('.accompany').hide();
+        }
+        }
+    </script>
+    <!-- 患者病史 选择显示 -->
     <!-- 分页格式 -->
     <style>
     .color{
@@ -436,7 +449,7 @@
                                                     <div class="row">
                                                         <div class="col-xs-12 col-sm-12">
                                                             <p>
-                                                            就诊日期：<input id="recdate" name="recdate" type="text" class="form-control datepicker" />
+                                                                就诊日期：<input id="recdate" name="recdate" type="text" class="form-control datepicker" />
                                                             </p>
                                                             <p>
                                                                 问卷编码:<input class="form-control" id="serial"  name="serial" type="text" />
@@ -471,15 +484,15 @@
                                                                 身高cm:<input class="form-control" type="number" name="height" id="height"/>
                                                             </p>
                                                             <p>
-                                                                体重kg:<input class="form-control" type="text" name="weight" id="weight"/>
+                                                                体重kg:<input class="form-control" type="number" name="weight" id="weight"/>
                                                             </p>
                                                             <p>
-                                                            腰围cm:<input class="form-control" type="number" name="waistline" id="waistline"/>
-                                                        </p>
-                                                        <p>
-                                                            臀围cm:<input class="form-control" type="text" name="hipline" id="hipline"/>
-                                                        </p>
-                                                        <p>
+                                                                腰围cm:<input class="form-control" type="number" name="waistline" id="waistline"/>
+                                                            </p>
+                                                            <p>
+                                                                臀围cm:<input class="form-control" type="number" name="hipline" id="hipline"/>
+                                                            </p>
+                                                            <p>
                                                                 血型:
                                                                 <label><input type="radio" value="A" name="blood_type"/>A</label>
                                                                 <label><input type="radio" value="B" name="blood_type"/>B</label>
@@ -489,11 +502,13 @@
     
                                                             <p>
                                                                 民族:
-                                                            <select name="nation" class="form-control">
+                                                                <p>
+                                                                <label><input type="radio" value="汉族" name="nation"/>汉族</label>
+                                                                <label><input type="radio" value="其他" name="nation"/>其他(回族、满族、苗族、藏族等)</label>
+                                                            <!-- <select name="nation" class="form-control">
                                                                 <option value="汉族">汉族</option>
-
                                                                 <option value="其他">其他(回族 、 满族 、内蒙古、 苗族 、藏族 、 布依族等)</option>
-                                                            </select>
+                                                            </select> -->
                                                         </p>
 
                                                         <p>
@@ -523,7 +538,15 @@
 
                                                         <p>
                                                             文化程度:
-                                                            <select name="culture" class="form-control">
+                                                            <p>
+                                                            <label><input type="radio" value="未接受国家教育(文盲)" name="culture"/>未接受国家教育(文盲)</label>
+                                                            <label><input type="radio" value="小学及以下" name="culture"/>小学及以下</label>
+                                                            <label><input type="radio" value="初中" name="culture"/>初中</label>
+                                                            <label><input type="radio" value="高中/中专" name="culture"/>高中/中专</label>
+                                                            <label><input type="radio" value="大专" name="culture"/>大专</label>
+                                                            <label><input type="radio" value="本科" name="culture"/>本科</label>
+                                                            <label><input type="radio" value="研究生及以上" name="culture"/>研究生及以上</label>
+                                                            <!-- <select name="culture" class="form-control">
                                                                 <option value="未接受国家教育(文盲)">未接受国家教育(文盲)</option>
                                                                 <option value="小学及以下">小学及以下</option>
                                                                 <option value="初中">初中</option>
@@ -531,7 +554,7 @@
                                                                 <option value="大专">大专</option>
                                                                 <option value="本科">本科</option>
                                                                 <option value="研究生及以上">研究生及以上</option>
-                                                            </select>
+                                                            </select> -->
                                                         </p>
 
                                                         <p>
@@ -639,10 +662,9 @@
                                                             <label><input type="radio" value="清稀" name="blood_quality"/>清稀</label>
                                                             <label><input type="radio" value="无血块" name="blood_quality"/>无血块</label>
                                                             <label><input type="radio" value="偶有血块" name="blood_quality"/>偶有血块</label>
-
-                                                            <label><input type="radio" value="夹少量小血块" name="blood_block"/>夹少量小血块</label>
-                                                            <label><input type="radio" value="夹较大血块" name="blood_block"/>夹较大血块</label>
-                                                            <label><input type="radio" value="其他" name="blood_color"/>其他</label>
+                                                            <label><input type="radio" value="夹少量小血块" name="blood_quality"/>夹少量小血块</label>
+                                                            <label><input type="radio" value="夹较大血块" name="blood_quality"/>夹较大血块</label>
+                                                            <label><input type="radio" value="其他" name="blood_quality"/>其他</label>
                                                         </p>
                                                         <p>
                                                             出血特点:
@@ -651,14 +673,12 @@
                                                             <label><input type="radio" value="势急暴下" name="blood_character"/>势急暴下</label>
                                                             <label><input type="radio" value="淋漓不断" name="blood_character"/>淋漓不断</label>
                                                             <label><input type="radio" value="点滴即净" name="blood_character"/>点滴即净</label>
-                                                            <label><input type="radio" value="其他" name="blood_color"/>其他</label>
+                                                            <label><input type="radio" value="其他" name="blood_character"/>其他</label>
                                                         </p>
                                                         <p>
                                                             精神情绪：
                                                         <p>
                                                             <label><input name="spirit_jinglichongpei" type="checkbox" value="true"/>精力充沛</label>
-
-
                                                             <label><input name="spirit_shenpifali" type="checkbox" value="true"/>神疲乏力</label>
                                                             <label><input name="spirit_jianwang" type="checkbox" value="true"/>健忘</label>
                                                             <label><input name="spirit_yalida" type="checkbox" value="true"/>压力大</label>
@@ -679,7 +699,7 @@
                                                             <label><input name="sweat_chaore" type="checkbox" value="true"/>潮热</label>
                                                             <label><input name="sweat_dire" type="checkbox" value="true"/>低热不退</label>
                                                             <label><input name="sweat_dongze" type="checkbox" value="true"/>动则汗出</label>
-                                                            <label><input name="sweat_yewo" type="checkbox" value="true"/>页卧汗出,醒后汗出</label>
+                                                            <label><input name="sweat_yewo" type="checkbox" value="true"/>夜卧汗出,醒后汗出</label>
                                                             <label><input name="sweat_hongre" type="checkbox" value="true"/>烘热汗出</label>
                                                             <label><input name="sweat_qita" type="checkbox" value="true"/>其他</label>
                                                         </p>
@@ -754,11 +774,9 @@
                                                             <label><input name="stomach_xiaofuzhuizhang" type="checkbox" value="true"/>小腹下坠感</label>
                                                             <label><input name="stomach_xiaofubiezhang" type="checkbox" value="true"/>小腹憋胀</label>
                                                             <label><input name="stomach_xiaofulengtong" type="checkbox" value="true"/>小腹冷痛</label>
-                                                            <label><input name="stomach_xiaofuzhuotong" type="checkbox" value="true"/>小腹灼痛</label>
+                                                            <label><input name="stomach_zhuotong" type="checkbox" value="true"/>小腹灼痛</label>
                                                             <label><input name="stomach_xiaofucitong" type="checkbox" value="true"/>小腹刺痛</label>
-
                                                             <label><input name="stomach_yaosuan" type="checkbox" value="true"/>腰酸痛</label>
-
                                                             <label><input name="stomach_yaoleng" type="checkbox" value="true"/>腰冷痛</label>
                                                             <label><input name="stomach_qita" type="checkbox" value="true"/>其他</label>
                                                         </p>
@@ -943,7 +961,7 @@
                                                             <label><input name="pasthistory_wu" type="checkbox" value="true"/>无</label>
                                                             <label><input name="pasthistory_yindaoyan" type="checkbox" value="true"/>阴道炎</label>
                                                             <label><input name="pasthistory_zigongneimoyan" type="checkbox" value="true"/>子宫内膜炎</label>
-                                                           <label><input name="pasthistory_zigongneimoyiwei" type="checkbox" value="true"/>子宫内膜异位症</label>
+                                                            <label><input name="pasthistory_zigongneimoyiwei" type="checkbox" value="true"/>子宫内膜异位症</label>
                                                             <label><input name="pasthistory_zigongxianjizheng" type="checkbox" value="true"/>子宫腺肌症</label>
                                                             <label><input name="pasthistory_penqiangyan" type="checkbox" value="true"/>盆腔炎性疾病</label>
                                                             <label><input name="pasthistory_zigongjiliu" type="checkbox" value="true"/>子宫肌瘤</label>
@@ -974,7 +992,7 @@
                                                         <p>
                                                             <label><input type="radio" value="好" name="body_cond"/>好</label>
                                                             <label><input type="radio" value="一般" name="body_cond"/>一般</label>
-                                                            <label><input type="radio" value="易疲劳" name="body_cond"/>易疲劳</label>
+                                                            <label><input type="radio" value="易疲倦" name="body_cond"/>易疲倦</label>
                                                         </p>
                                                         <p>
                                                             职业体力活动:
@@ -1047,9 +1065,8 @@
 
                                                             <label><input type="radio" value="出血量中等,每次约需15-20张卫生巾" name="blood_cond"/>出血量中等,每次约需15-20张卫生巾</label>
                                                             <label><input type="radio" value="出血量多,每次多于20张卫生巾" name="blood_cond"/>出血量多,每次多于20张卫生巾</label>
-                                                            <label><input type="radio" value="经量少,每张少于5张卫生巾" name="blood_cond"/>经量少,每张少于5张卫生巾</label>
-                                                            <label><input type="radio" value="经量少,每张少于5张卫生巾" name="blood_cond"/>经量极少,几乎不用卫生巾,用护垫即可</label>
-                                                            <label><input type="radio" value="其他" name="blood_cond"/>其他</label>
+                                                            <label><input type="radio" value="经量少,每次少于5张卫生巾" name="blood_cond"/>经量少,每次少于5张卫生巾</label>
+                                                            <label><input type="radio" value="经量极少,几乎不用卫生巾,用护垫即可" name="blood_cond"/>经量极少,几乎不用卫生巾,用护垫即可</label>
                                                         </p>
                                                         <p>
                                                             出血颜色:
@@ -1089,16 +1106,7 @@
                                                             <label><input type="radio" value="true" name="menstruation_is_accompany" onclick="display_accompany()"/>有</label>
                                                             <label><input type="radio" value="false" name="menstruation_is_accompany" onclick="display_accompany()"/>无</label>
                                                         </p>
-                                                        <script>
-                                                            function display_accompany(){
-                                                            var val = $('input[name="menstruation_is_accompany"]:checked').val();
-                                                            if (val=="true") {
-                                                                $('.accompany').show();
-                                                            } else {
-                                                                $('.accompany').hide();
-                                                            }
-                                                            }
-                                                        </script>
+                                    
                                                         <div class="accompany" style="display: none">
                                                                 <p>
                                                                     精神情绪:
@@ -1161,13 +1169,13 @@
                                                                 <p>
                                                                     头面：
                                                                 <p>
-                                                                    <label><input name="face_head_cangbai" type="checkbox" value="有"/>面色苍白</label>
-                                                                    <label><input name="face_head_huangbai" type="checkbox" value="有"/>面色晄白</label>
-                                                                    <label><input name="face_head_weihuang" type="checkbox" value="有"/>面色萎黄</label>
-                                                                    <label><input name="face_head_huian" type="checkbox" value="有"/>面色晦暗</label>
-                                                                    <label><input name="face_head_anban" type="checkbox" value="有"/>面色黯斑</label>
-                                                                    <label><input name="face_head_zhizhong" type="checkbox" value="有"/>面浮肢肿</label>
-                                                                    <label><input name="face_head_chunhong" type="checkbox" value="有"/>颧赤唇红</label>
+                                                                    <label><input name="face_head_cangbai" id="face_head_cangbai" type="checkbox" value="true"/>面色苍白</label>
+                                                                    <label><input name="face_head_huangbai" id="face_head_huangbai" type="checkbox" value="true"/>面色晄白</label>
+                                                                    <label><input name="face_head_weihuang" id="face_head_weihuang" type="checkbox" value="true"/>面色萎黄</label>
+                                                                    <label><input name="face_head_huian" id="face_head_huian" type="checkbox" value="true"/>面色晦暗</label>
+                                                                    <label><input name="face_head_anban" id="face_head_anban" type="checkbox" value="true"/>面色黯斑</label>
+                                                                    <label><input name="face_head_zhizhong" id="face_head_zhizhong" type="checkbox" value="true"/>面浮肢肿</label>
+                                                                    <label><input name="face_head_chunhong" id="face_head_chunhong" type="checkbox" value="true"/>颧赤唇红</label>
                                                                 
                                                                 </p>
                                                                 口苦咽干：
@@ -1284,10 +1292,10 @@
                                                             
                                                             
                                                                 <p>
-                                                                    <label><input name="belly_juan" type="checkbox" value="有"/>疼痛拒按</label>
-                                                                    <label><input name="belly_xian" type="checkbox" value="有"/>腹痛喜按</label>
-                                                                    <label><input name="belly_deretongjian" type="checkbox" value="有"/>腹痛得热痛减</label>
-                                                                    <label><input name="belly_tongjian" type="checkbox" value="有"/>血块下痛减</label>
+                                                                    <label><input name="belly_juan" type="checkbox" value="true"/>疼痛拒按</label>
+                                                                    <label><input name="belly_xian" type="checkbox" value="true"/>腹痛喜按</label>
+                                                                    <label><input name="belly_deretongjian" type="checkbox" value="true"/>腹痛得热痛减</label>
+                                                                    <label><input name="belly_tongjian" type="checkbox" value="true"/>血块下痛减</label>
                                                                 
                                                                     <label>其它说明:<input type="text" id="belly_qita" name="belly_qita" value="无"/></label>
                                                                 </p>
@@ -1386,30 +1394,30 @@
                                                             经期情况:
                                                         <p>
                                                             经期运动：
-                                                            <label><input type="radio" value="有" name="mens_yundong"/>有</label>
-                                                            <label><input type="radio" value="偶尔" name="mens_yundong"/>偶尔</label>
-                                                            <label><input type="radio" value="经常" name="mens_yundong"/>经常</label>
+                                                            <label><input type="radio" value="有" name="jingqi_yundong"/>有</label>
+                                                            <label><input type="radio" value="偶尔" name="jingqi_yundong"/>偶尔</label>
+                                                            <label><input type="radio" value="经常" name="jingqi_yundong"/>经常</label>
 
                                                         </p>
                                                         <p>
                                                             经期感冒：
-                                                            <label><input type="radio" value="有" name="mens_ganmao"/>有</label>
-                                                            <label><input type="radio" value="偶尔" name="mens_ganmao"/>偶尔</label>
-                                                            <label><input type="radio" value="经常" name="mens_ganmao"/>经常</label>
+                                                            <label><input type="radio" value="有" name="jingqi_ganmao"/>有</label>
+                                                            <label><input type="radio" value="偶尔" name="jingqi_ganmao"/>偶尔</label>
+                                                            <label><input type="radio" value="经常" name="jingqi_ganmao"/>经常</label>
 
                                                         </p>
                                                         <p>
                                                             经期同房：
-                                                            <label><input type="radio" value="有" name="mens_tongfang"/>有</label>
-                                                            <label><input type="radio" value="偶尔" name="mens_tongfang"/>偶尔</label>
-                                                            <label><input type="radio" value="经常" name="mens_tongfang"/>经常</label>
+                                                            <label><input type="radio" value="有" name="jingqi_tongfang"/>有</label>
+                                                            <label><input type="radio" value="偶尔" name="jingqi_tongfang"/>偶尔</label>
+                                                            <label><input type="radio" value="经常" name="jingqi_tongfang"/>经常</label>
 
                                                         </p>
                                                         <p>
                                                             经期着凉：
-                                                            <label><input type="radio" value="有" name="mens_zhaoliang"/>有</label>
-                                                            <label><input type="radio" value="偶尔" name="mens_zhaoliang"/>偶尔</label>
-                                                            <label><input type="radio" value="经常" name="mens_zhaoliang"/>经常</label>
+                                                            <label><input type="radio" value="有" name="jingqi_zhaoliang"/>有</label>
+                                                            <label><input type="radio" value="偶尔" name="jingqi_zhaoliang"/>偶尔</label>
+                                                            <label><input type="radio" value="经常" name="jingqi_zhaoliang"/>经常</label>
 
                                                         </p>
                                                         <p>
@@ -1548,7 +1556,7 @@
                                                         <p>
                                                             血红蛋白值：
                                                             <label><input type="radio" value="不详" name="accessory_hgb_value"/>不详</label>
-                                                            <label><input type="radio" value="＞110" name="accessory_hgb_value"/>＞110</label>
+                                                            <label><input type="radio" value=">110" name="accessory_hgb_value"/>＞110</label>
                                                             <label><input type="radio" value="91-110" name="accessory_hgb_value"/>91-110</label>
                                                             <label><input type="radio" value="61-90" name="accessory_hgb_value"/>61-90</label>
                                                             <label><input type="radio" value="30-60" name="accessory_hgb_value"/>30-60</label>
@@ -1598,23 +1606,24 @@
                                                             <label><input name="jingqiyanchang" type="checkbox" value="true"/>经期延长</label>
                                                             <label><input name="jingjianqichuxie" type="checkbox" value="true"/>经间期出血</label>
                                                             <label><input name="benglou" type="checkbox" value="true"/>崩漏</label>
-                                                            <label><input name="yuejing_qita" type="checkbox" value="true"/>其他</label>
+                                                            <label>其它说明：
+                                                                    <input type="text" id="yuejing_qita" name="yuejing_qita" value="无"/></label>
                                                         </p>
                                                         <p>
                                                             虚证诊断：
                                                         <p>
-                                                            <label><input name="shenqi" type="checkbox" value="true"/>肾气虚症</label>
-                                                            <label><input name="shenyin" type="checkbox" value="true"/>肾阴虚症</label>
-                                                            <label><input name="shenyang" type="checkbox" value="true"/>肾阳虚症</label>
-                                                            <label><input name="qixu" type="checkbox" value="true"/>气虚症</label>
-                                                            <label><input name="xuexu" type="checkbox" value="true"/>血虚症</label>
-                                                            <label><input name="xuhan" type="checkbox" value="true"/>虚寒症</label>
-                                                            <label><input name="xure" type="checkbox" value="true"/>虚热症</label>
-                                                            <label><input name="pixu" type="checkbox" value="true"/>脾气虚症</label>
-                                                            <label><input name="xinpiliangxu" type="checkbox" value="true"/>心脾两虚症</label>
-                                                            <label><input name="pishenyangxu" type="checkbox" value="true"/>脾肾阳虚症</label>
-                                                            <label><input name="qixuekuixu" type="checkbox" value="true"/>气血亏虚症</label>
-                                                            <label><input name="ganshenyinxu" type="checkbox" value="true"/>肝肾阴虚症</label>
+                                                            <label><input name="shenxu" type="checkbox" value="true"/>肾气虚证</label>
+                                                            <label><input name="shenyin" type="checkbox" value="true"/>肾阴虚证</label>
+                                                            <label><input name="shenyang" type="checkbox" value="true"/>肾阳虚证</label>
+                                                            <label><input name="qixu" type="checkbox" value="true"/>气虚证</label>
+                                                            <label><input name="xuexu" type="checkbox" value="true"/>血虚证</label>
+                                                            <label><input name="xuhan" type="checkbox" value="true"/>虚寒证</label>
+                                                            <label><input name="xure" type="checkbox" value="true"/>虚热证</label>
+                                                            <label><input name="pixu" type="checkbox" value="true"/>脾气虚证</label>
+                                                            <label><input name="xinpiliangxu" type="checkbox" value="true"/>心脾两虚证</label>
+                                                            <label><input name="pishenyangxu" type="checkbox" value="true"/>脾肾阳虚证</label>
+                                                            <label><input name="qixuekuixu" type="checkbox" value="true"/>气血亏虚证</label>
+                                                            <label><input name="ganshenyinxu" type="checkbox" value="true"/>肝肾阴虚证</label>
 
                                                             <label>其它说明：
                                                                 <input type="text" id="qita_asthenic" name="qita_asthenic" value="无"/></label>
@@ -1622,41 +1631,41 @@
                                                         <p>
                                                             实证诊断：
                                                         <p>
-                                                            <label><input name="ganyuxuere" type="checkbox" value="true"/>肝郁血热症</label>
-                                                            <label><input name="yangshengxuere" type="checkbox" value="true"/>阳盛血热症</label>
-                                                            <label><input name="shire" type="checkbox" value="true"/>湿热症</label>
-                                                            <label><input name="tanshi" type="checkbox" value="true"/>痰热症</label>
-                                                            <label><input name="qizhi" type="checkbox" value="true"/>气滞症</label>
-                                                            <label><input name="qizhixueyu" type="checkbox" value="true"/>气滞血瘀症</label>
-                                                            <label><input name="shihan" type="checkbox" value="true"/>实寒症</label>
-                                                            <label><input name="xuehan" type="checkbox" value="true"/>血寒症</label>
-                                                            <label><input name="hanningxueyu" type="checkbox" value="true"/>寒凝血瘀症</label>
+                                                            <label><input name="ganyuxuere" type="checkbox" value="true"/>肝郁血热证</label>
+                                                            <label><input name="yangshengxuere" type="checkbox" value="true"/>阳盛血热证</label>
+                                                            <label><input name="shire" type="checkbox" value="true"/>湿热证</label>
+                                                            <label><input name="tanshi" type="checkbox" value="true"/>痰热证</label>
+                                                            <label><input name="qizhi" type="checkbox" value="true"/>气滞证</label>
+                                                            <label><input name="qizhixueyu" type="checkbox" value="true"/>气滞血瘀证</label>
+                                                            <label><input name="shihan" type="checkbox" value="true"/>实寒证</label>
+                                                            <label><input name="xuehan" type="checkbox" value="true"/>血寒证</label>
+                                                            <label><input name="hanningxueyu" type="checkbox" value="true"/>寒凝血瘀证</label>
 															<label><input name="tanyuzuzhi" type="checkbox" value="true"/>痰瘀阻滞证</label>
                                                             <label>其它说明:
 
-                                                                <input type="text" id="" name="qita_demonstration" value="无"/></label>
+                                                                <input type="text" id="qita_demonstration" name="qita_demonstration" value="无"/></label>
                                                         </p>
 
                                                         <p>
                                                             虚实夹杂诊断：
                                                         <p>
-                                                            <label><input name="yinxuxuere" type="checkbox" value="true"/>阴虚血热症</label>
-                                                            <label><input name="yangxuxuere" type="checkbox" value="true"/>阳虚血热症</label>
-                                                            <label><input name="shenxuxueyu" type="checkbox" value="true"/>肾虚血瘀症</label>
-                                                            <label><input name="shenxuyure" type="checkbox" value="true"/>肾虚瘀热症</label>
-                                                            <label><input name="shenxuganyu" type="checkbox" value="true"/>肾虚肝郁症</label>
+                                                            <label><input name="yinxuxuere" type="checkbox" value="true"/>阴虚血热证</label>
+                                                            <label><input name="yangxuxuere" type="checkbox" value="true"/>阳虚血热证</label>
+                                                            <label><input name="shenxuxueyu" type="checkbox" value="true"/>肾虚血瘀证</label>
+                                                            <label><input name="shenxuyure" type="checkbox" value="true"/>肾虚瘀热证</label>
+                                                            <label><input name="shenxuganyu" type="checkbox" value="true"/>肾虚肝郁证</label>
 															<label><input name="yinxuhuowang" type="checkbox" value="true"/>阴虚火旺证</label>
-                                                            <label><input name="qixuxueyu" type="checkbox" value="true"/>气虚血瘀症</label>
+                                                            <label><input name="qixuxueyu" type="checkbox" value="true"/>气虚血瘀证</label>
 
                                                             <label>其它说明:
-                                                                <input type="text" id="" name="qita_def_ex" value="无"/></label>
+                                                                <input type="text" id="qita_def_ex" name="qita_def_ex" value="无"/></label>
                                                         </p>
                                                         <p>
                                                             西医诊断：
                                                         <p>
                                                             <label><input name="zigongchuxue" type="checkbox" value="true"/>排卵障碍性异常子宫出血</label>
-
-                                                            <label><input name="qita_west" type="checkbox" value="true"/>其他</label>
+                                                            <label>其它西医诊断:
+                                                                    <input type="text" id="qita_west" name="qita_west" value="无"/></label>
                                                         </p>
                                                     </div>
                                                 </div>
@@ -1767,7 +1776,7 @@
                                                             <label><input name="pre_xu_guchong" type="checkbox" value="true"/>固冲汤</label>
 															<label><input name="pre_xu_guben" type="checkbox" value="true"/>固本止崩汤</label>
 															<label>其它说明:
-                                                                <input type="text" id="" name="pre_xu_qita" value="无"/></label>
+                                                                <input type="text" id="pre_xu_qita" name="pre_xu_qita" value="无"/></label>
                                                             
 															</p>
 															<p>
@@ -1778,7 +1787,6 @@
                                                             <label><input name="pre_shi_wenjing" type="checkbox" value="true"/>温经汤(《妇人大全良方》)</label>
                                                             <label><input name="pre_shi_wuyao" type="checkbox" value="true"/>乌药汤</label>
                                                             <label><input name="pre_shi_erchen" type="checkbox" value="true"/>芎归二陈汤</label>
-                                                            <label><input name="pre_shi_daotan" type="checkbox" value="true"/>苍附导痰丸</label>
                                                             <label><input name="pre_shi_baoyin" type="checkbox" value="true"/>保阴煎</label>
                                                             <label><input name="pre_shi_taohong" type="checkbox" value="true"/>桃红四物汤</label>
 															<label><input name="pre_shi_siwu" type="checkbox" value="true"/>四物汤合失笑散</label>
@@ -1825,7 +1833,6 @@
                                                             <label><input name="zhong_xu_liuwei" type="checkbox" value="true"/>六味地黄丸</label>
                                                             <label><input name="zhong_xu_erzhi" type="checkbox" value="true"/>二至丸</label>
                                                             <label><input name="zhong_xu_fuke" type="checkbox" value="true"/>妇科止血灵片</label>
-                                                           
                                                             <label>其它说明:<input type="text" id="zhong_xu_qita" name="zhong_xu_qita" value="无"/></label>
 															</p>
 															实证：
@@ -1889,7 +1896,7 @@
                                                             <label><input name="cu_luan" type="checkbox" value="true"/>卵泡期使用低剂量雌激素</label>
 															<label><input name="cu_lai" type="checkbox" value="true"/>来曲唑</label>
                                                             <label><input name="cu_cu" type="checkbox" value="true"/>促卵泡生成激素(FSH)</label>
-															<label>其它说明:<input type="text" id="zcu_qita" name="zcu_qita" value="无"/></label>
+															<label>其它说明:<input type="text" id="cu_qita" name="cu_qita" value="无"/></label>
 															</p>	
 															手术治疗：
 															<label><input name="shu_neimo" type="checkbox" value="true"/>子宫内膜去除术</label>

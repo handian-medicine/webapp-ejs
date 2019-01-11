@@ -4,7 +4,7 @@ var myconst = require("./const");
 
 var router = express.Router();
 //路由 ../moblie/
-router.post('/login', function (req, res, next) {
+router.get('/login', function (req, res, next) {
     var url = myconst.apiurl + "o/token/";
     var mobileData = {
         "username": 'prj001-patient@handian.com',
@@ -47,7 +47,7 @@ router.post('/login', function (req, res, next) {
             res.json({status:0, msg:"密码或账户错误"});
         }
     });
-    res.render("mobile");//res.redirect()
+    // res.render("mobile");//res.redirect()
 })
 
 router.post('/input', function (req, res, next) {
@@ -66,7 +66,7 @@ router.post('/input', function (req, res, next) {
         request.post(options, function (error, response, body) {
             console.log("response:", body);
             // console.log("response.statusCode: ", response.statusCode);
-            if (!error && response.statusCode == 201) {
+            if (!error && response.statusCode == 200) {
                 res.json({status:1, msg:"录入成功"});
                 // console.log("prj001.js ajax result:", res);
                 //res.render('datainput',{username: req.cookies.userinfo.email});

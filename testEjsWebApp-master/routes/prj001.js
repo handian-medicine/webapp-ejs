@@ -2281,10 +2281,6 @@ router.get('/check', function (req, res, next){
             //console.log(">>>Getting archives met unknown error. " + error.error_description);
             else {
                 console.log(">>>其它错误码的body: ", user_geninfo);
-                // var info_cn = {};
-                // for (var i in user_geninfo) {
-                //     info_cn[dict[i]] = user_geninfo[i][0];
-                // }
                 res.json({user_geninfo: user_geninfo, status:1400});
             }
         }
