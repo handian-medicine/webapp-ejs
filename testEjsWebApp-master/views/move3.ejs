@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>患者病史</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- basic styles -->
+    <link rel="stylesheet" href="../public/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../public/css/font-awesome.min.css">
+
+    <!-- page specific plugin styles -->
+    <link rel="stylesheet" href="../public/css/ace.min.css">
+    <link rel="stylesheet" href="../public/css/ace-rtl.min.css">
+    <link rel="stylesheet" href="../public/css/ace-skins.min.css">
+
+    <!-- inline styles related to this page -->
+    <script src="../public/javascripts/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.js"></script>
+    <script>
+        $(function(){
+            $('.datepicker').datepicker({format:"yyyy-mm-dd"});
+        })
+    </script>
+    <script src="../public/js/ace-extra.min.js"></script>
+</head>
+<body>
+    <script>
+            $(document).ready(function () {
+                $("#historyBtn").click(function () {
+                    $.ajax({
+                            url: "/mobile/move3",
+                            type: "POST",
+                            // dataType: "json",
+                            data: $('#form-history').serializeArray(),
+                            success: function (result) {
+                                alert(result.form_all);
+                                alert("success");
+                            },
+                            error:  function () {
+                                alert("error");
+                            },
+                    })
+                })
+            })
+        </script>
+
+<div class="modal-content">
+        <div class="modal-header no-padding">
+            <div class="table-header">
+
+                患者病史
+            </div>
+        </div>
+
+        <form class="modal-body no-padding" id="form-history">
+                <table class="table table-striped table-bordered table-hover no-margin-bottom no-border-top">
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12">
+                                    <!-- <input type="hidden" class="person" name="person" id="person-history"/> -->
+
+                                    <p>既往史：
+                                    <p>
+                                        <label><input name="pasthistory_wu" type="checkbox" value="true"/>无</label>
+                                        <label><input name="pasthistory_yindaoyan" type="checkbox" value="true"/>阴道炎</label>
+                                        <label><input name="pasthistory_zigongneimoyan" type="checkbox" value="true"/>子宫内膜炎</label>
+                                        <label><input name="pasthistory_zigongneimoyiwei" type="checkbox" value="true"/>子宫内膜异位症</label>
+                                        <label><input name="pasthistory_zigongxianjizheng" type="checkbox" value="true"/>子宫腺肌症</label>
+                                        <label><input name="pasthistory_penqiangyan" type="checkbox" value="true"/>盆腔炎性疾病</label>
+                                        <label><input name="pasthistory_zigongjiliu" type="checkbox" value="true"/>子宫肌瘤</label>
+                                        <label><input name="pasthistory_luancaonangzhong" type="checkbox" value="true"/>卵巢囊肿</label>
+                                        <label><input name="pasthistory_ruxianzengsheng" type="checkbox" value="true"/>乳腺增生</label>
+                                        <label><input name="pasthistory_shengzhiyichang" type="checkbox" value="true"/>生殖器官发育异常</label>
+                                        <label><input name="pasthistory_jiazhuangxian" type="checkbox" value="true"/>甲状腺相关疾病</label>
+                                        <label><input name="pasthistory_shenshangxian" type="checkbox" value="true"/>肾上腺相关疾病</label>
+                                        <label><input name="pasthistory_xueye" type="checkbox" value="true"/>血液系统相关疾病</label>
+                                        <label><input name="pasthistory_naochuitiliu" type="checkbox" value="true"/>脑垂体瘤</label>
+                                        <label><input name="pasthistory_tangniaobing" type="checkbox" value="true"/>糖尿病</label>
+                                        <label><input name="pasthistory_feipang" type="checkbox" value="true"/>肥胖</label>
+                                        <label><input name="pasthistory_ganyan" type="checkbox" value="true"/>肝炎</label>
+                                        <label><input name="pasthistory_jiehe" type="checkbox" value="true"/>结核</label>
+                                        <label>其它说明:<input type="text"  id="pasthistory_qita" name="pasthistory_qita" value="无"/></label>
+                                    </p>
+                                    <p>
+                                        特殊嗜好：
+                                    <p>
+                                        <label><input name="hobbies_wu" type="checkbox" value="true"/>无</label>
+                                        <label><input name="hobbies_xiyan" type="checkbox" value="true"/>吸烟</label>
+                                        <label><input name="hobbies_yinjiu" type="checkbox" value="true"/>饮酒</label>
+                                        <label><input name="hobbies_aoye" type="checkbox" value="true"/>熬夜</label>
+                                        <label>其它说明:<input type="text"  id="hobbies_qita" name="hobbies_qita" value="无"/></label>
+                                    </p>
+                                    <p>
+                                        体力状况:
+                                    <p>
+                                        <label><input type="radio" value="好" name="body_cond"/>好</label>
+                                        <label><input type="radio" value="一般" name="body_cond"/>一般</label>
+                                        <label><input type="radio" value="易疲倦" name="body_cond"/>易疲倦</label>
+                                    </p>
+                                    <p>
+                                        职业体力活动:
+                                    <p>
+                                        <label><input type="radio" value="重体力劳动(如:搬运工、清洁工、农场工人、畜牧场工人等)" name="career_labor"/>重体力劳动(如:搬运工、清洁工、农场工人、畜牧场工人等)</label>
+                                        <label><input type="radio" value="中体力劳动(如:家政服务人员、服务生、厨师、护士等)" name="career_labor"/>中体力劳动(如:家政服务人员、服务生、厨师、护士等)</label>
+                                        <label><input type="radio" value="轻体力劳动(如:教师、美容美发师、批发商、职员等)" name="career_labor"/>轻体力劳动(如:教师、美容美发师、批发商、职员等)</label>
+                                        <label><input type="radio" value="坐式的工作(如:收银员、出纳员、接线员、秘书等)" name="career_labor"/>坐式的工作(如:收银员、出纳员、接线员、秘书等)</label>
+                                    </p>
+                                    <p>
+                                        体育锻炼:
+                                    <p>
+                                        <label><input type="radio" value="很少(≤1次/周)" name="phycial_exercise"/>很少(≤1次/周)</label>
+                                        <label><input type="radio" value="偶尔(≤3次/周)" name="phycial_exercise"/>偶尔(≤3次/周)</label>
+                                        <label><input type="radio" value="经常(≥4次/周)" name="phycial_exercise"/>经常(≥4次/周)</label>
+                                        <label><input type="radio" value="一般(少量出汗,心率≤120次/分)" name="phycial_exercise"/>一般(少量出汗,心率≤120次/分)</label>
+                                        <label><input type="radio" value="高强度(大汗淋漓,心率>120次/分)" name="phycial_exercise"/>高强度(大汗淋漓,心率>120次/分)</label>
+                                    </p>
+                                    <p>
+                                        减肥情况：
+                                    <p>
+                                        减肥时长(月):<input  class="form-control" type="number" id="reducefat_persist" name="reducefat_persist"/>
+                                    <p>
+                                        <label><input name="reducefat_ever" type="checkbox" value="true"/>有减肥</label>
+                                        <label><input name="reducefat_yundong" type="checkbox" value="true"/>运动减肥</label>
+                                        <label><input name="reducefat_jieshi" type="checkbox" value="true"/>节食减肥</label>
+                                        <label><input name="reducefat_yaowu" type="checkbox" value="true"/>药物减肥</label>
+                                        <label>其它说明:<input type="text"  id="reducefat_qita" name="reducefat_qita" value="无"/></label>
+
+                                    </p>
+                                    <p>
+                                        月经初潮年龄:
+                                    <p>
+                                        <label><input type="radio" value="10岁以前" name="first_time"/>10岁以前</label>
+                                        <label><input type="radio" value="11-14" name="first_time"/>11-14</label>
+                                        <label><input type="radio" value="14-16" name="first_time"/>14-16</label>
+                                        <label><input type="radio" value="16岁以后" name="first_time"/>16岁以后</label>
+                                        <label><input type="radio" value="其他" name="first_time"/>其他</label>
+                                    </p>
+                                    <p>
+                                        月经周期:
+                                    <p>
+                                        尚规律：
+                                        <label><input type="radio" value="21-25" name="normal"/>21-25</label>
+                                        <label><input type="radio" value="26-30" name="normal"/>26-30</label>
+                                        <label><input type="radio" value="31-35" name="normal"/>31-35</label>
+                                        
+                                    </p>
+                                    <p>
+                                        不规律：
+                                        <label><input type="radio" value="或1月多次" name="abnormal"/>或1月多次</label>
+                                        <label><input type="radio" value="1-2个月" name="abnormal"/>1-2个月</label>
+                                        <label><input type="radio" value="2-3个月" name="abnormal"/>2-3个月</label>
+                                        <label><input type="radio" value="3-4个月" name="abnormal"/>3-4个月</label>
+                                        <label><input type="radio" value="4-6个月" name="abnormal"/>4-6个月</label>
+                                        <label><input type="radio" value="大于6个月" name="abnormal"/>大于6个月</label>
+                                    </p>
+                                    <p>
+                                        行经天数:
+                                    <p>
+
+                                        <label><input type="radio" value="不足2天" name="cyclicity_sum"/>不足2天</label>
+                                        <label><input type="radio" value="3-7天" name="cyclicity_sum"/>3-7天</label>
+                                        <label><input type="radio" value="7天以上甚至半月" name="cyclicity_sum"/>7天以上甚至半月</label>
+                                        <label><input type="radio" value="其他" name="cyclicity_sum"/>其他</label>
+                                    </p>
+                                    <p>
+                                        出血所需卫生巾数:
+                                    <p>
+
+                                        <label><input type="radio" value="出血量中等,每次约需15-20张卫生巾" name="blood_cond"/>出血量中等,每次约需15-20张卫生巾</label>
+                                        <label><input type="radio" value="出血量多,每次多于20张卫生巾" name="blood_cond"/>出血量多,每次多于20张卫生巾</label>
+                                        <label><input type="radio" value="经量少,每次少于5张卫生巾" name="blood_cond"/>经量少,每次少于5张卫生巾</label>
+                                        <label><input type="radio" value="经量极少,几乎不用卫生巾,用护垫即可" name="blood_cond"/>经量极少,几乎不用卫生巾,用护垫即可</label>
+                                    </p>
+                                    <p>
+                                        出血颜色:
+                                    <p>
+                                        <label><input type="radio" value="淡红" name="blood_color"/>淡红</label>
+                                        <label><input type="radio" value="鲜红" name="blood_color"/>鲜红</label>
+                                        <label><input type="radio" value="暗红" name="blood_color"/>暗红</label>
+                                        <label><input type="radio" value="紫红" name="blood_color"/>紫红</label>
+                                        <label><input type="radio" value="紫黯" name="blood_color"/>紫黯</label>
+                                        <label><input type="radio" value="紫黑" name="blood_color"/>紫黑</label>
+                                        <label><input type="radio" value="褐色" name="blood_color"/>褐色</label>
+                                        <label><input type="radio" value="其他" name="blood_color"/>其他</label>
+                                    </p>
+                                    <p>
+                                        出血质地:
+                                    <p>
+                                        <label><input type="radio" value="正常" name="blood_quality"/>正常</label>
+                                        <label><input type="radio" value="粘稠" name="blood_quality"/>粘稠</label>
+                                        <label><input type="radio" value="清稀" name="blood_quality"/>清稀</label>
+                                        <label><input type="radio" value="无血块" name="blood_quality"/>无血块</label>
+                                        <label><input type="radio" value="偶有血块" name="blood_quality"/>偶有血块</label><label><input type="radio" value="夹少量小血块" name="blood_block"/>夹少量小血块</label>
+                                        <label><input type="radio" value="常夹较大血块" name="blood_quality"/>常夹较大血块</label>
+
+                                    </p>
+                                    <p>
+                                        出血特点:
+                                    <p>
+                                        <label><input type="radio" value="顺畅" name="blood_character"/>顺畅</label>
+                                        <label><input type="radio" value="势急暴下" name="blood_character"/>势急暴下</label>
+                                        <label><input type="radio" value="淋漓不断" name="blood_character"/>淋漓不断</label>
+                                        <label><input type="radio" value="点滴即净" name="blood_character"/>点滴即净</label>
+
+                                    </p>
+                                    <p>
+                                        经期是否伴随症状:
+                                    <p>
+                                        <label><input type="radio" value="true" name="menstruation_is_accompany" onclick="display_accompany()"/>有</label>
+                                        <label><input type="radio" value="false" name="menstruation_is_accompany" onclick="display_accompany()"/>无</label>
+                                    </p>
+                
+                                    <div class="accompany" style="display: none">
+                                            <p>
+                                                精神情绪:
+                                            <p>
+                                                精神肢倦：
+                                                <label><input type="radio" value="没有" name="spirit_shenpi"/>没有</label>
+                                                <label><input type="radio" value="很少" name="spirit_shenpi"/>很少</label>
+                                                <label><input type="radio" value="有时" name="spirit_shenpi"/>有时</label>
+                                                <label><input type="radio" value="经常" name="spirit_shenpi"/>经常</label>
+                                                <label><input type="radio" value="总是" name="spirit_shenpi"/>总是</label>
+                                            </p>
+                                            <p>
+                                                气短懒言：
+                                                <label><input type="radio" value="没有" name="spirit_qiduan"/>没有</label>
+                                                <label><input type="radio" value="很少" name="spirit_qiduan"/>很少</label>
+                                                <label><input type="radio" value="有时" name="spirit_qiduan"/>有时</label>
+                                                <label><input type="radio" value="经常" name="spirit_qiduan"/>经常</label>
+                                                <label><input type="radio" value="总是" name="spirit_qiduan"/>总是</label>
+                                            </p>
+                                            <p>
+                                                精神抑郁：
+                                                <label><input type="radio" value="没有" name="spirit_yiyu"/>没有</label>
+                                                <label><input type="radio" value="很少" name="spirit_yiyu"/>很少</label>
+                                                <label><input type="radio" value="有时" name="spirit_yiyu"/>有时</label>
+                                                <label><input type="radio" value="经常" name="spirit_yiyu"/>经常</label>
+                                                <label><input type="radio" value="总是" name="spirit_yiyu"/>总是</label>
+                                            </p>
+                                            <p>
+                                                时欲叹息：
+                                                <label><input type="radio" value="没有" name="spirit_tanxi"/>没有</label>
+                                                <label><input type="radio" value="很少" name="spirit_tanxi"/>很少</label>
+                                                <label><input type="radio" value="有时" name="spirit_tanxi"/>有时</label>
+                                                <label><input type="radio" value="经常" name="spirit_tanxi"/>经常</label>
+                                                <label><input type="radio" value="总是" name="spirit_tanxi"/>总是</label>
+                                            </p>
+                                            <p>
+                                                烦躁易怒：
+                                                <label><input type="radio" value="没有" name="spirit_yinu"/>没有</label>
+                                                <label><input type="radio" value="很少" name="spirit_yinu"/>很少</label>
+                                                <label><input type="radio" value="有时" name="spirit_yinu"/>有时</label>
+                                                <label><input type="radio" value="经常" name="spirit_yinu"/>经常</label>
+                                                <label><input type="radio" value="总是" name="spirit_yinu"/>总是</label>
+                                            </p>
+                                            <label>其它说明:</label>
+                                            <p>
+                                                <input type="text" class="form-control" id="spirit_qita" name="spirit_qita" value="无"/>
+                                            </p>
+                                            <p>
+                                                形体、四肢：
+                                            <p>
+                                                <label><input name="body_fat" type="checkbox" value="true"/>形体肥胖</label>
+                                                <label><input name="body_thin" type="checkbox" value="true"/>形体瘦小</label>
+                                                <label><input name="body_skin" type="checkbox" value="true"/>皮肤不润</label>
+                                                <label><input name="body_cold" type="checkbox" value="true"/>畏寒肢冷</label>
+                                                <label><input name="body_hot" type="checkbox" value="true"/>手足心热</label>
+                                                <label><input name="body_leg" type="checkbox" value="true"/>腰酸腿软</label>
+                                                <label><input name="body_waist" type="checkbox" value="true"/>腰痛如折</label>
+                                                <label>其它说明:<input type="text" id="body_qita" name="body_qita" value="无"/></label>
+                                            </p>
+                                            <p>
+                                                头面：
+                                            <p>
+                                                <label><input name="face_head_cangbai" id="face_head_cangbai" type="checkbox" value="true"/>面色苍白</label>
+                                                <label><input name="face_head_huangbai" id="face_head_huangbai" type="checkbox" value="true"/>面色晄白</label>
+                                                <label><input name="face_head_weihuang" id="face_head_weihuang" type="checkbox" value="true"/>面色萎黄</label>
+                                                <label><input name="face_head_huian" id="face_head_huian" type="checkbox" value="true"/>面色晦暗</label>
+                                                <label><input name="face_head_anban" id="face_head_anban" type="checkbox" value="true"/>面色黯斑</label>
+                                                <label><input name="face_head_zhizhong" id="face_head_zhizhong" type="checkbox" value="true"/>面浮肢肿</label>
+                                                <label><input name="face_head_chunhong" id="face_head_chunhong" type="checkbox" value="true"/>颧赤唇红</label>
+                                            
+                                            </p>
+                                            口苦咽干：
+                                        
+                                            <label><input type="radio" value="没有" name="face_head_kouku"/>没有</label>
+                                            <label><input type="radio" value="很少" name="face_head_kouku"/>很少</label>
+                                            <label><input type="radio" value="有时" name="face_head_kouku"/>有时</label>
+                                            <label><input type="radio" value="经常" name="face_head_kouku"/>经常</label>
+                                            <label><input type="radio" value="总是" name="face_head_kouku"/>总是</label>
+                                        
+                                            </p>
+                                            头晕耳鸣：
+                                        
+                                            <label><input type="radio" value="没有" name="face_head_erming"/>没有</label>
+                                            <label><input type="radio" value="很少" name="face_head_erming"/>很少</label>
+                                            <label><input type="radio" value="有时" name="face_head_erming"/>有时</label>
+                                            <label><input type="radio" value="经常" name="face_head_erming"/>经常</label>
+                                            <label><input type="radio" value="总是" name="face_head_erming"/>总是</label>
+                                        
+                                            </p>
+                                            眼花：
+                                        
+                                            <label><input type="radio" value="没有" name="face_head_yanghua"/>没有</label>
+                                            <label><input type="radio" value="很少" name="face_head_yanghua"/>很少</label>
+                                            <label><input type="radio" value="有时" name="face_head_yanghua"/>有时</label>
+                                            <label><input type="radio" value="经常" name="face_head_yanghua"/>经常</label>
+                                            <label><input type="radio" value="总是" name="face_head_yanghua"/>总是</label>
+                                            </p>
+                                            <label>其它说明:<input type="text" id="face_head_qita" name="face_head_qita" value="无"/></label>
+                                            </p>
+                                            <p>
+                                                胸腹：
+                                            <p>
+                                                心胸烦闷：
+                                            
+                                                <label><input type="radio" value="没有" name="belly_fanmen"/>没有</label>
+                                                <label><input type="radio" value="很少" name="belly_fanmen"/>很少</label>
+                                                <label><input type="radio" value="有时" name="belly_fanmen"/>有时</label>
+                                                <label><input type="radio" value="经常" name="belly_fanmen"/>经常</label>
+                                                <label><input type="radio" value="总是" name="belly_fanmen"/>总是</label>
+                                            </p>
+                                            经前乳房胀痛：
+                                        
+                                            <label><input type="radio" value="没有" name="belly_rufangzhangtong"/>没有</label>
+                                            <label><input type="radio" value="很少" name="belly_rufangzhangtong"/>很少</label>
+                                            <label><input type="radio" value="有时" name="belly_rufangzhangtong"/>有时</label>
+                                            <label><input type="radio" value="经常" name="belly_rufangzhangtong"/>经常</label>
+                                            <label><input type="radio" value="总是" name="belly_rufangzhangtong"/>总是</label>
+                                            </p>
+                                            经前胸胁胀痛：
+                                        
+                                            <label><input type="radio" value="没有" name="belly_xiongxiezhangtong"/>没有</label>
+                                            <label><input type="radio" value="很少" name="belly_xiongxiezhangtong"/>很少</label>
+                                            <label><input type="radio" value="有时" name="belly_xiongxiezhangtong"/>有时</label>
+                                            <label><input type="radio" value="经常" name="belly_xiongxiezhangtong"/>经常</label>
+                                            <label><input type="radio" value="总是" name="belly_xiongxiezhangtong"/>总是</label>
+                                            </p>
+                                            经前少腹胀痛：
+                                        
+                                            <label><input type="radio" value="没有" name="belly_shaofuzhangtong"/>没有</label>
+                                            <label><input type="radio" value="很少" name="belly_shaofuzhangtong"/>很少</label>
+                                            <label><input type="radio" value="有时" name="belly_shaofuzhangtong"/>有时</label>
+                                            <label><input type="radio" value="经常" name="belly_shaofuzhangtong"/>经常</label>
+                                            <label><input type="radio" value="总是" name="belly_shaofuzhangtong"/>总是</label>
+                                            </p>
+                                            小腹空坠：
+                                        
+                                            <label><input type="radio" value="没有" name="belly_kongzhui"/>没有</label>
+                                            <label><input type="radio" value="很少" name="belly_kongzhui"/>很少</label>
+                                            <label><input type="radio" value="有时" name="belly_kongzhui"/>有时</label>
+                                            <label><input type="radio" value="经常" name="belly_kongzhui"/>经常</label>
+                                            <label><input type="radio" value="总是" name="belly_kongzhui"/>总是</label>
+                                            </p>
+                                            小腹空痛：
+                                        
+                                            <label><input type="radio" value="没有" name="belly_kongtong"/>没有</label>
+                                            <label><input type="radio" value="很少" name="belly_kongtong"/>很少</label>
+                                            <label><input type="radio" value="有时" name="belly_kongtong"/>有时</label>
+                                            <label><input type="radio" value="经常" name="belly_kongtong"/>经常</label>
+                                            <label><input type="radio" value="总是" name="belly_kongtong"/>总是</label>
+                                            </p>
+                                            小腹刺痛：
+                                        
+                                            <label><input type="radio" value="没有" name="belly_citong"/>没有</label>
+                                            <label><input type="radio" value="很少" name="belly_citong"/>很少</label>
+                                            <label><input type="radio" value="有时" name="belly_citong"/>有时</label>
+                                            <label><input type="radio" value="经常" name="belly_citong"/>经常</label>
+                                            <label><input type="radio" value="总是" name="belly_citong"/>总是</label>
+                                            </p>
+                                            小腹胀痛：
+                                        
+                                            <label><input type="radio" value="没有" name="belly_zhangtong"/>没有</label>
+                                            <label><input type="radio" value="很少" name="belly_zhangtong"/>很少</label>
+                                            <label><input type="radio" value="有时" name="belly_zhangtong"/>有时</label>
+                                            <label><input type="radio" value="经常" name="belly_zhangtong"/>经常</label>
+                                            <label><input type="radio" value="总是" name="belly_zhangtong"/>总是</label>
+                                            </p>
+                                            小腹冷痛：
+                                        
+                                            <label><input type="radio" value="没有" name="belly_lengtong"/>没有</label>
+                                            <label><input type="radio" value="很少" name="belly_lengtong"/>很少</label>
+                                            <label><input type="radio" value="有时" name="belly_lengtong"/>有时</label>
+                                            <label><input type="radio" value="经常" name="belly_lengtong"/>经常</label>
+                                            <label><input type="radio" value="总是" name="belly_lengtong"/>总是</label>
+                                            </p>
+                                            小腹隐痛：
+                                        
+                                            <label><input type="radio" value="没有" name="belly_yintong"/>没有</label>
+                                            <label><input type="radio" value="很少" name="belly_yintong"/>很少</label>
+                                            <label><input type="radio" value="有时" name="belly_yintong"/>有时</label>
+                                            <label><input type="radio" value="经常" name="belly_yintong"/>经常</label>
+                                            <label><input type="radio" value="总是" name="belly_yintong"/>总是</label>
+                                            </p>
+                                        
+                                        
+                                            <p>
+                                                <label><input name="belly_juan" type="checkbox" value="true"/>疼痛拒按</label>
+                                                <label><input name="belly_xian" type="checkbox" value="true"/>腹痛喜按</label>
+                                                <label><input name="belly_deretongjian" type="checkbox" value="true"/>腹痛得热痛减</label>
+                                                <label><input name="belly_tongjian" type="checkbox" value="true"/>血块下痛减</label>
+                                            
+                                                <label>其它说明:<input type="text" id="belly_qita" name="belly_qita" value="无"/></label>
+                                            </p>
+                                        
+                                            <p>
+                                                饮食：
+                                            
+                                            <p>
+                                                脘闷恶心:
+                                                <label><input type="radio" value="没有" name="diet_exin"/>没有</label>
+                                                <label><input type="radio" value="很少" name="diet_exin"/>很少</label>
+                                                <label><input type="radio" value="有时" name="diet_exin"/>有时</label>
+                                                <label><input type="radio" value="经常" name="diet_exin"/>经常</label>
+                                                <label><input type="radio" value="总是" name="diet_exin"/>总是</label>
+                                            </p>
+                                            <p>
+                                                嗳气食少:
+                                                <label><input type="radio" value="没有" name="diet_shishao"/>没有</label>
+                                                <label><input type="radio" value="很少" name="diet_shishao"/>很少</label>
+                                                <label><input type="radio" value="有时" name="diet_shishao"/>有时</label>
+                                                <label><input type="radio" value="经常" name="diet_shishao"/>经常</label>
+                                                <label><input type="radio" value="总是" name="diet_shishao"/>总是</label>
+                                            </p>
+                                            <p>
+                                                脘腹胀满:
+                                                <label><input type="radio" value="没有" name="diet_zhangman"/>没有</label>
+                                                <label><input type="radio" value="很少" name="diet_zhangman"/>很少</label>
+                                                <label><input type="radio" value="有时" name="diet_zhangman"/>有时</label>
+                                                <label><input type="radio" value="经常" name="diet_zhangman"/>经常</label>
+                                                <label><input type="radio" value="总是" name="diet_zhangman"/>总是</label>
+                                            </p>
+                                            <p>
+                                                食欲不佳:
+                                                <label><input type="radio" value="没有" name="diet_bujia"/>没有</label>
+                                                <label><input type="radio" value="很少" name="diet_bujia"/>很少</label>
+                                                <label><input type="radio" value="有时" name="diet_bujia"/>有时</label>
+                                                <label><input type="radio" value="经常" name="diet_bujia"/>经常</label>
+                                                <label><input type="radio" value="总是" name="diet_bujia"/>总是</label>
+                                            </p>
+                                            <p>
+                                                渴喜冷饮：
+                                                <label><input type="radio" value="没有" name="diet_lengyin"/>没有</label>
+                                                <label><input type="radio" value="很少" name="diet_lengyin"/>很少</label>
+                                                <label><input type="radio" value="有时" name="diet_lengyin"/>有时</label>
+                                                <label><input type="radio" value="经常" name="diet_lengyin"/>经常</label>
+                                                <label><input type="radio" value="总是" name="diet_lengyin"/>总是</label>
+                                            </p>
+                                            <p>
+                                                咽干口燥：
+                                                <label><input type="radio" value="没有" name="diet_kouzao"/>没有</label>
+                                                <label><input type="radio" value="很少" name="diet_kouzao"/>很少</label>
+                                                <label><input type="radio" value="有时" name="diet_kouzao"/>有时</label>
+                                                <label><input type="radio" value="经常" name="diet_kouzao"/>经常</label>
+                                                <label><input type="radio" value="总是" name="diet_kouzao"/>总是</label>
+                                            </p>
+                                            <label>其它说明:<input type="text" id="diet_qita" name="diet_qita" value="无"/></label>
+                                            </p>
+                                            <p>
+                                            睡眠：
+                                            <p>
+                                            心悸失眠：
+                                                <label><input type="radio" value="没有" name="sleep_shimian"/>没有</label>
+                                                <label><input type="radio" value="很少" name="sleep_shimian"/>很少</label>
+                                                <label><input type="radio" value="有时" name="sleep_shimian"/>有时</label>
+                                                <label><input type="radio" value="经常" name="sleep_shimian"/>经常</label>
+                                                <label><input type="radio" value="总是" name="sleep_shimian"/>总是</label>
+                                            </p>
+                                            夜寐不宁：
+                                                <label><input type="radio" value="没有" name="sleep_buning"/>没有</label>
+                                                <label><input type="radio" value="很少" name="sleep_buning"/>很少</label>
+                                                <label><input type="radio" value="有时" name="sleep_buning"/>有时</label>
+                                                <label><input type="radio" value="经常" name="sleep_buning"/>经常</label>
+                                                <label><input type="radio" value="总是" name="sleep_buning"/>总是</label>
+                                            </p>
+                                            夜寐梦多：
+                                                <label><input type="radio" value="没有" name="sleep_mengduo"/>没有</label>
+                                                <label><input type="radio" value="很少" name="sleep_mengduo"/>很少</label>
+                                                <label><input type="radio" value="有时" name="sleep_mengduo"/>有时</label>
+                                                <label><input type="radio" value="经常" name="sleep_mengduo"/>经常</label>
+                                                <label><input type="radio" value="总是" name="sleep_mengduo"/>总是</label>
+                                            </p>
+                                            <label>其它说明:<input type="text" id="sleep_qita" name="sleep_qita" value="无"/></label>
+                                            </p>
+                                            <p>
+                                                二便：
+                                            <p>
+                                                <label><input name="erbian_zaojie" type="checkbox" value="true"/>大便燥结</label>
+                                                <label><input name="erbian_tangbo" type="checkbox" value="true"/>大便溏薄</label>
+                                                <label><input name="erbian_pinshu" type="checkbox" value="true"/>小便频数</label>
+                                                <label><input name="erbian_duanchi" type="checkbox" value="true"/>小便短赤</label>
+                                                <label><input name="erbian_qingchang" type="checkbox" value="true"/>小便清长</label>
+                                                <label>其它说明:<input type="text" id="erbian_qita" name="erbian_qita" value="无"/></label>
+                                            </p>
+                                    </div>
+                                    <p>
+                                        经期情况:
+                                    <p>
+                                        经期运动：
+                                        <label><input type="radio" value="有" name="jingqi_yundong"/>有</label>
+                                        <label><input type="radio" value="偶尔" name="jingqi_yundong"/>偶尔</label>
+                                        <label><input type="radio" value="经常" name="jingqi_yundong"/>经常</label>
+
+                                    </p>
+                                    <p>
+                                        经期感冒：
+                                        <label><input type="radio" value="有" name="jingqi_ganmao"/>有</label>
+                                        <label><input type="radio" value="偶尔" name="jingqi_ganmao"/>偶尔</label>
+                                        <label><input type="radio" value="经常" name="jingqi_ganmao"/>经常</label>
+
+                                    </p>
+                                    <p>
+                                        经期同房：
+                                        <label><input type="radio" value="有" name="jingqi_tongfang"/>有</label>
+                                        <label><input type="radio" value="偶尔" name="jingqi_tongfang"/>偶尔</label>
+                                        <label><input type="radio" value="经常" name="jingqi_tongfang"/>经常</label>
+
+                                    </p>
+                                    <p>
+                                        经期着凉：
+                                        <label><input type="radio" value="有" name="jingqi_zhaoliang"/>有</label>
+                                        <label><input type="radio" value="偶尔" name="jingqi_zhaoliang"/>偶尔</label>
+                                        <label><input type="radio" value="经常" name="jingqi_zhaoliang"/>经常</label>
+
+                                    </p>
+                                    <p>
+                                        末次行经日期:<input class="form-control datepicker" type="text" id="last_time" name="last_time"/>
+                                    </p>
+                                    <p>
+                                        平素带下情况：
+                                    <p>
+                                        <label><input name="leucorrhea_liangke" type="checkbox" value="true"/>带下量正常</label>
+                                        <label><input name="leucorrhea_liangshao" type="checkbox" value="true"/>带下量少</label>
+                                        <label><input name="leucorrhea_liangduo" type="checkbox" value="true"/>带下量多</label>
+                                        <label><input name="leucorrhea_touming" type="checkbox" value="true"/>带下透明</label>
+                                        <label><input name="leucorrhea_sehuang" type="checkbox" value="true"/>带下色黄</label>
+                                        <label><input name="leucorrhea_sebai" type="checkbox" value="true"/>带下色白</label>
+                                        <label><input name="leucorrhea_seqing" type="checkbox" value="true"/>带下色青</label>
+                                        <label><input name="leucorrhea_zhiqingxi" type="checkbox" value="true"/>带下质清稀</label>
+                                        <label><input name="leucorrhea_zhinianchou" type="checkbox" value="true"/>带下质黏稠</label>
+                                    </p>
+                                    <p>
+                                        婚姻史：
+                                        <label><input type="radio" value="未婚无性生活" name="marriage"/>未婚无性生活</label>
+                                        <label><input type="radio" value="未婚有性生活" name="marriage"/>未婚有性生活</label>
+                                        <label><input type="radio" value="已婚同居" name="marriage"/>已婚同居</label>
+                                        <label><input type="radio" value="已婚分居" name="marriage"/>已婚分居</label>
+                                        <label><input type="radio" value="离婚" name="marriage"/>离婚</label>
+                                        <label><input type="radio" value="丧偶" name="marriage"/>丧偶</label>
+                                    </p>
+                                    <p>
+                                        孕产史：
+                                    <p>
+                                        孕次总数:<input class="form-control" type="number" name="pastpreg_yuncount" id="pastpreg_yuncount"/>
+                                    <p>
+                                        顺产次数:<input class="form-control" type="number" name="pastpreg_shunchan" id="pastpreg_shunchan"/>
+                                    <p>
+                                        剖宫产次数:<input class="form-control" type="number" name="pastpreg_pougong" id="pastpreg_pougong"/>
+                                    <p>
+                                        药物流产次数:<input class="form-control" type="number" name="pastpreg_yaoliu" id="pastpreg_yaoliu"/>
+                                    <p>
+                                        人工流产次数:<input class="form-control" type="number" name="pastpreg_renliu" id="pastpreg_renliu"/>
+                                    <p>
+                                        自然流产次数:<input class="form-control" type="number" name="pastpreg_ziranliu" id="pastpreg_ziranliu"/>
+                                    <p>
+                                        早产次数:<input class="form-control" type="number" name="pastpreg_zaochan" id="pastpreg_zaochan"/>
+                                    <p>
+                                        异位妊娠次数:<input class="form-control" type="number" name="pastpreg_yiweirenshen" id="pastpreg_yiweirenshen"/>
+                                    <p>
+                                        清宫术次数:<input class="form-control" type="number" name="pastpreg_qinggongshu" id="pastpreg_qinggongshu"/>
+                                    <p>
+                                        其他说明:<input class="form-control" type="text" name="pastpreg_qita" id="pastpreg_qita"/>
+                                    </p>
+                                    <p>
+                                        避孕措施：
+                                    <p>
+                                        <label><input name="prevent_jieza" type="checkbox" value="true"/>结扎</label>
+                                        <label><input name="prevent_jieyuqi" type="checkbox" value="true"/>宫内节育器</label>
+                                        <label><input name="prevent_biyuntao" type="checkbox" value="true"/>避孕套</label>
+                                        <label><input name="prevent_biyunyao" type="checkbox" value="true"/>口服避孕药</label>
+                                    </p>
+                                    <p>
+                                        一级亲属（母亲、姐妹、女儿）异常子宫出血史:
+                                    <p>
+                                        <label><input type="radio" value="无" name="pastfamily_womb_blood"/>无</label>
+                                        <label><input type="radio" value="有" name="pastfamily_womb_blood"/>有</label>
+                                        <label><input type="radio" value="不详" name="pastfamily_womb_blood"/>不详</label>
+                                    </p>
+                                    <p>
+                                        是否为排卵障碍性:
+                                    <p>
+                                        <label><input type="radio" value="是" name="pastfamily_ovulation"/>是</label>
+                                        <label><input type="radio" value="否" name="pastfamily_ovulation"/>否</label>
+
+                                    </p>
+                                    <p>
+                                        一级亲属（母亲、姐妹、女儿）其它病史：
+                                    <p>
+                                        <label><input name="pastfamily_wu" type="checkbox" value="true"/>无</label>
+                                        <label><input name="pastfamily_xinzangbing" type="checkbox" value="true"/>甲状腺相关疾病</label>
+                                        <label><input name="pastfamily_duonangluanchao" type="checkbox" value="true"/>多囊卵巢综合征</label>
+
+                                        <label><input name="pastfamily_tangniaobing" type="checkbox" value="true"/>糖尿病</label>
+
+                                        <label><input name="pastfamily_buxiang" type="checkbox" value="true"/>不详</label>
+                                        <label>其它说明:<input type="text" id="pastfamily_qita" name="pastfamily_qita" value="无"/></label>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </table>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary historyBtn" id="historyBtn">
+                    <a href="move4" style="color: #ffffff">下一页</a>
+                </button>
+            </div>
+        </form>
+    </div>
+
+
+
+<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+    <i class="icon-double-angle-up icon-only bigger-110"></i>
+</a>
+
+
+
+<!--[if !IE]> -->
+
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='../public/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
+</script>
+
+<!-- <![endif]-->
+
+<script type="text/javascript">
+    if("ontouchend" in document) document.write("<script src='../public/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+</script>
+<script src="../public/js/bootstrap.min.js"></script>
+<script src="../public/js/typeahead-bs2.min.js"></script>
+
+<!-- page specific plugin scripts -->
+<script src="../public/js/jquery.dataTables.min.js"></script>
+<script src="../public/js/jquery.dataTables.bootstrap.js"></script>
+<!-- ace scripts -->
+
+<script src="../public/js/ace-elements.min.js"></script>
+<script src="../public/js/ace.min.js"></script>
+
+<!-- inline scripts related to this page -->
+<script type="text/javascript">
+    jQuery(function($) {
+        var oTable1 = $('#sample-table-2').dataTable( {
+            "aoColumns": [
+                { "bSortable": false },
+                null, null,null, null, null,
+                { "bSortable": false }
+            ] } );
+
+
+        $('table th input:checkbox').on('click' , function(){
+            var that = this;
+            $(this).closest('table').find('tr > td:first-child input:checkbox')
+                .each(function(){
+                    this.checked = that.checked;
+                    $(this).closest('tr').toggleClass('selected');
+                });
+
+        });
+
+
+        $('[data-rel="tooltip"]').tooltip({placement: tooltip_placement});
+        function tooltip_placement(context, source) {
+            var $source = $(source);
+            var $parent = $source.closest('table')
+            var off1 = $parent.offset();
+            var w1 = $parent.width();
+
+            var off2 = $source.offset();
+            var w2 = $source.width();
+
+            if( parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2) ) return 'right';
+            return 'left';
+        }
+    })
+</script>
+
+<script type="text/javascript">
+    var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cscript src='" + _bdhmProtocol + ""));
+</script>
+</body>
+</html>

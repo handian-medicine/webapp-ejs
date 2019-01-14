@@ -1034,7 +1034,7 @@
 
                             $("input:checkbox[name='hormone_yun']").prop('checked',result["hormone_yun"]);
                             $("input:checkbox[name='hormone_ci']").prop('checked',result["hormone_ci"]);
-                            $("input:checkbox[name='hormone_fufang']").prop('checked',result["hormone_fufang"]);
+                            $("input:checkbox[name='hormone_xiong']").prop('checked',result["hormone_xiong"]);
                             $("input:checkbox[name='hormone_kou']").prop('checked',result["hormone_kou"]);
                             $("input:checkbox[name='hormone_gn']").prop('checked',result["hormone_gn"]);
                             $('#hormone_qita').val(result["hormone_qita"]);

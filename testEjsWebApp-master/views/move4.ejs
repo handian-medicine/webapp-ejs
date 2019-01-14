@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>相关检查</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- basic styles -->
+    <link rel="stylesheet" href="../public/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../public/../public/css/font-awesome.min.css">
+
+    <!-- page specific plugin styles -->
+    <link rel="stylesheet" href="../public/../public/css/ace.min.css">
+    <link rel="stylesheet" href="../public/../public/css/ace-rtl.min.css">
+    <link rel="stylesheet" href="../public/../public/css/ace-skins.min.css">
+
+    <!-- inline styles related to this page -->
+    <script src="../public/javascripts/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.js"></script>
+    <script>
+        $(function(){
+            $('.datepicker').datepicker({format:"yyyy-mm-dd"});
+        })
+    </script>
+    <script src="../public/../public/js/ace-extra.min.js"></script>
+</head>
+<body>
+    <script>
+            $(document).ready(function () {
+                $("#relevantBtn").click(function () {
+                    $.ajax({
+                            url: "/mobile/move4",
+                            type: "POST",
+                            // dataType: "json",
+                            data: $('#form-relevant').serializeArray(),
+                            success: function (result) {
+                                alert(result.form_all);
+                                alert("录入完毕");
+                            },
+                            error:  function () {
+                                alert("error");
+                            },
+                    })
+                })
+            })
+        </script>
+
+<div class="modal-content">
+        <div class="modal-header no-padding">
+            <div class="table-header">
+
+                相关检查
+            </div>
+        </div>
+
+        <form class="modal-body no-padding" id="form-relevant">
+            <table class="table table-striped table-bordered table-hover no-margin-bottom no-border-top">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12">
+                            <!-- <input type="hidden" class="person" name="person" id="person-other"/> -->
+                            <p>
+                                体格检查：
+                            <p>
+                                <label><input type="checkbox" value="true" name="menstruation_check"/>妇科检查</label>
+                                <label><input type="checkbox" value="true" name="body_check"/>全身检查</label>
+
+
+                            </p>
+                            <p>
+                                辅助检查：
+                            <p>
+                                <label><input name="accessory_chaosheng" type="checkbox" value="true"/>超声检查</label>
+                                <label><input name="accessory_quanxuexibaojishu" type="checkbox" value="true"/>全血细胞计数</label>
+                                <label><input name="accessory_ningxue" type="checkbox" value="true"/>凝血功能检查</label>
+                                <label><input name="accessory_niaorenshen" type="checkbox" value="true"/>尿妊娠试验或血hCG检测</label>
+                                <label><input name="accessory_jichutiwen" type="checkbox" value="true"/>基础体温测定(BBT)</label>
+                                <label><input name="accessory_neifenmi" type="checkbox" value="true"/>生殖内分泌测定(激素六项、促甲状腺素水平)</label>
+                                <label><input name="accessory_zuzhi" type="checkbox" value="true"/>刮宫或子宫内膜活组织检查</label>
+                                <label><input name="accessory_gongqiangjing" type="checkbox" value="true"/>宫腔镜检查</label>
+                                <label><input name="accessory_jiejing" type="checkbox" value="true"/>宫颈粘液结晶检查</label>
+                                <label>其它说明:<input type="text" id="accessory_qita" name="accessory_qita" value="无"/></label>
+                            <p>
+                                血红蛋白值：
+                                <label><input type="radio" value="不详" name="accessory_hgb_value"/>不详</label>
+                                <label><input type="radio" value="＞110" name="accessory_hgb_value"/>＞110</label>
+                                <label><input type="radio" value="91-110" name="accessory_hgb_value"/>91-110</label>
+                                <label><input type="radio" value="61-90" name="accessory_hgb_value"/>61-90</label>
+                                <label><input type="radio" value="30-60" name="accessory_hgb_value"/>30-60</label>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </table>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary relevantBtn" id="relevantBtn">提交</button>
+            </div>
+        </form>
+    </div>
+
+
+
+<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+    <i class="icon-double-angle-up icon-only bigger-110"></i>
+</a>
+
+
+
+<!--[if !IE]> -->
+
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='../public/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
+</script>
+
+<!-- <![endif]-->
+
+<script type="text/javascript">
+    if("ontouchend" in document) document.write("<script src='../public/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+</script>
+<script src="../public/js/bootstrap.min.js"></script>
+<script src="../public/js/typeahead-bs2.min.js"></script>
+
+<!-- page specific plugin scripts -->
+<script src="../public/js/jquery.dataTables.min.js"></script>
+<script src="../public/js/jquery.dataTables.bootstrap.js"></script>
+<!-- ace scripts -->
+
+<script src="../public/js/ace-elements.min.js"></script>
+<script src="../public/js/ace.min.js"></script>
+
+<!-- inline scripts related to this page -->
+<script type="text/javascript">
+    jQuery(function($) {
+        var oTable1 = $('#sample-table-2').dataTable( {
+            "aoColumns": [
+                { "bSortable": false },
+                null, null,null, null, null,
+                { "bSortable": false }
+            ] } );
+
+
+        $('table th input:checkbox').on('click' , function(){
+            var that = this;
+            $(this).closest('table').find('tr > td:first-child input:checkbox')
+                .each(function(){
+                    this.checked = that.checked;
+                    $(this).closest('tr').toggleClass('selected');
+                });
+
+        });
+
+
+        $('[data-rel="tooltip"]').tooltip({placement: tooltip_placement});
+        function tooltip_placement(context, source) {
+            var $source = $(source);
+            var $parent = $source.closest('table')
+            var off1 = $parent.offset();
+            var w1 = $parent.width();
+
+            var off2 = $source.offset();
+            var w2 = $source.width();
+
+            if( parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2) ) return 'right';
+            return 'left';
+        }
+    })
+</script>
+
+<script type="text/javascript">
+    var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cscript src='" + _bdhmProtocol + ""));
+</script>
+</body>
+</html>
