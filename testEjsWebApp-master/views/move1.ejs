@@ -32,16 +32,16 @@
 <script>
     $(document).ready(function () {
         $("#geninfoBtn").click(function () {
-            console.log($('#form-geninfo').serializeArray());
-            alert(($('#form-geninfo').serializeArray()));
+            // console.log($('#form-geninfo').serializeArray());
+            // alert(($('#form-geninfo').serializeArray()));
             $.ajax({
                     url: "/mobile/move1",
                     type: "POST",
                     // dataType: "json",
                     data: $('#form-geninfo').serializeArray(),
                     success: function (result) {
-                        alert(result.form_all);
-                        alert("success");
+                        // alert(result.form_all);
+                        alert("继续填写下一页");
                     },
                     error:  function () {
                         alert("error");

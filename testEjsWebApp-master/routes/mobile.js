@@ -4,17 +4,16 @@ var myconst = require("./const");
 
 var router = express.Router();
 //路由 ../moblie/
-'use strict';
-var form_all = {"data":{}};
+// 'use strict';
+var form_all = {};
 router.get('/move1', function (req, res, next) {
     res.render('move1');
 });
 router.post('/move1', function (req, res, next) {
-    var geninfo_data = JSON.stringify(req.body);
-    geninfo_data = JSON.parse(geninfo_data);
-    // console.log("body1",typeof(geninfo_data));
-    // console.log("body1",geninfo_data["recdate"]);
-    form_all["data"]["info"] = geninfo_data;
+    // var geninfo_data = JSON.stringify(req.body);
+    // geninfo_data = JSON.parse(geninfo_data);
+    // form_all["data"]["info"] = geninfo_data;
+    form_all["info"] = req.body;
     console.log("form_all form_geninfo",form_all);
     res.json({form_all:form_all});
 });
@@ -23,9 +22,10 @@ router.get('/move2', function (req, res, next) {
     res.render('move2');
 });
 router.post('/move2', function (req, res, next) {
-    var summary_data = JSON.stringify(req.body);
-    summary_data = JSON.parse(summary_data);
-    form_all["data"]["summary"] = summary_data;
+    // var summary_data = JSON.stringify(req.body);
+    // summary_data = JSON.parse(summary_data);
+    // form_all["data"]["summary"] = summary_data;
+    form_all["summary"] = req.body;
     console.log("form_all form_summary",form_all);
     res.json({form_all:form_all});
 });
@@ -34,9 +34,10 @@ router.get('/move3', function (req, res, next) {
     res.render('move3');
 });
 router.post('/move3', function (req, res, next) {
-    var history_data = JSON.stringify(req.body);
-    history_data = JSON.parse(history_data);
-    form_all["data"]["history"] = history_data;
+    // var history_data = JSON.stringify(req.body);
+    // history_data = JSON.parse(history_data);
+    // form_all["data"]["history"] = history_data;
+    form_all["history"] = req.body;
     console.log("form_all form_history",form_all);
     res.json({form_all:form_all});
 });
@@ -80,15 +81,14 @@ router.post('/move4', function (req, res, next) {
                 res.json({status:1, msg:""});  
 
                 var newurl = myconst.apiurl + "prj001/mobile/";
-                var authstring = req.cookies.prj001token.access_token;
+                var authstring = obj.access_token;
                 //body直接传过来的数据有[Object: null prototype],通过stringify和parse
                 //方法可以去掉
-                var relevant_data = JSON.stringify(req.body);
-                relevant_data = JSON.parse(relevant_data);
-
-                form_all["data"]["relevant"] = relevant_data;
+                // var relevant_data = JSON.stringify(req.body);
+                // relevant_data = JSON.parse(relevant_data);
+                form_all["relevant"] = req.body;
                 var options = {
-                    form: form_all,
+                    form: {data:JSON.stringify(form_all)},
                     url: newurl,
                     headers: {
                         'Authorization': 'Bearer ' + authstring,
@@ -102,12 +102,12 @@ router.post('/move4', function (req, res, next) {
                     console.log("response:", body);
                     console.log("response.statusCode: ", response.statusCode);
                     if (!error && response.statusCode == 200) {
-                        res.json({status:1, msg:"录入成功"});
+                        // res.json({status:1, msg:"录入成功"});
                         console.log("?????",form_all);
-                        res.json({form_all:form_all});
+                        // res.json({form_all:1});
                     } else {
                         console.log("?????",form_all);
-                        res.json({status:0, msg:"录入失败"});
+                        // res.json({status:0, msg:"录入失败"});
                         // console.log('response.statusCode wrong');
                     }
                 })       
