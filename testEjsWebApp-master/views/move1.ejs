@@ -25,6 +25,12 @@
     <!-- inline styles related to this page -->
 
     <script src="../public/js/ace-extra.min.js"></script>
+
+    <!-- 表单验证 -->
+    <!-- <link rel="stylesheet" href="../public/css/bootstrap.css"> -->
+    <!-- <script src="../public/bootstrap-validator/js/validator.js"></script> -->
+    <!-- <script src="../public/bootstrap-validator/dist/validator.min.js"></script> -->
+    <!-- 表单验证 -->
 </head>
 <body>
 
@@ -34,6 +40,7 @@
         $("#geninfoBtn").click(function () {
             // console.log($('#form-geninfo').serializeArray());
             // alert(($('#form-geninfo').serializeArray()));
+            window.location.href = "move2";
             $.ajax({
                     url: "/mobile/move1",
                     type: "POST",
@@ -59,24 +66,24 @@
                                         </div>
                                     </div>
 
-    <form class="modal-body no-padding" id="form-geninfo">
-                                        <table class="table table-striped table-bordered table-hover no-margin-bottom no-border-top">
+    <form class="modal-body no-padding" id="form-geninfo" data-toggle="validator">
+        <table class="table table-striped table-bordered table-hover no-margin-bottom no-border-top">
                                             <div class="modal-body">
                                                 <div class="row">
                                                     <div class="col-xs-12 col-sm-12">
                                                         <!-- <input type="hidden" class="person" name="person" id="person-geninfo"/> -->
                                                         <p>
-                                                            就诊日期：<input id="recdate" name="recdate" type="text" class="form-control datepicker" />
+                                                            就诊日期：<input id="recdate" name="recdate" type="text" class="form-control datepicker" placeholder="必填" />
                                                             <!-- <input class="form-control" id="recdate" name="recdate"  type="text"/> -->
                                                         </p>
                                                         <p>
-                                                            问卷编码:<input class="form-control" id="serial"  name="serial" type="text" />
+                                                            问卷编码:<input class="form-control" id="serial"  name="serial" type="text" placeholder="必填" />
                                                         </p>
                                                         <p>
-                                                            医院名称:<input class="form-control"  id="hospital" name="hospital" type="text" />
+                                                            医院名称:<input class="form-control"  id="hospital" name="hospital" type="text" placeholder="必填"/>
                                                         </p>
                                                         <p>
-                                                            填表专家姓名:<input class="form-control" id="expert" name="expert" type="text" />
+                                                            填表专家姓名:<input class="form-control" id="expert" name="expert" type="text"/>
                                                         </p>
                                                         <p>
                                                             职称:
@@ -90,13 +97,13 @@
                                                             </select> -->
                                                         </p>
                                                         <p>
-                                                            患者姓名:<input class="form-control" type="text" name="name" id="name" />
+                                                            患者姓名:<input class="form-control" type="text" name="name" id="name" placeholder="必填"/>
                                                         </p>
                                                         <p>
-                                                            电话:<input class="form-control" type="text" name="telephone" id="telephone"/>
+                                                            电话:<input class="form-control" type="text" name="telephone" id="telephone" placeholder="必填"/>
                                                         </p>
                                                         <p>
-                                                            年龄:<input class="form-control" type="number" name="age" id="age"/>
+                                                            年龄:<input class="form-control" type="number" name="age" id="age" placeholder="必填"/>
                                                         </p>
                                                         <p>
                                                             身高cm:<input class="form-control" type="number" name="height" id="height"/>
@@ -198,13 +205,13 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </table>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-primary geninfoBtn" id="geninfoBtn">
-                                                <a href="move2" style="color: #ffffff">下一页</a>
-                                            </button>
-                                        </div>
-                                    </form>
+        </table>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary geninfoBtn" id="geninfoBtn">
+                下一页
+            </button>
+        </div>
+    </form>
 
 </div>
 

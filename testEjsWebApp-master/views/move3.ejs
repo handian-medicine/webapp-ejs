@@ -29,6 +29,7 @@
     <script>
             $(document).ready(function () {
                 $("#historyBtn").click(function () {
+                    window.location.href = "move4";
                     $.ajax({
                             url: "/mobile/move3",
                             type: "POST",
@@ -613,7 +614,7 @@
                     </table>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary historyBtn" id="historyBtn">
-                    <a href="move4" style="color: #ffffff">下一页</a>
+                    下一页
                 </button>
             </div>
         </form>
