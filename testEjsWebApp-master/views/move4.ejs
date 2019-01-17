@@ -35,12 +35,11 @@
                             // dataType: "json",
                             data: $('#form-relevant').serializeArray(),
                             success: function (result) {
-                                // alert(result.form_all);
-                                alert("录入完毕");
+                                alert(result.msg);
                                 $(".relevantBtn").attr("disabled", true);
                             },
-                            error:  function () {
-                                alert("error");
+                            error:  function (result) {
+                                alert(result.msg);                                
                             },
                     })
                 })

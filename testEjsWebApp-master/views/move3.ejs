@@ -29,7 +29,6 @@
     <script>
             $(document).ready(function () {
                 $("#historyBtn").click(function () {
-                    window.location.href = "move4";
                     $.ajax({
                             url: "/mobile/move3",
                             type: "POST",
@@ -38,6 +37,7 @@
                             success: function (result) {
                                 // alert(result.form_all);
                                 alert("继续填写下一页");
+                                window.location.href = "move4";
                             },
                             error:  function () {
                                 alert("error");
@@ -46,7 +46,18 @@
                 })
             })
         </script>
-
+    <!-- 患者病史 选择显示 -->
+    <script>
+            function display_accompany(){
+            var val = $('input[name="menstruation_is_accompany"]:checked').val();
+            if (val=="true") {
+                $('.accompany').show();
+            } else {
+                $('.accompany').hide();
+            }
+            }
+        </script>
+        <!-- 患者病史 选择显示 -->
 <div class="modal-content">
         <div class="modal-header no-padding">
             <div class="table-header">
@@ -60,7 +71,7 @@
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12">
-                                    <!-- <input type="hidden" class="person" name="person" id="person-history"/> -->
+                                    <input type="hidden" class="person" name="person" id="person-history"/>
 
                                     <p>既往史：
                                     <p>
@@ -193,8 +204,9 @@
                                         <label><input type="radio" value="粘稠" name="blood_quality"/>粘稠</label>
                                         <label><input type="radio" value="清稀" name="blood_quality"/>清稀</label>
                                         <label><input type="radio" value="无血块" name="blood_quality"/>无血块</label>
-                                        <label><input type="radio" value="偶有血块" name="blood_quality"/>偶有血块</label><label><input type="radio" value="夹少量小血块" name="blood_block"/>夹少量小血块</label>
-                                        <label><input type="radio" value="常夹较大血块" name="blood_quality"/>常夹较大血块</label>
+                                        <label><input type="radio" value="偶有血块" name="blood_quality"/>偶有血块</label>
+                                        <label><input type="radio" value="夹少量小血块" name="blood_quality"/>夹少量小血块</label>
+                                        <label><input type="radio" value="夹较大血块" name="blood_quality"/>夹较大血块</label>
 
                                     </p>
                                     <p>

@@ -78,7 +78,7 @@ router.post('/move4', function (req, res, next) {
                     "password": 'asdf1234'
                     }, {maxAge: 1000 * 60 * 60 * 8, httpOnly: true});//cookie 4小时有效时间
                 // console.log(">>>mobile.js -> Set-Cookie: ", res.get('Set-Cookie'));           
-                res.json({status:1, msg:""});  
+                // res.json({status:1, msg:""});  
 
                 var newurl = myconst.apiurl + "prj001/mobile/";
                 var authstring = obj.access_token;
@@ -99,15 +99,17 @@ router.post('/move4', function (req, res, next) {
                 console.log("11111111mobile.js form_all:", form_all);
                 // console.log(">>>mobile.js -> options: ", options);
                 request.post(options, function (error, response, body) {
-                    console.log("response:", body);
+                    console.log("response:", JSON.parse(body).msg);
                     console.log("response.statusCode: ", response.statusCode);
                     if (!error && response.statusCode == 200) {
-                        // res.json({status:1, msg:"录入成功"});
+                        res.json({status:1, msg:JSON.parse(body).msg});
                         console.log("?????",form_all);
-                        // res.json({form_all:1});
+                        //res.json()不能用在太前面，否则会调用res.send()
+                        //res.render and res.json will both call res.end() 
+                        //which is basically like trying to send a response twice to the client
                     } else {
                         console.log("?????",form_all);
-                        // res.json({status:0, msg:"录入失败"});
+                        res.json({status:0, msg:JSON.parse(body).msg});
                         // console.log('response.statusCode wrong');
                     }
                 })       

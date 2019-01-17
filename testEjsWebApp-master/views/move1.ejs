@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- basic styles -->
-    <link rel="stylesheet" href="../public/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="../public/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="../public/css/font-awesome.min.css">
 
     <!-- page specific plugin styles -->
@@ -21,26 +22,24 @@
             $('.datepicker').datepicker({format:"yyyy-mm-dd"});
         })
     </script>
-
     <!-- inline styles related to this page -->
-
     <script src="../public/js/ace-extra.min.js"></script>
-
     <!-- 表单验证 -->
-    <!-- <link rel="stylesheet" href="../public/css/bootstrap.css"> -->
     <!-- <script src="../public/bootstrap-validator/js/validator.js"></script> -->
-    <!-- <script src="../public/bootstrap-validator/dist/validator.min.js"></script> -->
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- 表单验证 -->
+
 </head>
 <body>
 
-
 <script>
     $(document).ready(function () {
-        $("#geninfoBtn").click(function () {
+        $("#form-geninfo").submit(function (e) {
+            e.preventDefault();
             // console.log($('#form-geninfo').serializeArray());
             // alert(($('#form-geninfo').serializeArray()));
-            window.location.href = "move2";
+            // $("#form-geninfo").validator();
+            
             $.ajax({
                     url: "/mobile/move1",
                     type: "POST",
@@ -49,11 +48,12 @@
                     success: function (result) {
                         // alert(result.form_all);
                         alert("继续填写下一页");
+                        window.location.href = "move2";
                     },
                     error:  function () {
                         alert("error");
                     },
-            })
+            })   
         })
     })
 </script>
@@ -66,148 +66,145 @@
                                         </div>
                                     </div>
 
-    <form class="modal-body no-padding" id="form-geninfo" data-toggle="validator">
+    <form class="modal-body no-padding" id="form-geninfo">
         <table class="table table-striped table-bordered table-hover no-margin-bottom no-border-top">
-                                            <div class="modal-body">
-                                                <div class="row">
-                                                    <div class="col-xs-12 col-sm-12">
-                                                        <!-- <input type="hidden" class="person" name="person" id="person-geninfo"/> -->
-                                                        <p>
-                                                            就诊日期：<input id="recdate" name="recdate" type="text" class="form-control datepicker" placeholder="必填" />
-                                                            <!-- <input class="form-control" id="recdate" name="recdate"  type="text"/> -->
-                                                        </p>
-                                                        <p>
-                                                            问卷编码:<input class="form-control" id="serial"  name="serial" type="text" placeholder="必填" />
-                                                        </p>
-                                                        <p>
-                                                            医院名称:<input class="form-control"  id="hospital" name="hospital" type="text" placeholder="必填"/>
-                                                        </p>
-                                                        <p>
-                                                            填表专家姓名:<input class="form-control" id="expert" name="expert" type="text"/>
-                                                        </p>
-                                                        <p>
-                                                            职称:
-                                                            <label><input type="radio" value="主任医师" name="title" />主任医师</label>
-                                                            <label><input type="radio" value="副主任医师" name="title"/>副主任医师</label>
-                                                            <label><input type="radio" value="主治医师" name="title"/>主治医师</label>
-                                                            <!-- <select id="title" name="title">
-                                                                    <option value="主任医师">主任医师</option>
-                                                                    <option value="副主任医师">副主任医师</option>
-                                                                    <option value="主治医师">主治医师</option>
-                                                            </select> -->
-                                                        </p>
-                                                        <p>
-                                                            患者姓名:<input class="form-control" type="text" name="name" id="name" placeholder="必填"/>
-                                                        </p>
-                                                        <p>
-                                                            电话:<input class="form-control" type="text" name="telephone" id="telephone" placeholder="必填"/>
-                                                        </p>
-                                                        <p>
-                                                            年龄:<input class="form-control" type="number" name="age" id="age" placeholder="必填"/>
-                                                        </p>
-                                                        <p>
-                                                            身高cm:<input class="form-control" type="number" name="height" id="height"/>
-                                                        </p>
-                                                        <p>
-                                                            体重kg:<input class="form-control" type="text" name="weight" id="weight"/>
-                                                        </p>
-                                                        <p>
-                                                            腰围cm:<input class="form-control" type="number" name="waistline" id="waistline"/>
-                                                        </p>
-                                                        <p>
-                                                            臀围cm:<input class="form-control" type="text" name="hipline" id="hipline"/>
-                                                        </p>
-                                                        <p>
-                                                            血型:
-                                                            <label><input type="radio" value="A" name="blood_type"/>A</label>
-                                                            <label><input type="radio" value="B" name="blood_type"/>B</label>
-                                                            <label><input type="radio" value="O" name="blood_type"/>O</label>
-                                                            <label><input type="radio" value="AB" name="blood_type"/>AB</label>
-                                                        </p>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12">
+                        <!-- <input type="hidden" class="person" name="person" id="person-geninfo"/> -->
+                        <p>
+                            就诊日期：<input id="recdate" name="recdate" type="text" class="form-control datepicker" placeholder="必填" required/>
+                            <!-- <input class="form-control" id="recdate" name="recdate"  type="text"/> -->
+                        </p>
+                        <p>
+                            问卷编码:<input class="form-control" id="serial"  name="serial" type="text" placeholder="必填" required/>
+                        </p>
+                        <p>
+                            医院名称:<input class="form-control"  id="hospital" name="hospital" type="text" placeholder="必填" required/>
+                        </p>
+                        <p>
+                            填表专家姓名:<input class="form-control" id="expert" name="expert" type="text" />
+                        </p>
+                        <p>
+                            职称:
+                            <label><input type="radio" value="主任医师" name="title" />主任医师</label>
+                            <label><input type="radio" value="副主任医师" name="title"/>副主任医师</label>
+                            <label><input type="radio" value="主治医师" name="title"/>主治医师</label>
+                            <!-- <select id="title" name="title">
+                                    <option value="主任医师">主任医师</option>
+                                    <option value="副主任医师">副主任医师</option>
+                                    <option value="主治医师">主治医师</option>
+                            </select> -->
+                        </p>
+                        <p>
+                            患者姓名:<input class="form-control" type="text" name="name" id="name" placeholder="必填" required/>
+                        </p>
+                        <p>
+                            电话:<input class="form-control" type="text" name="telephone" id="telephone" placeholder="必填" required/>
+                        </p>
+                        <p>
+                            年龄:<input class="form-control" type="number" name="age" id="age" placeholder="必填" required/>
+                        </p>
+                        <p>
+                            身高cm:<input class="form-control" type="number" name="height" id="height"/>
+                        </p>
+                        <p>
+                            体重kg:<input class="form-control" type="text" name="weight" id="weight"/>
+                        </p>
+                        <p>
+                            腰围cm:<input class="form-control" type="number" name="waistline" id="waistline"/>
+                        </p>
+                        <p>
+                            臀围cm:<input class="form-control" type="text" name="hipline" id="hipline"/>
+                        </p>
+                        <p>
+                            血型:
+                            <label><input type="radio" value="A" name="blood_type"/>A</label>
+                            <label><input type="radio" value="B" name="blood_type"/>B</label>
+                            <label><input type="radio" value="O" name="blood_type"/>O</label>
+                            <label><input type="radio" value="AB" name="blood_type"/>AB</label>
+                        </p>
+                        <p>
+                            民族:
+                            <select name="nation" class="form-control">
+                                <option value="汉族">汉族</option>
+                                <option value="其他">其他(回族、满族、内蒙古、苗族等)</option>
+                            </select>
+                        </p>
+                        
+                        <p>
+                            职业:
+                        <p>
+                            <label><input type="radio" value="学生" name="career"/>学生</label>
+                            <label><input type="radio" value="个体" name="career"/>个体</label>
+                            <label><input type="radio" value="农民" name="career"/>农民</label>
+                            <label><input type="radio" value="军人" name="career"/>军人</label>
+                            <label><input type="radio" value="工人" name="career"/>工人</label>
+                            <label><input type="radio" value="财会人员" name="career"/>财会人员</label>
+                            <label><input type="radio" value="技术人员" name="career"/>技术人员</label>
+                            <label><input type="radio" value="服务业" name="career"/>服务业</label>
+                            <label><input type="radio" value="科教文卫" name="career"/>科教文卫</label>
+                            <label><input type="radio" value="行政管理" name="career"/>行政管理</label>
+                            <label><input type="radio" value="无业" name="career"/>无业</label>
+                            <label><input type="radio" value="其它" name="career"/>其它</label>
+                        </p>
+                        <p>
+                            病人现住址:<input class="form-control" id="address" name="address" type="text"/>
+                        </p>
+                        <p>
+                            病人来源:
+                            <label><input type="radio" value="门诊" name="entrance"/>门诊</label>
+                            <label><input type="radio" value="病房" name="entrance"/>病房</label>
+                        </p>
 
-                                                        <p>
-                                                            民族:
-                                                            <select name="nation" class="form-control">
-                                                                <option value="汉族">汉族</option>
+                        <p>
+                            文化程度:
+                            <select name="culture" class="form-control">
+                                <option value="未接受国家教育(文盲)">未接受国家教育(文盲)</option>
+                                <option value="小学及以下">小学及以下</option>
+                                <option value="初中">初中</option>
+                                <option value="高中/中专">高中/中专</option>
+                                <option value="大专">大专</option>
+                                <option value="本科">本科</option>
+                                <option value="研究生及以上">研究生及以上</option>
+                            </select>
+                        </p>
 
-                                                                <option value="其他">其他(回族、满族、内蒙古、苗族等)</option>
-                                                            </select>
-                                                        </p>
+                        <p>
+                            特殊工种环境：
+                        <p>
+                            <label><input name="gaowen" type="checkbox" value="true"/>高温</label>
+                            <label><input name="diwen" type="checkbox" value="true"/>低温</label>
+                            <label><input name="yeban" type="checkbox" value="true"/>夜班/熬夜</label>
+                            <label><input name="zaosheng" type="checkbox" value="true"/>噪声</label>
+                            <label><input name="fushe" type="checkbox" value="true"/>辐射</label>
+                            <label><input name="huagongyinran" type="checkbox" value="true"/>化工污染</label>
+                            <label><input name="julieyundong" type="checkbox" value="true"/>剧烈运动</label>
+                            <label><input name="qiyou" type="checkbox" value="true"/>汽油</label>
+                            <label><input name="gaokong" type="checkbox" value="true"/>高空</label>
+                            <label><input name="wu" type="checkbox" value="true"/>无</label>
+                        </p>
+                        <p>
+                            饮食偏好：
+                        <p>
+                            <label><input name="wuteshu" type="checkbox" value="true"/>无特殊</label>
+                            <label><input name="sushi" type="checkbox" value="true"/>素食</label>
+                            <label><input name="suan" type="checkbox" value="true"/>酸</label>
+                            <label><input name="tian" type="checkbox" value="true"/>甜</label>
+                            <label><input name="xian" type="checkbox" value="true"/>咸</label>
+                            <label><input name="xinla" type="checkbox" value="true"/>辛辣</label>
+                            <label><input name="you" type="checkbox" value="true"/>油</label>
+                            <label><input name="shengleng" type="checkbox" value="true"/>生冷</label>
+                            <label><input name="kafei" type="checkbox" value="true"/>含咖啡因食物或饮品</label>
+                            <label><input name="qita" type="checkbox" value="true"/>其他</label>
+                        </p>
 
-                                                        <p>
-                                                            职业:
-                                                        <p>
-                                                            <label><input type="radio" value="学生" name="career"/>学生</label>
-                                                            <label><input type="radio" value="个体" name="career"/>个体</label>
-                                                            <label><input type="radio" value="农民" name="career"/>农民</label>
-                                                            <label><input type="radio" value="军人" name="career"/>军人</label>
-                                                            <label><input type="radio" value="工人" name="career"/>工人</label>
-                                                            <label><input type="radio" value="财会人员" name="career"/>财会人员</label>
-                                                            <label><input type="radio" value="技术人员" name="career"/>技术人员</label>
-                                                            <label><input type="radio" value="服务业" name="career"/>服务业</label>
-                                                            <label><input type="radio" value="科教文卫" name="career"/>科教文卫</label>
-                                                            <label><input type="radio" value="行政管理" name="career"/>行政管理</label>
-                                                            <label><input type="radio" value="无业" name="career"/>无业</label>
-                                                            <label><input type="radio" value="其它" name="career"/>其它</label>
-                                                        </p>
-                                                        <p>
-                                                            病人现住址:<input class="form-control" id="address" name="address" type="text"/>
-                                                        </p>
-                                                        <p>
-                                                            病人来源:
-                                                            <label><input type="radio" value="门诊" name="entrance"/>门诊</label>
-                                                            <label><input type="radio" value="病房" name="entrance"/>病房</label>
-                                                        </p>
-
-                                                        <p>
-                                                            文化程度:
-                                                            <select name="culture" class="form-control">
-                                                                <option value="未接受国家教育(文盲)">未接受国家教育(文盲)</option>
-                                                                <option value="小学及以下">小学及以下</option>
-                                                                <option value="初中">初中</option>
-                                                                <option value="高中/中专">高中/中专</option>
-                                                                <option value="大专">大专</option>
-                                                                <option value="本科">本科</option>
-                                                                <option value="研究生及以上">研究生及以上</option>
-                                                            </select>
-                                                        </p>
-
-                                                        <p>
-                                                            特殊工种环境：
-                                                        <p>
-                                                            <label><input name="gaowen" type="checkbox" value="true"/>高温</label>
-                                                            <label><input name="diwen" type="checkbox" value="true"/>低温</label>
-                                                            <label><input name="yeban" type="checkbox" value="true"/>夜班/熬夜</label>
-                                                            <label><input name="zaosheng" type="checkbox" value="true"/>噪声</label>
-                                                            <label><input name="fushe" type="checkbox" value="true"/>辐射</label>
-                                                            <label><input name="huagongyinran" type="checkbox" value="true"/>化工污染</label>
-                                                            <label><input name="julieyundong" type="checkbox" value="true"/>剧烈运动</label>
-                                                            <label><input name="qiyou" type="checkbox" value="true"/>汽油</label>
-                                                            <label><input name="gaokong" type="checkbox" value="true"/>高空</label>
-                                                            <label><input name="wu" type="checkbox" value="true"/>无</label>
-                                                        </p>
-                                                        <p>
-                                                            饮食偏好：
-                                                        <p>
-                                                            <label><input name="wuteshu" type="checkbox" value="true"/>无特殊</label>
-                                                            <label><input name="sushi" type="checkbox" value="true"/>素食</label>
-                                                            <label><input name="suan" type="checkbox" value="true"/>酸</label>
-                                                            <label><input name="tian" type="checkbox" value="true"/>甜</label>
-                                                            <label><input name="xian" type="checkbox" value="true"/>咸</label>
-                                                            <label><input name="xinla" type="checkbox" value="true"/>辛辣</label>
-                                                            <label><input name="you" type="checkbox" value="true"/>油</label>
-                                                            <label><input name="shengleng" type="checkbox" value="true"/>生冷</label>
-                                                            <label><input name="kafei" type="checkbox" value="true"/>含咖啡因食物或饮品</label>
-                                                            <label><input name="qita" type="checkbox" value="true"/>其他</label>
-                                                        </p>
-
-
-                                                    </div>
-                                                </div>
-                                            </div>
+                    </div>
+                </div>
+            </div>
         </table>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-primary geninfoBtn" id="geninfoBtn">
+        <div class="modal-footer form-group">
+            <button type="submit" class="btn btn-primary geninfoBtn" id="geninfoBtn">
                 下一页
             </button>
         </div>
@@ -219,7 +216,7 @@
 
 <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
         <i class="icon-double-angle-up icon-only bigger-110"></i>
-    </a>
+</a>
 
 
 

@@ -15,7 +15,7 @@
 // var client_secret = "REmyfsiy3egeWWy3JF631S2kURtz9QbvdWnhptSx6011I9e1fyttmvZ9r9PiixZvvvcWQlvPFWtKHI9i5HfEVNC6e8a1BhTlfAtzqIa1KJySln3nMbJ4ri0Jkk9PS9x3";
 
 //测试服务器 新
-var apiurl = "http://10.17.1.108:8001/";
+var apiurl = "http://10.17.1.98:8001/";//10.17.1.108:8001
 var client_id = "nEcBgmP7qvSz0SyBkHQ9h25IroliPrelwZ7oE476";
 var client_secret = "Bsf9ZupGD9ltI5mkvMffb3SelGBpkfeHKxdphJgNjaqqax6FkuxiaxWCoICRc9FL1KZ4SbnB8xSyfkdMdODJ2rI7rHeFogB8Tz0hMA1JhesDkE9tWPWrkYTJqfMgrU0x";
 

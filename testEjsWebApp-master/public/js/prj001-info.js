@@ -298,7 +298,7 @@
                             $("input:checkbox[name='diet_xilengyin']").prop('checked',result["diet_xilengyin"]);
                             $("input:checkbox[name='diet_shixinla']").prop('checked',result["diet_shixinla"]);
                             $("input:checkbox[name='diet_bushu']").prop('checked',result["diet_bushu"]);
-                            $('#diet_qita').val(result["diet_qita"]);
+                            $("input:checkbox[name='diet_qita']").prop('checked',result["diet_qita"]);
 
                             /* 睡眠 */
                             $("input:checkbox[name='sleep_zhengchang']").prop('checked',result["sleep_zhengchang"]);
@@ -544,7 +544,8 @@
                             $("input[name='diet_bujia'][value='"+result["diet_bujia"]+"']").prop("checked",true);
                             $("input[name='diet_lengyin'][value='"+result["diet_lengyin"]+"']").prop("checked",true);
                             $("input[name='diet_kouzao'][value='"+result["diet_kouzao"]+"']").prop("checked",true);
-                            $("input[name='diet_qita'][value='"+result["diet_qita"]+"']").prop("checked",true);
+                            $('#diet_qita').val(result["diet_qita"]);
+                            
                             $("input[name='sleep_shimian'][value='"+result["sleep_shimian"]+"']").prop("checked",true);
                             $("input[name='sleep_buning'][value='"+result["sleep_buning"]+"']").prop("checked",true);
                             $("input[name='sleep_mengduo'][value='"+result["sleep_mengduo"]+"']").prop("checked",true);

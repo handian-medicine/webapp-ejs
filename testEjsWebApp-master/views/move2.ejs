@@ -29,7 +29,7 @@
     <script>
             $(document).ready(function () {
                 $("#summaryBtn").click(function () {
-                    window.location.href = "move3";
+                    
                     $.ajax({
                             url: "/mobile/move2",
                             type: "POST",
@@ -38,6 +38,7 @@
                             success: function (result) {
                                 // alert(result.form_all);
                                 alert("继续填写下一页");
+                                window.location.href = "move3";
                             },
                             error:  function () {
                                 alert("error");
@@ -60,7 +61,7 @@
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12">
-                                        <!-- <input type="hidden" class="person" name="person" id="person-summary"/> -->
+                                        <input type="hidden" class="person" name="person" id="person-summary"/>
                                     主诉：
                                     <p>
                                         <label>阴道不规则流血<input id="owner_buguize"  name="owner_buguize" type="text" value="" style="width:30px; border:0; border-bottom:1px solid #000; text-align:center;"/>天</label>&nbsp;&nbsp;&nbsp;
