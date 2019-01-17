@@ -26,7 +26,8 @@
     <script src="../public/js/ace-extra.min.js"></script>
     <!-- 表单验证 -->
     <!-- <script src="../public/bootstrap-validator/js/validator.js"></script> -->
-    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+    <script src="../public/js/jquery.validate.min.js"></script>
     <!-- 表单验证 -->
 
 </head>
@@ -38,22 +39,75 @@
             e.preventDefault();
             // console.log($('#form-geninfo').serializeArray());
             // alert(($('#form-geninfo').serializeArray()));
-            // $("#form-geninfo").validator();
+            $("#form-geninfo").validate({
+                rules:{
+                    recdate:{
+                        required:true
+                    },
+                    serial:{
+                        required:true
+                    },
+                    hospital:{
+                        required:true
+                    },
+                    name:{
+                        required:true
+                    },
+                    telephone:{
+                        required:true,
+                        digits:true,
+                        rangelength:[1,11]
+                    },
+                    age:{
+                        required:true,
+                        digits:true,
+                        range:[0,200]
+                        // rangelength:[1,4]
+                    },
+                    height:{
+                        required:false,
+                        rangelength:[0,6]
+                    },
+                    weight:{
+                        required:false,
+                        rangelength:[0,6]
+                    },
+                    waistline:{
+                        required:false,
+                        rangelength:[0,6]
+                    },
+                    hipline:{
+                        required:false,
+                        rangelength:[0,6]
+                    }
+                },
+                messages:{
+                    recdate:{required:"请填写该字段"},
+                    serial:{required:"请填写该字段"},
+                    hospital:{required:"请填写该字段"},
+                    name:{required:"请填写该字段"},
+                    telephone:{required:"请填写该字段"},
+                    age:{required:"请填写该字段"}
+                },
+                submitHandler:function () {
+                    $.ajax({
+                        url: "/mobile/move1",
+                        type: "POST",
+                        // dataType: "json",
+                        data: $('#form-geninfo').serializeArray(),
+                        success: function (result) {
+                            // alert(result.form_all);
+                            alert("继续填写下一页");
+                            window.location.href = "move2";
+                        },
+                        error:  function () {
+                            alert("error");
+                        },
+                    })   
+                }
+            })
             
-            $.ajax({
-                    url: "/mobile/move1",
-                    type: "POST",
-                    // dataType: "json",
-                    data: $('#form-geninfo').serializeArray(),
-                    success: function (result) {
-                        // alert(result.form_all);
-                        alert("继续填写下一页");
-                        window.location.href = "move2";
-                    },
-                    error:  function () {
-                        alert("error");
-                    },
-            })   
+
         })
     })
 </script>
@@ -73,14 +127,14 @@
                     <div class="col-xs-12 col-sm-12">
                         <!-- <input type="hidden" class="person" name="person" id="person-geninfo"/> -->
                         <p>
-                            就诊日期：<input id="recdate" name="recdate" type="text" class="form-control datepicker" placeholder="必填" required/>
+                            就诊日期：<input id="recdate" name="recdate" type="text" class="form-control datepicker" placeholder="必填"/>
                             <!-- <input class="form-control" id="recdate" name="recdate"  type="text"/> -->
                         </p>
                         <p>
-                            问卷编码:<input class="form-control" id="serial"  name="serial" type="text" placeholder="必填" required/>
+                            问卷编码:<input class="form-control" id="serial"  name="serial" type="text" placeholder="必填"/>
                         </p>
                         <p>
-                            医院名称:<input class="form-control"  id="hospital" name="hospital" type="text" placeholder="必填" required/>
+                            医院名称:<input class="form-control"  id="hospital" name="hospital" type="text" placeholder="必填"/>
                         </p>
                         <p>
                             填表专家姓名:<input class="form-control" id="expert" name="expert" type="text" />
@@ -97,22 +151,22 @@
                             </select> -->
                         </p>
                         <p>
-                            患者姓名:<input class="form-control" type="text" name="name" id="name" placeholder="必填" required/>
+                            患者姓名:<input class="form-control" type="text" name="name" id="name" placeholder="必填"/>
                         </p>
                         <p>
-                            电话:<input class="form-control" type="text" name="telephone" id="telephone" placeholder="必填" required/>
+                            电话:<input class="form-control" type="text" name="telephone" id="telephone" placeholder="必填"/>
                         </p>
                         <p>
-                            年龄:<input class="form-control" type="number" name="age" id="age" placeholder="必填" required/>
+                            年龄:<input class="form-control" type="text" name="age" id="age" placeholder="必填"/>
                         </p>
                         <p>
-                            身高cm:<input class="form-control" type="number" name="height" id="height"/>
+                            身高cm:<input class="form-control" type="text" name="height" id="height"/>
                         </p>
                         <p>
                             体重kg:<input class="form-control" type="text" name="weight" id="weight"/>
                         </p>
                         <p>
-                            腰围cm:<input class="form-control" type="number" name="waistline" id="waistline"/>
+                            腰围cm:<input class="form-control" type="text" name="waistline" id="waistline"/>
                         </p>
                         <p>
                             臀围cm:<input class="form-control" type="text" name="hipline" id="hipline"/>
