@@ -29,10 +29,22 @@
     <!-- <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
     <script src="../public/js/jquery.validate.min.js"></script>
     <!-- 表单验证 -->
-
+    <style>
+        .error{ 
+            color:#FF0000; /* red */ 
+        } 
+    </style>
 </head>
 <body>
-
+<!-- <script>
+    $.validator.addMethod("phone",function(value,element,params){
+         if((value.length != 11) || (!value.match(/^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|17[0|6|7|8]|18[0-9])\d{8}$/))){
+            return false;
+         }else{
+            return true;
+        }
+    },"请输入正确的手机号");
+</script> -->
 <script>
     $(document).ready(function () {
         $("#form-geninfo").submit(function (e) {
@@ -86,8 +98,28 @@
                     serial:{required:"请填写该字段"},
                     hospital:{required:"请填写该字段"},
                     name:{required:"请填写该字段"},
-                    telephone:{required:"请填写该字段"},
-                    age:{required:"请填写该字段"}
+                    telephone:{
+                        required:"请填写该字段",
+                        rangelength:$.validator.format("电话号码长度必须在{0}-{1}之间"),
+                        digits:"不能填写非数字字符"        
+                    },
+                    age:{
+                        required:"请填写该字段",
+                        digits:"不能填写非数字字符",
+                        range:$.validator.format("年龄必须在{0}-{1}之间")
+                    },
+                    height:{
+                        rangelength:$.validator.format("数值长度必须在{0}-{1}之间,包含小数点")
+                    },
+                    weight:{
+                        rangelength:$.validator.format("数值长度必须在{0}-{1}之间,包含小数点")
+                    },
+                    waistline:{
+                        rangelength:$.validator.format("数值长度必须在{0}-{1}之间,包含小数点")
+                    },
+                    hipline:{
+                        rangelength:$.validator.format("数值长度必须在{0}-{1}之间,包含小数点")
+                    },
                 },
                 submitHandler:function () {
                     $.ajax({
@@ -105,8 +137,7 @@
                         },
                     })   
                 }
-            })
-            
+            })           
 
         })
     })
