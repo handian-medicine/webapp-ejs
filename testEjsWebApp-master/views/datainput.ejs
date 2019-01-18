@@ -29,7 +29,6 @@
             $('#recdate').datepicker({format:"yyyy-mm-dd"});
         }
     </script>
-    <script src="/public/javascripts/jquery.form.min.js"></script>
 
     <!-- 新日期控件 -->
     <!-- <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -139,13 +138,15 @@
         }
     </script> -->
     <!-- 根据不同浏览器设置不同的date输入方式 -->
-
+    
 </head>
 
 <body>
+
 <script>
     $(document).ready(function () {
         $("#tijiaoBtn").click(function () {
+            $('#address').val( $('#province').val() + $('#city').val() + $('#adrs').val() );
             $.ajax({
                 url: "/prj001/datainputoptr", //用来处理ajax请求的函数的所在网址路径
                 method: "POST",
@@ -468,10 +469,27 @@
                                                         <option value="其它">其它</option>
                                                     </select>
                                                                     </p>
+
                                                                     <p>
-                                                                        病人现住址:<input class="form-control" id="address"
-                                                                            name="address" type="text" />
-                                                                    </p>
+                                                                            病人现住址:
+                                                                        </p >
+                                                                        <input class="form-control" id="address" name="address" type="hidden"/>
+                                                                        <div class="form-group">
+                                                                            <div class="col-sm-3">
+                                                                                <select name="" id="province" class="form-control" >
+                                                                                    <option value="">--请选择--</option>
+                                                                                </select>
+                                                                            </div>
+                                                                            <div class="col-sm-3">
+                                                                                <select name="" id="city" class="form-control">
+                                                                                    <option value="">--请选择--</option>
+                                                                                </select>
+                                                                            </div>
+                                                                            <div class="col-sm-6">
+                                                                                <input class="form-control" id="adrs" name="" type="text" placeholder="请填写具体地址"/>
+                                                                            </div>
+                                                                        </div>
+
                                                                     <p>
                                                                         病人来源:
                                                     <select name="entrance" class="form-control">
@@ -592,6 +610,8 @@
             <i class="icon-double-angle-up icon-only bigger-110"></i>
         </a>
     </div>
+    <script src="../public/js/Province_city.js"></script>
+    <script src="/public/javascripts/jquery.form.min.js"></script>
 
     <script type="text/javascript">
         window.jQuery || document.write("<script src='../public/js/jquery-2.0.3.min.js'>" + "<" + "/script>");
@@ -953,6 +973,7 @@
         var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
         document.write(unescape("%3Cscript src='" + _bdhmProtocol + ""));
     </script>
+     
 </body>
 
 </html>

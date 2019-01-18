@@ -91,9 +91,7 @@
 }
     </style>
     <!-- 分页格式 -->
-    <!-- 表单验证 -->
-    <!-- <script src="../public/bootstrap-validator/js/validator.js"></script> -->
-    <!-- 表单验证 -->
+
     <!-- 头部style -->
     <style>
         .hd{
@@ -135,17 +133,27 @@
         }
     
     </style>
+    <!-- 解决问题:Unable to preventDefault inside passive event listener due to target being treated as passive -->
+    <style>html {touch-action: manipulation;}</style>
+<script>
+    // $(document).on('click', '.my-btn .dropdown-toggle .dropdown-menu', function (e) {
+    //     // e.stopPropagation();
+    //     $('.my-ul').show()
+    // }); 
+    function listshow(){
+        // alert("hello");
+        $('.my-div').attr("class","inline position-relative my-div open");
+        alert($('.my-div').attr("class"));
+    }
+</script>
+
+
 </head>
 
 <body>
 
     <!-- 导航 -->
     <div class="navbar navbar-default" id="navbar">
-            <script type="text/javascript">
-                try {
-                    ace.settings.check('navbar', 'fixed')
-                } catch (e) {}
-            </script>
     
             <div class="navbar-container" id="navbar-container">
                 <div class="navbar-header pull-left">
@@ -156,36 +164,36 @@
                             </i>
                         </small>
                     </a>
-                </div>
+                </div>  
             </div>
-    
             <div class="navbar-header pull-right" role="navigation">
-                <ul class="nav ace-nav">
-                    <li class="light-blue">
-                        <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                            <img class="nav-user-photo" src="../public/avatars/0017030553263367_b.jpg" alt="Jason's Photo">
-                            <span class="user-info">
-                                <small>欢迎,</small>
-                                <%= username %>
-                            </span>
-    
-                            <i class="icon-caret-down"></i>
-                        </a>
-    
-                        <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-    
-                            <li class="divider"></li>
-    
-                            <li>
-                                <a href="../logout">
-                                    <i class="icon-off"></i>
-                                    注销
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
+                    <ul class="nav ace-nav">
+                        <li class="light-blue">
+                            <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                                <img class="nav-user-photo" src="../public/avatars/0017030553263367_b.jpg" alt="Jason's Photo">
+                                <span class="user-info">
+                                    <small>欢迎,</small>
+                                    <%= username %>
+                                </span>
+        
+                                <i class="icon-caret-down"></i>
+                            </a>
+        
+                            <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+        
+                                <li class="divider"></li>
+        
+                                <li>
+                                    <a href="../logout">
+                                        <i class="icon-off"></i>
+                                        注销
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
             </div>
+
     </div>
     
     <div class="main-container" id="main-container">
@@ -304,7 +312,6 @@
                                                     <th>专家</th>
                                                     <th>录入人</th>
                                                     <th>数据修改</th>
-                                                    
                                                 </tr>
                                             </thead>
 
@@ -359,7 +366,7 @@
                                                                 </button>
                                                             </div>
                                                             <div class="visible-xs visible-sm hidden-md hidden-lg">
-                                                                <div class="inline position-relative">
+                                                                <div class="inline position-relative my-div">
                                                                     <button class="btn btn-minier btn-primary dropdown-toggle"
                                                                         data-toggle="dropdown">
                                                                         <i class="icon-cog icon-only bigger-110"></i>
@@ -457,7 +464,7 @@
                                                                     </button>
                                                             </div>
                                                             <div class="visible-xs visible-sm hidden-md hidden-lg">
-                                                                <div class="inline position-relative">
+                                                                <div class="inline position-relative my-div">
                                                                     <button class="btn btn-minier btn-primary dropdown-toggle"
                                                                         data-toggle="dropdown">
                                                                         <i class="icon-cog icon-only bigger-110"></i>
@@ -657,8 +664,27 @@
                                                             <label><input type="radio" value="其它" name="career"/>其它</label>
                                                         </p>
                                                         <p>
-                                                            病人现住址:<input class="form-control" id="address" name="address" type="text"/>
-                                                        </p>
+                                                                病人现住址:
+                                                            </p >
+                                                            <!--<input class="form-control" id="address" name="address" type="text" />-->
+                                                            <div class="form-group">
+                                                                <div class="col-sm-3">
+                                                                    <select name="" id="province" class="form-control" >
+                                                                        <option value="">--请选择--</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="col-sm-3">
+                                                                    <select name="" id="city" class="form-control">
+                                                                        <option value="">--请选择--</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                            
+                                                                    <input class="form-control" id="" name="" type="text" placeholder="请填写具体地址"/>
+                                                            
+                                                                </div>
+                                                            </div>
+                                                            
                                                         <p>
                                                             病人来源:
                                                             <label><input type="radio" value="门诊" name="entrance"/>门诊</label>
@@ -2100,7 +2126,7 @@
     <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
             <i class="icon-double-angle-up icon-only bigger-110"></i>
     </a>
-
+    <script src="../public/js/Province_city.js"></script>
     <script type="text/javascript">
         window.jQuery || document.write("<script src='../public/js/jquery-2.0.3.min.js'>" + "<" + "/script>");
     </script>

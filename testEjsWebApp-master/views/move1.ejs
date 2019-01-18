@@ -32,7 +32,7 @@
     <style>
         .error{ 
             color:#FF0000; /* red */ 
-        } 
+        }
     </style>
 </head>
 <body>
@@ -53,15 +53,15 @@
             // alert(($('#form-geninfo').serializeArray()));
             $("#form-geninfo").validate({
                 rules:{
-                    recdate:{
-                        required:true
-                    },
-                    serial:{
-                        required:true
-                    },
-                    hospital:{
-                        required:true
-                    },
+                    // recdate:{
+                    //     required:true
+                    // },
+                    // serial:{
+                    //     required:true
+                    // },
+                    // hospital:{
+                    //     required:true
+                    // },
                     name:{
                         required:true
                     },
@@ -122,6 +122,7 @@
                     },
                 },
                 submitHandler:function () {
+                    $('#address').val( $('#province').val() + $('#city').val() + $('#adrs').val() );
                     $.ajax({
                         url: "/mobile/move1",
                         type: "POST",
@@ -158,14 +159,14 @@
                     <div class="col-xs-12 col-sm-12">
                         <!-- <input type="hidden" class="person" name="person" id="person-geninfo"/> -->
                         <p>
-                            就诊日期：<input id="recdate" name="recdate" type="text" class="form-control datepicker" placeholder="必填"/>
+                            就诊日期：<input id="recdate" name="recdate" type="text" class="form-control datepicker"/>
                             <!-- <input class="form-control" id="recdate" name="recdate"  type="text"/> -->
                         </p>
                         <p>
-                            问卷编码:<input class="form-control" id="serial"  name="serial" type="text" placeholder="必填"/>
+                            问卷编码:<input class="form-control" id="serial"  name="serial" type="text"/>
                         </p>
                         <p>
-                            医院名称:<input class="form-control"  id="hospital" name="hospital" type="text" placeholder="必填"/>
+                            医院名称:<input class="form-control"  id="hospital" name="hospital" type="text"/>
                         </p>
                         <p>
                             填表专家姓名:<input class="form-control" id="expert" name="expert" type="text" />
@@ -234,8 +235,24 @@
                             <label><input type="radio" value="其它" name="career"/>其它</label>
                         </p>
                         <p>
-                            病人现住址:<input class="form-control" id="address" name="address" type="text"/>
-                        </p>
+                                病人现住址:
+                            </p >
+                            <input class="form-control" id="address" name="address" type="hidden"/>
+                            <div class="form-group">
+                                <div class="col-sm-3">
+                                    <select name="" id="province" class="form-control" >
+                                        <option value="">--请选择--</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-3">
+                                    <select name="" id="city" class="form-control">
+                                        <option value="">--请选择--</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input class="form-control" id="adrs" name="" type="text" placeholder="请填写具体地址"/>
+                                </div>
+                            </div>
                         <p>
                             病人来源:
                             <label><input type="radio" value="门诊" name="entrance"/>门诊</label>
@@ -306,7 +323,7 @@
 
 
 <!--[if !IE]> -->
-
+<script src="../public/js/Province_city.js"></script>
 <script type="text/javascript">
     window.jQuery || document.write("<script src='../public/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
 </script>
