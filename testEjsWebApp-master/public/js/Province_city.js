@@ -92,12 +92,12 @@ objprovince.onchange=function GetCity(){
     }
     else
     {
-        objcity.options[0]=new Option("--请选择--","--请选择--");
+        objcity.options[0]=new Option("","");
     }
 };
 function GetProvince()
 {
-    objprovince.options[0]=new Option("--请选择--","--请选择--");
+    objprovince.options[0]=new Option("","");
     for(i=0;i<parray.length;i++)
     {
         objprovince.options[i+1]=new Option(parray[i],parray[i]);
