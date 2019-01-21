@@ -2256,6 +2256,7 @@ router.get('/patientInfo', function (req, res, next){
 /* 审核 */
 router.get('/check', function (req, res, next){
     var id = req.query.id;
+    var page = req.query.page;
     // var id = req.params.id; //router.get('/patientInfo/:id'...
     console.log("id", id);
     var check_url = myconst.apiurl + "prj001/info/" + id +'/checked/';
@@ -2272,10 +2273,10 @@ router.get('/check', function (req, res, next){
         console.log("check",response.statusCode)           
         if (!error && response.statusCode == 200) {
             // res.json({user_geninfo: user_geninfo, status: 200});
-            res.redirect("/prj001");
+            res.redirect("/prj001/?page="+page);
         } else {
             if (response.statusCode == 403) {
-                console.log(">>>prj001.js put方法-> body: ", user_geninfo);
+                console.log(">>>审核 body: ", user_geninfo);
                 res.json({user_geninfo:user_geninfo, status:403});
             }
             //console.log(">>>Getting archives met unknown error. " + error.error_description);

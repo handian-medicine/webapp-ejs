@@ -495,7 +495,7 @@
                             
                             $("input[name='spirit_shenpi'][value='"+result["spirit_shenpi"]+"']").prop("checked",true);
                             $("input[name='spirit_qiduan'][value='"+result["spirit_qiduan"]+"']").prop("checked",true);
-                            $("input[name='spirit_yiyu'][value='"+result["spirit_yiyu"]+"']").prop("checked",true);
+                            $("input[name='spirit_yiyu_m'][value='"+result["spirit_yiyu_m"]+"']").prop("checked",true);
                             $("input[name='spirit_tanxi'][value='"+result["spirit_tanxi"]+"']").prop("checked",true);
                             $("input[name='spirit_yinu'][value='"+result["spirit_yinu"]+"']").prop("checked",true);
                             $('#spirit_qita').val(result["spirit_qita"]);

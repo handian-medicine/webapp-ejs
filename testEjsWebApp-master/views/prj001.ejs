@@ -307,7 +307,7 @@
                                                     <th>住址</th>
                                                     <th>专家</th>
                                                     <th>录入人</th>
-                                                    <th>基本信息完整度</th>
+                                                    <th>信息完整度</th>
                                                     <th>数据修改</th>
                                                 </tr>
                                             </thead>
@@ -361,9 +361,9 @@
                                                                 <button id="results" checked-info="no" data-toggle="modal" data-target="#modal-table6" class="btn btn-xs btn-primary results" geninfo-url=<%= archive.url %> results-url=<%= archive.results %>>
                                                                     疗效情况
                                                                 </button>
-                                                                <button type="button" id="check" class="btn btn-xs btn-default check" geninfo-url=<%= archive.url %> patient-id=<%= archive.id %> >
-                                                                    <a href="/prj001/check/?id=<%= archive.id %>">未审核</a>
-                                                                </button>
+                                                                <!-- <button type="button" id="check" class="btn btn-xs btn-default check" geninfo-url=<%= archive.url %> patient-id=<%= archive.id %> > -->
+                                                                    <a href="/prj001/check/?page=<%= curpage %>&id=<%= archive.id %>">未审核</a>
+                                                                <!-- </button> -->
                                                             </div>
                                                             <div class="visible-xs visible-sm hidden-md hidden-lg">
                                                                 <div class="inline position-relative">
@@ -1024,7 +1024,7 @@
 
                                                             <label><input name="coating_run" type="checkbox" value="true"/>润</label>
                                                             <label><input name="coating_hua" type="checkbox" value="true"/>滑</label>
-                                                            <label><input name="coating_hou" type="checkbox" value="true"/>干</label>
+                                                            <label><input name="coating_gan" type="checkbox" value="true"/>干</label>
                                                             <label><input name="coating_shaotai" type="checkbox" value="true"/>少苔</label>
                                                             <label><input name="coating_huabo" type="checkbox" value="true"/>花剥</label>
                                                             <label><input name="coating_wutai" type="checkbox" value="true"/>无苔</label>
@@ -1267,11 +1267,11 @@
                                                                 </p>
                                                                 <p>
                                                                     精神抑郁：
-                                                                    <label><input type="radio" value="没有" name="spirit_yiyu"/>没有</label>
-                                                                    <label><input type="radio" value="很少" name="spirit_yiyu"/>很少</label>
-                                                                    <label><input type="radio" value="有时" name="spirit_yiyu"/>有时</label>
-                                                                    <label><input type="radio" value="经常" name="spirit_yiyu"/>经常</label>
-                                                                    <label><input type="radio" value="总是" name="spirit_yiyu"/>总是</label>
+                                                                    <label><input type="radio" value="没有" name="spirit_yiyu_m"/>没有</label>
+                                                                    <label><input type="radio" value="很少" name="spirit_yiyu_m"/>很少</label>
+                                                                    <label><input type="radio" value="有时" name="spirit_yiyu_m"/>有时</label>
+                                                                    <label><input type="radio" value="经常" name="spirit_yiyu_m"/>经常</label>
+                                                                    <label><input type="radio" value="总是" name="spirit_yiyu_m"/>总是</label>
                                                                 </p>
                                                                 <p>
                                                                     时欲叹息：
@@ -2115,10 +2115,10 @@
         window.jQuery || document.write("<script src='../public/js/jquery-2.0.3.min.js'>" + "<" + "/script>");
     </script> -->
 
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
         if ("ontouchend" in document) document.write("<script src='../public/js/jquery.mobile.custom.min.js'>" + "<" +
             "/script>");
-    </script>
+    </script> -->
     <script src="../public/js/bootstrap.min.js"></script>
     <script src="../public/js/typeahead-bs2.min.js"></script>
 
