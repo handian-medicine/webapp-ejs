@@ -13,11 +13,11 @@
     <link rel="stylesheet" href="../public/css/ace.min.css">
     <link rel="stylesheet" href="../public/css/ace-rtl.min.css">
     <link rel="stylesheet" href="../public/css/ace-skins.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="../public/css/bootstrap-datepicker.css">
 
     <script src="../public/js/ace-extra.min.js"></script>
     <script src="../public/javascripts/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.js"></script>
+    <script src="../public/js/bootstrap-datepicker.js"></script>
     <script>
         $(function(){
             $('.datepicker').datepicker({format:"yyyy-mm-dd"});
@@ -307,6 +307,7 @@
                                                     <th>住址</th>
                                                     <th>专家</th>
                                                     <th>录入人</th>
+                                                    <th>基本信息完整度</th>
                                                     <th>数据修改</th>
                                                 </tr>
                                             </thead>
@@ -333,6 +334,9 @@
                                                     <td>
                                                         <%= archive.owner %>
                                                         </td>
+                                                    <td>
+                                                        <%= archive.degree_of_completion %>
+                                                        </td>    
                                                     <td>
                                                             <% if (archive.owner == null) { %>
                                                             <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
@@ -2107,9 +2111,9 @@
             <i class="icon-double-angle-up icon-only bigger-110"></i>
     </a>
     <!-- <script src="../public/js/Province_city.js"></script> -->
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
         window.jQuery || document.write("<script src='../public/js/jquery-2.0.3.min.js'>" + "<" + "/script>");
-    </script>
+    </script> -->
 
     <script type="text/javascript">
         if ("ontouchend" in document) document.write("<script src='../public/js/jquery.mobile.custom.min.js'>" + "<" +
@@ -2119,13 +2123,13 @@
     <script src="../public/js/typeahead-bs2.min.js"></script>
 
     <!-- page specific plugin scripts -->
-    <script src="../public/js/jquery.dataTables.min.js"></script>
-    <script src="../public/js/jquery.dataTables.bootstrap.js"></script>
+    <!-- <script src="../public/js/jquery.dataTables.min.js"></script> -->
+    <!-- <script src="../public/js/jquery.dataTables.bootstrap.js"></script> -->
     <!-- ace scripts -->
 
     <script src="../public/js/ace-elements.min.js"></script>
     <script src="../public/js/ace.min.js"></script>
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
         jQuery(function ($) {
             var oTable1 = $('#sample-table-2').dataTable({
                 "aoColumns": [{
@@ -2160,12 +2164,12 @@
                 return 'left';
             }
         })
-    </script>
+    </script> -->
 
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
         var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
         document.write(unescape("%3Cscript src='" + _bdhmProtocol + ""));
-    </script>
+    </script> -->
 </body>
 
 </html>
