@@ -136,10 +136,6 @@
     <!-- 解决问题:Unable to preventDefault inside passive event listener due to target being treated as passive -->
     <style>html {touch-action: manipulation;}</style>
 <script>
-    // $(document).on('click', '.my-btn .dropdown-toggle .dropdown-menu', function (e) {
-    //     // e.stopPropagation();
-    //     $('.my-ul').show()
-    // }); 
     function listshow(){
         // alert("hello");
         $('.my-div').attr("class","inline position-relative my-div open");
@@ -366,7 +362,7 @@
                                                                 </button>
                                                             </div>
                                                             <div class="visible-xs visible-sm hidden-md hidden-lg">
-                                                                <div class="inline position-relative my-div">
+                                                                <div class="inline position-relative">
                                                                     <button class="btn btn-minier btn-primary dropdown-toggle"
                                                                         data-toggle="dropdown">
                                                                         <i class="icon-cog icon-only bigger-110"></i>
@@ -464,7 +460,7 @@
                                                                     </button>
                                                             </div>
                                                             <div class="visible-xs visible-sm hidden-md hidden-lg">
-                                                                <div class="inline position-relative my-div">
+                                                                <div class="inline position-relative">
                                                                     <button class="btn btn-minier btn-primary dropdown-toggle"
                                                                         data-toggle="dropdown">
                                                                         <i class="icon-cog icon-only bigger-110"></i>
@@ -666,24 +662,8 @@
                                                         <p>
                                                                 病人现住址:
                                                             </p >
-                                                            <!--<input class="form-control" id="address" name="address" type="text" />-->
-                                                            <div class="form-group">
-                                                                <div class="col-sm-3">
-                                                                    <select name="" id="province" class="form-control" >
-                                                                        <option value="">--请选择--</option>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="col-sm-3">
-                                                                    <select name="" id="city" class="form-control">
-                                                                        <option value="">--请选择--</option>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="col-sm-6">
+                                                            <input class="form-control" id="address" name="address" type="text" />
                                                             
-                                                                    <input class="form-control" id="" name="" type="text" placeholder="请填写具体地址"/>
-                                                            
-                                                                </div>
-                                                            </div>
                                                             
                                                         <p>
                                                             病人来源:
@@ -2126,7 +2106,7 @@
     <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
             <i class="icon-double-angle-up icon-only bigger-110"></i>
     </a>
-    <script src="../public/js/Province_city.js"></script>
+    <!-- <script src="../public/js/Province_city.js"></script> -->
     <script type="text/javascript">
         window.jQuery || document.write("<script src='../public/js/jquery-2.0.3.min.js'>" + "<" + "/script>");
     </script>
