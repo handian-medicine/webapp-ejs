@@ -212,10 +212,13 @@
                         </p>
                         <p>
                             民族:
-                            <select name="nation" class="form-control">
+                            <!-- <select name="nation" class="form-control">
                                 <option value="汉族">汉族</option>
                                 <option value="其他">其他(回族、满族、内蒙古、苗族等)</option>
-                            </select>
+                            </select> -->
+                            <p>
+                            <label><input type="radio" value="汉族" name="nation"/>汉族</label>
+                            <label><input type="radio" value="其他" name="nation"/>其他(回族、满族、苗族、藏族等)</label>
                         </p>
                         
                         <p>
@@ -261,7 +264,7 @@
 
                         <p>
                             文化程度:
-                            <select name="culture" class="form-control">
+                            <!-- <select name="culture" class="form-control">
                                 <option value="未接受国家教育(文盲)">未接受国家教育(文盲)</option>
                                 <option value="小学及以下">小学及以下</option>
                                 <option value="初中">初中</option>
@@ -269,7 +272,15 @@
                                 <option value="大专">大专</option>
                                 <option value="本科">本科</option>
                                 <option value="研究生及以上">研究生及以上</option>
-                            </select>
+                            </select> -->
+                            <p>
+                                <label><input type="radio" value="未接受国家教育(文盲)" name="culture"/>未接受国家教育(文盲)</label>
+                                <label><input type="radio" value="小学及以下" name="culture"/>小学及以下</label>
+                                <label><input type="radio" value="初中" name="culture"/>初中</label>
+                                <label><input type="radio" value="高中/中专" name="culture"/>高中/中专</label>
+                                <label><input type="radio" value="大专" name="culture"/>大专</label>
+                                <label><input type="radio" value="本科" name="culture"/>本科</label>
+                                <label><input type="radio" value="研究生及以上" name="culture"/>研究生及以上</label>
                         </p>
 
                         <p>
