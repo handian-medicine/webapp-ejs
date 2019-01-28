@@ -28,6 +28,8 @@
 <body>
     <script>
             $(document).ready(function () {
+                $("#normal").hide();
+                $("#abnormal").hide();
                 $("#historyBtn").click(function () {
                     $.ajax({
                             url: "/mobile/move3",
@@ -121,24 +123,56 @@
                                     </p>
                                     <p>
                                         体育锻炼:
-                                    <p>
-                                        <label><input type="radio" value="很少(≤1次/周)" name="phycial_exercise"/>很少(≤1次/周)</label>
-                                        <label><input type="radio" value="偶尔(≤3次/周)" name="phycial_exercise"/>偶尔(≤3次/周)</label>
-                                        <label><input type="radio" value="经常(≥4次/周)" name="phycial_exercise"/>经常(≥4次/周)</label>
-                                        <label><input type="radio" value="一般(少量出汗,心率≤120次/分)" name="phycial_exercise"/>一般(少量出汗,心率≤120次/分)</label>
-                                        <label><input type="radio" value="高强度(大汗淋漓,心率>120次/分)" name="phycial_exercise"/>高强度(大汗淋漓,心率>120次/分)</label>
+                                        <label><input type="radio" value="无" name="physical" onchange="physical_no()"/>无</label>
+                                        <label><input type="radio" value="有" name="physical" onchange="physical_yes()"/>有</label>
+                                        <script>
+                                            function physical_no () {
+                                                $("input[name='physical_exercise']").prop("checked", false);
+                                                $("input[name='physical_intensity']").prop("checked", false);
+                                                // $("input[name='physical_exercise']").prop("disabled", true);
+                                                // $("input[name='physical_intensity']").prop("disabled", true);
+                                                $("#div-physical").hide();
+                                            }
+                                            function physical_yes () {
+                                                // $("input[name='physical_exercise']").prop("disabled", false);
+                                                // $("input[name='physical_intensity']").prop("disabled", false);
+                                                $("#div-physical").show();
+                                            }
+                                        </script>
+                                        <div id="div-physical">
+                                        <p>(1)
+                                            <label><input type="radio" value="很少(≤1次/周)" name="physical_exercise"/>很少(≤1次/周)</label>
+                                            <label><input type="radio" value="偶尔(≤3次/周)" name="physical_exercise"/>偶尔(≤3次/周)</label>
+                                            <label><input type="radio" value="经常(≥4次/周)" name="physical_exercise"/>经常(≥4次/周)</label>
+                                        <p>(2)
+                                            <label><input type="radio" value="一般(少量出汗,心率≤120次/分)" name="physical_intensity"/>一般(少量出汗,心率≤120次/分)</label>
+                                            <label><input type="radio" value="高强度(大汗淋漓,心率>120次/分)" name="physical_intensity"/>高强度(大汗淋漓,心率>120次/分)</label>
+                                        </div>
                                     </p>
                                     <p>
                                         减肥情况：
-                                    <p>
-                                        减肥时长(月):<input  class="form-control" type="number" id="reducefat_persist" name="reducefat_persist"/>
-                                    <p>
-                                        <label><input name="reducefat_ever" type="checkbox" value="true"/>有减肥</label>
-                                        <label><input name="reducefat_yundong" type="checkbox" value="true"/>运动减肥</label>
-                                        <label><input name="reducefat_jieshi" type="checkbox" value="true"/>节食减肥</label>
-                                        <label><input name="reducefat_yaowu" type="checkbox" value="true"/>药物减肥</label>
-                                        <label>其它说明:<input type="text"  id="reducefat_qita" name="reducefat_qita" value="无"/></label>
-
+                                        <label><input type="radio" value="无" name="reducefat" onchange="reducefat_no()"/>无</label>
+                                        <label><input type="radio" value="有" name="reducefat" onchange="reducefat_yes()"/>有</label>
+                                        <script>
+                                            function reducefat_no () {
+                                                $("input[name='reducefat_yundong']").prop("checked", false);
+                                                $("input[name='reducefat_jieshi']").prop("checked", false);
+                                                $("input[name='reducefat_yaowu']").prop("checked", false);
+                                                $("#div-reducefat").hide();
+                                            }
+                                            function reducefat_yes () {
+                                                $("#div-reducefat").show();
+                                            }
+                                        </script>
+                                        <div id="div-reducefat">
+                                            <p>
+                                                减肥时长(月):<input  class="form-control" type="number" id="reducefat_persist" name="reducefat_persist"/>
+                                            <p>
+                                                <label><input name="reducefat_yundong" type="checkbox" value="true"/>运动减肥</label>
+                                                <label><input name="reducefat_jieshi" type="checkbox" value="true"/>节食减肥</label>
+                                                <label><input name="reducefat_yaowu" type="checkbox" value="true"/>药物减肥</label>
+                                                <label>其它说明:<input type="text"  id="reducefat_qita" name="reducefat_qita" value=""/></label>
+                                        </div>
                                     </p>
                                     <p>
                                         月经初潮年龄:
@@ -151,21 +185,40 @@
                                     </p>
                                     <p>
                                         月经周期:
+                                        <script>
+                                            function cycle_yes () {
+                                                $("input[name='abnormal']").prop("checked", false);
+                                                $("input[name='abnormal']").prop("disabled", true);
+                                                $("input[name='normal']").prop("disabled", false);
+                                                $("#normal").show();
+                                                $("#abnormal").hide();
+                                            }
+                                            function cycle_no () {
+                                                $("input[name='normal']").prop("checked", false);
+                                                $("input[name='normal']").prop("disabled", true);
+                                                $("input[name='abnormal']").prop("disabled", false);
+                                                $("#normal").hide();
+                                                $("#abnormal").show();
+                                            }
+                                        </script>
                                     <p>
-                                        尚规律：
+                                        <label><input type="radio" value="尚规律" name="cycle" onchange="cycle_yes()"/>尚规律</label>
+                                        <div id="normal">
                                         <label><input type="radio" value="21-25" name="normal"/>21-25</label>
                                         <label><input type="radio" value="26-30" name="normal"/>26-30</label>
                                         <label><input type="radio" value="31-35" name="normal"/>31-35</label>
-                                        
+                                        </div>
                                     </p>
                                     <p>
-                                        不规律：
+                                        <label><input type="radio" value="不规律" name="cycle" onchange="cycle_no()"/>不规律</label>
+                                        <div id="abnormal">
                                         <label><input type="radio" value="或1月多次" name="abnormal"/>或1月多次</label>
                                         <label><input type="radio" value="1-2个月" name="abnormal"/>1-2个月</label>
                                         <label><input type="radio" value="2-3个月" name="abnormal"/>2-3个月</label>
                                         <label><input type="radio" value="3-4个月" name="abnormal"/>3-4个月</label>
                                         <label><input type="radio" value="4-6个月" name="abnormal"/>4-6个月</label>
                                         <label><input type="radio" value="大于6个月" name="abnormal"/>大于6个月</label>
+                                        </div>
                                     </p>
                                     <p>
                                         行经天数:
@@ -200,14 +253,16 @@
                                     <p>
                                         出血质地:
                                     <p>
-                                        <label><input type="radio" value="正常" name="blood_quality"/>正常</label>
-                                        <label><input type="radio" value="粘稠" name="blood_quality"/>粘稠</label>
-                                        <label><input type="radio" value="清稀" name="blood_quality"/>清稀</label>
-                                        <label><input type="radio" value="无血块" name="blood_quality"/>无血块</label>
-                                        <label><input type="radio" value="偶有血块" name="blood_quality"/>偶有血块</label>
-                                        <label><input type="radio" value="夹少量小血块" name="blood_quality"/>夹少量小血块</label>
-                                        <label><input type="radio" value="夹较大血块" name="blood_quality"/>夹较大血块</label>
-
+                                        <p>(1)
+                                            <label><input type="radio" value="正常" name="blood_quality"/>正常</label>
+                                            <label><input type="radio" value="粘稠" name="blood_quality"/>粘稠</label>
+                                            <label><input type="radio" value="清稀" name="blood_quality"/>清稀</label>
+                                        <p>(2)
+                                            <label><input type="radio" value="无血块" name="blood_block"/>无血块</label>
+                                            <label><input type="radio" value="偶有血块" name="blood_block"/>偶有血块</label>
+                                            <label><input type="radio" value="经常出现血块" name="blood_block"/>经常出现血块</label>
+                                            <label><input type="radio" value="夹少量小血块" name="blood_block"/>夹少量小血块</label>
+                                            <label><input type="radio" value="夹较大血块" name="blood_block"/>夹较大血块</label>
                                     </p>
                                     <p>
                                         出血特点:
@@ -229,7 +284,7 @@
                                             <p>
                                                 精神情绪:
                                             <p>
-                                                精神肢倦：
+                                                神疲肢倦：
                                                 <label><input type="radio" value="没有" name="spirit_shenpi"/>没有</label>
                                                 <label><input type="radio" value="很少" name="spirit_shenpi"/>很少</label>
                                                 <label><input type="radio" value="有时" name="spirit_shenpi"/>有时</label>
@@ -512,6 +567,7 @@
                                         经期情况:
                                     <p>
                                         经期运动：
+                                        <label><input type="radio" value="无" name="jingqi_yundong"/>无</label>
                                         <label><input type="radio" value="有" name="jingqi_yundong"/>有</label>
                                         <label><input type="radio" value="偶尔" name="jingqi_yundong"/>偶尔</label>
                                         <label><input type="radio" value="经常" name="jingqi_yundong"/>经常</label>
@@ -519,6 +575,7 @@
                                     </p>
                                     <p>
                                         经期感冒：
+                                        <label><input type="radio" value="无" name="jingqi_ganmao"/>无</label>
                                         <label><input type="radio" value="有" name="jingqi_ganmao"/>有</label>
                                         <label><input type="radio" value="偶尔" name="jingqi_ganmao"/>偶尔</label>
                                         <label><input type="radio" value="经常" name="jingqi_ganmao"/>经常</label>
@@ -526,6 +583,7 @@
                                     </p>
                                     <p>
                                         经期同房：
+                                        <label><input type="radio" value="无" name="jingqi_tongfang"/>无</label>
                                         <label><input type="radio" value="有" name="jingqi_tongfang"/>有</label>
                                         <label><input type="radio" value="偶尔" name="jingqi_tongfang"/>偶尔</label>
                                         <label><input type="radio" value="经常" name="jingqi_tongfang"/>经常</label>
@@ -533,6 +591,7 @@
                                     </p>
                                     <p>
                                         经期着凉：
+                                        <label><input type="radio" value="无" name="jingqi_zhaoliang"/>无</label>
                                         <label><input type="radio" value="有" name="jingqi_zhaoliang"/>有</label>
                                         <label><input type="radio" value="偶尔" name="jingqi_zhaoliang"/>偶尔</label>
                                         <label><input type="radio" value="经常" name="jingqi_zhaoliang"/>经常</label>
@@ -589,42 +648,82 @@
                                     <p>
                                         避孕措施：
                                     <p>
+                                        <label><input name="prevent_wu" type="checkbox" value="true"/>无</label>
                                         <label><input name="prevent_jieza" type="checkbox" value="true"/>结扎</label>
                                         <label><input name="prevent_jieyuqi" type="checkbox" value="true"/>宫内节育器</label>
                                         <label><input name="prevent_biyuntao" type="checkbox" value="true"/>避孕套</label>
                                         <label><input name="prevent_biyunyao" type="checkbox" value="true"/>口服避孕药</label>
                                     </p>
                                     <p>
-                                        一级亲属（母亲、姐妹、女儿）异常子宫出血史:
-                                    <p>
-                                        <label><input type="radio" value="无" name="pastfamily_womb_blood"/>无</label>
-                                        <label><input type="radio" value="有" name="pastfamily_womb_blood"/>有</label>
-                                        <label><input type="radio" value="不详" name="pastfamily_womb_blood"/>不详</label>
-                                    </p>
-                                    <p>
-                                        是否为排卵障碍性:
-                                    <p>
-                                        <label><input type="radio" value="是" name="pastfamily_ovulation"/>是</label>
-                                        <label><input type="radio" value="否" name="pastfamily_ovulation"/>否</label>
+                                            一级亲属（母亲、姐妹、女儿）异常子宫出血史:
+                                            <p>
+                                                <label><input type="radio" value="无" name="pastfamily_womb_blood" onchange="div_womb_blood_no()"/>无</label>
+                                                <label><input type="radio" value="有" name="pastfamily_womb_blood" onchange="div_womb_blood_yes()"/>有</label>
+                                                <label><input type="radio" value="不详" name="pastfamily_womb_blood" onchange="div_womb_blood_no()"/>不详</label>
+                                            </p>
+                                                <script>
+                                                    function div_womb_blood_yes () {
+                                                        // $("input[name='pastfamily_ovulation']").prop("checked", false);
+                                                        $("#div-ovulation").show();
+                                                    }
+                                                    function div_womb_blood_no () {
+                                                        $("input[name='pastfamily_ovulation']").prop("checked", false);
+                                                        $("#div-ovulation").hide();
+                                                    }
+                                                </script>
+                                            <div id="div-ovulation">  
+                                                <p>
+                                                    是否为排卵障碍性:
+                                                <p>
+                                                    <label><input type="radio" value="是" name="pastfamily_ovulation"/>是</label>
+                                                    <label><input type="radio" value="否" name="pastfamily_ovulation"/>否</label>
+                                                    <label><input type="radio" value="不详" name="pastfamily_ovulation"/>不详</label>
+                                                </p>
+                                            </div>
 
-                                    </p>
-                                    <p>
-                                        一级亲属（母亲、姐妹、女儿）其它病史：
-                                    <p>
-                                        <label><input name="pastfamily_wu" type="checkbox" value="true"/>无</label>
-                                        <label><input name="pastfamily_xinzangbing" type="checkbox" value="true"/>甲状腺相关疾病</label>
-                                        <label><input name="pastfamily_duonangluanchao" type="checkbox" value="true"/>多囊卵巢综合征</label>
-
-                                        <label><input name="pastfamily_tangniaobing" type="checkbox" value="true"/>糖尿病</label>
-
-                                        <label><input name="pastfamily_buxiang" type="checkbox" value="true"/>不详</label>
-                                        <label>其它说明:<input type="text" id="pastfamily_qita" name="pastfamily_qita" value="无"/></label>
-                                    </p>
+                                            <p>
+                                            一级亲属（母亲、姐妹、女儿）其它病史：
+                                            <p>
+                                                <label><input type="radio" value="无" name="pastfamily_disease" onchange="div_disease_no()"/>无</label>
+                                                <label><input type="radio" value="有" name="pastfamily_disease" onchange="div_disease_yes()"/>有</label>
+                                                <label><input type="radio" value="不详" name="pastfamily_disease" onchange="div_disease_no()"/>不详</label>
+                                            </p>
+                                                <script>
+                                                    function div_disease_yes () {
+                                                        // $("input[name='pastfamily_ovulation']").prop("checked", false);
+                                                        $("input[name='pastfamily_qita']").prop("disabled", false);
+                                                        $("#div-disease").show();
+                                                    }
+                                                    function div_disease_no () {
+                                                        $("input[name='pastfamily_xinzangbing']").prop("checked", false);
+                                                        $("input[name='pastfamily_duonangluanchao']").prop("checked", false);
+                                                        $("input[name='pastfamily_tangniaobing']").prop("checked", false);
+                                                        $("input[name='pastfamily_buxiang']").prop("checked", false);
+                                                        $("input[name='pastfamily_qita']").prop("disabled", true);
+                                                        $("#div-disease").hide();
+                                                    }
+                                                </script>
+                                            <div id="div-disease">
+                                                <p>
+                                                    <label><input name="pastfamily_xinzangbing" type="checkbox" value="true"/>甲状腺相关疾病</label>
+                                                    <label><input name="pastfamily_duonangluanchao" type="checkbox" value="true"/>多囊卵巢综合征</label>
+                                                    <label><input name="pastfamily_tangniaobing" type="checkbox" value="true"/>糖尿病</label>
+                                                    <label><input name="pastfamily_buxiang" type="checkbox" value="true"/>不详</label>
+                                                    <label>其它说明:<input type="text" id="pastfamily_qita" name="pastfamily_qita" value=""/></label>
+                                                </p>
+                                            </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </table>
             <div class="modal-footer">
+                <script>
+                    function goback() {
+                        window.history.go(-1);
+                    }
+                </script>
+                <button type="button" class="btn btn-primary" onclick="goback()">上一页</button>
                 <button type="button" class="btn btn-primary historyBtn" id="historyBtn">
                     下一页
                 </button>

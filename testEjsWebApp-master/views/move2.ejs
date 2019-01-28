@@ -66,7 +66,7 @@
                                         <label>其它说明:<input type="text"  id="owner_qita" name="owner_qita" value="无"/></label>
                                     </p>
                                     <p>
-                                        出血量：   
+                                        出血量(24h)：   
                                         <p>
                                     
                                         <label><input type="radio" value="出血量中等,每天约需2-4张卫生巾" name="blood_cond"/>出血量中等,每天约需2-4张卫生巾</label>
@@ -89,16 +89,18 @@
                                         <label><input type="radio" value="其他" name="blood_color"/>其他</label>
                                     </p>
                                     <p>
-                                        出血质地：
-                                    <p>
-                                        <label><input type="radio" value="正常" name="blood_quality"/>正常</label>
-                                        <label><input type="radio" value="粘稠" name="blood_quality"/>粘稠</label>
-                                        <label><input type="radio" value="清稀" name="blood_quality"/>清稀</label>
-                                        <label><input type="radio" value="无血块" name="blood_quality"/>无血块</label>
-                                        <label><input type="radio" value="偶有血块" name="blood_quality"/>偶有血块</label>
-                                        <label><input type="radio" value="夹少量小血块" name="blood_quality"/>夹少量小血块</label>
-                                        <label><input type="radio" value="夹较大血块" name="blood_quality"/>夹较大血块</label>
-                                    </p>
+                                        出血质地:
+                                        <p>(1)
+                                            <label><input type="radio" value="正常" name="blood_quality"/>正常</label>
+                                            <label><input type="radio" value="粘稠" name="blood_quality"/>粘稠</label>
+                                            <label><input type="radio" value="清稀" name="blood_quality"/>清稀</label>
+                                        <p>(2)
+                                            <label><input type="radio" value="无血块" name="blood_block"/>无血块</label>
+                                            <label><input type="radio" value="偶有血块" name="blood_block"/>偶有血块</label>
+                                            <label><input type="radio" value="经常出现血块" name="blood_block"/>经常出现血块</label>
+                                            <label><input type="radio" value="夹少量小血块" name="blood_block"/>夹少量小血块</label>
+                                            <label><input type="radio" value="夹较大血块" name="blood_block"/>夹较大血块</label>
+                                        </p>
                                     <p>
                                         出血特点：
                                     <p>
@@ -144,7 +146,7 @@
                                         <label><input name="face_cangbai" type="checkbox" value="true"/>苍白</label>
                                         <label><input name="face_qingbai" type="checkbox" value="true"/>青白</label>
                                         <label><input name="face_baierfuzhong" type="checkbox" value="true"/>白而浮肿</label>
-                                        <label><input name="face_weihuang" type="checkbox" value="true"/>微黄</label>
+                                        <label><input name="face_weihuang" type="checkbox" value="true"/>萎黄</label>
                                         <label><input name="face_huangzhong" type="checkbox" value="true"/>黄肿</label>
                                         <label><input name="face_chaohong" type="checkbox" value="true"/>潮红</label>
                                         <label><input name="face_huian" type="checkbox" value="true"/>晦黯</label>
@@ -232,7 +234,7 @@
                                         饮食：
                                     <p>
                                         <label><input name="diet_zhengchang" type="checkbox" value="true"/>正常</label>
-                                        <label><input name="diet_nadaishishao" type="checkbox" value="true"/>纳呆食少</label>
+                                        <label><input name="diet_nadaishishao" type="checkbox" value="true"/>食欲不振</label>
                                         <label><input name="diet_shiyuws" type="checkbox" value="true"/>多食易饥</label>
 
                                         <label><input name="diet_xireyin" type="checkbox" value="true"/>喜热饮</label>
@@ -358,6 +360,12 @@
                         </div>
                     </table>
             <div class="modal-footer">
+            <script>
+            	function goback() {
+            		window.history.go(-1);
+            	}
+            </script>
+                <button type="button" class="btn btn-primary" onclick="goback()">上一页</button>
                 <button type="button" class="btn btn-primary summaryBtn" id="summaryBtn">
                     下一页
                 </button>

@@ -88,6 +88,12 @@
                 </div>
             </table>
             <div class="modal-footer">
+                <script>
+                    function goback() {
+                        window.history.go(-1);
+                    }
+                </script>
+                <button type="button" class="btn btn-primary" onclick="goback()">上一页</button>
                 <button type="button" class="btn btn-primary relevantBtn" id="relevantBtn">提交</button>
             </div>
         </form>

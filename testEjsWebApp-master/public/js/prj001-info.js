@@ -52,6 +52,7 @@
                 data: {geninfo_url: $(this).attr("geninfo-url")},
                 success: function(result){
                     if (result !== null) {
+                        // alert($('#minzu-qita').val());
                         $('#geninfoBtn').attr("geninfoBtn-url", result["url"]);
                         //填空
                         $('#serial').val(result["serial"]);
@@ -73,9 +74,19 @@
                         //单选
                         $("input[name='title'][value='"+result["title"]+"']").prop("checked",true);
                         $("input[name='blood_type'][value='"+result["blood_type"]+"']").prop("checked",true);
-                        $("input[name='nation'][value='"+result["nation"]+"']").prop("checked",true);
-                        $("input[name='career'][value='"+result["career"]+"']").prop("checked",true);
                         
+                        // $("#minzu-list option[value='回族']").prop("selected","selected");//选中值
+                        // alert($('#minzu-list option:selected').val());//获取值
+                        if (result["nation"]=="汉族") {
+                            $("input[name='nation'][value='汉族']").prop("checked",true);
+                            $("#minzu-list").prop("disabled", true);
+                        } else {
+                            $("input[name='nation'][value='其他']").prop("checked",true);
+                            $("#minzu-list").prop("disabled", false);
+                            $("#minzu-list option[value='"+result["nation"]+"']").prop("selected","selected");
+                        }
+                        
+                        $("input[name='career'][value='"+result["career"]+"']").prop("checked",true);
                         $("input[name='entrance'][value='"+result["entrance"]+"']").prop("checked",true);
                         $("input[name='culture'][value='"+result["culture"]+"']").prop("checked",true);
                         $("input[name='marriage'][value='"+result["marriage"]+"']").prop("checked",true);
@@ -186,6 +197,7 @@
                             $("input[name='blood_color'][value='"+result["blood_color"]+"']").prop("checked",true);
                             /* 出血质地 */
                             $("input[name='blood_quality'][value='"+result["blood_quality"]+"']").prop("checked",true);
+                            $("input[name='blood_block'][value='"+result["blood_block"]+"']").prop("checked",true);
                             /* 出血特点 */
                             $("input[name='blood_character'][value='"+result["blood_character"]+"']").prop("checked",true);
 
@@ -484,6 +496,7 @@
                             $("input[name='blood_color'][value='"+result["blood_color"]+"']").prop("checked",true);
                             /* 出血质地 */
                             $("input[name='blood_quality'][value='"+result["blood_quality"]+"']").prop("checked",true);
+                            $("input[name='blood_block'][value='"+result["blood_block"]+"']").prop("checked",true);
                             /* 出血特点 */
                             $("input[name='blood_character'][value='"+result["blood_character"]+"']").prop("checked",true);
                             $("input[name='first_time'][value='"+result["first_time"]+"']").prop("checked",true);
@@ -591,17 +604,31 @@
                             $("input:checkbox[name='prevent_jieyuqi']").prop('checked',result["prevent_jieyuqi"]);
                             $("input:checkbox[name='prevent_biyuntao']").prop('checked',result["prevent_biyuntao"]);
                             $("input:checkbox[name='prevent_biyunyao']").prop('checked',result["prevent_biyunyao"]);
-                            
-                            $("input[name='pastfamily_womb_blood'][value='"+result["pastfamily_womb_blood"]+"']").prop("checked",true);
-                            $("input[name='pastfamily_ovulation'][value='"+result["pastfamily_ovulation"]+"']").prop("checked",true);
-                            
-                            $("input:checkbox[name='pastfamily_wu']").prop('checked',result["pastfamily_wu"]);
-                            $("input:checkbox[name='pastfamily_xinzangbing']").prop('checked',result["pastfamily_xinzangbing"]);
-                            $("input:checkbox[name='pastfamily_duonangluanchao']").prop('checked',result["pastfamily_duonangluanchao"]);
-                            $("input:checkbox[name='pastfamily_tangniaobing']").prop('checked',result["pastfamily_tangniaobing"]);
-                            $("input:checkbox[name='pastfamily_buxiang']").prop('checked',result["pastfamily_buxiang"]);
-                            $('#pastfamily_qita').val(result["pastfamily_qita"]);
-                            
+                            //一级亲属（母亲、姐妹、女儿）异常子宫出血史
+                            if (result["pastfamily_ovulation"] != null) {
+                                $("input[name='pastfamily_womb_blood'][value='有']").prop("checked", true);//触发 展开 动作
+                                $("input[name='pastfamily_ovulation'][value='"+result["pastfamily_ovulation"]+"']").prop("checked",true);
+                            } else {
+                                $("input[name='pastfamily_womb_blood'][value='无']").prop("checked", true);//触发 收回 动作
+                                $("input[name='pastfamily_womb_blood'][value='无']").trigger("onchange");//触发 收回 动作
+                            }
+                            //一级亲属（母亲、姐妹、女儿）其它病史
+                            if (result["pastfamily_xinzangbing"] != (null || false) ||
+                                result["pastfamily_duonangluanchao"] != (null || false) || 
+                                result["pastfamily_tangniaobing"] != (null || false) ||
+                                result["pastfamily_buxiang"] != (null || false) ||
+                                result["pastfamily_qita"] != (null || '')) {
+                                $("input[name='pastfamily_disease'][value='有']").prop("checked", true);//触发 展开 动作
+                                $("input:checkbox[name='pastfamily_xinzangbing']").prop('checked',result["pastfamily_xinzangbing"]);
+                                $("input:checkbox[name='pastfamily_duonangluanchao']").prop('checked',result["pastfamily_duonangluanchao"]);
+                                $("input:checkbox[name='pastfamily_tangniaobing']").prop('checked',result["pastfamily_tangniaobing"]);
+                                $("input:checkbox[name='pastfamily_buxiang']").prop('checked',result["pastfamily_buxiang"]);
+                                $('#pastfamily_qita').val(result["pastfamily_qita"]);
+                            } else {
+                                $("input[name='pastfamily_disease'][value='无']").prop("checked", true);//触发 收回 动作
+                                $("input[name='pastfamily_disease'][value='无']").trigger("onchange");//触发 收回 动作
+                            }
+
                             $("input:checkbox[name='pasthistory_yindaoyan']").prop('checked',result["pasthistory_yindaoyan"]);
                             $("input:checkbox[name='pasthistory_zigongneimoyan']").prop('checked',result["pasthistory_zigongneimoyan"]);
                             $("input:checkbox[name='pasthistory_zigongneimoyiwei']").prop('checked',result["pasthistory_zigongneimoyiwei"]);
@@ -629,15 +656,32 @@
                             
                             $("input[name='body_cond'][value='"+result["body_cond"]+"']").prop("checked",true);
                             $("input[name='career_labor'][value='"+result["career_labor"]+"']").prop("checked",true);
-                            $("input[name='phycial_exercise'][value='"+result["phycial_exercise"]+"']").prop("checked",true);
                             
-                            $("input:checkbox[name='reducefat_ever']").prop('checked',result["reducefat_ever"]);
-                            $('#reducefat_persist').val(result["reducefat_persist"]);
-                            
-                            $("input:checkbox[name='reducefat_yundong']").prop('checked',result["reducefat_yundong"]);
-                            $("input:checkbox[name='reducefat_jieshi']").prop('checked',result["reducefat_jieshi"]);
-                            $("input:checkbox[name='reducefat_yaowu']").prop('checked',result["reducefat_yaowu"]);
-                            $('#reducefat_qita').val(result["reducefat_qita"]);
+                            //体育锻炼
+                            if (result["physical_exercise"]!=null || result["physical_intensity"]!=null) {
+                                $("input[name='physical'][value='有']").prop("checked", true);//触发 展开 动作
+                                $("input[name='physical_exercise'][value='"+result["physical_exercise"]+"']").prop("checked",true);
+                                $("input[name='physical_intensity'][value='"+result["physical_intensity"]+"']").prop("checked",true);
+                            } else {
+                                $("input[name='physical'][value='无']").prop("checked", true);//触发 收起 动作
+                                $("input[name='physical'][value='无']").trigger("onchange");//触发 收起 动作
+                            }
+                            //减肥情况
+                            if (   result["reducefat_persist"] !=(null || '')
+                                || result["reducefat_jieshi"] !=(null || false)
+                                || result["reducefat_yaowu"] !=(null || false)
+                                || result["reducefat_yundong"] !=(null || false)
+                                || result["reducefat_qita"] !=(null || '') ) {
+                                $("input[name='reducefat'][value='有']").prop("checked", true);//触发 展开 动作
+                                $('#reducefat_persist').val(result["reducefat_persist"]);
+                                $("input:checkbox[name='reducefat_yundong']").prop('checked',result["reducefat_yundong"]);
+                                $("input:checkbox[name='reducefat_jieshi']").prop('checked',result["reducefat_jieshi"]);
+                                $("input:checkbox[name='reducefat_yaowu']").prop('checked',result["reducefat_yaowu"]);
+                                $('#reducefat_qita').val(result["reducefat_qita"]);
+                            } else {
+                                $("input[name='reducefat'][value='无']").prop("checked", true);//触发 收起 动作
+                                $("input[name='reducefat'][value='无']").trigger("onchange");//触发 收起 动作
+                            }
 
                             display_accompany();
                         } else {
@@ -1040,7 +1084,7 @@
                             $("input:checkbox[name='hormone_gn']").prop('checked',result["hormone_gn"]);
                             $('#hormone_qita').val(result["hormone_qita"]);
 
-                            $('#guagongshu').val(result["guagongshu"]);
+                            $("input[name='guagongshu'][value='"+result["guagongshu"]+"']").prop("checked", true);
                             $("input:checkbox[name='zhou_yun']").prop('checked',result["zhou_yun"]);
                             $("input:checkbox[name='zhou_kou']").prop('checked',result["zhou_kou"]);
                             $("input:checkbox[name='zhou_ci']").prop('checked',result["zhou_ci"]);
