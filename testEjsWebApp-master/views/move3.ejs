@@ -27,51 +27,49 @@
 </head>
 <body>
     <script>
-            $(document).ready(function () {
-                $("#normal").hide();
-                $("#abnormal").hide();
-                $("#historyBtn").click(function () {
-                    $.ajax({
-                            url: "/mobile/move3",
-                            type: "POST",
-                            // dataType: "json",
-                            data: $('#form-history').serializeArray(),
-                            success: function (result) {
-                                // alert(result.form_all);
-                                alert("继续填写下一页");
-                                window.location.href = "move4";
-                            },
-                            error:  function () {
-                                alert("请求错误");
-                            },
-                    })
+        $(document).ready(function () {
+            $("#normal").hide();
+            $("#abnormal").hide();
+            $("#historyBtn").click(function () {
+                $.ajax({
+                        url: "/mobile/move3",
+                        type: "POST",
+                        // dataType: "json",
+                        data: $('#form-history').serializeArray(),
+                        success: function (result) {
+                            // alert(result.form_all);
+                            alert("继续填写下一页");
+                            window.location.href = "move4";
+                        },
+                        error:  function () {
+                            alert("请求错误");
+                        },
                 })
             })
-        </script>
+        })
+    </script>
     <!-- 患者病史 选择显示 -->
     <script>
-            function display_accompany(){
-            var val = $('input[name="menstruation_is_accompany"]:checked').val();
-            if (val=="true") {
-                $('.accompany').show();
-            } else {
-                $('.accompany').hide();
-            }
-            }
-        </script>
+        function display_accompany(){
+        var val = $('input[name="menstruation_is_accompany"]:checked').val();
+        if (val=="true") {
+            $('.accompany').show();
+        } else {
+            $('.accompany').hide();
+        }
+        }
+    </script>
         <!-- 患者病史 选择显示 -->
 <div class="modal-content">
-        <div class="modal-header no-padding">
-            <div class="table-header">
-
-                患者病史
-            </div>
+    <div class="modal-header no-padding">
+        <div class="table-header center">
+            患者病史
         </div>
+    </div>
 
-        <form class="modal-body no-padding" id="form-history">
-            <table class="table table-striped table-bordered table-hover no-margin-bottom no-border-top">
-                <div class="modal-body">
-                    <div class="row">
+    <form class="modal-body no-padding" id="form-history">
+        <div class="modal-body">
+            <div class="row">
                         <div class="col-xs-12 col-sm-12">
                             <input type="hidden" class="person" name="person" id="person-history"/>
 
@@ -644,24 +642,21 @@
                                         <label>其他<input type="text" id="pastfamily_qita" name="pastfamily_qita" value=""/></label>
                                 </div>
                         </div>
-                    </div>
-                </div>
-            </table>
-            <div class="modal-footer">
-                <script>
-                    function goback() {
-                        window.history.go(-1);
-                    }
-                </script>
-                <button type="button" class="btn btn-primary" onclick="goback()">上一页</button>
-                <button type="button" class="btn btn-primary historyBtn" id="historyBtn">
-                    下一页
-                </button>
             </div>
-        </form>
-    </div>
-
-
+        </div>
+        <div class="modal-footer">
+            <script>
+                function goback() {
+                    window.history.go(-1);
+                }
+            </script>
+            <button type="button" class="btn btn-primary" onclick="goback()">上一页</button>
+            <button type="button" class="btn btn-primary historyBtn" id="historyBtn">
+                下一页
+            </button>
+        </div>
+    </form>
+</div>
 
 <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
     <i class="icon-double-angle-up icon-only bigger-110"></i>

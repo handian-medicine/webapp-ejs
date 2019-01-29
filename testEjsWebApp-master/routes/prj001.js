@@ -95,7 +95,8 @@ router.get('/', function (req, res, next) {
                         previouspage: previousPage,
                         nextpage: nextPage,
                         totalCount: archiveobjs.count,
-                        searchname: retschname
+                        searchname: retschname,
+                        code: archiveobjs.code
                     });
                 } else {
                     retschname = params["keyword"];
@@ -108,7 +109,8 @@ router.get('/', function (req, res, next) {
                         previouspage: previousPage,
                         nextpage: nextPage,
                         totalCount: archiveobjs.count,
-                        searchname: retschname
+                        searchname: retschname,
+                        code: archiveobjs.code
                     });
                 }
                 /*   分页测试  */
@@ -229,7 +231,8 @@ router.get('/', function (req, res, next) {
                                     previouspage: previousPage,
                                     nextpage: nextPage,
                                     totalCount: archiveobjs.count,
-                                    searchname: retschname
+                                    searchname: retschname,
+                                    code: archiveobjs.code
                                 });
                             } else {
                                 retschname = params["keyword"];
@@ -242,7 +245,8 @@ router.get('/', function (req, res, next) {
                                     previouspage: previousPage,
                                     nextpage: nextPage,
                                     totalCount: archiveobjs.count,
-                                    searchname: retschname
+                                    searchname: retschname,
+                                    code: archiveobjs.code
                                 });
                             }
                             /*   分页测试  */

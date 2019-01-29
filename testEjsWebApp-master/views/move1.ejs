@@ -48,11 +48,11 @@
 </script> -->
 <script>
     $(document).ready(function () {
-        // $("#form-geninfo").submit(function (e) {
-            // alert("e.preventDefault()");
-            // e.preventDefault();
-            $("#form-geninfo").validate({
-                rules:{
+    // $("#form-geninfo").submit(function (e) {
+        // alert("e.preventDefault()");
+        // e.preventDefault();
+        $("#form-geninfo").validate({
+            rules:{
                     // recdate:{
                     //     required:true
                     // },
@@ -93,7 +93,7 @@
                         rangelength:[0,6]
                     }
                 },
-                messages:{
+            messages:{
                     recdate:{required:"请填写该字段"},
                     serial:{required:"请填写该字段"},
                     hospital:{required:"请填写该字段"},
@@ -121,39 +121,38 @@
                         rangelength:$.validator.format("数值长度必须在{0}-{1}之间,包含小数点")
                     },
                 },
-                submitHandler:function () {
-                    // alert("验证成功进入");
-                    $('#address').val( $('#province').val() + $('#city').val() + $('#adrs').val() );
-                    $.ajax({
-                        url: "/mobile/move1",
-                        type: "POST",
-                        // dataType: "json",
-                        data: $('#form-geninfo').serializeArray(),
-                        success: function (result) {
-                            // alert(result.form_all);
-                            alert("继续填写下一页");
-                            window.location.href = "move2";
-                        },
-                        error:  function () {
-                            alert("请求错误");
-                        }
-                    })   
-                } 
-            })           
-        // })
+            submitHandler:function () {
+                // alert("验证成功进入");
+                $('#address').val( $('#province').val() + $('#city').val() + $('#adrs').val() );
+                $.ajax({
+                    url: "/mobile/move1",
+                    type: "POST",
+                    // dataType: "json",
+                    data: $('#form-geninfo').serializeArray(),
+                    success: function (result) {
+                        // alert(result.form_all);
+                        alert("继续填写下一页");
+                        window.location.href = "move2";
+                    },
+                    error:  function () {
+                        alert("请求错误");
+                    }
+                })   
+            } 
+        })           
+    // })
     })
 </script>
 
 <div class="modal-content">
     <div class="modal-header no-padding">
-        <div class="table-header">
+        <div class="table-header center">
             基本信息
         </div>
     </div>
 
     <form class="modal-body no-padding" id="form-geninfo" onsubmit="return false;">
-        <table class="table table-striped table-bordered table-hover no-margin-bottom no-border-top">
-            <div class="modal-body">
+        <div class="modal-body">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12">
                         <!-- <input type="hidden" class="person" name="person" id="person-geninfo"/> -->
@@ -372,8 +371,7 @@
                             <label><input name="qita" type="checkbox" value="true"/>其他</label>
                     </div>
                 </div>
-            </div>
-        </table>
+        </div>
         <div class="modal-footer form-group">
             <button type="submit" class="btn btn-primary" id="geninfoBtn">
                 下一页
@@ -383,77 +381,17 @@
 
 </div>
 
-
-
 <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
         <i class="icon-double-angle-up icon-only bigger-110"></i>
 </a>
 
-
-
-<!--[if !IE]> -->
 <script src="../public/js/Province_city.js"></script>
-<!-- <script type="text/javascript">
-    window.jQuery || document.write("<script src='../public/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
-</script> -->
-
-<!-- <![endif]-->
-
 <script type="text/javascript">
     if("ontouchend" in document) document.write("<script src='../public/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
 </script>
-
 <script src="../public/js/typeahead-bs2.min.js"></script>
-
-<!-- page specific plugin scripts -->
-<!-- <script src="../public/js/jquery.dataTables.min.js"></script>
-<script src="../public/js/jquery.dataTables.bootstrap.js"></script> -->
-<!-- ace scripts -->
-
 <script src="../public/js/ace-elements.min.js"></script>
 <script src="../public/js/ace.min.js"></script>
 
-<!-- inline scripts related to this page -->
-<!-- <script type="text/javascript">
-    jQuery(function($) {
-        var oTable1 = $('#sample-table-2').dataTable( {
-            "aoColumns": [
-                { "bSortable": false },
-                null, null,null, null, null,
-                { "bSortable": false }
-            ] } );
-
-
-        $('table th input:checkbox').on('click' , function(){
-            var that = this;
-            $(this).closest('table').find('tr > td:first-child input:checkbox')
-                .each(function(){
-                    this.checked = that.checked;
-                    $(this).closest('tr').toggleClass('selected');
-                });
-
-        });
-
-
-        $('[data-rel="tooltip"]').tooltip({placement: tooltip_placement});
-        function tooltip_placement(context, source) {
-            var $source = $(source);
-            var $parent = $source.closest('table')
-            var off1 = $parent.offset();
-            var w1 = $parent.width();
-
-            var off2 = $source.offset();
-            var w2 = $source.width();
-
-            if( parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2) ) return 'right';
-            return 'left';
-        }
-    })
-</script> -->
-
-<!-- <script type="text/javascript">
-    var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-    document.write(unescape("%3Cscript src='" + _bdhmProtocol + ""));
-</script> -->
 </body>
 </html>

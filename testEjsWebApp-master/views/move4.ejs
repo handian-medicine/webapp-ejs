@@ -21,37 +21,35 @@
 </head>
 <body>
     <script>
-            $(document).ready(function () {
-                $("#relevantBtn").click(function () {
-                    $.ajax({
-                            url: "/mobile/move4",
-                            type: "POST",
-                            // dataType: "json",
-                            data: $('#form-relevant').serializeArray(),
-                            success: function (result) {
-                                alert(result.msg);
-                                $(".relevantBtn").attr("disabled", true);
-                            },
-                            error:  function (result) {
-                                alert(result.msg);                                
-                            },
-                    })
+        $(document).ready(function () {
+            $("#relevantBtn").click(function () {
+                $.ajax({
+                        url: "/mobile/move4",
+                        type: "POST",
+                        // dataType: "json",
+                        data: $('#form-relevant').serializeArray(),
+                        success: function (result) {
+                            alert(result.msg);
+                            $(".relevantBtn").attr("disabled", true);
+                        },
+                        error:  function (result) {
+                            alert(result.msg);                                
+                        },
                 })
             })
-        </script>
+        })
+    </script>
 
 <div class="modal-content">
-        <div class="modal-header no-padding">
-            <div class="table-header">
-
-                相关检查
-            </div>
+    <div class="modal-header no-padding">
+        <div class="table-header center">
+            相关检查
         </div>
-
-        <form class="modal-body no-padding" id="form-relevant">
-            <table class="table table-striped table-bordered table-hover no-margin-bottom no-border-top">
-                <div class="modal-body">
-                    <div class="row">
+    </div>
+    
+    <form class="modal-body no-padding" id="form-relevant">
+        <div class="modal-body">
+            <div class="row">
                         <div class="col-xs-12 col-sm-12">
                             <!-- <input type="hidden" class="person" name="person" id="person-other"/> -->
                             <p>
@@ -84,20 +82,19 @@
                                 <label><input type="radio" value="30-60" name="accessory_hgb_value"/>30-60</label>
                             </p>
                         </div>
-                    </div>
-                </div>
-            </table>
-            <div class="modal-footer">
-                <script>
-                    function goback() {
-                        window.history.go(-1);
-                    }
-                </script>
-                <button type="button" class="btn btn-primary" onclick="goback()">上一页</button>
-                <button type="button" class="btn btn-primary relevantBtn" id="relevantBtn">提交</button>
             </div>
-        </form>
-    </div>
+        </div>
+        <div class="modal-footer">
+            <script>
+                function goback() {
+                    window.history.go(-1);
+                }
+            </script>
+            <button type="button" class="btn btn-primary" onclick="goback()">上一页</button>
+            <button type="button" class="btn btn-primary relevantBtn" id="relevantBtn">提交</button>
+        </div>
+    </form>
+</div>
 
 
 
