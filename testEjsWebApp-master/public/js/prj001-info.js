@@ -965,25 +965,10 @@
 
                             $("input[name='to_cure'][value='"+result["to_cure"]+"']").prop("checked",true);
 
-                            $("input:checkbox[name='xuzheng_bupi']").prop('checked',result["xuzheng_bupi"]);
-                            $("input:checkbox[name='xuzheng_bushen']").prop('checked',result["xuzheng_bushen"]);
-                            $("input:checkbox[name='xuzheng_buxue']").prop('checked',result["xuzheng_buxue"]);
-                            $("input:checkbox[name='xuzheng_fuyang']").prop('checked',result["xuzheng_fuyang"]);
-                            $("input:checkbox[name='xuzheng_buqi']").prop('checked',result["xuzheng_buqi"]);
-                            $("input:checkbox[name='xuzheng_yangyin']").prop('checked',result["xuzheng_yangyin"]);
-                            $("input:checkbox[name='xuzheng_zishen']").prop('checked',result["xuzheng_zishen"]);
-                            $("input:checkbox[name='xuzheng_zhuyang']").prop('checked',result["xuzheng_zhuyang"]);
+                            $("input[name='xuzheng_one'][value='"+result["xuzheng_one"]+"']").prop("checked",true);
                             $('#xuzheng_qita').val(result["xuzheng_qita"]);
 
-                            $("input:checkbox[name='shizheng_sanhan']").prop('checked',result["shizheng_sanhan"]);
-                            $("input:checkbox[name='shizheng_jieyu']").prop('checked',result["shizheng_jieyu"]);
-                            $("input:checkbox[name='shizheng_jianghuo']").prop('checked',result["shizheng_jianghuo"]);
-                            $("input:checkbox[name='shizheng_huatan']").prop('checked',result["shizheng_huatan"]);
-                            $("input:checkbox[name='shizheng_qingre']").prop('checked',result["shizheng_qingre"]);
-                            $("input:checkbox[name='shizheng_liqi']").prop('checked',result["shizheng_liqi"]);
-                            $("input:checkbox[name='shizheng_huayu']").prop('checked',result["shizheng_huayu"]);
-                            $("input:checkbox[name='shizheng_chushi']").prop('checked',result["shizheng_chushi"]);
-                            $("input:checkbox[name='shizheng_lishi']").prop('checked',result["shizheng_lishi"]);
+                            $("input[name='shizheng_one'][value='"+result["shizheng_one"]+"']").prop("checked",true);
                             $('#shizheng_qita').val(result["shizheng_qita"]);
 
                             $("input:checkbox[name='xushi_yangyin']").prop('checked',result["xushi_yangyin"]);
