@@ -500,8 +500,18 @@
                             /* 出血特点 */
                             $("input[name='blood_character'][value='"+result["blood_character"]+"']").prop("checked",true);
                             $("input[name='first_time'][value='"+result["first_time"]+"']").prop("checked",true);
-                            $("input[name='normal'][value='"+result["normal"]+"']").prop("checked",true);
-                            $("input[name='abnormal'][value='"+result["abnormal"]+"']").prop("checked",true);
+
+                            if (result["normal"] != null)
+                            {
+                                $("input[name='cycle'][value='尚规律']").prop("checked",true);
+                                $("input[name='normal'][value='"+result["normal"]+"']").prop("checked",true);
+                            }
+                            if (result["abnormal"] != null)
+                            {
+                                $("input[name='cycle'][value='不规律']").prop("checked",true);
+                                $("input[name='abnormal'][value='"+result["abnormal"]+"']").prop("checked",true);
+                            }
+                            
                             $("input[name='cyclicity_sum'][value='"+result["cyclicity_sum"]+"']").prop("checked",true);
                             
                             $("input[name='menstruation_is_accompany'][value='"+result["menstruation_is_accompany"]+"']").prop("checked",true);
@@ -578,15 +588,10 @@
                             
                             $('#last_time').val(result["last_time"]);
                             
-                            $("input:checkbox[name='leucorrhea_liangke']").prop('checked',result["leucorrhea_liangke"]);
-                            $("input:checkbox[name='leucorrhea_liangshao']").prop('checked',result["leucorrhea_liangshao"]);
-                            $("input:checkbox[name='leucorrhea_liangduo']").prop('checked',result["leucorrhea_liangduo"]);
-                            $("input:checkbox[name='leucorrhea_touming']").prop('checked',result["leucorrhea_touming"]);
-                            $("input:checkbox[name='leucorrhea_sehuang']").prop('checked',result["leucorrhea_sehuang"]);
-                            $("input:checkbox[name='leucorrhea_sebai']").prop('checked',result["leucorrhea_sebai"]);
-                            $("input:checkbox[name='leucorrhea_seqing']").prop('checked',result["leucorrhea_seqing"]);
-                            $("input:checkbox[name='leucorrhea_zhiqingxi']").prop('checked',result["leucorrhea_zhiqingxi"]);
-                            $("input:checkbox[name='leucorrhea_zhinianchou']").prop('checked',result["leucorrhea_zhinianchou"]);
+                            $("input[name='leucorrhea_quantity'][value='"+result["leucorrhea_quantity"]+"']").prop("checked",true);
+                            $("input[name='leucorrhea_color'][value='"+result["leucorrhea_color"]+"']").prop("checked",true);
+                            $("input[name='leucorrhea_feature'][value='"+result["leucorrhea_feature"]+"']").prop("checked",true);
+                            
                             $("input[name='marriage'][value='"+result["marriage"]+"']").prop("checked",true);
 
                             $('#pastpreg_yuncount').val(result["pastpreg_yuncount"]);
@@ -613,11 +618,12 @@
                                 $("input[name='pastfamily_womb_blood'][value='无']").trigger("onchange");//触发 收回 动作
                             }
                             //一级亲属（母亲、姐妹、女儿）其它病史
-                            if (result["pastfamily_xinzangbing"] != (null || false) ||
-                                result["pastfamily_duonangluanchao"] != (null || false) || 
-                                result["pastfamily_tangniaobing"] != (null || false) ||
-                                result["pastfamily_buxiang"] != (null || false) ||
-                                result["pastfamily_qita"] != (null || '')) {
+                            if ( (result["pastfamily_xinzangbing"] != null && result["pastfamily_xinzangbing"] != false) ||
+                                 (result["pastfamily_duonangluanchao"] != null && result["pastfamily_duonangluanchao"] != false) ||
+                                 (result["pastfamily_tangniaobing"] != null && result["pastfamily_tangniaobing"] != false) ||
+                                 (result["pastfamily_buxiang"] != null && result["pastfamily_buxiang"] != false) ||
+                                 (result["pastfamily_qita"] != null && result["pastfamily_qita"] != false)
+                                ) {
                                 $("input[name='pastfamily_disease'][value='有']").prop("checked", true);//触发 展开 动作
                                 $("input:checkbox[name='pastfamily_xinzangbing']").prop('checked',result["pastfamily_xinzangbing"]);
                                 $("input:checkbox[name='pastfamily_duonangluanchao']").prop('checked',result["pastfamily_duonangluanchao"]);
@@ -667,11 +673,12 @@
                                 $("input[name='physical'][value='无']").trigger("onchange");//触发 收起 动作
                             }
                             //减肥情况
-                            if (   result["reducefat_persist"] !=(null || '')
-                                || result["reducefat_jieshi"] !=(null || false)
-                                || result["reducefat_yaowu"] !=(null || false)
-                                || result["reducefat_yundong"] !=(null || false)
-                                || result["reducefat_qita"] !=(null || '') ) {
+                            if (   (result["reducefat_persist"] != null && result["reducefat_persist"] != '')
+                                || result["reducefat_jieshi"] !=false
+                                || result["reducefat_yaowu"] !=false
+                                || result["reducefat_yundong"] !=false
+                                || (result["reducefat_qita"] != null && result["reducefat_qita"] != '')
+                                ) {
                                 $("input[name='reducefat'][value='有']").prop("checked", true);//触发 展开 动作
                                 $('#reducefat_persist').val(result["reducefat_persist"]);
                                 $("input:checkbox[name='reducefat_yundong']").prop('checked',result["reducefat_yundong"]);
@@ -757,8 +764,11 @@
                             }
                             $('#relevantBtn').attr("relevantBtn-url", result["url"]);
                             
+                            $("input:checkbox[name='body_wu']").prop('checked',result["body_wu"]);
                             $("input:checkbox[name='menstruation_check']").prop('checked',result["menstruation_check"]);
                             $("input:checkbox[name='body_check']").prop('checked',result["body_check"]);
+                            
+                            $("input:checkbox[name='accessory_wu']").prop('checked',result["accessory_wu"]);
                             $("input:checkbox[name='accessory_chaosheng']").prop('checked',result["accessory_chaosheng"]);
                             $("input:checkbox[name='accessory_quanxuexibaojishu']").prop('checked',result["accessory_quanxuexibaojishu"]);
                             $("input[name='accessory_hgb_value'][value='"+result["accessory_hgb_value"]+"']").prop("checked",true);
@@ -1028,6 +1038,7 @@
                             $("input:checkbox[name='zhong_xushi_zhibo']").prop('checked',result["zhong_xushi_zhibo"]);
                             $('#zhong_xushi_qita').val(result["zhong_xushi_qita"]);
 
+                            $("input:checkbox[name='hormone_wu']").prop('checked',result["hormone_wu"]);
                             $("input:checkbox[name='hormone_yun']").prop('checked',result["hormone_yun"]);
                             $("input:checkbox[name='hormone_ci']").prop('checked',result["hormone_ci"]);
                             $("input:checkbox[name='hormone_xiong']").prop('checked',result["hormone_xiong"]);
@@ -1036,12 +1047,14 @@
                             $('#hormone_qita').val(result["hormone_qita"]);
 
                             $("input[name='guagongshu'][value='"+result["guagongshu"]+"']").prop("checked", true);
+                            $("input:checkbox[name='zhou_wu']").prop('checked',result["zhou_wu"]);
                             $("input:checkbox[name='zhou_yun']").prop('checked',result["zhou_yun"]);
                             $("input:checkbox[name='zhou_kou']").prop('checked',result["zhou_kou"]);
                             $("input:checkbox[name='zhou_ci']").prop('checked',result["zhou_ci"]);
                             $("input:checkbox[name='zhou_zuo']").prop('checked',result["zhou_zuo"]);
                             $('#zhou_qita').val(result["zhou_qita"]);
 
+                            $("input:checkbox[name='cu_wu']").prop('checked',result["cu_wu"]);
                             $("input:checkbox[name='cu_mifen']").prop('checked',result["cu_mifen"]);
                             $("input:checkbox[name='cu_rongmao']").prop('checked',result["cu_rongmao"]);
                             $("input:checkbox[name='cu_niao']").prop('checked',result["cu_niao"]);
@@ -1050,6 +1063,7 @@
                             $("input:checkbox[name='cu_cu']").prop('checked',result["cu_cu"]);
                             $('#cu_qita').val(result["cu_qita"]);
 
+                            $("input:checkbox[name='shu_wu']").prop('checked',result["shu_wu"]);
                             $("input:checkbox[name='shu_neimo']").prop('checked',result["shu_neimo"]);
                             $("input:checkbox[name='shu_qiechu']").prop('checked',result["shu_qiechu"]);
                             $('#shu_qita').val(result["shu_qita"]);

@@ -210,7 +210,6 @@
                     <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
 
                         <li class="divider"></li>
-
                         <li>
                             <a href="../logout">
                                 <i class="icon-off"></i>
@@ -321,10 +320,10 @@
                                         录入病例基本信息后,
                                     </li>
 
-                            <li>
-                                <i class="icon-hand-right blue"></i>
-                                请在数据展示页面进行数据操作，
-                            </li>
+                                    <li>
+                                        <i class="icon-hand-right blue"></i>
+                                        请在数据展示页面进行数据操作，
+                                    </li>
 
                                     <li>
                                         <i class="icon-hand-right blue"></i>
@@ -371,183 +370,228 @@
                                         </div>
                                     </div>
 
-                                        <form class="modal-body no-padding" id="form1">
-                                            <table class="table table-striped table-bordered table-hover no-margin-bottom no-border-top">
-                                                <div class="modal-body">
-                                                    <div class="row">
-                                                        <div class="col-xs-12 col-sm-12">
-                                                                
-                                                            <p>
-                                                            就诊日期：
-							                                <input id="recdate" name="recdate" type="text" class="form-control datepicker" />
-
-                                                            <!-- <input type="text" id="recdate" name="recdate" class="form-control hasDatepicker" 
-                                                                   placeholder="日期格式: 20180101或2018-01-01" onblur="date('recdate')" /> -->
-                                                            <!-- <input type="text" id="recdate-ie" name="recdate" class="form-control hasDatepicker" onblur="date('recdate-ie')" /> -->
-                                                            <!-- <input type="date" id="recdate-other" name="recdate" class="form-control hasDatepicker"/> -->
-                                                            </p>
-                                                            <p>
-                                                                问卷编码:<input class="form-control" id="serial" name="serial"
-                                                                    type="text" />
-                                                            </p>
-                                                            <p>
-                                                                医院名称:<input class="form-control" id="hospital" name="hospital"
-                                                                    type="text" />
-                                                            </p>
-                                                            <p>
-                                                                填表专家姓名:<input class="form-control" id="expert" name="expert"
-                                                                    type="text" />
-                                                            </p>
-                                                            <p>
-                                                                职称:
+                                    <form class="modal-body no-padding" id="form1">
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-xs-12 col-sm-12">
+                                                    <input class="form-control" id="address" name="address" type="hidden"/>
+                                                    <table class="table table-striped table-bordered table-hover">
+                                                        <tbody style="color:blue;font-size:15px;">
+                                                            <tr>
+                                                                <td style="vertical-align:middle;">就诊日期</td>
+                                                                <td><input id="recdate" name="recdate" type="text" class="form-control datepicker ace"/></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="vertical-align:middle;">医院名称</td>
+                                                                <td><input class="form-control ace" id="hospital" name="hospital" type="text" /></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="vertical-align:middle;">填表专家姓名</td>
+                                                                <td><input class="form-control ace" id="expert" name="expert" type="text" /></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="vertical-align:middle;">职称</td>
+                                                                <td style="color:black;font-size:14px;">
                                                                     <select name="title" class="form-control">
                                                                         <option value="主任医师">主任医师</option>
                                                                         <option value="副主任医师">副主任医师</option>
                                                                         <option value="主治医师">主治医师</option>
                                                                     </select>
-                                                            </p>
-                                                            <p>
-                                                                患者姓名:<input class="form-control" id="name" name="name"
-                                                                    type="text" />
-                                                            </p>
-                                                            <p>
-                                                                电话:<input class="form-control" id="telephone" name="telephone"
-                                                                    type="text" />
-                                                            </p>
-                                                            <p>
-                                                                年龄:<input class="form-control" type="number" name="age"
-                                                                    id="age" />
-                                                            </p>
-                                                            <p>
-                                                                身高cm:<input class="form-control" type="number" name="height"
-                                                                    id="height" />
-                                                            </p>
-                                                            <p>
-                                                                体重kg:<input class="form-control" type="number" id="weight "
-                                                                    name="weight" />
-                                                            </p>
-															<p>
-                                                                腰围cm:<input class="form-control" type="number" id="waistline"
-                                                                    name="waistline" />
-                                                            </p>
-															<p>
-                                                                臀围cm:<input class="form-control" type="number" id="hipline"
-                                                                    name="hipline" />
-                                                            </p>
-                                                            <p>
-                                                                血型:
-                                                    <select name="blood_type" class="form-control">
-                                                        <option value="A" >A</option>
-                                                        <option value="B">B</option>
-                                                        <option value="O">O</option>
-                                                        <option value="AB">AB</option>
-                                                    </select>
-                                                            </p>
-
-                                                            <p>
-                                                                民族:
-                                                    <select name="nation" class="form-control">
-                                                        <option value="汉族">汉族</option>
-                                                        <option value="其他">其他(回族 、 满族 、内蒙古、 苗族 、藏族 、 布依族等)</option>
-                                                    </select>
-                                                                </p>
-
-                                                                <p>
-                                                                    职业:
-                                                    <select name="career" class="form-control">
-                                                        <option value="学生">学生</option>
-                                                        <option value="个体">个体</option>
-                                                        <option value="农民">农民</option>
-                                                        <option value="军人">军人</option>
-                                                        <option value="工人">工人</option>
-                                                        <option value="财会人员">财会人员</option>
-                                                        <option value="技术人员">技术人员</option>
-                                                        <option value="服务业">服务业</option>
-                                                        <option value="科教文卫">科教文卫</option>
-                                                        <option value="行政管理">行政管理</option>
-                                                        <option value="无业">无业</option>
-                                                        <option value="其它">其它</option>
-                                                    </select>
-                                                                    </p>
-
-                                                                    <p>
-                                                                            病人现住址:
-                                                                        </p >
-                                                                        <input class="form-control" id="address" name="address" type="hidden"/>
-                                                                        <div class="form-group">
-                                                                            <div class="col-sm-3">
-                                                                                <select name="" id="province" class="form-control" >
-                                                                                    <option value=""></option>
-                                                                                </select>
-                                                                            </div>
-                                                                            <div class="col-sm-3">
-                                                                                <select name="" id="city" class="form-control">
-                                                                                    <option value=""></option>
-                                                                                </select>
-                                                                            </div>
-                                                                            <div class="col-sm-6">
-                                                                                <input class="form-control" id="adrs" name="" type="text" placeholder="请填写具体地址"/>
-                                                                            </div>
-                                                                        </div>
-
-                                                                    <p>
-                                                                        病人来源:
-                                                    <select name="entrance" class="form-control">
-                                                        <option value="门诊">门诊</option>
-                                                        <option value="病房">病房</option>
-                                                    </select>
-                                                                    </p>
-
-                                                        <p>
-                                                            文化程度:
-                                                    <select name="culture" class="form-control">
-                                                        <option value="未接受国家教育(文盲)">未接受国家教育(文盲)</option>
-                                                        <option value="小学及以下">小学及以下</option>
-														<option value="初中">初中</option>
-                                                        <option value="高中/中专">高中/中专</option>
-                                                        <option value="大专">大专</option>
-                                                        <option value="本科">本科</option>
-                                                        <option value="研究生及以上">研究生及以上</option>
-                                                    </select>
-                                                                    </p>
-                                                                
-                                                                        <p>
-                                                                            特殊工种环境：
-                                                                            <p>
-                                                    <label><input name="gaowen" type="checkbox" value="true" class="ace"/><span class="lbl">高温</span></label>
-                                                    <label><input name="diwen" type="checkbox" value="true" class="ace"/><span class="lbl">低温</span></label>
-													<label><input name="yeban" type="checkbox" value="true" class="ace"/><span class="lbl">夜班/熬夜</span></label>
-                                                    <label><input name="zaosheng" type="checkbox" value="true" class="ace"/><span class="lbl">噪声</span></label>
-                                                    <label><input name="fushe" type="checkbox" value="true" class="ace"/><span class="lbl">辐射</span></label>
-                                                    <label><input name="huagongyinran" type="checkbox" value="true" class="ace"/><span class="lbl">化工污染</span></label>
-                                                    <label><input name="julieyundong" type="checkbox" value="true" class="ace"/><span class="lbl">剧烈运动</span></label>
-                                                    <label><input name="qiyou" type="checkbox" value="true" class="ace"/><span class="lbl">汽油</span></label>
-													<label><input name="gaokong" type="checkbox" value="true" class="ace"/><span class="lbl">高空</span></label>
-                                                    <label><input name="wu" type="checkbox" value="true" class="ace"/><span class="lbl">无</span></label>
-                                                </p>
-                                                <p>
-                                                    饮食偏好：
-                                                <p>
-                                                    <label><input name="wuteshu" type="checkbox" value="true" class="ace"/><span class="lbl">无特殊</span></label>
-                                                    <label><input name="sushi" type="checkbox" value="true" class="ace"/><span class="lbl">素食</span></label>
-                                                    <label><input name="suan" type="checkbox" value="true" class="ace"/><span class="lbl">酸</span></label>
-                                                    <label><input name="tian" type="checkbox" value="true" class="ace"/><span class="lbl">甜</span></label>
-                                                    <label><input name="xian" type="checkbox" value="true" class="ace"/><span class="lbl">咸</span></label>
-                                                    <label><input name="xinla" type="checkbox" value="true" class="ace"/><span class="lbl">辛辣</span></label>
-                                                    <label><input name="you" type="checkbox" value="true" class="ace"/><span class="lbl">油</span></label>
-                                                    <label><input name="shengleng" type="checkbox" value="true" class="ace"/><span class="lbl">生冷</span></label>
-                                                    <label><input name="kafei" type="checkbox" value="true" class="ace" /><span class="lbl">含咖啡因食物或饮品</span></label>
-                                                    <label><input name="qita" type="checkbox" value="true" class="ace" /><span class="lbl">其他</span></label>
-                                                </p>
-                                                        </div>
-                                                    </div>
+                                                                </td>
+                                                            </tr>   
+                                                            <tr>
+                                                                <td style="vertical-align:middle;">患者姓名</td>
+                                                                <td><input class="form-control"  type="text" name="name" id="name"/></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="vertical-align:middle;">电话</td>
+                                                                <td><input class="form-control"  type="text" name="telephone" id="telephone"/></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="vertical-align:middle;">患者现住址</td>
+                                                                <td>
+                                                                    <div class="col-sm-3">
+                                                                        <select name="" id="province" class="form-control" >
+                                                                            <option value=""></option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="col-sm-3">
+                                                                        <select name="" id="city" class="form-control">
+                                                                            <option value=""></option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="col-sm-6">
+                                                                        <input class="form-control" id="adrs" name="" type="text" placeholder="请填写具体地址"/>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="vertical-align:middle;">患者来源</td>
+                                                                <td style="color:black;font-size:15px;">
+                                                                    <select name="entrance" class="form-control">
+                                                                        <option value="门诊">门诊</option>
+                                                                        <option value="病房">病房</option>
+                                                                    </select>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="vertical-align:middle;">患者年龄</td>
+                                                                <td><input class="form-control"  type="text" name="age" id="age"/></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="vertical-align:middle;">身高cm</td>
+                                                                <td><input class="form-control"  type="text" name="height" id="height"/></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="vertical-align:middle;">体重kg</td>
+                                                                <td><input class="form-control"  type="text" name="weight" id="weight"/></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="vertical-align:middle;">腰围cm</td>
+                                                                <td><input class="form-control"  type="text" name="waistline" id="waistline"/></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="vertical-align:middle;">臀围cm</td>
+                                                                <td><input class="form-control"  type="text" name="hipline" id="hipline"/></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="vertical-align:middle;">血型</td>
+                                                                <td style="color:black;font-size:15px;">
+                                                                    <input type="radio" value="A" name="blood_type"/>A
+                                                                    <input type="radio" value="B" name="blood_type"/>B
+                                                                    <input type="radio" value="O" name="blood_type"/>O
+                                                                    <input type="radio" value="AB" name="blood_type"/>AB
+                                                                    <input type="radio" value="不详" name="blood_type"/>不详
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="vertical-align:middle;">民族</td>
+                                                                <td style="color:black;font-size:15px;">
+                                                                    <select name="nation" class="form-control" id="minzu-list">
+                                                                            <!-- <option value="" disabled selected></option> -->
+                                                                            <option value="汉族">汉族</option>
+                                                                            <option value="蒙古族">蒙古族</option>
+                                                                            <option value="回族">回族</option>
+                                                                            <option value="藏族">藏族</option>
+                                                                            <option value="维吾尔族">维吾尔族</option>
+                                                                            <option value="苗族">苗族</option>
+                                                                            <option value="彝族">彝族</option>
+                                                                            <option value="壮族">壮族</option>
+                                                                            <option value="布依族">布依族</option>
+                                                                            <option value="朝鲜族">朝鲜族</option>
+                                                                            <option value="满族">满族</option>
+                                                                            <option value="侗族">侗族</option>
+                                                                            <option value="瑶族">瑶族</option>
+                                                                            <option value="白族">白族</option>
+                                                                            <option value="土家族">土家族</option>
+                                                                            <option value="哈尼族">哈尼族</option>
+                                                                            <option value="哈萨克族">哈萨克族</option>
+                                                                            <option value="傣族">傣族</option>
+                                                                            <option value="黎族">黎族</option>
+                                                                            <option value="傈傈族">傈傈族</option>
+                                                                            <option value="佤族">佤族</option>
+                                                                            <option value="畲族">畲族</option>
+                                                                            <option value="高山族">高山族</option>
+                                                                            <option value="拉祜族">拉祜族</option>
+                                                                            <option value="水族">水族</option>
+                                                                            <option value="东乡族">东乡族</option>
+                                                                            <option value="纳西族">纳西族</option>
+                                                                            <option value="景颇族">景颇族</option>
+                                                                            <option value="科尔克孜族">科尔克孜族</option>
+                                                                            <option value="土族">土族</option>
+                                                                            <option value="达斡尔族">达斡尔族</option>
+                                                                            <option value="仫佬族">仫佬族</option>
+                                                                            <option value="羌族">羌族</option>
+                                                                            <option value="布朗族">布朗族</option>
+                                                                            <option value="撒拉族">撒拉族</option>
+                                                                            <option value="毛难族">毛难族</option>
+                                                                            <option value="仡佬族">仡佬族</option>
+                                                                            <option value="锡伯族">锡伯族</option>
+                                                                            <option value="阿昌族">阿昌族</option>
+                                                                            <option value="普米族">普米族</option>
+                                                                            <option value="塔吉克族">塔吉克族</option>
+                                                                            <option value="怒族">怒族</option>
+                                                                            <option value="乌孜别克族">乌孜别克族</option>
+                                                                            <option value="俄罗斯族">俄罗斯族</option>
+                                                                            <option value="鄂温克族">鄂温克族</option>
+                                                                            <option value="崩龙族">崩龙族</option>
+                                                                            <option value="保安族">保安族</option>
+                                                                            <option value="裕固族">裕固族</option>
+                                                                            <option value="京族">京族</option>
+                                                                            <option value="塔塔尔族">塔塔尔族</option>
+                                                                            <option value="独龙族">独龙族</option>
+                                                                            <option value="鄂伦春族">鄂伦春族</option>
+                                                                            <option value="赫哲族">赫哲族</option>
+                                                                            <option value="门巴族">门巴族</option>
+                                                                            <option value="珞巴族">珞巴族</option>
+                                                                            <option value="基诺族">基诺族</option>
+                                                                    </select>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="vertical-align:middle;">职业</td>
+                                                                <td><select name="career" class="form-control">
+                                                                            <option value="学生">学生</option>
+                                                                            <option value="个体">个体</option>
+                                                                            <option value="农民">农民</option>
+                                                                            <option value="军人">军人</option>
+                                                                            <option value="工人">工人</option>
+                                                                            <option value="财会人员">财会人员</option>
+                                                                            <option value="技术人员">技术人员</option>
+                                                                            <option value="服务业">服务业</option>
+                                                                            <option value="科教文卫">科教文卫</option>
+                                                                            <option value="行政管理">行政管理</option>
+                                                                            <option value="无业">无业</option>
+                                                                            <option value="其它">其它</option>
+                                                                    </select></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="vertical-align:middle;">文化程度</td>
+                                                                <td style="color:black;font-size:15px;">
+                                                                    <select name="culture" class="form-control">
+                                                                        <option value="未接受国家教育(文盲)">未接受国家教育</option>
+                                                                        <option value="小学及以下">小学及以下</option>
+                                                                        <option value="初中">初中</option>
+                                                                        <option value="高中/中专">高中/中专</option>
+                                                                        <option value="大专">大专</option>
+                                                                        <option value="本科">本科</option>
+                                                                        <option value="研究生及以上">研究生及以上</option>
+                                                                    </select>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>    
+                                            
+                                                    <p><h5 style="color:blue">特殊工种环境</h5>          
+                                                        <label><input name="gaowen" type="checkbox" value="true" class="ace"/><span class="lbl">高温</span></label>
+                                                        <label><input name="diwen" type="checkbox" value="true" class="ace"/><span class="lbl">低温</span></label>
+											            <label><input name="yeban" type="checkbox" value="true" class="ace"/><span class="lbl">夜班/熬夜</span></label>
+                                                        <label><input name="zaosheng" type="checkbox" value="true" class="ace"/><span class="lbl">噪声</span></label>
+                                                        <label><input name="fushe" type="checkbox" value="true" class="ace"/><span class="lbl">辐射</span></label>
+                                                        <label><input name="huagongyinran" type="checkbox" value="true" class="ace"/><span class="lbl">化工污染</span></label>
+                                                        <label><input name="julieyundong" type="checkbox" value="true" class="ace"/><span class="lbl">剧烈运动</span></label>
+                                                        <label><input name="qiyou" type="checkbox" value="true" class="ace"/><span class="lbl">汽油</span></label>
+											            <label><input name="gaokong" type="checkbox" value="true" class="ace"/><span class="lbl">高空</span></label>
+                                                        <label><input name="wu" type="checkbox" value="true" class="ace"/><span class="lbl">无</span></label>
+                                                    
+                                                    <p><h5 style="color:blue">饮食偏好</h5>
+                                                        <label><input name="wuteshu" type="checkbox" value="true" class="ace"/><span class="lbl">无特殊</span></label>
+                                                        <label><input name="sushi" type="checkbox" value="true" class="ace"/><span class="lbl">素食</span></label>
+                                                        <label><input name="suan" type="checkbox" value="true" class="ace"/><span class="lbl">酸</span></label>
+                                                        <label><input name="tian" type="checkbox" value="true" class="ace"/><span class="lbl">甜</span></label>
+                                                        <label><input name="xian" type="checkbox" value="true" class="ace"/><span class="lbl">咸</span></label>
+                                                        <label><input name="xinla" type="checkbox" value="true" class="ace"/><span class="lbl">辛辣</span></label>
+                                                        <label><input name="you" type="checkbox" value="true" class="ace"/><span class="lbl">油</span></label>
+                                                        <label><input name="shengleng" type="checkbox" value="true" class="ace"/><span class="lbl">生冷</span></label>
+                                                        <label><input name="kafei" type="checkbox" value="true" class="ace" /><span class="lbl">含咖啡因食物或饮品</span></label>
+                                                        <label><input name="qita" type="checkbox" value="true" class="ace" /><span class="lbl">其他</span></label>
                                                 </div>
-                                            </table>
-
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-primary" id="tijiaoBtn">提交</button>
                                             </div>
-                                        </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-primary" id="tijiaoBtn">提交</button>
+                                        </div>
+                                    </form>
 
                                     </div><!-- /.modal-content -->
                                 </div><!-- /.modal-dialog -->

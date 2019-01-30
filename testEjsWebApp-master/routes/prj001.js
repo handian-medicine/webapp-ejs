@@ -293,7 +293,7 @@ router.post('/datainputoptr', function (req, res, next) {
                 // console.log("prj001.js ajax result:", res);
                 //res.render('datainput',{username: req.cookies.userinfo.email});
             } else {
-                res.json({status:0, msg:"请检查信息是否完整或序列号重复"});
+                res.json({status:0, msg:"请检查信息是否完整"});
                 console.log('response.statusCode wrong');
             }
         })
