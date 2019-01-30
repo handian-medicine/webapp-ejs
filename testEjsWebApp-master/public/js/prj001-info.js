@@ -77,14 +77,7 @@
                         
                         // $("#minzu-list option[value='回族']").prop("selected","selected");//选中值
                         // alert($('#minzu-list option:selected').val());//获取值
-                        if (result["nation"]=="汉族") {
-                            $("input[name='nation'][value='汉族']").prop("checked",true);
-                            $("#minzu-list").prop("disabled", true);
-                        } else {
-                            $("input[name='nation'][value='其他']").prop("checked",true);
-                            $("#minzu-list").prop("disabled", false);
-                            $("#minzu-list option[value='"+result["nation"]+"']").prop("selected","selected");
-                        }
+                        $("#nation option[value='"+result["nation"]+"']").prop("selected","selected");
                         
                         $("input[name='career'][value='"+result["career"]+"']").prop("checked",true);
                         $("input[name='entrance'][value='"+result["entrance"]+"']").prop("checked",true);
@@ -607,6 +600,7 @@
                             $('#pastpreg_qinggongshu').val(result["pastpreg_qinggongshu"]);
                             $('#pastpreg_qita').val(result["pastpreg_qita"]);
                             
+                            $("input:checkbox[name='prevent_wu']").prop('checked',result["prevent_wu"]);
                             $("input:checkbox[name='prevent_jieza']").prop('checked',result["prevent_jieza"]);
                             $("input:checkbox[name='prevent_jieyuqi']").prop('checked',result["prevent_jieyuqi"]);
                             $("input:checkbox[name='prevent_biyuntao']").prop('checked',result["prevent_biyuntao"]);
@@ -624,8 +618,8 @@
                                  (result["pastfamily_duonangluanchao"] != null && result["pastfamily_duonangluanchao"] != false) ||
                                  (result["pastfamily_tangniaobing"] != null && result["pastfamily_tangniaobing"] != false) ||
                                  (result["pastfamily_buxiang"] != null && result["pastfamily_buxiang"] != false) ||
-                                 (result["pastfamily_qita"] != null && result["pastfamily_qita"] != false)
-                                ) {
+                                 (result["pastfamily_qita"] != null && result["pastfamily_qita"] != false) ) 
+                            {
                                 $("input[name='pastfamily_disease'][value='有']").prop("checked", true);//触发 展开 动作
                                 $("input:checkbox[name='pastfamily_xinzangbing']").prop('checked',result["pastfamily_xinzangbing"]);
                                 $("input:checkbox[name='pastfamily_duonangluanchao']").prop('checked',result["pastfamily_duonangluanchao"]);
