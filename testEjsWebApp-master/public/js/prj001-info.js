@@ -504,14 +504,16 @@
                             if (result["normal"] != null)
                             {
                                 $("input[name='cycle'][value='尚规律']").prop("checked",true);
+                                $("input[name='cycle'][value='尚规律']").trigger("onchange");
                                 $("input[name='normal'][value='"+result["normal"]+"']").prop("checked",true);
                             }
                             if (result["abnormal"] != null)
                             {
                                 $("input[name='cycle'][value='不规律']").prop("checked",true);
+                                $("input[name='cycle'][value='不规律']").trigger("onchange");
                                 $("input[name='abnormal'][value='"+result["abnormal"]+"']").prop("checked",true);
                             }
-                            
+
                             $("input[name='cyclicity_sum'][value='"+result["cyclicity_sum"]+"']").prop("checked",true);
                             
                             $("input[name='menstruation_is_accompany'][value='"+result["menstruation_is_accompany"]+"']").prop("checked",true);
