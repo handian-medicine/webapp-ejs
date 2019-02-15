@@ -6,29 +6,29 @@
     <title>数据展示</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="../public/css/myPagination.css">
+    <link rel="stylesheet" href="/public/css/myPagination.css">
     <!-- <link rel="stylesheet" href="../public/css/chosen.css" /> -->
     <!-- <link rel="stylesheet" href="../public/css/bootstrap.min.css"> -->
-    <link rel="stylesheet" href="../public/bootstrap3/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../public/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/public/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/public/css/font-awesome.min.css">
 
-    <link rel="stylesheet" href="../public/css/ace.min.css">
-    <link rel="stylesheet" href="../public/css/ace-rtl.min.css">
-    <link rel="stylesheet" href="../public/css/ace-skins.min.css">
-    <link rel="stylesheet" href="../public/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="/public/css/ace.min.css">
+    <link rel="stylesheet" href="/public/css/ace-rtl.min.css">
+    <link rel="stylesheet" href="/public/css/ace-skins.min.css">
+    <link rel="stylesheet" href="/public/css/bootstrap-datepicker.css">
 
-    <script src="../public/js/ace-extra.min.js"></script>
-    <script src="../public/javascripts/jquery.min.js"></script>
-    <script src="../public/js/bootstrap-datepicker.js"></script>
+    <script src="/public/js/ace-extra.min.js"></script>
+    <script src="/public/javascripts/jquery.min.js"></script>
+    <script src="/public/js/bootstrap-datepicker.js"></script>
     <script>
         $(function(){
             $('.datepicker').datepicker({format:"yyyy-mm-dd"});
         })
     </script>
-    <script src="../public/js/respond.min.js"></script>
-    <script src="../public/js/jquery.pagination.min.js"></script>
+    <script src="/public/js/respond.min.js"></script>
+    <script src="/public/js/jquery.pagination.min.js"></script>
 
-    <script src="../public/js/prj001-info.js"></script>
+    <script src="/public/js/prj001-info.js"></script>
     <script>var curpage_global = '<%= curpage %>' ;
             var totalpagenumber_global = '<%= totalpagenumber %>';
             var username = '<%= username %>';
@@ -150,7 +150,7 @@
     
             <div class="navbar-container" id="navbar-container">
                 <div class="navbar-header pull-left">
-                    <a href="../home" class="navbar-brand">
+                    <a href="/home" class="navbar-brand">
                         <small>
                             <i class="icon-leaf">
                                 中医妇科临床流调数据中心
@@ -163,7 +163,7 @@
                     <ul class="nav ace-nav">
                         <li class="light-blue">
                             <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                                <img class="nav-user-photo" src="../public/avatars/0017030553263367_b.jpg" alt="Jason's Photo">
+                                <img class="nav-user-photo" src="/public/avatars/0017030553263367_b.jpg" alt="Jason's Photo">
                                 <span class="user-info">
                                     <small>欢迎,</small>
                                     <%= username %>
@@ -177,7 +177,7 @@
                                 <li class="divider"></li>
         
                                 <li>
-                                    <a href="../logout">
+                                    <a href="/logout">
                                         <i class="icon-off"></i>
                                         注销
                                     </a>
@@ -212,28 +212,28 @@
 
                 <ul class="nav nav-list">
                     <li>
-                        <a href="../prj001">
+                        <a href="/prj001">
                             <i class="icon-dashboard"></i>
                             <span class="menu-text"> 数据展示 </span>
                         </a>
                     </li>
 
                     <li>
-                        <a href="../prj001/datainput">
+                        <a href="/prj001/datainput">
                             <i class="icon-text-width"></i>
                             <span class="menu-text"> 数据采集 </span>
                         </a>
                     </li>
 
                     <li>
-                        <a href="../public/dataana.html">
+                        <a href="/public/dataana.html">
                             <i class="icon-list-alt"></i>
                             <span class="menu-text"> 数据分析 </span>
                         </a>
                     </li>
 
                     <li>
-                        <a href="../public/about.html">
+                        <a href="/public/about.html">
                             <i class="icon-tag"></i>
                             <span class="menu-text"> 关于 </span>
                         </a>
@@ -261,11 +261,11 @@
                         <ul class="breadcrumb">
                             <li>
                                 <i class="icon-home home-icon"></i>
-                                <a href="../home">首页</a >
+                                <a href="/home">首页</a >
                             </li>
                     
                             <li>
-                                <a href="../prj001">数据展示</a >
+                                <a href="/prj001">数据展示</a >
                             </li>
                             <li class="active">当前页</li>
                         </ul>
@@ -280,9 +280,9 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <!-- 搜索框 -->
-                                    <div class="searchbox">
+                                    <!-- <div class="searchbox">
                                         <form class="form-search" role="form" method='get' action="/prj001/">
-                                            <span class="input-icon align-middle" role="form" method='get' action="/prj001/">
+                                            <span class="input-icon align-middle">
                                                 <i class="icon-search"></i>
                                                 <input type="search" class="search-query" id="keyword" name="keyword" value="<%= searchname %>" placeholder="采集对象人员姓名" style="width:180px; height:36px;"/>
                                             </span>
@@ -290,6 +290,22 @@
                                                 检索
                                             </button>
                                             <p><span>随机码:<%= code %></span>
+                                        </form>
+                                    </div> -->
+                                    <!-- 搜索框 -->
+                                    <!-- 搜索框 -->
+                                    <div class="searchbox">
+                                        <form class="form-search" role="form" method='get' action="/prj001/info/search/">
+                                            <span class="input-icon align-middle">
+                                                <i class="icon-search"></i>
+                                                <input type="search" class="search-query" id="sname" name="name" placeholder="name" style="width:180px; height:36px;"/>
+                                                <input type="search" class="search-query" id="saddress" name="address" placeholder="address" style="width:180px; height:36px;"/>
+                                                <input type="search" class="search-query" id="stelephone" name="telephone"  placeholder="telephone" style="width:180px; height:36px;"/>
+                                                <input type="search" class="search-query" id="shospital" name="hospital"  placeholder="hospital" style="width:180px; height:36px;"/>
+                                            </span>
+                                            <button class="btn btn-sm" type="submit" id="searchBtn">
+                                                检索
+                                            </button>
                                         </form>
                                     </div>
                                     <!-- 搜索框 -->
@@ -547,11 +563,21 @@
                                                             currentPage: parseInt(curpage_global),
                                                             totalPage: parseInt(totalpagenumber_global),
                                                             callback: function(current) {
-                                                                if (($("#keyword").val()) == "") {
-                                                                    window.location.href = "/prj001/?page=" + current;
+                                                                if ( ($("#keyword").val()) == undefined ) {
+                                                                        // alert("在这里1->" + current);
+                                                                        window.location.href = "/prj001/info/search/?page=" + current + 
+                                                                                                 "&name=" + $("#name").val() 
+                                                                                               + "&address=" + $("#address").val()
+                                                                                               + "&telephone=" + $("#telephone").val()
+                                                                                               + "&hospital=" + $("#hospital").val();
                                                                 } else {
-                                                                    window.location.href = "/prj001/?page=" + current  + "&keyword=" + $("#keyword").val();
-                                                                };
+                                                                    if ( ($("#keyword").val()) == "" ) {
+                                                                        // alert("在这里2->", current);
+                                                                        window.location.href = "/prj001/?page=" + current;
+                                                                    } else {
+                                                                        window.location.href = "/prj001/?page=" + current + "&keyword=" + $("#keyword").val();
+                                                                    };
+                                                                }
                                                             }
                                                         });
                                                     });
@@ -2053,16 +2079,16 @@
             "/script>");
     </script> -->
     <!-- <script src="../public/js/bootstrap.min.js"></script> -->
-    <script src="../public/bootstrap3/js/bootstrap.min.js"></script>
-    <script src="../public/js/typeahead-bs2.min.js"></script>
+    <script src="/public/bootstrap3/js/bootstrap.min.js"></script>
+    <script src="/public/js/typeahead-bs2.min.js"></script>
     <!-- <script src="../public/js/chosen.jquery.min.js"></script> -->
     <!-- page specific plugin scripts -->
     <!-- <script src="../public/js/jquery.dataTables.min.js"></script> -->
     <!-- <script src="../public/js/jquery.dataTables.bootstrap.js"></script> -->
     <!-- ace scripts -->
 
-    <script src="../public/js/ace-elements.min.js"></script>
-    <script src="../public/js/ace.min.js"></script>
+    <script src="/public/js/ace-elements.min.js"></script>
+    <script src="/public/js/ace.min.js"></script>
     <!-- <script type="text/javascript">
         jQuery(function ($) {
             var oTable1 = $('#sample-table-2').dataTable({
