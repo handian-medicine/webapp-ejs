@@ -137,7 +137,7 @@
                         window.location.href = '/prj001' + '/?page=' + curpage_global;
                     } else {
                         if (result.status == 403) {
-                            alert("" + result.user_summary.msg)
+                            alert("" + result.user_summary.detail)
                         } else {
                             alert("保存失败" + result.status)
                         }
@@ -422,7 +422,7 @@
                         window.location.href = '/prj001' + '/?page=' + curpage_global;
                     } else {
                         if (result.status == 403) {
-                            alert("" + result.user_history.msg)
+                            alert("" + result.user_history.detail)
                         } else {
                             alert("保存失败" + result.status)
                         }
@@ -719,7 +719,7 @@
                         window.location.href = '/prj001' + '/?page=' + curpage_global;
                     } else {
                         if (result.status == 403) {
-                            alert("" + result.user_relevant.msg)
+                            alert("" + result.user_relevant.detail)
                         } else {
                             alert("保存失败" + result.status)
                         }
@@ -808,7 +808,7 @@
                         window.location.href = '/prj001' + '/?page=' + curpage_global;
                     } else {
                         if (result.status == 403) {
-                            alert("" + result.user_cc.msg)
+                            alert("" + result.user_cc.detail)
                         } else {
                             alert("保存失败" + result.status)
                         }
@@ -895,7 +895,7 @@
                         window.location.href = '/prj001' + '/?page=' + curpage_global;
                     } else {
                         if (result.status == 403) {
-                            alert("" + result.user_cure.msg)
+                            alert("" + result.user_cure.detail)
                         } else {
                             alert("保存失败" + result.status)
                         }

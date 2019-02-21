@@ -453,17 +453,17 @@ router.put('/summary_save', function (req, res, next){
                 console.log(">>>prj001.js put method response.statusCode: ", response.statusCode);
                 if (!error && response.statusCode == 200) {
                     var user_summary = JSON.parse(body);
-                    console.log(">>>prj001.js put方法-> body: ", body);
+                    console.log(">>>prj001.js put方法-> body: ", user_summary);
                     res.json({user_summary:user_summary, status: 200});
                 } else {
                     if (response.statusCode == 403) {
                         var user_summary = JSON.parse(body);
-                        console.log(">>>prj001.js put方法-> body: ", body);
+                        console.log(">>>prj001.js put方法-> body: ", user_summary);
                         res.json({user_summary:user_summary, status: 403});
                     }
                     //console.log(">>>Getting archives met unknown error. " + error.error_description);
                     else {
-                        console.log(">>>其它错误码的body: ", body);
+                        console.log(">>>其它错误码的body: ", user_summary);
                     }
                     
                 }
