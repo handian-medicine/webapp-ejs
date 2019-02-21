@@ -137,10 +137,53 @@
     </style>
     <!-- 解决问题:Unable to preventDefault inside passive event listener due to target being treated as passive -->
     <style>html {touch-action: manipulation;}</style>
-<script>
-
-</script>
-
+    <script>
+        $(document).ready(function () {
+            $("#fileoutBtn").click(function () {
+                $.ajax({
+                        url: "/prj001/info/search/", 
+                        // url:"http://10.17.1.98:8001/prj001/fileout/",
+                        // headers:{ Authorization: 'Bearer 6Xhucit2aVk4hSQRMMCAi816Thw2RJ' },
+                        type: "GET",
+                        // dataType: "json",
+                        data:{
+                            types:'download',
+                            name: $('#sname').val(),
+                            address: $('#saddress').val(),
+                            telephone: $('#stelephone').val(),
+                            hospital: $('#shospital').val(),
+                        },
+                        success: function (result) {
+                            alert("导出成功");
+                            window.location.href="http://" + result.data;
+                        },
+                        error:  function () {
+                            alert("导出错误");
+                        },
+                })
+            })
+        })
+    </script>
+    
+    <!-- <script>
+        $(document).ready(function () {
+            $("#searchBtn").click(function () {
+                
+                $.ajax({
+                        // url: "/prj001/fileout/", 
+                        url:"/prj001/info/search/",
+                        type: "GET",
+                        data: $('#search-form').serializeArray(),
+                        success: function (result) {
+                            alert("haha");
+                        },
+                        error:  function () {
+                            alert("ohno");
+                        },
+                })
+            })
+        })
+    </script> -->
 </head>
 
 <body>
@@ -279,36 +322,64 @@
 
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <!-- 搜索框 -->
-                                    <!-- <div class="searchbox">
-                                        <form class="form-search" role="form" method='get' action="/prj001/">
-                                            <span class="input-icon align-middle">
-                                                <i class="icon-search"></i>
-                                                <input type="search" class="search-query" id="keyword" name="keyword" value="<%= searchname %>" placeholder="采集对象人员姓名" style="width:180px; height:36px;"/>
-                                            </span>
-                                            <button class="btn btn-sm" type="submit" id="searchBtn">
-                                                检索
-                                            </button>
-                                            <p><span>随机码:<%= code %></span>
-                                        </form>
-                                    </div> -->
-                                    <!-- 搜索框 -->
-                                    <!-- 搜索框 -->
-                                    <div class="searchbox">
-                                        <form class="form-search" role="form" method='get' action="/prj001/info/search/">
-                                            <span class="input-icon align-middle">
-                                                <i class="icon-search"></i>
-                                                <input type="search" class="search-query" id="sname" name="name" placeholder="name" style="width:180px; height:36px;"/>
-                                                <input type="search" class="search-query" id="saddress" name="address" placeholder="address" style="width:180px; height:36px;"/>
-                                                <input type="search" class="search-query" id="stelephone" name="telephone"  placeholder="telephone" style="width:180px; height:36px;"/>
-                                                <input type="search" class="search-query" id="shospital" name="hospital"  placeholder="hospital" style="width:180px; height:36px;"/>
-                                            </span>
-                                            <button class="btn btn-sm" type="submit" id="searchBtn">
-                                                检索
-                                            </button>
-                                        </form>
-                                    </div>
-                                    <!-- 搜索框 -->
+
+                                    <form class="form-horizontal" id="search-form" role="form" method='get' action="/prj001/info/search/">
+                                        <input hidden type="search" id="types" name="types" value="search">
+                                        <div class="row">
+                                            <div class="col-xs-3">
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label no-padding-right" for=""> 患者姓名 </label>
+                                                    <div class="col-sm-9">
+                                                        <input type="search" id="sname" name="name" value="<%= name %>" class="col-xs-12">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-3">
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label no-padding-right" for=""> 患者地区 </label>
+                                                    <div class="col-sm-9">
+                                                        <input type="search" id="saddress" name="address" value="<%= address %>" class="col-xs-12">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-2">
+                                                <label class="pull-right">
+                                                    <button type="button" class="btn btn-sm fileoutBtn" id="fileoutBtn">导出Excel</button>
+                                                </label>
+                                            </div>
+                                        </div>
+    
+                                        <div class="row">
+                                            <div class="col-xs-3">
+
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label no-padding-right" for=""> 患者手机 </label>
+                                                    <div class="col-sm-9">
+                                                        <input type="search" id="stelephone" name="telephone" value="<%= telephone %>" class="col-xs-12">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-xs-3">
+
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label no-padding-right" for=""> 所在医院 </label>
+                                                    <div class="col-sm-9">
+                                                        <input type="search" id="shospital" name="hospital" value="<%= hospital %>" class="col-xs-12">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-xs-2">
+                                                <label class="pull-right">
+                                                    <button class="btn btn-sm" type="submit" id="searchBtn" >检索</button>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <!-- <button type="button" class="btn btn-primary fileoutBtn" id="fileoutBtn"  onclick="srch_or_out()">
+                                            导出结果
+                                        </button> -->
+                                    </form>
                                     <hr>
                                     <div class="table-responsive">
                                         <!-- 信息列表框 -->

@@ -83,9 +83,7 @@ router.get('/', function (req, res, next) {
                     console.log(">>>5. current retrieving results: " + tmpobj["name"]);
                 }
 
-                var retschname = "";
                 if ( (params["keyword"] == undefined) || (params["keyword"] =="") ) {
-                    retschname = "";
                     res.render('prj001', {
                         title: '流调项目-排卵障碍性异常子宫出血',
                         archives: archiveobjs.results,
@@ -95,11 +93,11 @@ router.get('/', function (req, res, next) {
                         previouspage: previousPage,
                         nextpage: nextPage,
                         totalCount: archiveobjs.count,
-                        searchname: retschname,
+                        searchname: '',
+                        name: '', address:'', hospital:'', telephone:'',
                         code: archiveobjs.code
                     });
                 } else {
-                    retschname = params["keyword"];
                     res.render('prj001', {
                         title: '流调项目-排卵障碍性异常子宫出血',
                         archives: archiveobjs.results,
@@ -109,7 +107,7 @@ router.get('/', function (req, res, next) {
                         previouspage: previousPage,
                         nextpage: nextPage,
                         totalCount: archiveobjs.count,
-                        searchname: retschname,
+                        name: params["name"], address:params["address"], hospital:params["hospital"], telephone:params["telephone"],
                         code: archiveobjs.code
                     });
                 }
@@ -219,9 +217,7 @@ router.get('/', function (req, res, next) {
                                 console.log(">>> current retrieving results: " + tmpobj["name"]);
                             }
 
-                            var retschname = "";
                             if (params["keyword"] == undefined) {
-                                retschname = "";
                                 res.render('prj001', {
                                     title: '流调项目-排卵障碍性异常子宫出血',
                                     archives: archiveobjs.results,
@@ -231,11 +227,11 @@ router.get('/', function (req, res, next) {
                                     previouspage: previousPage,
                                     nextpage: nextPage,
                                     totalCount: archiveobjs.count,
-                                    searchname: retschname,
+                                    searchname: '',
+                                    name: '', address:'', hospital:'', telephone:'',
                                     code: archiveobjs.code
                                 });
                             } else {
-                                retschname = params["keyword"];
                                 res.render('prj001', {
                                     title: '流调项目-排卵障碍性异常子宫出血',
                                     archives: archiveobjs.results,
@@ -245,7 +241,8 @@ router.get('/', function (req, res, next) {
                                     previouspage: previousPage,
                                     nextpage: nextPage,
                                     totalCount: archiveobjs.count,
-                                    searchname: retschname,
+                                    searchname: params["keyword"],
+                                    name: params["name"], address:params["address"], hospital:params["hospital"], telephone:params["telephone"],
                                     code: archiveobjs.code
                                 });
                             }
@@ -2292,13 +2289,15 @@ router.get('/check', function (req, res, next){
     });
 });
 
-/* 搜索 */
+/* 搜索 导出 */
 router.get('/info/search/', function (req, res, next) {
     console.log("表单", req.body, typeof(req.body));
     var authstring = req.cookies.prj001token.access_token;
 
-    /*  分页测试  */
+    /*  解析url搜索关键词  */
     console.log(">>>1. req url: " + req.url);
+    // console.log(">>>1. req.query.name: " + req.query.name);//GET方法获取参数
+    // console.log(">>>1. req.query.name: " + req.body.name);//POST方法获取参数
     var params = url_pack.parse(req.url, true).query;
     console.log(">>>2. req url params: ", params);
     var search_url = "";
@@ -2308,65 +2307,102 @@ router.get('/info/search/', function (req, res, next) {
     else {
         search_url = myconst.apiurl + "prj001/info/search/?page=" + params["page"];
     }
-    /*  分页测试  */
+
     var formdata = {name:params["name"],address:params["address"],
-                    telephone:params["telephone"],hospital:params["hospital"]};
+                    telephone:params["telephone"],hospital:params["hospital"],
+                    types:params["types"]};
     var options = {
         url: encodeURI(search_url),
-        form: formdata,
+        form: formdata,//req.body.data,//formdata
         headers: {
             'Authorization': 'Bearer ' + authstring
         }
     };
     console.log("search options:", options);
-    request.post(options, function (error, response, body) {
+    /* 直接搜索 */
+    if ( params["types"]=='search' ) {
+        request.post(options, function (error, response, body) {
             console.log("response:", body);
-            if (!error && response.statusCode == 200) {
+            console.log("response:", typeof(body));
+            console.log("response:", body=="[]");
+            if (body != "[]") {    
+                if (!error && response.statusCode == 200) {
                 var archiveobjs = JSON.parse(body);
             
-            /*  分页测试  */
-            var curPageNumber = 1;
-            if (params["page"] == undefined) {
-                curPageNumber = 1;
-            }else {
-                curPageNumber = params["page"];
-            }
+                /*  分页测试  */
+                var curPageNumber = 1;
+                if (params["page"] == undefined) {
+                    curPageNumber = 1;
+                }else {
+                    curPageNumber = params["page"];
+                }
 
-            if (curPageNumber > 1){
-                var previousPage = curPageNumber - 1;
+                if (curPageNumber > 1){
+                    var previousPage = curPageNumber - 1;
+                } else {
+                    var previousPage = 1;
+                }
+
+                if (curPageNumber < archiveobjs.total_pages) {
+                    var nextPage = parseInt(curPageNumber) + 1 ;//如果不转换类型，"1" + 1="11"
+                } else {
+                    var nextPage = curPageNumber;
+                }
+
+                var i = 0, len = archiveobjs.results.length;
+                for (; i < len; i++) {
+                    var tmpobj = archiveobjs.results[i];
+                    console.log(">>>5. current retrieving results: " + tmpobj["name"]);
+                }
+                res.render('prj001', {
+                    title: '流调项目-排卵障碍性异常子宫出血',
+                    archives: archiveobjs.results,
+                    username: req.cookies.userinfo.email,
+                    totalpagenumber: archiveobjs.total_pages,
+                    curpage: curPageNumber,
+                    previouspage: previousPage,
+                    nextpage: nextPage,
+                    totalCount: archiveobjs.count,
+                    name: params["name"], address:params["address"], hospital:params["hospital"], telephone:params["telephone"],
+                    code: archiveobjs.code
+                });
+                } else {
+                    res.json({status:0, msg:""});
+                }
             } else {
-                var previousPage = 1;
-            }
-
-            if (curPageNumber < archiveobjs.total_pages) {
-                var nextPage = parseInt(curPageNumber) + 1 ;//如果不转换类型，"1" + 1="11"
-            } else {
-                var nextPage = curPageNumber;
-            }
-
-            var i = 0, len = archiveobjs.results.length;
-            for (; i < len; i++) {
-                var tmpobj = archiveobjs.results[i];
-                console.log(">>>5. current retrieving results: " + tmpobj["name"]);
-            }
-            var retschname = "";
-            res.render('prj001', {
+                res.render('prj001', {
                 title: '流调项目-排卵障碍性异常子宫出血',
-                archives: archiveobjs.results,
+                archives: [],
                 username: req.cookies.userinfo.email,
-                totalpagenumber: archiveobjs.total_pages,
-                curpage: curPageNumber,
-                previouspage: previousPage,
-                nextpage: nextPage,
-                totalCount: archiveobjs.count,
-                searchname: retschname,
-                code: archiveobjs.code
-            });
-
-        } else {
-            res.json({status:0, msg:""});
-        }
-    })
+                totalpagenumber: 0,
+                curpage: 1,
+                previouspage: null,
+                nextpage: null,
+                totalCount: 0,
+                name: '', address:'', hospital:'', telephone:'',
+                code: null
+                });
+            }
+        })
+    
+    } 
+    /* 导出搜索结果 */
+    else {
+        request.post(options, function (error, response, body) {
+            console.log("response:", body);
+            console.log("response:", typeof(body));
+            console.log("response:", body=="[]");
+            var fileout_body = JSON.parse(body);
+            if (body != "[]") {
+                console.log("",fileout_body.path);
+                res.json({status:1, msg:"ok", data:fileout_body.path});
+            } else {
+                res.json({status:0, msg:"no"});
+            }
+        })
+    }
 
 });
+
+
 module.exports = router;
