@@ -299,9 +299,9 @@ router.post('/datainputoptr', function (req, res, next) {
 router.post('/file_upload', mutipartMiddeware, function (req, res, next) {
     console.log(req.files);
     //xlsFileTrans 是前端的form里面input的名称
-    if (req.files.xlsFileTrans.originalFilename == "") {
-        res.send('请选择文件!');
-    }
+    // if (req.files.xlsFileTrans.originalFilename == "") {
+    //     res.send('请选择文件!');
+    // }
     const formData = {
         // Pass a simple key-value pair
         name: '测试excel文件',
@@ -320,14 +320,14 @@ router.post('/file_upload', mutipartMiddeware, function (req, res, next) {
     };
 
     request.post(options, function optionalCallback(err, response, body) {
-        console.log("上传文件: response.statusCode:", response.statusCode);
+        console.log("1上传文件: response.statusCode:", response.statusCode);
         if (!err && response.statusCode == 200) {
-            console.log('Upload successful!  Server responded with:', body);
+            console.log('2Upload successful!  Server responded with:', body);
             //给浏览器返回一个成功提示。
             var upload_info = JSON.parse(body);
-            console.log(">>>上传信息 -> upload_info: ", upload_info);
+            console.log("3>>>上传信息 -> upload_info: ", upload_info);
             // alert("haha",response.statusCode);
-            console.log("haha",response.statusCode);
+            console.log("4haha",response.statusCode);
             
             if (upload_info.code == 403) {
                 res.json(upload_info);//权限问题
@@ -336,10 +336,16 @@ router.post('/file_upload', mutipartMiddeware, function (req, res, next) {
             }
         }
         else {
-            // alert("err",response.statusCode);
-            console.log("err",response.statusCode);
-            return console.error('upload failed:', err);
-            res.send('上传失败!');
+            var upload_info = JSON.parse(body);
+            console.log("5response.statusCode",response.statusCode);
+            if (upload_info.ivfile==undefined) {
+                console.log("6upload_info",upload_info);
+                res.send(upload_info.msg);
+            } else {
+                console.log("7upload_info",upload_info);
+                res.send(upload_info.ivfile[0]);
+            }
+            // return console.log('8upload failed:', upload_info);
         }
     });
 
