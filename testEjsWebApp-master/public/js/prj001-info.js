@@ -1095,7 +1095,7 @@
                         window.location.href = '/prj001' + '/?page=' + curpage_global;
                     } else {
                         if (result.status == 403) {
-                            alert("" + result.user_results.msg)
+                            alert("" + result.user_results.detail)
                         } else {
                             alert("保存失败" + result.status)
                         }
