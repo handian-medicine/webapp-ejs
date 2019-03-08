@@ -83,13 +83,10 @@ router.post('/verify', function (req, res, next) {
             }
             // res.render()
         } else {
-            var verify_data = JSON.parse(body);
-            console.log("verify_data",verify_data);
-            if (verify_data.msg != undefined) {
-                res.json({status:1, msg:verify_data.msg});
-            } else {
-                res.json({status:1, msg:verify_data.non_field_errors});
-            };
+            // var verify_data = JSON.parse(body);
+            // console.log("verify_data",verify_data);
+            res.json({status:1, msg:'密码重置失败'});
+            
         }
     })
 
