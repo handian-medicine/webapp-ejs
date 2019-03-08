@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>使用指南</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- basic styles -->
+
+    <link rel="stylesheet" href="/public/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/public/css/font-awesome.min.css">
+
+    <!-- ace styles -->
+    <link rel="stylesheet" href="/public/css/ace.min.css">
+    <link rel="stylesheet" href="/public/css/ace-rtl.min.css">
+    <link rel="stylesheet" href="/public/css/ace-skins.min.css">
+
+    <script src="/public/js/ace-extra.min.js"></script>
+</head>
+<body>
+<!-- 导航 -->
+<div class="navbar navbar-default" id="navbar">
+    <script type="text/javascript">
+        try {ace.settings.check('navbar','fixed')}catch (e) {}
+    </script>
+
+    <div class="navbar-container" id="navbar-container">
+        <div class="navbar-header pull-left">
+            <a href="/" class="navbar-brand">
+                <small>
+                    <i class="icon-leaf">
+                        中医妇产科临床流调数据中心
+                    </i>
+                </small>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+
+    <h3>使用指南（网页版）</h3>
+    <div class="page-content">
+
+        <div class="row">
+            <div class="col-xs-12">
+
+                <div class="row">
+                    <div class="col-dm-6">
+                        <blockquote>
+                        <h4>1、如何获取登录账号？</h4>
+                        <p>
+                            系统不提供开放注册，请项目负责人联系，提供需要账号人员的电子邮箱和手机号，系统维护人员将从后台进行创建，并将密码以邮件形式下发。
+                        </p>
+
+                        <h4>2、如何修改密码？</h4>
+                        <p>
+                            登陆后，在”项目入口“界面，点击右上角用户，选择“修改密码”，进入修改密码界面进行密码修改。
+                        </p>
+                            <div class="row">
+                                <div class="col-dm-6">
+                        <img class="img-responsive" src="/public/avatars/explains.png" alt="">
+                                </div>
+                            </div>
+                        <h4>3、忘记密码怎么办？</h4>
+                        <p>请在登录页面，点击“忘记密码”，进入密码申诉界面后，填写电子邮箱进行密码修改申请。发送申请后，电子邮箱中将会收到一封带有新密码的邮件。</p>
+
+                        <h4> 4、如何录入数据？</h4>
+                        <p>选择自己所属的项目，点击侧边栏的“数据采集”按钮，进入数据采集页面。</p>
+                        <p>系统共提供三种录入数据的方式：</p>
+                            &nbsp
+                        <p>网页版录入：</p>
+                            <div style="margin-left: 20px">
+
+                                <p>点击“1、点击添加基本信息”， 在弹出的录入框中填写患者基本信息，不能留空</p>
+                                <p>全部填写完成后，点击“提交”按钮提交数据，如弹出“录入成功”提示框，则该患者信息已成功创建并录入。如提示“请检查信息是否完整”， 则证明还有未填写的信息，请重新检查并填写完整</p>
+                                <p>点击侧边栏的“数据展示”，回到数据展示页面，最新录入的患者信息会展示在首页的第一行，点击需要完善的患者信息，选择要填写的模块，依次填写，直到信息完整度达到“100%”，患者信息录入完毕</p>
+
+                            </div>
+                            &nbsp
+                            <p>手机版录入：</p>
+                            <div style="margin-left: 20px">
+
+                                <p>患者打开手机，用微信或浏览器扫描二维码，在打开的问卷中按照要求依次填写</p>
+                                <p>信息全部填写完成后，点击“下一页”按钮继续填写，如需要修改上一项的内容，点击“上一页”返回修改</p>
+                                <p>全部填写完成后，点击提交按钮提交患者信息</p>
+                                <p>医生登录电脑端，首页会显示患者刚刚提交的信息，后面标有“未审核”字样。</p>
+                                <p>医生对患者提交的信息进行审核，确认无误后，点击“未审核”三字，患者信息就可通过审核，正式录入数据中心</p>
+                                <p>医生将患者无法填写的其他信息补充完整，数据录入结束</p>
+
+                            </div>
+                            &nbsp
+                            <p>Excel版录入：</p>
+                            <div style="margin-left: 20px">
+
+                                <p>点击“模板文件下载”下载excel模板</p>
+                                <p>打开模板文件</p>
+                                <p>问卷填写有三种方式：手动输入、单选和多选</p>
+                                <p>手动输入和单选区域，在未填写时为红色，填写完成后恢复正常背景色	</p>
+                                <p>多选题对可以选一个或多个选项进行勾选</p>
+                                <p>打开流调数据中心网站，打开数据采集页面</p>
+                                <p>在excel数据上传区域，点击“choose”选择填写完毕的excel模板的路径</p>
+                                <p>点击提交，数据上传到数据中心</p>
+                                <p>如提示“xxxx-未填写，请检查信息表”，则表示数据填写不完整，请填写完整后重新提交</p>
+                                <p style="font-weight: bold">表格中的“问卷编码”，<a href="" style="color: red">初次录入</a>此项请<a href="" style="color: red">务必不要填写</a>，数据上传成功后，会自动生成</p>
+                                <p style="font-weight: bold">一个问卷编码。后续如想修改，请查询到想修改数据的数据编码，并填写到Excel模板</p>
+                                <p style="font-weight: bold">中“数据编码”一栏，修改数据后，再提交，即可实现修改功能。</p>
+                            </div>
+                            &nbsp
+                        <h4>5、如何查看数据和检索数据？</h4>
+                        <p>1）点击侧边栏的“数据展示”按钮，跳转到数据展示页面</p>
+                        <p>2）输入“患者姓名”、“患者手机”、“患者地区”、“所在医院”的任一信息</p>
+                        <p>3）点击检索，即可显示查询的患者信息</p>
+
+                        <h4>6、如何导出数据？</h4>
+                        <p>1）点击侧边栏的“数据展示”按钮，跳转到数据展示页面</p>
+                        <p>2）输入“患者姓名”、“患者手机”、“患者地区”、“所在医院”的任一信息</p>
+                        <p>3）点击导出excel，即可导出所查询的患者信息</p>
+
+                        <h4>7、如何进行数据分析？</h4>
+                        <p>项目团队提供希望进行的数据分析公式，系统开发维护团队根据公式对采集数据进行计算并生成动态图示；</p>
+                        <p>目前支持直方图、饼图、散点图等</p>
+                        </blockquote>
+                    </div>
+                </div>
+                <hr />
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!--[if !IE]> -->
+
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='/public/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
+</script>
+
+<script type="text/javascript">
+    if("ontouchend" in document) document.write("<script src='/public/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+</script>
+<script src="/public/js/bootstrap.min.js"></script>
+<script src="/public/js/typeahead-bs2.min.js"></script>
+
+<!-- page specific plugin scripts -->
+
+<!-- ace scripts -->
+
+<script src="/public/js/ace-elements.min.js"></script>
+<script src="/public/js/ace.min.js"></script>
+
+<!-- inline scripts related to this page -->
+<script type="text/javascript">
+    var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cscript src='" + _bdhmProtocol + ""));
+</script>
+</body>
+</html>

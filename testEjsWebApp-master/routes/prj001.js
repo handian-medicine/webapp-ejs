@@ -2410,5 +2410,4 @@ router.get('/info/search/', function (req, res, next) {
 
 });
 
-
 module.exports = router;

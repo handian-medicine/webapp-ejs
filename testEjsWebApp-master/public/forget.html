@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>密码重置</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- basic styles -->
+
+    <link rel="stylesheet" href="/public/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/public/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/public/css/ace.min.css">
+    <link rel="stylesheet" href="/public/css/ace-rtl.min.css">
+    <link rel="stylesheet" href="/public/css/ace-skins.min.css">
+    <script src="/public/javascripts/jquery.min.js"></script>
+    <script src="/public/js/ace-extra.min.js"></script>
+</head>
+<style>
+    .page-content1 {
+        margin: 0;
+        padding: 8px 20px 24px;
+    }
+    .container1 {
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+    .form-signin {
+        max-width: 330px;
+        padding: 15px;
+        margin: 0 auto;
+    }
+</style>
+<body>
+<script>
+    $(document).ready(function () {
+        $("#verifyBtn").click(function () {
+            if ($("#id_email").val()=='') {
+                alert("请填写邮箱名");
+                return
+            }
+            $.ajax({
+                    url: "/users/verify", 
+                    type: "POST",
+                    data:{
+                        email: $("#id_email").val(),
+                    },
+                    success: function (result) {
+                        alert(result.msg);
+                        if (result.msg=='邮件发送成功, 新的密码请查看邮件'){
+                            window.location.href="/";
+                        }   
+                    },
+                    error:  function (result) {
+                        alert(result.msg);
+                        // window.location.href="/";
+                    },
+            })
+        })
+    })
+</script>
+<!-- 导航 -->
+<div class="navbar navbar-default" id="navbar">
+    <script type="text/javascript">
+        try {ace.settings.check('navbar','fixed')}catch (e) {}
+    </script>
+
+    <div class="navbar-container" id="navbar-container">
+        <div class="navbar-header pull-left">
+            <a href="../" class="navbar-brand">
+                <small>
+                    <i class="icon-leaf">
+                        中医妇产科临床流调数据中心
+                    </i>
+                </small>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="page-content1">
+    <div class="row">
+        <div class="col-xs-6">
+            <form>
+                <tbody>
+                <tr>
+                    <th><label for="">电子邮箱:</label></th>
+                    <td><input type="text" name="email" maxlength="50" id="id_email" required></td>
+                </tr>
+                </tbody>
+            </form>
+            <button type="submit" id="verifyBtn">发送</button>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='/public/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
+</script>
+
+<script type="text/javascript">
+    if("ontouchend" in document) document.write("<script src='/public/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+</script>
+<script src="/public/js/bootstrap.min.js"></script>
+
+<script src="/public/js/typeahead-bs2.min.js"></script>
+
+<!-- page specific plugin scripts -->
+
+<!-- ace scripts -->
+
+<script src="/public/js/ace-elements.min.js"></script>
+<script src="/public/js/ace.min.js"></script>
+
+<!-- inline scripts related to this page -->
+<script type="text/javascript">
+    var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cscript src='" + _bdhmProtocol + ""));
+</script>
+</body>
+</html>

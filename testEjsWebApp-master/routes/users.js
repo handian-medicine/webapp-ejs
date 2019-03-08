@@ -33,11 +33,11 @@ router.post('/login', function (req, res, next) {
                 "refresh_token": obj.refresh_token,
                 "scope": obj.scope,
                 "expires_in": obj.expires_in
-            }, {maxAge: 1000 * 60 * 60 * 4, httpOnly: true});//cookie 4小时有效时间
+                }, {maxAge: 1000 * 60 * 60 * 4, httpOnly: true});//cookie 4小时有效时间
             res.cookie("userinfo", {
                 "email": req.body.email,
                 "password": req.body.pass
-            }, {maxAge: 1000 * 60 * 60 * 4, httpOnly: true});//cookie 4小时有效时间
+                }, {maxAge: 1000 * 60 * 60 * 4, httpOnly: true});//cookie 4小时有效时间
             //以上设置的两个cookie未来都需要以base64进行编码以防泄密
             console.log(">>>users.js -> Set-Cookie: ", res.get('Set-Cookie'));           
             //res.set('Set-Cookie',[Buffer.from(res.get('Set-Cookie')[0]).toString('base64'), Buffer.from(res.get('Set-Cookie')[1]).toString('base64')]);
@@ -58,5 +58,40 @@ router.post('/login', function (req, res, next) {
     });
 });
 
+//忘记密码
+router.post('/verify', function (req, res, next) {
+    console.log("密码重置");
+    // var authstring = req.cookies.prj001token.access_token;
+    var verify_url = myconst.apiurl + "users/sendemial/";
+    var verify_email = {"email": req.body.email};
+    console.log("",verify_email);
+    var options = {
+        url: verify_url,
+        form: verify_email,//忘记密码后用户输入的邮箱
+    };    
+    console.log("密码重置options",options);
+    request.post(options, function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            var verify_data = JSON.parse(body);
+            console.log("verify_data",verify_data);
+            // console.log("verify_data.email",verify_data.email);
+            
+            if (verify_data.msg != undefined) {
+                res.json({status:1, msg:verify_data.msg});
+            } else {
+                res.json({status:1, msg:verify_data.non_field_errors});
+            }
+            // res.render()
+        } else {
+            var verify_data = JSON.parse(body);
+            console.log("verify_data",verify_data);
+            if (verify_data.msg != undefined) {
+                res.json({status:1, msg:verify_data.msg});
+            } else {
+                res.json({status:1, msg:verify_data.non_field_errors});
+            };
+        }
+    })
 
+})
 module.exports = router;
