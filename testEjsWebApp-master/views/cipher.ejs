@@ -27,12 +27,20 @@
             var pwd1 = $("#affirmcode").val();
             if (pwd == pwd1) {
                 $("#tip").html("两次密码相同");
-                 $("#tip").css("color","green");
-            $("#codeBtn").removeAttr("disabled");
+                $("#tip").css("color","green");
+                $("#codeBtn").removeAttr("disabled");
             } else {
                 $("#tip").html("两次密码不相同");
-                 $("#tip").css("color","red")
-                  $("#codeBtn").attr("disabled","disabled");  
+                $("#tip").css("color","red")
+                $("#codeBtn").attr("disabled","disabled");  
+            }
+        }
+        function empty() {
+            var pwd = $("#oldcode").val();
+            if (pwd == '') {
+                $("#codeBtn").attr("disabled","disabled"); 
+            } else {
+                $("#codeBtn").removeAttr("disabled");
             }
         }
     </script>
@@ -56,7 +64,7 @@
                             $.removeCookie("userid", { path: '/' });
                             window.location.href = '/';    //    请求成功后跳转到你的主页
                         } else {
-                            alert("密码修改失败");
+                            alert("密码修改失败:" + data.msg);
                             window.location.href = '/cipher';
                         }
                     },
@@ -123,11 +131,11 @@
                 <tbody>
                 <tr>
                     <th><label for="oldcode">旧密码:</label></th>
-                    <td><input type="password" name="oldcode" maxlength="50" required="" id="oldcode"/></td>
+                    <td><input type="password" name="oldcode" maxlength="50" required="" id="oldcode" onkeyup="empty();"/></td>
                 </tr>
                 <tr>
                     <th><label for="newcode">新密码:</label></th>
-                    <td><input type="password" name="newcode" required="true" id="newcode"/></td>                   
+                    <td><input type="password" name="newcode" required="true" id="newcode" onkeyup="validate();"/></td>                   
                 </tr>
                 <tr>
                     <th><label for="affirmcode">确认新密码:</label></th>
@@ -137,7 +145,7 @@
             </table>
             <span id="tip"></span>
             <br>
-            <button type="submit" id="codeBtn">确认修改</button>
+            <button type="submit" id="codeBtn" disabled>确认修改</button>
             </div>
                     <p style="color:darkgray">你的密码不能与其他个人信息太相似。</p >
                     <p style="color:darkgray">你的密码必须包含至少 8 个字符。</p >
