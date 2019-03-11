@@ -131,7 +131,7 @@ router.put('/cipher',  function (req, res, next){
         }
         else {
             var err = JSON.parse(body); //由JSON字符串转换为JSON对象
-
+            console.log("8. json body ", err);
             res.json({status:0, msg:err.error_description});
         }
     });

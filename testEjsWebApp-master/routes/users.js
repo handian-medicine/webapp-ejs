@@ -60,11 +60,9 @@ router.post('/login', function (req, res, next) {
 
 //忘记密码
 router.post('/verify', function (req, res, next) {
-    console.log("密码重置");
     // var authstring = req.cookies.prj001token.access_token;
-    var verify_url = myconst.apiurl + "users/sendemial/";
+    var verify_url = myconst.apiurl + "users/sendemail/";
     var verify_email = {"email": req.body.email};
-    console.log("",verify_email);
     var options = {
         url: verify_url,
         form: verify_email,//忘记密码后用户输入的邮箱
@@ -73,19 +71,23 @@ router.post('/verify', function (req, res, next) {
     request.post(options, function (error, response, body) {
         if (!error && response.statusCode == 200) {
             var verify_data = JSON.parse(body);
-            console.log("verify_data",verify_data);
+            console.log("if,verify_data",verify_data);
             // console.log("verify_data.email",verify_data.email);
             
             if (verify_data.msg != undefined) {
-                res.json({status:1, msg:verify_data.msg});
+                res.json({msg:verify_data.msg});
             } else {
-                res.json({status:1, msg:verify_data.non_field_errors});
+                res.json({msg:verify_data.non_field_errors});
             }
             // res.render()
         } else {
-            // var verify_data = JSON.parse(body);
-            // console.log("verify_data",verify_data);
-            res.json({status:1, msg:'密码重置失败'});
+            var verify_data = JSON.parse(body);
+            console.log("else,verify_data",verify_data);
+            if (verify_data.msg != undefined) {
+                res.json({msg:verify_data.msg});
+            } else {
+                res.json({msg:verify_data.non_field_errors});
+            }
             
         }
     })
