@@ -21,65 +21,49 @@ router.get('/', function (req, res, next) {
 router.get('/home', function (req, res, next) {
     console.log(">>>Visting home page!");
     if (req.cookies.usertoken) {
-        var url = myconst.apiurl + "users/";
+        var url = myconst.apiurl + "users/login/";
         var authstring = req.cookies.usertoken.access_token;
-        var useremail = req.cookies.userinfo.email;
+        var email = req.cookies.userinfo.email;
+        var password = req.cookies.userinfo.password;
 
         console.log(">>>index.js: user access_token in cookie: " + authstring);
-        console.log(">>>index.js: user emain: " + useremail);
+        console.log(">>>index.js: user email: " + email);
+        console.log(">>>index.js: user password: " + password);
         
         var options = {
             url: url,
+            form:{email:email,password:password},
             headers: {
                 'Authorization': 'Bearer ' + authstring
             }
         };
-
-        //第一步请求的回调处理
-        function callback(error, response, body) {
-            if (!error && response.statusCode == 200) {
-                var userobjs = JSON.parse(body);
-                var userurl = "";
-                //console.log(">>>response: ", response);
-                console.log(">>>index.js: userobjs: ", userobjs);
-                //从所有用户列表中找到与当前用户email信息匹配的，获取其用户详情的url
-                for(var i=0,l=userobjs.count;i<l;i++){
-                    /*for(var key in userobjs.results[i]){
-                        console.log(key+':'+userobjs.results[i][key]);
-                    }*/
-                    if (userobjs.results[i]['email'] == useremail ) {
-                        console.log(">>>index.js: Found the user! " + userobjs.results[i]['url']);
-                        userurl = userobjs.results[i]['url'];
-                        res.cookie("userid", {
-                            "id": userobjs.results[i]['id']
-                        }, {maxAge: 1000 * 60 * 60 * 4, httpOnly: true});//cookie 4小时有效时间
-                        break;
-                    }
+        console.log(">>>index.js: options: ", options);
+        request.post(options, function (error, response, body) {
+            console.log(">>>index.js: 1.",body);
+            var matched_user = JSON.parse(body);
+            var userurl = matched_user.url;
+            var userid = matched_user.id
+            console.log(">>>index.js: matched_user: ", matched_user);
+            res.cookie("userid", {"id": userid}, {maxAge: 1000 * 60 * 60 * 4, httpOnly: true});
+            //根据用户详情的接口url发起新的请求，获取用户详情，里面包含该用户能访问的项目列表
+            var newoptions = {
+                url: userurl,
+                headers: {
+                    'Authorization': 'Bearer ' + authstring
                 }
-
-                //2. 根据用户详情的接口url发起新的请求，获取用户详情，里面包含该用户能访问的项目列表
-                var newoptions = {
-                    url: userurl,
-                    headers: {
-                        'Authorization': 'Bearer ' + authstring
-                    }
-                };
-                request(newoptions, function (error, response, body) {
-                    if (!error && response.statusCode == 200) {
-                        var userobj = JSON.parse(body);
-                        console.log(">>>index.js: userobj : ", userobj);
-                        res.render('home', {title: '临床流调项目中心', prjs: userobj.myprojects, userobj: userobj});
-                    }
-                    else {
-                        console.log(">>>index.js: Getting user details met unknown error. "+err.error_description);
-                        res.redirect("login");
-                    }
-                });
-            }
-        }
-
-        //1.发起请求，获取所有用户列表，然后比对cookie里面的email，来确定当前用户的接口访问url
-        request(options, callback);
+            };
+            request(newoptions, function (error, response, body) {
+                if (!error && response.statusCode == 200) {
+                    var userobj = JSON.parse(body);
+                    console.log(">>>index.js: userobj : ", userobj);
+                    res.render('home', {title: '临床流调项目中心', prjs: userobj.myprojects, userobj: userobj});
+                }
+                else {
+                    console.log(">>>index.js: Getting user details met unknown error. "+err.error_description);
+                    res.redirect("login");
+                }
+            });
+        });
     } else {
         console.log(">>>Failed to find cookie with access token");
         res.redirect("login");
@@ -131,10 +115,14 @@ router.put('/cipher',  function (req, res, next){
         }
         else {
             var err = JSON.parse(body); //由JSON字符串转换为JSON对象
-            console.log("8. json body ", err, err.new_password.length);
+            console.log("8. json body ", err);
             var msg = '';
-            for (var i=0,l=err.new_password.length;i<l;i++) {
-                msg = msg + err.new_password[i];
+            if (err.new_password != undefined) {
+                for (var i=0,l=err.new_password.length;i<l;i++) {
+                    msg = msg + err.new_password[i];
+                }
+            } else {
+                msg = msg + err.old_password;
             }
             console.log('9. msg', msg);
             res.json({status:0, msg:msg});

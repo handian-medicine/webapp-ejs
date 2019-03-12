@@ -25,14 +25,19 @@
         function validate() {                  
             var pwd = $("#newcode").val();
             var pwd1 = $("#affirmcode").val();
-            if (pwd == pwd1) {
-                $("#tip").html("两次密码相同");
-                $("#tip").css("color","green");
-                $("#codeBtn").removeAttr("disabled");
+
+            if (pwd == '' || pwd1 == '') {
+                $("#codeBtn").attr("disabled","disabled"); 
             } else {
-                $("#tip").html("两次密码不相同");
-                $("#tip").css("color","red")
-                $("#codeBtn").attr("disabled","disabled");  
+                if (pwd == pwd1) {
+                    $("#tip").html("两次密码相同");
+                    $("#tip").css("color","green");
+                    $("#codeBtn").removeAttr("disabled");
+                } else {
+                    $("#tip").html("两次密码不相同");
+                    $("#tip").css("color","red")
+                    $("#codeBtn").attr("disabled","disabled");  
+                }
             }
         }
         function empty() {
@@ -40,7 +45,12 @@
             if (pwd == '') {
                 $("#codeBtn").attr("disabled","disabled"); 
             } else {
-                $("#codeBtn").removeAttr("disabled");
+                if (pwd == '' || pwd1 == '') {
+                    $("#codeBtn").attr("disabled","disabled"); 
+                } else {
+                    $("#codeBtn").removeAttr("disabled");
+                }
+                
             }
         }
     </script>
