@@ -142,7 +142,7 @@ router.post('/move7', function (req, res, next) {
                     var mobile_body = JSON.parse(body);
                     if (!error && response.statusCode == 200) {
                         if (mobile_body.msg == "信息提交成功") {
-                            form_all = {};
+                            form_all = {};//信息提交成功后，删除node缓存的信息
                             res.json({status:1, msg:mobile_body.msg});
                         } else {
                             res.json({status:1, msg:mobile_body.msg});

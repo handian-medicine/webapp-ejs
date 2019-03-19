@@ -410,7 +410,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-xs-4">
-                                                <select name="is_checked">
+                                                <select id="id_is_checked" name="is_checked">
                                                     <option value="未审核">未审核</option>
                                                     <option value="审核通过">审核通过</option>
                                                     <option value="审核不通过">审核不通过</option>
@@ -725,7 +725,8 @@
                                                                 if ( $("#sname").val()=="" && 
                                                                      $("#saddress").val()=="" && 
                                                                      $("#stelephone").val()=="" && 
-                                                                     $("#shospital").val()=="") {
+                                                                     $("#shospital").val()==""&&
+                                                                     $("#is_checked").val()=="") {
                                                                         // alert("在这里if->" + current);
                                                                     window.location.href = "/prj001/?page=" + current;
                                                                 } else {
@@ -735,7 +736,8 @@
                                                                                                                 + "&name=" + $("#sname").val() 
                                                                                                                 + "&address=" + $("#saddress").val()
                                                                                                                 + "&telephone=" + $("#stelephone").val()
-                                                                                                                + "&hospital=" + $("#shospital").val();
+                                                                                                                + "&hospital=" + $("#shospital").val()
+                                                                                                                + "&is_checked=" + $("#id_is_checked").val();
                                                                 }
                                                             }
                                                         });
