@@ -21,26 +21,31 @@
 </head>
 <body>
     <script>
-            $(document).ready(function () {
-                $("#summaryBtn").click(function () {
-                    
-                    $.ajax({
-                            url: "/mobile/move2",
-                            type: "POST",
-                            // dataType: "json",
-                            data: $('#form-summary').serializeArray(),
-                            success: function (result) {
-                                // alert(result.form_all);
-                                alert("继续填写下一页");
+        var test=1;
+        $(document).ready(function () {
+            // alert("全局变量");
+            $("#form-summary").submit(function () {
+                $.ajax({
+                        url: "/mobile/move2",
+                        type: "POST",
+                        // dataType: "json",
+                        data: $('#form-summary').serializeArray(),
+                        success: function (result) {
+                            if (result.form_all["history"] == undefined) {
+                                // alert("继续填写下一页");
                                 window.location.href = "move3";
-                            },
-                            error:  function () {
-                                alert("请求错误");
-                            },
-                    })
+                            } else {
+                                window.history.go(1);
+                                // window.location.href = "move3";
+                            }
+                        },
+                        error:  function () {
+                            alert("请求错误");
+                        },
                 })
             })
-        </script>
+        })
+    </script>
 <div class="modal-content">
     <div class="modal-header no-padding">
         <div class="table-header center">
@@ -48,10 +53,10 @@
         </div>
     </div>
 
-    <form class="modal-body no-padding" id="form-summary">
+    <form class="modal-body no-padding" id="form-summary" method="GET" onsubmit="return false;">
         <div class="modal-body">
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-12">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12">
                             <input type="hidden" class="person" name="person" id="person-summary"/>
                             
                             <p><h5 style="color:blue">1、主诉</h5>
@@ -295,19 +300,17 @@
                                 <label><input name="pulse_se" type="checkbox" value="true"/>涩</label>
                                 <label><input name="pulse_jin" type="checkbox" value="true"/>紧</label>
                                 <label><input name="pulse_qita" type="checkbox" value="true"/>其他</label>
-                        </div>
-                    </div>
+                </div>
+            </div>
         </div>
         <div class="modal-footer">
         <script>
         	function goback() {
         		window.history.go(-1);
-        	}
+            }
         </script>
-            <button type="button" class="btn btn-primary" onclick="goback()">上一页</button>
-            <button type="button" class="btn btn-primary summaryBtn" id="summaryBtn">
-                下一页
-            </button>
+            <button type="button" class="btn btn-primary" id="prepage" onclick="goback()">上一页</button>
+            <button type="submit" class="btn btn-primary" id="nextpage">下一页</button>
         </div>
     </form>
 </div>
@@ -340,47 +343,5 @@
 <script src="../public/js/ace-elements.min.js"></script>
 <script src="../public/js/ace.min.js"></script>
 
-<!-- inline scripts related to this page -->
-<!-- <script type="text/javascript">
-    jQuery(function($) {
-        var oTable1 = $('#sample-table-2').dataTable( {
-            "aoColumns": [
-                { "bSortable": false },
-                null, null,null, null, null,
-                { "bSortable": false }
-            ] } );
-
-
-        $('table th input:checkbox').on('click' , function(){
-            var that = this;
-            $(this).closest('table').find('tr > td:first-child input:checkbox')
-                .each(function(){
-                    this.checked = that.checked;
-                    $(this).closest('tr').toggleClass('selected');
-                });
-
-        });
-
-
-        $('[data-rel="tooltip"]').tooltip({placement: tooltip_placement});
-        function tooltip_placement(context, source) {
-            var $source = $(source);
-            var $parent = $source.closest('table')
-            var off1 = $parent.offset();
-            var w1 = $parent.width();
-
-            var off2 = $source.offset();
-            var w2 = $source.width();
-
-            if( parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2) ) return 'right';
-            return 'left';
-        }
-    })
-</script> -->
-
-<!-- <script type="text/javascript">
-    var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-    document.write(unescape("%3Cscript src='" + _bdhmProtocol + ""));
-</script> -->
 </body>
 </html>

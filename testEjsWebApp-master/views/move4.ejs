@@ -22,18 +22,22 @@
 <body>
     <script>
         $(document).ready(function () {
-            $("#relevantBtn").click(function () {
+            $("#form-relevant").submit(function () {
                 $.ajax({
                         url: "/mobile/move4",
                         type: "POST",
                         // dataType: "json",
                         data: $('#form-relevant').serializeArray(),
                         success: function (result) {
-                            alert(result.msg);
-                            // $(".relevantBtn").attr("disabled", true);
+                            if (result.form_all["cc"] == undefined) {
+                                // alert("继续填写下一页");
+                                window.location.href = "move5";
+                            } else {
+                                window.history.go(1);
+                            }
                         },
                         error:  function (result) {
-                            alert(result.msg);                                
+                            alert("请求错误");                                
                         },
                 })
             })
@@ -47,7 +51,7 @@
         </div>
     </div>
     
-    <form class="modal-body no-padding" id="form-relevant">
+    <form class="modal-body no-padding" id="form-relevant" method="GET" onsubmit="return false;">
         <div class="modal-body">
             <div class="row">
                 <div class="col-xs-12 col-sm-12">
@@ -80,13 +84,21 @@
             </div>
         </div>
         <div class="modal-footer">
+            
             <script>
                 function goback() {
                     window.history.go(-1);
                 }
             </script>
+            <script>
+                    function forward() {
+                        window.history.go(1);
+                    }
+            </script>
             <button type="button" class="btn btn-primary" onclick="goback()">上一页</button>
-            <button type="button" class="btn btn-primary relevantBtn" id="relevantBtn">提交</button>
+            <button type="submit" class="btn btn-primary relevantBtn" id="relevantBtn">
+                下一页
+            </button>
         </div>
     </form>
 </div>

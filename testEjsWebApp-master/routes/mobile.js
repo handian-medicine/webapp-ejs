@@ -6,7 +6,11 @@ var router = express.Router();
 //路由 ../moblie/
 // 'use strict';
 var form_all = {};
+
+//基本信息 
 router.get('/move1', function (req, res, next) {
+    console.log("基本信息");
+    form_all["info"] = {};
     res.render('move1');
 });
 router.post('/move1', function (req, res, next) {
@@ -14,43 +18,77 @@ router.post('/move1', function (req, res, next) {
     // geninfo_data = JSON.parse(geninfo_data);
     // form_all["data"]["info"] = geninfo_data;
     form_all["info"] = req.body;
-    console.log("form_all form_geninfo",form_all);
+    console.log("form_all form_info",form_all);
+    // console.log("类型",typeof(form_all["summary"]))
     res.json({form_all:form_all});
 });
 
+//病情概要
 router.get('/move2', function (req, res, next) {
+    console.log("病情概要");
+    form_all["summary"] = {};
     res.render('move2');
 });
 router.post('/move2', function (req, res, next) {
-    // var summary_data = JSON.stringify(req.body);
-    // summary_data = JSON.parse(summary_data);
-    // form_all["data"]["summary"] = summary_data;
     form_all["summary"] = req.body;
     console.log("form_all form_summary",form_all);
     res.json({form_all:form_all});
 });
 
+//患者病史
 router.get('/move3', function (req, res, next) {
+    console.log("患者病史");
+    form_all["history"] = {};
     res.render('move3');
 });
 router.post('/move3', function (req, res, next) {
-    // var history_data = JSON.stringify(req.body);
-    // history_data = JSON.parse(history_data);
-    // form_all["data"]["history"] = history_data;
     form_all["history"] = req.body;
     console.log("form_all form_history",form_all);
     res.json({form_all:form_all});
 });
 
+//相关检查
 router.get('/move4', function (req, res, next) {
+    console.log("相关检查");
+    form_all["relevant"] = {};
     res.render('move4');
 });
-// router.post('/move4', function (req, res, next) {
-//     form_all = form_all + req.body.form_relevant;
-//     console.log("form_all form_relevant",form_all);
-//     res.json({form_all:form_all});
-// });
 router.post('/move4', function (req, res, next) {
+    form_all["relevant"] = req.body;
+    console.log("form_all form_relevant",form_all);
+    res.json({form_all:form_all});
+});
+
+//临床诊断 
+router.get('/move5', function (req, res, next) {
+    console.log("临床诊断");
+    form_all["cc"] = {};
+    res.render('move5');
+});
+router.post('/move5', function (req, res, next) {
+    form_all["cc"] = req.body;
+    console.log("form_all form_cc",form_all);
+    res.json({form_all:form_all});
+});
+
+//中西治疗
+router.get('/move6', function (req, res, next) {
+    console.log("中西治疗");
+    form_all["cure"] = {};
+    res.render('move6');
+});
+router.post('/move6', function (req, res, next) {
+    form_all["cure"] = req.body;
+    console.log("form_all form_cure",form_all);
+    res.json({form_all:form_all});
+});
+
+//疗效情况
+router.get('/move7', function (req, res, next) {
+    form_all["results"] = {};
+    res.render('move7');
+});
+router.post('/move7', function (req, res, next) {
         var url = myconst.apiurl + "o/token/";
         var mobileData = {
             "username": 'prj001-patient@handian.com',
@@ -84,9 +122,9 @@ router.post('/move4', function (req, res, next) {
                 var authstring = obj.access_token;
                 //body直接传过来的数据有[Object: null prototype],通过stringify和parse
                 //方法可以去掉
-                // var relevant_data = JSON.stringify(req.body);
-                // relevant_data = JSON.parse(relevant_data);
-                form_all["relevant"] = req.body;
+                // var results_data = JSON.stringify(req.body);
+                // results_data = JSON.parse(results_data);
+                form_all["results"] = req.body;
                 var options = {
                     form: {data:JSON.stringify(form_all)},
                     url: newurl,
@@ -101,15 +139,22 @@ router.post('/move4', function (req, res, next) {
                 request.post(options, function (error, response, body) {
                     console.log("response:", JSON.parse(body).msg);
                     console.log("response.statusCode: ", response.statusCode);
+                    var mobile_body = JSON.parse(body);
                     if (!error && response.statusCode == 200) {
-                        res.json({status:1, msg:JSON.parse(body).msg});
-                        console.log("?????",form_all);
+                        if (mobile_body.msg == "信息提交成功") {
+                            form_all = {};
+                            res.json({status:1, msg:mobile_body.msg});
+                        } else {
+                            res.json({status:1, msg:mobile_body.msg});
+                        }    
+                        console.log("status200",form_all);
                         //res.json()不能用在太前面，否则会调用res.send()
                         //res.render and res.json will both call res.end() 
                         //which is basically like trying to send a response twice to the client
                     } else {
-                        console.log("?????",form_all);
-                        res.json({status:0, msg:JSON.parse(body).msg});
+                        console.log("response:", mobile_body.msg);
+                        console.log("err",form_all);
+                        res.json({status:0, msg:mobile_body.msg});
                         // console.log('response.statusCode wrong');
                     }
                 })       

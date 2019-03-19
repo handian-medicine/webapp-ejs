@@ -42,7 +42,7 @@
             document.getElementById("form-geninfo").reset();
             //判断是否审核状态,未审核false则disable掉geninfoBtn
             if ($(this).attr("checked-info") == "no") {
-                $(".geninfoBtn").attr("disabled", true);
+                $(".geninfoBtn").attr("disabled", false);
             } else {
                 $(".geninfoBtn").removeAttr("disabled");
             }
@@ -55,6 +55,7 @@
                         // alert($('#minzu-qita').val());
                         $('#geninfoBtn').attr("geninfoBtn-url", result["url"]);
                         //填空
+                        $('#owner').val(result["owner"]);
                         $('#serial').val(result["serial"]);
                         $('#name').val(result["name"]);
                         $('#recdate').val(result["recdate"]);
@@ -154,7 +155,7 @@
 
             //判断是否审核状态,未审核false则disable掉geninfoBtn
             if ($(this).attr("checked-info") == "no") {
-                $(".summaryBtn").attr("disabled", true);
+                $(".summaryBtn").attr("disabled", false);
             } else {
                 $(".summaryBtn").removeAttr("disabled");
             }
@@ -439,7 +440,7 @@
 
             //判断是否审核状态,未审核false则disable掉geninfoBtn
             if ($(this).attr("checked-info") == "no") {
-                $(".historyBtn").attr("disabled", true);
+                $(".historyBtn").attr("disabled", false);
             } else {
                 $(".historyBtn").removeAttr("disabled");
             }
@@ -474,6 +475,10 @@
                             $("input:checkbox[name='pasthistory_luancaonangzhong']").prop('checked',result["pasthistory_luancaonangzhong"]);
                             $("input:checkbox[name='pasthistory_ruxianzengsheng']").prop('checked',result["pasthistory_ruxianzengsheng"]);
                             $("input:checkbox[name='pasthistory_shengzhiyichang']").prop('checked',result["pasthistory_shengzhiyichang"]);
+
+                            $("input:checkbox[name='pasthistory_minus']").prop('checked',result["pasthistory_minus"]);
+                            $("input:checkbox[name='pasthistory_plus']").prop('checked',result["pasthistory_plus"]);
+
                             $("input:checkbox[name='pasthistory_jiazhuangxian']").prop('checked',result["pasthistory_jiazhuangxian"]);
                             $("input:checkbox[name='pasthistory_shenshangxian']").prop('checked',result["pasthistory_shenshangxian"]);
                             $("input:checkbox[name='pasthistory_xueye']").prop('checked',result["pasthistory_xueye"]);
@@ -518,6 +523,7 @@
                             $("input[name='spirit_yinu'][value='"+result["spirit_yinu"]+"']").prop("checked",true);
                             $('#spirit_qita').val(result["spirit_qita"]);
                             
+                            $("input:checkbox[name='body_normal']").prop('checked',result["body_normal"]);
                             $("input:checkbox[name='body_fat']").prop('checked',result["body_fat"]);
                             $("input:checkbox[name='body_thin']").prop('checked',result["body_thin"]);
                             $("input:checkbox[name='body_skin']").prop('checked',result["body_skin"]);
@@ -527,6 +533,7 @@
                             $("input:checkbox[name='body_waist']").prop('checked',result["body_waist"]);
                             $('#body_qita').val(result["body_qita"]);
 
+                            $("input:checkbox[name='face_head_normal']").prop("checked",result["face_head_normal"]);
                             $("input:checkbox[name='face_head_cangbai']").prop("checked",result["face_head_cangbai"]);
                             $("input:checkbox[name='face_head_huangbai']").prop("checked",result["face_head_huangbai"]);
                             $("input:checkbox[name='face_head_weihuang']").prop("checked",result["face_head_weihuang"]);
@@ -569,6 +576,7 @@
                             $("input[name='sleep_mengduo'][value='"+result["sleep_mengduo"]+"']").prop("checked",true);
                             $('#sleep_qita').val(result["sleep_qita"]);
                             
+                            $("input:checkbox[name='erbian_normal']").prop('checked',result["erbian_normal"]);
                             $("input:checkbox[name='erbian_zaojie']").prop('checked',result["erbian_zaojie"]);
                             $("input:checkbox[name='erbian_tangbo']").prop('checked',result["erbian_tangbo"]);
                             $("input:checkbox[name='erbian_pinshu']").prop('checked',result["erbian_pinshu"]);
@@ -736,7 +744,7 @@
 
             //判断是否审核状态,未审核false则disable掉geninfoBtn
             if ($(this).attr("checked-info") == "no") {
-                $(".relevantBtn").attr("disabled", true);
+                $(".relevantBtn").attr("disabled", false);
             } else {
                 $(".relevantBtn").removeAttr("disabled");
             }
@@ -825,7 +833,7 @@
 
             //判断是否审核状态,未审核false则disable掉geninfoBtn
             if ($(this).attr("checked-info") == "no") {
-                $(".ccBtn").attr("disabled", true);
+                $(".ccBtn").attr("disabled", false);
             } else {
                 $(".ccBtn").removeAttr("disabled");
             }
@@ -850,7 +858,7 @@
                             $('#ccBtn').attr("ccBtn-url", result["url"]); 
 
                             $("input[name='yuejing_zhenduan'][value='"+result["yuejing_zhenduan"]+"']").prop("checked",true);
-                            $('#yuejing_qita').val(result["yuejing_qita"]);
+                            // $('#yuejing_qita').val(result["yuejing_qita"]);
 
                             $("input[name='xuzheng'][value='"+result["xuzheng"]+"']").prop("checked",true);
                             $('#qita_asthenic').val(result["qita_asthenic"]);
@@ -912,7 +920,7 @@
 
             //判断是否审核状态,未审核false则disable掉geninfoBtn
             if ($(this).attr("checked-info") == "no") {
-                $(".cureBtn").attr("disabled", true);
+                $(".cureBtn").attr("disabled", false);
             } else {
                 $(".cureBtn").removeAttr("disabled");
             }
@@ -950,14 +958,9 @@
                             $("input:checkbox[name='pre_xu_yiqi']").prop('checked',result["pre_xu_yiqi"]);
                             $("input:checkbox[name='pre_xu_guyin']").prop('checked',result["pre_xu_guyin"]);
                             $("input:checkbox[name='pre_xu_yuanjian']").prop('checked',result["pre_xu_yuanjian"]);
-                            $("input:checkbox[name='pre_xu_dihuang']").prop('checked',result["pre_xu_dihuang"]);
                             $("input:checkbox[name='pre_xu_yangrong']").prop('checked',result["pre_xu_yangrong"]);
-                            $("input:checkbox[name='pre_xu_daying']").prop('checked',result["pre_xu_daying"]);
-                            $("input:checkbox[name='pre_xu_wenjing']").prop('checked',result["pre_xu_wenjing"]);
                             $("input:checkbox[name='pre_xu_guipi']").prop('checked',result["pre_xu_guipi"]);
                             $("input:checkbox[name='pre_xu_anchong']").prop('checked',result["pre_xu_anchong"]);
-                            $("input:checkbox[name='pre_xu_guishen']").prop('checked',result["pre_xu_guishen"]);
-                            $("input:checkbox[name='pre_xu_zixue']").prop('checked',result["pre_xu_zixue"]);
                             $("input:checkbox[name='pre_xu_jianyuan']").prop('checked',result["pre_xu_jianyuan"]);
                             $("input:checkbox[name='pre_xu_qingxue']").prop('checked',result["pre_xu_qingxue"]);
                             $("input:checkbox[name='pre_xu_liangdi']").prop('checked',result["pre_xu_liangdi"]);
@@ -967,25 +970,23 @@
                             $("input:checkbox[name='pre_xu_yougui']").prop('checked',result["pre_xu_yougui"]);
                             $("input:checkbox[name='pre_xu_guchong']").prop('checked',result["pre_xu_guchong"]);
                             $("input:checkbox[name='pre_xu_guben']").prop('checked',result["pre_xu_guben"]);
+                            $("input:checkbox[name='pre_xu_baoyin']").prop('checked',result["pre_xu_baoyin"]);
                             $('#pre_xu_qita').val(result["pre_xu_qita"]);
 
                             $("input:checkbox[name='pre_shi_xiaoyao']").prop('checked',result["pre_shi_xiaoyao"]);
                             $("input:checkbox[name='pre_shi_qingjing']").prop('checked',result["pre_shi_qingjing"]);
                             $("input:checkbox[name='pre_shi_wenjing']").prop('checked',result["pre_shi_wenjing"]);
-                            $("input:checkbox[name='pre_shi_wuyao']").prop('checked',result["pre_shi_wuyao"]);
-                            $("input:checkbox[name='pre_shi_erchen']").prop('checked',result["pre_shi_erchen"]);
-                            $("input:checkbox[name='pre_shi_baoyin']").prop('checked',result["pre_shi_baoyin"]);
                             $("input:checkbox[name='pre_shi_taohong']").prop('checked',result["pre_shi_taohong"]);
                             $("input:checkbox[name='pre_shi_siwu']").prop('checked',result["pre_shi_siwu"]);
-                            $("input:checkbox[name='pre_shi_tongyu']").prop('checked',result["pre_shi_tongyu"]);
                             $("input:checkbox[name='pre_shi_cangfu']").prop('checked',result["pre_shi_cangfu"]);
-                            $("input:checkbox[name='pre_shi_yangxue']").prop('checked',result["pre_shi_yangxue"]);
                             $("input:checkbox[name='pre_shi_liangdi']").prop('checked',result["pre_shi_liangdi"]);
                             $("input:checkbox[name='pre_shi_zongpu']").prop('checked',result["pre_shi_zongpu"]);
                             $("input:checkbox[name='pre_shi_qinggan']").prop('checked',result["pre_shi_qinggan"]);
                             $("input:checkbox[name='pre_shi_zuyu']").prop('checked',result["pre_shi_zuyu"]);
                             $("input:checkbox[name='pre_shi_qingre']").prop('checked',result["pre_shi_qingre"]);
                             $("input:checkbox[name='pre_shi_zhibeng']").prop('checked',result["pre_shi_zhibeng"]);
+                            $("input:checkbox[name='pre_shi_danzhi']").prop('checked',result["pre_shi_danzhi"]);
+                            $("input:checkbox[name='pre_shi_longdan']").prop('checked',result["pre_shi_longdan"]);
                             $('#pre_shi_qita').val(result["pre_shi_qita"]);
 
                             $("input:checkbox[name='pre_xushi_liangdi']").prop('checked',result["pre_xushi_liangdi"]);
@@ -999,12 +1000,6 @@
                             $("input:checkbox[name='zhong_xu_ankun']").prop('checked',result["zhong_xu_ankun"]);
                             $("input:checkbox[name='zhong_xu_fufang']").prop('checked',result["zhong_xu_fufang"]);
                             $("input:checkbox[name='zhong_xu_gujing']").prop('checked',result["zhong_xu_gujing"]);
-                            $("input:checkbox[name='zhong_xu_dabu']").prop('checked',result["zhong_xu_dabu"]);
-                            $("input:checkbox[name='zhong_xu_kuntai']").prop('checked',result["zhong_xu_kuntai"]);
-                            $("input:checkbox[name='zhong_xu_wuji']").prop('checked',result["zhong_xu_wuji"]);
-                            $("input:checkbox[name='zhong_xu_dingkun']").prop('checked',result["zhong_xu_dingkun"]);
-                            $("input:checkbox[name='zhong_xu_zanyu']").prop('checked',result["zhong_xu_zanyu"]);
-                            $("input:checkbox[name='zhong_xu_aifu']").prop('checked',result["zhong_xu_aifu"]);
                             $("input:checkbox[name='zhong_xu_ejiao']").prop('checked',result["zhong_xu_ejiao"]);
                             $("input:checkbox[name='zhong_xu_liuwei']").prop('checked',result["zhong_xu_liuwei"]);
                             $("input:checkbox[name='zhong_xu_erzhi']").prop('checked',result["zhong_xu_erzhi"]);
@@ -1015,17 +1010,11 @@
                             $("input:checkbox[name='zhong_shi_duanxue']").prop('checked',result["zhong_shi_duanxue"]);
                             $("input:checkbox[name='zhong_shi_jiawei']").prop('checked',result["zhong_shi_jiawei"]);
                             $("input:checkbox[name='zhong_shi_qianzhi']").prop('checked',result["zhong_shi_qianzhi"]);
-                            $("input:checkbox[name='zhong_shi_angong']").prop('checked',result["zhong_shi_angong"]);
                             $("input:checkbox[name='zhong_shi_yunnan']").prop('checked',result["zhong_shi_yunnan"]);
-                            $("input:checkbox[name='zhong_shi_fuan']").prop('checked',result["zhong_shi_fuan"]);
-                            $("input:checkbox[name='zhong_shi_fuxue']").prop('checked',result["zhong_shi_fuxue"]);
                             $("input:checkbox[name='zhong_shi_gongning']").prop('checked',result["zhong_shi_gongning"]);
                             $("input:checkbox[name='zhong_shi_zhixue']").prop('checked',result["zhong_shi_zhixue"]);
-                            $("input:checkbox[name='zhong_shi_ankun']").prop('checked',result["zhong_shi_ankun"]);
-                            $("input:checkbox[name='zhong_shi_shaofu']").prop('checked',result["zhong_shi_shaofu"]);
-                            $("input:checkbox[name='zhong_shi_xuefu']").prop('checked',result["zhong_shi_xuefu"]);
-                            $("input:checkbox[name='zhong_shi_qizhi']").prop('checked',result["zhong_shi_qizhi"]);
                             $("input:checkbox[name='zhong_shi_xiaoyao']").prop('checked',result["zhong_shi_xiaoyao"]);
+                            $("input:checkbox[name='zhong_shi_kunning']").prop('checked',result["zhong_shi_kunning"]);
                             $('#zhong_shi_qita').val(result["zhong_shi_qita"]);
 
                             $("input:checkbox[name='zhong_xushi_zhixue']").prop('checked',result["zhong_xushi_zhixue"]);
@@ -1034,11 +1023,39 @@
                             $("input:checkbox[name='zhong_xushi_zhibo']").prop('checked',result["zhong_xushi_zhibo"]);
                             $('#zhong_xushi_qita').val(result["zhong_xushi_qita"]);
 
+                            $("input:checkbox[name='zhongyi_body']").prop('checked',result["zhongyi_body"]);
+                            $("input:checkbox[name='zhongyi_ears']").prop('checked',result["zhongyi_ears"]);
+                            $("input:checkbox[name='zhongyi_belly']").prop('checked',result["zhongyi_belly"]);
+                            $("input:checkbox[name='zhongyi_ai']").prop('checked',result["zhongyi_ai"]);
+                            $("input:checkbox[name='zhongyi_yadou']").prop('checked',result["zhongyi_yadou"]);
+                            $("input:checkbox[name='zhongyi_zhushe']").prop('checked',result["zhongyi_zhushe"]);
+                            $("input:checkbox[name='zhongyi_futie']").prop('checked',result["zhongyi_futie"]);
+                            $('#zhongyi_qita').val(result["zhongyi_qita"]);
+                            
                             $("input:checkbox[name='hormone_wu']").prop('checked',result["hormone_wu"]);
-                            $("input:checkbox[name='hormone_yun']").prop('checked',result["hormone_yun"]);
-                            $("input:checkbox[name='hormone_ci']").prop('checked',result["hormone_ci"]);
+
+                            // $("input:checkbox[name='hormone_yun']").prop('checked',result["hormone_yun"]);
+                            $("input:checkbox[name='yun_jizhu']").prop('checked',result["yun_jizhu"]);
+                            $("input:checkbox[name='yun_diqu']").prop('checked',result["yun_diqu"]);
+                            $("input:checkbox[name='yun_weihua']").prop('checked',result["yun_weihua"]);
+                            $("input:checkbox[name='yun_yuntong']").prop('checked',result["yun_yuntong"]);
+                            $('#yun_qita').val(result["yun_qita"]);
+
+                            // $("input:checkbox[name='hormone_ci']").prop('checked',result["hormone_ci"]);
+                            $("input:checkbox[name='ci_benjia']").prop('checked',result["ci_benjia"]);
+                            $("input:checkbox[name='ci_jieheji']").prop('checked',result["ci_jieheji"]);
+                            $("input:checkbox[name='ci_jiehepian']").prop('checked',result["ci_jiehepian"]);
+                            $('#ci_qita').val(result["ci_qita"]);
+
+                            // $("input:checkbox[name='hormone_kou']").prop('checked',result["hormone_kou"]);
+                            $("input:checkbox[name='kou_chunhuan']").prop('checked',result["kou_chunhuan"]);
+                            $("input:checkbox[name='kou_quluoo']").prop('checked',result["kou_quluoo"]);
+                            $("input:checkbox[name='kou_quluot']").prop('checked',result["kou_quluot"]);
+                            $("input:checkbox[name='kou_quyang']").prop('checked',result["kou_quyang"]);
+                            $("input:checkbox[name='kou_fufang']").prop('checked',result["kou_fufang"]);
+                            $('#kou_qita').val(result["kou_qita"]);
+                            
                             $("input:checkbox[name='hormone_xiong']").prop('checked',result["hormone_xiong"]);
-                            $("input:checkbox[name='hormone_kou']").prop('checked',result["hormone_kou"]);
                             $("input:checkbox[name='hormone_gn']").prop('checked',result["hormone_gn"]);
                             $('#hormone_qita').val(result["hormone_qita"]);
 
@@ -1063,6 +1080,9 @@
                             $("input:checkbox[name='shu_neimo']").prop('checked',result["shu_neimo"]);
                             $("input:checkbox[name='shu_qiechu']").prop('checked',result["shu_qiechu"]);
                             $('#shu_qita').val(result["shu_qita"]);
+
+                            $('#other_cure').val(result["other_cure"]);
+                            $("input:checkbox[name='other_cure_wu']").prop('checked',result["other_cure_wu"]);
                         }else {
                             alert("result.status wrong");
                         }
@@ -1112,7 +1132,7 @@
 
             //判断是否审核状态,未审核false则disable掉geninfoBtn
             if ($(this).attr("checked-info") == "no") {
-                $(".resultsBtn").attr("disabled", true);
+                $(".resultsBtn").attr("disabled", false);
             } else {
                 $(".resultsBtn").removeAttr("disabled");
             }

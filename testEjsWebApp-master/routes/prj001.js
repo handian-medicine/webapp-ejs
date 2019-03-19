@@ -86,6 +86,7 @@ router.get('/', function (req, res, next) {
                 if ( (params["keyword"] == undefined) || (params["keyword"] =="") ) {
                     res.render('prj001', {
                         title: '流调项目-排卵障碍性异常子宫出血',
+                        is_admin:archiveobjs.is_admin,
                         archives: archiveobjs.results,
                         username: req.cookies.userinfo.email,
                         totalpagenumber: archiveobjs.total_pages,
@@ -94,12 +95,13 @@ router.get('/', function (req, res, next) {
                         nextpage: nextPage,
                         totalCount: archiveobjs.count,
                         searchname: '',
-                        name: '', address:'', hospital:'', telephone:'',
+                        name: '', address:'', hospital:'', telephone:'',//用于搜索框保留关键字
                         code: archiveobjs.code
                     });
                 } else {
                     res.render('prj001', {
                         title: '流调项目-排卵障碍性异常子宫出血',
+                        is_admin:archiveobjs.is_admin,
                         archives: archiveobjs.results,
                         username: req.cookies.userinfo.email,
                         totalpagenumber: archiveobjs.total_pages,
@@ -107,6 +109,7 @@ router.get('/', function (req, res, next) {
                         previouspage: previousPage,
                         nextpage: nextPage,
                         totalCount: archiveobjs.count,
+                        //用于搜索框保留关键字
                         name: params["name"], address:params["address"], hospital:params["hospital"], telephone:params["telephone"],
                         code: archiveobjs.code
                     });
@@ -220,6 +223,7 @@ router.get('/', function (req, res, next) {
                             if (params["keyword"] == undefined) {
                                 res.render('prj001', {
                                     title: '流调项目-排卵障碍性异常子宫出血',
+                                    is_admin:archiveobjs.is_admin,
                                     archives: archiveobjs.results,
                                     username: req.cookies.userinfo.email,
                                     totalpagenumber: archiveobjs.total_pages,
@@ -234,6 +238,7 @@ router.get('/', function (req, res, next) {
                             } else {
                                 res.render('prj001', {
                                     title: '流调项目-排卵障碍性异常子宫出血',
+                                    is_admin:archiveobjs.is_admin,
                                     archives: archiveobjs.results,
                                     username: req.cookies.userinfo.email,
                                     totalpagenumber: archiveobjs.total_pages,
@@ -369,9 +374,9 @@ router.post('/geninfo', function (req, res, next){
         request(options, function (error, response, body) {
             if (!error && response.statusCode == 200) {
                 console.log(">>>prj001.js options: ", options)
-                var all_data = JSON.parse(body);
-                console.log(">>>prj001.js -> user_geninfo: ", all_data);
-                res.json(all_data.info);
+                var user_info = JSON.parse(body);
+                console.log(">>>prj001.js -> user_geninfo: ", user_info);
+                res.json(user_info);
             } else {
                 //console.log(">>>Getting archives met unknown error. " + error.error_description);
                 res.redirect("/prj001");
@@ -2264,13 +2269,15 @@ router.get('/patientInfo', function (req, res, next){
 router.get('/check', function (req, res, next){
     var id = req.query.id;
     var page = req.query.page;
+    var check = req.query.check;
     // var id = req.params.id; //router.get('/patientInfo/:id'...
-    console.log("id", id);
+    console.log("显示id+check"+id+check);
     var check_url = myconst.apiurl + "prj001/info/" + id +'/checked/';
 
     var authstring = req.cookies.prj001token.access_token;
     var options = {
         url: check_url,
+        form:{is_checked:check,id:id,},
         headers: {
             'Authorization': 'Bearer ' + authstring
         }
@@ -2316,7 +2323,7 @@ router.get('/info/search/', function (req, res, next) {
 
     var formdata = {name:params["name"],address:params["address"],
                     telephone:params["telephone"],hospital:params["hospital"],
-                    types:params["types"]};
+                    is_checked:params["is_checked"],types:params["types"]};
     var options = {
         url: encodeURI(search_url),
         form: formdata,//req.body.data,//formdata
@@ -2362,6 +2369,7 @@ router.get('/info/search/', function (req, res, next) {
                 }
                 res.render('prj001', {
                     title: '流调项目-排卵障碍性异常子宫出血',
+                    is_admin:archiveobjs.is_admin,
                     archives: archiveobjs.results,
                     username: req.cookies.userinfo.email,
                     totalpagenumber: archiveobjs.total_pages,
@@ -2378,6 +2386,7 @@ router.get('/info/search/', function (req, res, next) {
             } else {
                 res.render('prj001', {
                 title: '流调项目-排卵障碍性异常子宫出血',
+                is_admin:false,
                 archives: [],
                 username: req.cookies.userinfo.email,
                 totalpagenumber: 0,

@@ -48,106 +48,34 @@
 </script> -->
 <script>
     $(document).ready(function () {
-    // $("#form-geninfo").submit(function (e) {
-        // alert("e.preventDefault()");
-        // e.preventDefault();
-        $("#form-geninfo").validate({
-            rules:{
-                    // recdate:{
-                    //     required:true
-                    // },
-                    // serial:{
-                    //     required:true
-                    // },
-                    // hospital:{
-                    //     required:true
-                    // },
-                    name:{
-                        required:true
-                    },
-                    telephone:{
-                        required:true,
-                        digits:true,
-                        rangelength:[1,11]
-                    },
-                    age:{
-                        required:true,
-                        digits:true,
-                        range:[0,200]
-                        // rangelength:[1,4]
-                    },
-                    height:{
-                        required:false,
-                        rangelength:[0,6]
-                    },
-                    weight:{
-                        required:false,
-                        rangelength:[0,6]
-                    },
-                    waistline:{
-                        required:false,
-                        rangelength:[0,6]
-                    },
-                    hipline:{
-                        required:false,
-                        rangelength:[0,6]
-                    },
-                    address:{
-                        required:true,
-                    },
-                    entrance:{
-                        required:true,
-                    }
-                },
-            messages:{
-                    recdate:{required:"请填写该字段"},
-                    serial:{required:"请填写该字段"},
-                    hospital:{required:"请填写该字段"},
-                    name:{required:"请填写该字段"},
-                    telephone:{
-                        required:"请填写该字段",
-                        rangelength:$.validator.format("电话号码长度必须在{0}-{1}之间"),
-                        digits:"不能填写非数字字符"        
-                    },
-                    age:{
-                        required:"请填写该字段",
-                        digits:"不能填写非数字字符",
-                        range:$.validator.format("年龄必须在{0}-{1}之间")
-                    },
-                    entrance:{required:"请填写该字段"},
-                    height:{
-                        rangelength:$.validator.format("数值长度必须在{0}-{1}之间,包含小数点")
-                    },
-                    weight:{
-                        rangelength:$.validator.format("数值长度必须在{0}-{1}之间,包含小数点")
-                    },
-                    waistline:{
-                        rangelength:$.validator.format("数值长度必须在{0}-{1}之间,包含小数点")
-                    },
-                    hipline:{
-                        rangelength:$.validator.format("数值长度必须在{0}-{1}之间,包含小数点")
-                    },
-                },
-            submitHandler:function () {
-                // alert("验证成功进入");
-                $('#address').val( $('#province').val() + $('#city').val() + $('#adrs').val() );
-                $.ajax({
-                    url: "/mobile/move1",
-                    type: "POST",
-                    // dataType: "json",
-                    data: $('#form-geninfo').serializeArray(),
-                    success: function (result) {
-                        // alert(result.form_all);
-                        alert("继续填写下一页");
+        // $("#province option[value='"+result["nation"]+"']").prop("selected","selected");
+        // $("#province option[value='北京']").prop("selected","selected");
+        // $("#city option[value='朝阳区']").prop("selected","selected");
+        $("#form-geninfo").submit(function () {
+            $('#address').val( $('#province').val() + $('#city').val() + $('#adrs').val() );
+            $.ajax({
+                url: "/mobile/move1",
+                type: "POST",
+                // dataType: "json",
+                data: $('#form-geninfo').serializeArray(),
+                success: function (result) {
+                    // alert(typeof(result.form_all["summary"]));
+                    if (result.form_all["summary"] == undefined) {
+                        // alert("继续填写下一页");
+                        // alert("if");
                         window.location.href = "move2";
-                    },
-                    error:  function () {
-                        alert("请求错误");
-                    }
-                })   
-            } 
-        })           
-    // })
+                    } else {
+                        // alert("else")
+                        window.history.go(1);
+                        // window.location.href = "move2";
+                    }    
+                },
+                error:  function () {
+                    alert("请求错误");
+                }
+                })  
+            })
+    
     })
 </script>
 
@@ -158,7 +86,7 @@
         </div>
     </div>
 
-    <form class="modal-body no-padding" id="form-geninfo" onsubmit="return false;">
+    <form class="modal-body no-padding" id="form-geninfo" method="GET" onsubmit="return false;">
         <div class="modal-body">
             <div class="row">
                 <div class="col-xs-12 col-sm-12">
@@ -167,8 +95,12 @@
                         <input class="form-control" id="address" name="address" type="hidden"/>
                         <tbody style="color:blue;font-size:15px;">
                             <tr>
+                                <td style="vertical-align:middle;">辅助医生</td>
+                                <td><input class="form-control ace" id="owner" name="owner" type="text" /></td>
+                            </tr>
+                            <tr>
                                 <td style="vertical-align:middle;">就诊日期</td>
-                                <td><input id="recdate" name="recdate" type="text" class="form-control datepicker ace"/></td>
+                                <td><input class="form-control datepicker ace" id="recdate" name="recdate" type="text"/></td>
                             </tr>
                             <tr>
                                 <td style="vertical-align:middle;">医院名称</td>
@@ -365,13 +297,16 @@
             </div>
         </div>
         <div class="modal-footer form-group">
-            <button type="submit" class="btn btn-primary" id="geninfoBtn">
+            <!-- <button type="submit" class="btn btn-primary" id="save">
+                保存修改
+            </button> -->
+            <button type="submit" class="btn btn-primary" id="nextpage">
                 下一页
             </button>
         </div>
     </form>
-
 </div>
+
 
 <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
         <i class="icon-double-angle-up icon-only bigger-110"></i>

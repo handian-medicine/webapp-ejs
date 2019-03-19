@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>临床诊断</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- basic styles -->
+    <link rel="stylesheet" href="../public/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../public/css/font-awesome.min.css">
+
+    <!-- page specific plugin styles -->
+    <link rel="stylesheet" href="../public/css/ace.min.css">
+    <link rel="stylesheet" href="../public/css/ace-rtl.min.css">
+    <link rel="stylesheet" href="../public/css/ace-skins.min.css">
+
+    <!-- inline styles related to this page -->
+    <script src="../public/javascripts/jquery.min.js"></script>
+    <script src="../public/js/ace-extra.min.js"></script>
+
+</head>
+<body>
+<script>
+    $(document).ready(function () {
+        $("#form-cc").submit(function () {
+
+            $.ajax({
+                url: "/mobile/move5",
+                type: "POST",
+                // dataType: "json",
+                data: $('#form-cc').serializeArray(),
+                success: function (result) {
+                    if (result.form_all["cure"] == undefined) {
+                        // alert("继续填写下一页");
+                        window.location.href = "move6";
+                    } else {
+                        window.history.go(1);
+                    }
+                },
+                error:  function () {
+                    alert("请求错误");
+                },
+            })
+        })
+    })
+</script>
+
+<div class="modal-content">
+    <div class="modal-header no-padding">
+        <div class="table-header center">
+            临床诊断
+        </div>
+    </div>
+
+    <form class="modal-body no-padding" id="form-cc" method="GET" onsubmit="return false;">
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12">
+                    <input type="hidden" class="person" name="person" id="person-cc"/>
+                    <p><h4 style="color:#BC1717">一、中医诊断</h4>
+
+                    <p><h5 style="color:blue">1、诊断结果:</h5>
+                    <label><input name="yuejing_zhenduan" type="radio" value="月经先期"/>月经先期</label>
+                    <label><input name="yuejing_zhenduan" type="radio" value="月经过多"/>月经过多</label>
+                    <label><input name="yuejing_zhenduan" type="radio" value="经期延长"/>经期延长</label>
+                    <label><input name="yuejing_zhenduan" type="radio" value="经间期出血"/>经间期出血</label>
+                    <label><input name="yuejing_zhenduan" type="radio" value="崩漏"/>崩漏</label>
+
+                    <p><h5 style="color:blue">2、虚证诊断:</h5>
+                    <label><input name="xuzheng" type="radio" value="肾气虚证"/>肾气虚证</label>
+                    <label><input name="xuzheng" type="radio" value="肾阴虚证"/>肾阴虚证</label>
+                    <label><input name="xuzheng" type="radio" value="肾阳虚证"/>肾阳虚证</label>
+                    <label><input name="xuzheng" type="radio" value="气虚证"/>气虚证</label>
+                    <label><input name="xuzheng" type="radio" value="血虚证"/>血虚证</label>
+                    <label><input name="xuzheng" type="radio" value="虚热证"/>虚热证</label>
+                    <label><input name="xuzheng" type="radio" value="脾气虚证"/>脾气虚证</label>
+                    <br>
+                    <label>其他:<input type="text" id="qita_asthenic" name="qita_asthenic" value=""/></label>
+
+                    <p><h5 style="color:blue">3、实证诊断:</h5>
+                    <label><input name="shizheng" type="radio" value="肝郁血热证"/>肝郁血热证</label>
+                    <label><input name="shizheng" type="radio" value="阳盛血热证"/>阳盛血热证</label>
+                    <label><input name="shizheng" type="radio" value="湿热证"/>湿热证</label>
+                    <label><input name="shizheng" type="radio" value="痰湿证"/>痰湿证</label>
+                    <label><input name="shizheng" type="radio" value="肝郁气滞证"/>肝郁气滞证</label>
+                    <label><input name="shizheng" type="radio" value="气滞血瘀证"/>气滞血瘀证</label>
+                    <label><input name="shizheng" type="radio" value="血寒证"/>血寒证</label>
+                    <label><input name="shizheng" type="radio" value="实热证"/>实热证</label>
+                    <br>
+                    <label>其他:<input type="text" id="qita_demonstration" name="qita_demonstration" value=""/></label>
+
+                    <p><h5 style="color:blue">4、虚实夹杂诊断:</h5>
+                    <label><input name="xushi" type="radio" value="阴虚血热证"/>阴虚血热证</label>
+                    <br>
+                    <label>其他:<input type="text" id="qita_def_ex" name="qita_def_ex" value=""/></label>
+                    <hr>
+
+                    <p><h4 style="color:#BC1717">二、西医诊断</h4>
+                    <label><input name="zigongchuxue" type="checkbox" value="true"/>排卵障碍性异常子宫出血</label>
+                    <br>
+                    <label>其他西医诊断:<input type="text" id="qita_west" name="qita_west" value=""/></label>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+                <script>
+                        function goback() {
+                            window.history.go(-1);
+                        }
+                    </script>
+                    <button type="button" class="btn btn-primary" onclick="goback()">上一页</button>
+                    <button type="submit" class="btn btn-primary ccBtn" id="ccBtn">
+                        下一页
+                    </button>
+        </div>
+    </form>
+</div>
+
+<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+    <i class="icon-double-angle-up icon-only bigger-110"></i>
+</a>
+
+
+
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='../public/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
+</script>
+
+<!-- <![endif]-->
+<script src="../public/js/bootstrap.min.js"></script>
+<script src="../public/js/typeahead-bs2.min.js"></script>
+
+<script src="../public/js/ace-elements.min.js"></script>
+<script src="../public/js/ace.min.js"></script>
+</body>
+</html>

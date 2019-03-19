@@ -409,6 +409,13 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="col-xs-4">
+                                                <select name="is_checked">
+                                                    <option value="未审核">未审核</option>
+                                                    <option value="审核通过">审核通过</option>
+                                                    <option value="审核不通过">审核不通过</option>
+                                                </select>
+                                            </div>
                                         </div>
     
                                         <div class="row">
@@ -458,6 +465,7 @@
                                                     <th>专家</th>
                                                     <th>录入人</th>
                                                     <th>信息完整度</th>
+                                                    <th>审核状态</th>
                                                     <th>数据修改</th>
                                                 </tr>
                                             </thead>
@@ -486,36 +494,47 @@
                                                         </td>
                                                     <td>
                                                         <%= archive.degree_of_completion %>
-                                                        </td>    
+                                                        </td>  
                                                     <td>
-                                                            <% if (archive.owner == null) { %>
-                                                            <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
-                                                                <button id="geninfo"  checked-info="no" data-backdrop="static" data-backdrop="static" data-toggle="modal" data-target="#modal-table" class="btn btn-xs btn-success geninfo" geninfo-url=<%= archive.url %>>
-                                                        	        基本信息
-                                                                </button>
-                                                                <button id="summary"  checked-info="no" data-backdrop="static" data-toggle="modal" data-target="#modal-table1" class="btn btn-xs btn-primary summary" geninfo-url=<%= archive.url %> summary-url=<%= archive.summary %>>
-                                                                    病情概要
-                                                                </button>
-                                                                <button id="history" checked-info="no" data-backdrop="static" data-toggle="modal" data-target="#modal-table2" class="btn btn-xs btn-warning history" geninfo-url=<%= archive.url %> history-url=<%= archive.history %>>
-                                                                    患者病史
-                                                                </button>
-                                                                <button id="relevant" checked-info="no" data-backdrop="static" data-toggle="modal" data-target="#modal-table3" class="btn btn-xs btn-danger relevant" geninfo-url=<%= archive.url %> relevant-url=<%= archive.relevant %>>
-                                                                    相关检查
-                                                                </button>
-                                                                <button id="cc" checked-info="no" data-backdrop="static" data-toggle="modal" data-target="#modal-table4" class="btn btn-xs btn-info cc" geninfo-url=<%= archive.url %> cc-url=<%= archive.cc %>>
-                                                                    临床诊断
-                                                                </button>
-                                                                <button id="cure" checked-info="no" data-backdrop="static" data-toggle="modal" data-target="#modal-table5" class="btn btn-xs btn-success cure" geninfo-url=<%= archive.url %> cure-url=<%= archive.cure %>>
-                                                                    中西治疗
-                                                                </button>
-                                                                <button id="results" checked-info="no" data-backdrop="static" data-toggle="modal" data-target="#modal-table6" class="btn btn-xs btn-primary results" geninfo-url=<%= archive.url %> results-url=<%= archive.results %>>
-                                                                    疗效情况
-                                                                </button>
-                                                                <!-- <button type="button" id="check" class="btn btn-xs btn-default check" geninfo-url=<%= archive.url %> patient-id=<%= archive.id %> > -->
-                                                                    <a href="/prj001/check/?page=<%= curpage %>&id=<%= archive.id %>">未审核</a>
-                                                                <!-- </button> -->
-                                                            </div>
-                                                            <div class="visible-xs visible-sm hidden-md hidden-lg btn-group">
+                                                        <%= archive.is_checked %>
+                                                        </td>   
+                                                    <td>
+                                                        <!-- 有审核按钮 -->
+                                                        <% if (is_admin == true) { %>
+                                                        <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
+                                                            <button id="geninfo"  checked-info="no" data-backdrop="static" data-backdrop="static" data-toggle="modal" data-target="#modal-table" class="btn btn-xs btn-success geninfo" geninfo-url=<%= archive.url %>>
+                                                                基本信息
+                                                            </button>
+                                                            <button id="summary"  checked-info="no" data-backdrop="static" data-toggle="modal" data-target="#modal-table1" class="btn btn-xs btn-primary summary" geninfo-url=<%= archive.url %> summary-url=<%= archive.summary %>>
+                                                                病情概要
+                                                            </button>
+                                                            <button id="history" checked-info="no" data-backdrop="static" data-toggle="modal" data-target="#modal-table2" class="btn btn-xs btn-warning history" geninfo-url=<%= archive.url %> history-url=<%= archive.history %>>
+                                                                患者病史
+                                                            </button>
+                                                            <button id="relevant" checked-info="no" data-backdrop="static" data-toggle="modal" data-target="#modal-table3" class="btn btn-xs btn-danger relevant" geninfo-url=<%= archive.url %> relevant-url=<%= archive.relevant %>>
+                                                                相关检查
+                                                            </button>
+                                                            <button id="cc" checked-info="no" data-backdrop="static" data-toggle="modal" data-target="#modal-table4" class="btn btn-xs btn-info cc" geninfo-url=<%= archive.url %> cc-url=<%= archive.cc %>>
+                                                                临床诊断
+                                                            </button>
+                                                            <button id="cure" checked-info="no" data-backdrop="static" data-toggle="modal" data-target="#modal-table5" class="btn btn-xs btn-success cure" geninfo-url=<%= archive.url %> cure-url=<%= archive.cure %>>
+                                                                中西治疗
+                                                            </button>
+                                                            <button id="results" checked-info="no" data-backdrop="static" data-toggle="modal" data-target="#modal-table6" class="btn btn-xs btn-primary results" geninfo-url=<%= archive.url %> results-url=<%= archive.results %>>
+                                                                疗效情况
+                                                            </button>
+                                                            <button type="button" class="btn btn-xs btn-info" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                审核状态
+                                                                <i class="icon-caret-down"></i>
+                                                            </button>
+                                                            <ul class="dropdown-menu user-menu pull-right dropdown-yellow dropdown-caret dropdown-close">
+                                                                <li><a href="/prj001/check/?page=<%= curpage %>&id=<%= archive.id %>&check=未审核">未审核</a ></li>
+                                                                <li><a href="/prj001/check/?page=<%= curpage %>&id=<%= archive.id %>&check=审核通过">审核通过</a ></li>
+                                                                <li><a href="/prj001/check/?page=<%= curpage %>&id=<%= archive.id %>&check=审核不通过">审核不通过</a ></li>
+                                                            </ul>
+                                                            
+                                                        </div>
+                                                        <div class="visible-xs visible-sm hidden-md hidden-lg btn-group">
                                                                 <div class="inline position-relative">
                                                                     <button class="btn btn-minier btn-primary dropdown-toggle"
                                                                         data-toggle="dropdown">
@@ -579,18 +598,22 @@
                                                                             </a>
                                                                             </li>
                                                                         <li>
-                                                                                <a href="#modal-table7" data-toggle="modal" class="tooltip-info check" 
-                                                                                geninfo-url=<%= archive.url %> check-owner=<%= username %> >
-                                                                                    <span class="" style="color: #204d74">
-                                                                                        未审核
-                                                                                    </span>
-                                                                                </a>
-                                                                                </li>
+                                                                            <button type="button" class="btn btn-xs btn-info" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                                    审核状态
+                                                                                    <i class="icon-caret-down"></i>
+                                                                            </button>
+                                                                            <ul class="dropdown-menu user-menu pull-right dropdown-yellow dropdown-caret dropdown-close">
+                                                                                <li><a href="/prj001/check/?page=<%= curpage %>&id=<%= archive.id %>&check=未审核">未审核</a ></li>
+                                                                                <li><a href="/prj001/check/?page=<%= curpage %>&id=<%= archive.id %>&check=审核通过">审核通过</a ></li>
+                                                                                <li><a href="/prj001/check/?page=<%= curpage %>&id=<%= archive.id %>&check=审核不通过">审核不通过</a ></li>
+                                                                            </ul>
+                                                                        </li>
                                                                     </ul>
                                                                 </div>
-                                                            </div>
-                                                            <% } else { %>
-                                                            <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
+                                                        </div>
+                                                        <!-- 无审核按钮 -->
+                                                        <% } else { %>
+                                                        <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
                                                                     <button id="geninfo" data-backdrop="static" checked-info="yes" data-toggle="modal" data-target="#modal-table" class="btn btn-xs btn-success geninfo" geninfo-url=<%= archive.url %>>
                                                                         基本信息
                                                                     </button>
@@ -612,8 +635,8 @@
                                                                     <button id="results" data-backdrop="static" checked-info="yes" data-toggle="modal" data-target="#modal-table6" class="btn btn-xs btn-primary results" geninfo-url=<%= archive.url %> results-url=<%= archive.results %>>
                                                                         疗效情况
                                                                     </button>
-                                                            </div>
-                                                            <div class="visible-xs visible-sm hidden-md hidden-lg btn-group">
+                                                        </div>
+                                                        <div class="visible-xs visible-sm hidden-md hidden-lg btn-group">
                                                                 <div class="inline position-relative">
                                                                     <button class="btn btn-minier btn-primary dropdown-toggle"
                                                                         data-toggle="dropdown">
@@ -678,8 +701,8 @@
                                                                             </li>
                                                                     </ul>
                                                                 </div>
-                                                            </div>
-                                                            <% } %>
+                                                        </div>
+                                                        <% } %>
                                             
                                                     </td>
                                                 </tr>
@@ -745,6 +768,10 @@
                                                             <!-- <div class="input-group-addon" style="color:blue" ></div> -->
                                                             <table class="table table-striped table-bordered table-hover">
                                                                     <tbody style="color:blue;font-size:15px;">
+                                                                        <tr>
+                                                                            <td style="vertical-align:middle;">辅助医生</td>
+                                                                            <td><input class="form-control ace" id="owner" name="owner" type="text" /></td>
+                                                                        </tr>
                                                                         <tr>
                                                                             <td style="vertical-align:middle;">就诊日期</td>
                                                                             <td><input id="recdate" name="recdate" type="text" class="form-control datepicker"/></td>
@@ -1257,6 +1284,10 @@
                                                             <label><input name="pasthistory_luancaonangzhong" type="checkbox" value="true"/>卵巢囊肿</label>
                                                             <label><input name="pasthistory_ruxianzengsheng" type="checkbox" value="true"/>乳腺增生</label>
                                                             <label><input name="pasthistory_shengzhiyichang" type="checkbox" value="true"/>生殖器官发育异常</label>
+
+                                                            <label><input name="pasthistory_minus" type="checkbox" value="true"/>甲减</label>
+                                                            <label><input name="pasthistory_plus" type="checkbox" value="true"/>甲亢</label>
+
                                                             <label><input name="pasthistory_jiazhuangxian" type="checkbox" value="true"/>甲状腺相关疾病</label>
                                                             <label><input name="pasthistory_shenshangxian" type="checkbox" value="true"/>肾上腺相关疾病</label>
                                                             <label><input name="pasthistory_xueye" type="checkbox" value="true"/>血液系统相关疾病</label>
@@ -1275,7 +1306,7 @@
                                                             <label><input name="hobbies_wu" type="checkbox" value="true"/>无</label>
                                                             <label><input name="hobbies_xiyan" type="checkbox" value="true"/>吸烟</label>
                                                             <label><input name="hobbies_yinjiu" type="checkbox" value="true"/>饮酒</label>
-                                                            <label><input name="hobbies_aoye" type="checkbox" value="true"/>熬夜</label>
+                                                            <label><input name="hobbies_aoye" type="checkbox" value="true"/>熬夜(23:00以后睡)</label>
                                                             <br>
                                                             <label>其他<input type="text"  id="hobbies_qita" name="hobbies_qita" value=""/></label>
                                                         
@@ -1474,6 +1505,7 @@
                                                             <p><label>其他<input type="text" class="form-control" id="spirit_qita" name="spirit_qita" value=""/></label>
                                                             
                                                             <p><h6 style="color:#871F78">(2)形体四肢:</h6>
+                                                                <label><input name="body_normal" type="checkbox" value="true"/>正常</label>
                                                                 <label><input name="body_fat" type="checkbox" value="true"/>形体肥胖</label>
                                                                 <label><input name="body_thin" type="checkbox" value="true"/>形体瘦小</label>
                                                                 <label><input name="body_skin" type="checkbox" value="true"/>皮肤不润</label>
@@ -1485,6 +1517,7 @@
                                                                 <label>其他<input type="text" id="body_qita" name="body_qita" value=""/></label>
                                                             
                                                             <p><h6 style="color:#871F78">(3)头面:</h6>
+                                                                <label><input name="face_head_normal" id="face_head_normal" type="checkbox" value="true"/>正常</label>
                                                                 <label><input name="face_head_cangbai" id="face_head_cangbai" type="checkbox" value="true"/>面色苍白</label>
                                                                 <label><input name="face_head_huangbai" id="face_head_huangbai" type="checkbox" value="true"/>面色晄白</label>
                                                                 <label><input name="face_head_weihuang" id="face_head_weihuang" type="checkbox" value="true"/>面色萎黄</label>
@@ -1648,6 +1681,7 @@
 														        <label>其他<input type="text" id="sleep_qita" name="sleep_qita" value=""/></label>
                                                             
                                                             <p><h6 style="color:#871F78">(7)二便</h6>
+                                                                <label><input name="erbian_normal" type="checkbox" value="true"/>正常</label>
                                                                 <label><input name="erbian_zaojie" type="checkbox" value="true"/>大便燥结</label>
                                                                 <label><input name="erbian_tangbo" type="checkbox" value="true"/>大便溏薄</label>
                                                                 <label><input name="erbian_pinshu" type="checkbox" value="true"/>小便频数</label>
@@ -1695,6 +1729,7 @@
                                                             <label><input name="leucorrhea_color" type="radio" value="带下色白"/>带下色白</label>
                                                             <label><input name="leucorrhea_color" type="radio" value="带下色青"/>带下色青</label>
                                                         <p><span style="color:#871F78">(3)质:</span>
+                                                            <label><input name="leucorrhea_feature" type="radio" value="带下质黏而不稠"/>带下质黏而不稠</label>
                                                             <label><input name="leucorrhea_feature" type="radio" value="带下质清稀"/>带下质清稀</label>
                                                             <label><input name="leucorrhea_feature" type="radio" value="带下质粘稠"/>带下质粘稠</label>
                                                         
@@ -1804,7 +1839,8 @@
                                                                 </script>
                                                             <div id="div-disease">
                                                                 <p><span style="color:#871F78">(1)病史</span>:
-                                                                    <label><input name="pastfamily_xinzangbing" type="checkbox" value="true"/>甲状腺相关疾病</label>
+                                                                    <label><input name="pastfamily_minus" type="checkbox" value="true"/>甲减</label>
+                                                                    <label><input name="pastfamily_plus" type="checkbox" value="true"/>甲亢</label>
                                                                     <label><input name="pastfamily_duonangluanchao" type="checkbox" value="true"/>多囊卵巢综合征</label>
                                                                     <label><input name="pastfamily_tangniaobing" type="checkbox" value="true"/>糖尿病</label>
                                                                     <label><input name="pastfamily_buxiang" type="checkbox" value="true"/>不详</label>
@@ -1896,15 +1932,10 @@
 
                                                         <p><h5 style="color:blue">1、诊断结果:</h5>
                                                         <label><input name="yuejing_zhenduan" type="radio" value="月经先期"/>月经先期</label>
-                                                        <label><input name="yuejing_zhenduan" type="radio" value="月经后期"/>月经后期</label>
-                                                        <label><input name="yuejing_zhenduan" type="radio" value="月经先后无定期"/>月经先后无定期</label>
                                                         <label><input name="yuejing_zhenduan" type="radio" value="月经过多"/>月经过多</label>
-                                                        <label><input name="yuejing_zhenduan" type="radio" value="月经过少"/>月经过少</label>
                                                         <label><input name="yuejing_zhenduan" type="radio" value="经期延长"/>经期延长</label>
                                                         <label><input name="yuejing_zhenduan" type="radio" value="经间期出血"/>经间期出血</label>
                                                         <label><input name="yuejing_zhenduan" type="radio" value="崩漏"/>崩漏</label>
-                                                        <br>
-                                                        <label>其他:<input type="text" id="yuejing_qita" name="yuejing_qita" value=""/></label>
                                                         
                                                         <p><h5 style="color:blue">2、虚证诊断:</h5>
                                                             <label><input name="xuzheng" type="radio" value="肾气虚证"/>肾气虚证</label>
@@ -1912,13 +1943,8 @@
                                                             <label><input name="xuzheng" type="radio" value="肾阳虚证"/>肾阳虚证</label>
                                                             <label><input name="xuzheng" type="radio" value="气虚证"/>气虚证</label>
                                                             <label><input name="xuzheng" type="radio" value="血虚证"/>血虚证</label>
-                                                            <label><input name="xuzheng" type="radio" value="虚寒证"/>虚寒证</label>
                                                             <label><input name="xuzheng" type="radio" value="虚热证"/>虚热证</label>
                                                             <label><input name="xuzheng" type="radio" value="脾气虚证"/>脾气虚证</label>
-                                                            <label><input name="xuzheng" type="radio" value="心脾两虚证"/>心脾两虚证</label>
-                                                            <label><input name="xuzheng" type="radio" value="脾肾阳虚证"/>脾肾阳虚证</label>
-                                                            <label><input name="xuzheng" type="radio" value="气血亏虚证"/>气血亏虚证</label>
-                                                            <label><input name="xuzheng" type="radio" value="肝肾阴虚证"/>肝肾阴虚证</label>
                                                             <br>
                                                             <label>其他:<input type="text" id="qita_asthenic" name="qita_asthenic" value=""/></label>
                                                         
@@ -1927,23 +1953,15 @@
                                                             <label><input name="shizheng" type="radio" value="阳盛血热证"/>阳盛血热证</label>
                                                             <label><input name="shizheng" type="radio" value="湿热证"/>湿热证</label>
                                                             <label><input name="shizheng" type="radio" value="痰湿证"/>痰湿证</label>
-                                                            <label><input name="shizheng" type="radio" value="气滞证"/>气滞证</label>
+                                                            <label><input name="shizheng" type="radio" value="气滞证"/>肝郁气滞证</label>
                                                             <label><input name="shizheng" type="radio" value="气滞血瘀证"/>气滞血瘀证</label>
-                                                            <label><input name="shizheng" type="radio" value="实寒证"/>实寒证</label>
                                                             <label><input name="shizheng" type="radio" value="血寒证"/>血寒证</label>
-                                                            <label><input name="shizheng" type="radio" value="寒凝血瘀证"/>寒凝血瘀证</label>
-													    	<label><input name="shizheng" type="radio" value="痰瘀阻滞证"/>痰瘀阻滞证</label>
+                                                            <label><input name="shizheng" type="radio" value="实热证"/>实热证</label>
                                                             <br>
                                                             <label>其他:<input type="text" id="qita_demonstration" name="qita_demonstration" value=""/></label>
                                                         
                                                         <p><h5 style="color:blue">4、虚实夹杂诊断:</h5>
                                                             <label><input name="xushi" type="radio" value="阴虚血热证"/>阴虚血热证</label>
-                                                            <label><input name="xushi" type="radio" value="阳虚血热证"/>阳虚血热证</label>
-                                                            <label><input name="xushi" type="radio" value="肾虚血瘀证"/>肾虚血瘀证</label>
-                                                            <label><input name="xushi" type="radio" value="肾虚瘀热证"/>肾虚瘀热证</label>
-                                                            <label><input name="xushi" type="radio" value="肾虚肝郁证"/>肾虚肝郁证</label>
-													    	<label><input name="xushi" type="radio" value="阴虚火旺证"/>阴虚火旺证</label>
-                                                            <label><input name="xushi" type="radio" value="气虚血瘀证"/>气虚血瘀证</label>
                                                             <br>
                                                             <label>其他:<input type="text" id="qita_def_ex" name="qita_def_ex" value=""/></label>
                                                         <hr>
@@ -1990,7 +2008,6 @@
                                                                 <label><input name="xuzheng_one" type="radio" value="补脾益气,养血固冲调经"/>补脾益气,养血固冲调经</label>
                                                                 <label><input name="xuzheng_one" type="radio" value="补益肾气,养血固冲调经"/>补益肾气,养血固冲调经</label>
                                                                 <label><input name="xuzheng_one" type="radio" value="补血养营,益气调经"/>补血养营,益气调经</label>
-                                                                <label><input name="xuzheng_one" type="radio" value="温经扶阳,养血调经"/>温经扶阳,养血调经</label>
                                                                 <label><input name="xuzheng_one" type="radio" value="补气升提,固冲止血调经"/>补气升提,固冲止血调经</label>
                                                                 <label><input name="xuzheng_one" type="radio" value="养阴清热,凉血调经"/>养阴清热,凉血调经</label>
                                                                 <label><input name="xuzheng_one" type="radio" value="滋肾益阴,清热固冲止血"/>滋肾益阴,清热固冲止血</label>
@@ -1999,14 +2016,12 @@
                                                                 <label>其他:<input type="text" id="xuzheng_qita" name="xuzheng_qita" value=""/></label>
 													        <p><h6 style="color:#871F78">(2)实证治法:</h6>
                                                                 <label><input name="shizheng_one" type="radio" value="温经散寒,活血调经"/>温经散寒,活血调经</label>
-                                                                <label><input name="shizheng_one" type="radio" value="清肝解郁,凉血调经"/>清肝解郁,凉血调经</label>
                                                                 <label><input name="shizheng_one" type="radio" value="清热降火,凉血调经"/>清热降火,凉血调经</label>
                                                                 <label><input name="shizheng_one" type="radio" value="燥湿化痰,活血调经"/>燥湿化痰,活血调经</label>
                                                                 <label><input name="shizheng_one" type="radio" value="清热凉血,固冲止血"/>清热凉血,固冲止血</label>
-                                                                <label><input name="shizheng_one" type="radio" value="理气行滞,活血调经"/>理气行滞,活血调经</label>
+                                                                <label><input name="shizheng_one" type="radio" value="疏肝理气,活血调经"/>疏肝理气,活血调经</label>
                                                                 <label><input name="shizheng_one" type="radio" value="活血化瘀,固冲止血调经"/>活血化瘀,固冲止血调经</label>
                                                                 <label><input name="shizheng_one" type="radio" value="清热除湿,凉血止血"/>清热除湿,凉血止血</label>
-													        	<label><input name="shizheng_one" type="radio" value="清热利湿,益肾止血"/>清热利湿,益肾止血</label>
                                                                 <br>
                                                                 <label>其他:<input type="text" id="shizheng_qita" name="shizheng_qita" value=""/></label>
 													        <p><h6 style="color:#871F78">(3)虚实夹杂证:</h6>
@@ -2020,14 +2035,9 @@
 													        	<label><input name="pre_xu_yiqi" type="checkbox" value="true"/>补中益气汤</label>
                                                                 <label><input name="pre_xu_guyin" type="checkbox" value="true"/>固阴煎</label>
                                                                 <label><input name="pre_xu_yuanjian" type="checkbox" value="true"/>大补元煎</label>
-                                                                <label><input name="pre_xu_dihuang" type="checkbox" value="true"/>当归地黄饮</label>
                                                                 <label><input name="pre_xu_yangrong" type="checkbox" value="true"/>人参养荣汤</label>
-                                                                <label><input name="pre_xu_daying" type="checkbox" value="true"/>大营煎</label>
-                                                                <label><input name="pre_xu_wenjing" type="checkbox" value="true"/>温经汤《金匮要略》</label>
                                                                 <label><input name="pre_xu_guipi" type="checkbox" value="true"/>归脾汤</label>
 													        	<label><input name="pre_xu_anchong" type="checkbox" value="true"/>安冲汤</label>
-													        	<label><input name="pre_xu_guishen" type="checkbox" value="true"/>归肾丸</label>
-                                                                <label><input name="pre_xu_zixue" type="checkbox" value="true"/>滋血汤</label>
                                                                 <label><input name="pre_xu_jianyuan" type="checkbox" value="true"/>举元煎</label>
                                                                 <label><input name="pre_xu_qingxue" type="checkbox" value="true"/>清血养阴汤</label>
                                                                 <label><input name="pre_xu_liangdi" type="checkbox" value="true"/>两地汤合二至丸</label>
@@ -2036,7 +2046,8 @@
                                                                 <label><input name="pre_xu_zuogui" type="checkbox" value="true"/>左归丸合二至丸</label>
 													        	<label><input name="pre_xu_yougui" type="checkbox" value="true"/>右归丸</label>
                                                                 <label><input name="pre_xu_guchong" type="checkbox" value="true"/>固冲汤</label>
-													        	<label><input name="pre_xu_guben" type="checkbox" value="true"/>固本止崩汤</label>
+                                                                <label><input name="pre_xu_guben" type="checkbox" value="true"/>固本止崩汤</label>
+                                                                <label><input name="pre_xu_baoyin" type="checkbox" value="true"/>保阴煎</label>
                                                                 <br>
                                                                 <label>其他:<input type="text" id="pre_xu_qita" name="pre_xu_qita" value=""/></label>
 													        <p><h6 style="color:#871F78">(2)实证代表方:</h6>
@@ -2044,19 +2055,17 @@
                                                                 <label><input name="pre_shi_qingjing" type="checkbox" value="true"/>清经散</label>
                                                                 <label><input name="pre_shi_wenjing" type="checkbox" value="true"/>温经汤(《妇人大全良方》)</label>
                                                                 <label><input name="pre_shi_wuyao" type="checkbox" value="true"/>乌药汤</label>
-                                                                <label><input name="pre_shi_erchen" type="checkbox" value="true"/>芎归二陈汤</label>
-                                                                <label><input name="pre_shi_baoyin" type="checkbox" value="true"/>保阴煎</label>
                                                                 <label><input name="pre_shi_taohong" type="checkbox" value="true"/>桃红四物汤</label>
 													            <label><input name="pre_shi_siwu" type="checkbox" value="true"/>四物汤合失笑散</label>
-													            <label><input name="pre_shi_tongyu" type="checkbox" value="true"/>通瘀煎</label>
                                                                 <label><input name="pre_shi_cangfu" type="checkbox" value="true"/>苍附导痰丸</label>
-                                                                <label><input name="pre_shi_yangxue" type="checkbox" value="true"/>清血养阴汤</label>
                                                                 <label><input name="pre_shi_liangdi" type="checkbox" value="true"/>两地汤合二至丸</label>
                                                                 <label><input name="pre_shi_zongpu" type="checkbox" value="true"/>棕蒲散</label>
                                                                 <label><input name="pre_shi_qinggan" type="checkbox" value="true"/>清肝止淋汤</label>
                                                                 <label><input name="pre_shi_zuyu" type="checkbox" value="true"/>逐瘀止血汤</label>
                                                                 <label><input name="pre_shi_qingre" type="checkbox" value="true"/>清热固经汤</label>
-													            <label><input name="pre_shi_zhibeng" type="checkbox" value="true"/>逐瘀止崩汤</label>
+                                                                <label><input name="pre_shi_zhibeng" type="checkbox" value="true"/>逐瘀止崩汤</label>
+                                                                <label><input name="pre_shi_danzhi" type="checkbox" value="true"/>丹栀逍遥散</label>
+                                                                <label><input name="pre_shi_longdan" type="checkbox" value="true"/>龙胆泻肝汤</label>
                                                                 <br>
                                                                 <label>其他:<input type="text" id="pre_shi_qita" name="pre_shi_qita" value=""/></label>
 													    	<p><h6 style="color:#871F78">(3)虚实夹杂证代表方:</h6>
@@ -2067,22 +2076,17 @@
                                                         
                                                         <p><h5 style="color:blue">3、中成药</h5>
 														    <p><h6 style="color:#871F78">(1)虚证中成药:</h6>
-														        <label><input name="zhong_xu_buzhong" type="checkbox" value="true"/>补中益气汤</label>
+														        <label><input name="zhong_xu_buzhong" type="checkbox" value="true"/>补中益气颗粒</label>
                                                                 <label><input name="zhong_xu_renshen" type="checkbox" value="true"/>人参归脾丸</label>
                                                                 <label><input name="zhong_xu_zhixue" type="checkbox" value="true"/>葆宫止血颗粒</label>
                                                                 <label><input name="zhong_xu_ankun" type="checkbox" value="true"/>安坤颗粒</label>
                                                                 <label><input name="zhong_xu_fufang" type="checkbox" value="true"/>复方阿胶浆</label>
                                                                 <label><input name="zhong_xu_gujing" type="checkbox" value="true"/>固经丸</label>
-                                                                <label><input name="zhong_xu_dabu" type="checkbox" value="true"/>大补阴丸</label>
-                                                                <label><input name="zhong_xu_kuntai" type="checkbox" value="true"/>坤泰胶囊</label>
-														        <label><input name="zhong_xu_wuji" type="checkbox" value="true"/>乌鸡白凤丸</label>
-                                                                <label><input name="zhong_xu_dingkun" type="checkbox" value="true"/>定坤丹</label>
-														        <label><input name="zhong_xu_zanyu" type="checkbox" value="true"/>安坤赞育丸</label>
-                                                                <label><input name="zhong_xu_aifu" type="checkbox" value="true"/>艾附暖宫丸</label>
                                                                 <label><input name="zhong_xu_ejiao" type="checkbox" value="true"/>阿胶当归合剂</label>
                                                                 <label><input name="zhong_xu_liuwei" type="checkbox" value="true"/>六味地黄丸</label>
                                                                 <label><input name="zhong_xu_erzhi" type="checkbox" value="true"/>二至丸</label>
                                                                 <label><input name="zhong_xu_fuke" type="checkbox" value="true"/>妇科止血灵片</label>
+                                                                <label><input name="zhong_xu_wuzi" type="checkbox" value="true"/>五子衍宗丸</label>
                                                                 <br>
                                                                 <label>其他:<input type="text" id="zhong_xu_qita" name="zhong_xu_qita" value=""/></label>
                                                             <p><h6 style="color:#871F78">(2)实证中成药:</h6>
@@ -2090,17 +2094,11 @@
                                                                 <label><input name="zhong_shi_duanxue" type="checkbox" value="true"/>断血流片</label>
                                                                 <label><input name="zhong_shi_jiawei" type="checkbox" value="true"/>加味逍遥服液/丸</label>
                                                                 <label><input name="zhong_shi_qianzhi" type="checkbox" value="true"/>茜芷胶囊</label>
-                                                                <label><input name="zhong_shi_angong" type="checkbox" value="true"/>安宫止血颗粒</label>
                                                                 <label><input name="zhong_shi_yunnan" type="checkbox" value="true"/>云南白药</label>
-                                                                <label><input name="zhong_shi_fuan" type="checkbox" value="true"/>妇血安片</label>
-														        <label><input name="zhong_shi_fuxue" type="checkbox" value="true"/>妇血康胶囊</label>
                                                                 <label><input name="zhong_shi_gongning" type="checkbox" value="true"/>宫宁颗粒</label>
 														        <label><input name="zhong_shi_zhixue" type="checkbox" value="true"/>葆宫止血颗粒</label>
-                                                                <label><input name="zhong_shi_ankun" type="checkbox" value="true"/>安坤颗粒</label>
-                                                                <label><input name="zhong_shi_shaofu" type="checkbox" value="true"/>少腹逐瘀胶囊</label>
-                                                                <label><input name="zhong_shi_xuefu" type="checkbox" value="true"/>血府逐瘀胶囊</label>
-                                                                <label><input name="zhong_shi_qizhi" type="checkbox" value="true"/>七制香附丸</label>
                                                                 <label><input name="zhong_shi_xiaoyao" type="checkbox" value="true"/>逍遥丸</label>
+                                                                <label><input name="zhong_shi_kunning" type="checkbox" value="true"/>坤宁口服液</label>
                                                                 <br>
                                                                 <label>其他:<input type="text" id="zhong_shi_qita" name="zhong_shi_qita" value=""/></label>
                                                             <p><h6 style="color:#871F78">(3)虚实夹杂证中成药:</h6>
@@ -2110,15 +2108,49 @@
                                                                 <label><input name="zhong_xushi_zhibo" type="checkbox" value="true"/>知柏地黄丸</label>
                                                                 <br>
                                                                 <label>其他:<input type="text" id="zhong_xushi_qita" name="zhong_xushi_qita" value=""/></label>
+                                                            <p><h6 style="color:#871F78">(4)中医其他治疗:</h6>
+                                                                <label><input name="zhongyi_body" type="checkbox" value="true"/>体针</label>
+                                                                <label><input name="zhongyi_ears" type="checkbox" value="true"/>耳针</label>
+                                                                <label><input name="zhongyi_belly" type="checkbox" value="true"/>腹针</label>
+                                                                <label><input name="zhongyi_ai" type="checkbox" value="true"/>艾灸</label>
+                                                                <label><input name="zhongyi_yadou" type="checkbox" value="true"/>耳穴压豆</label>
+                                                                <label><input name="zhongyi_zhushe" type="checkbox" value="true"/>穴位注射</label>
+                                                                <label><input name="zhongyi_futie" type="checkbox" value="true"/>穴位敷贴</label>
+                                                                <br>
+                                                                <label>其他:<input type="text" id="zhongyi_qita" name="zhongyi_qita" value=""/></label>
+                                                                 
+                                                    
                                                     <hr>
                                                     <p><h4 style="color:#BC1717">二、西医治疗</h4>
                                                         
 													    <p><h5 style="color:blue">1、止血治疗</h5>
 													        <p><h6 style="color:#871F78">(1)性激素:</h6>
                                                                 <label><input name="hormone_wu" type="checkbox" value="true"/>无</label>
-													        	<label><input name="hormone_yun" type="checkbox" value="true"/>孕激素</label>
-                                                                <label><input name="hormone_ci" type="checkbox" value="true"/>雌激素</label>
-													        	<label><input name="hormone_kou" type="checkbox" value="true"/>复方短效口服避孕药</label>
+                                                                <!-- <label><input name="hormone_yun" type="checkbox" value="true"/>孕激素</label> -->
+                                                                <br>
+                                                                <label>孕激素-></label>
+                                                                    <label><input name="yun_jizhu" type="checkbox" value="true"/>肌注黄体酮</label>
+                                                                    <label><input name="yun_diqu" type="checkbox" value="true"/>地屈孕酮</label>
+                                                                    <label><input name="yun_weihua" type="checkbox" value="true"/>微粒化黄体酮胶囊胶囊</label>
+                                                                    <label><input name="yun_yuntong" type="checkbox" value="true"/>甲羟孕酮</label>
+                                                                    <label>其他:<input type="text" id="yun_qita" name="yun_qita" value=""/></label>
+                                                                <br>
+                                                                <!-- <label><input name="hormone_ci" type="checkbox" value="true"/>雌激素</label> -->
+                                                                <label>雌激素-></label>
+                                                                    <label><input name="ci_benjia" type="checkbox" value="true"/>苯甲酸雌二醇</label>
+                                                                    <label><input name="ci_jieheji" type="checkbox" value="true"/>结合雌激素（针剂）</label>
+                                                                    <label><input name="ci_jiehepian" type="checkbox" value="true"/>结合雌激素（片剂）</label>
+                                                                    <label>其他:<input type="text" id="ci_qita" name="ci_qita" value=""/></label>
+                                                                <br>    
+                                                                <!-- <label><input name="hormone_kou" type="checkbox" value="true"/>复方短效口服避孕药</label> -->
+                                                                <label>复方短效口服避孕药-></label>
+                                                                    <label><input name="kou_chunhuan" type="checkbox" value="true"/>炔雌醇环丙孕酮片</label>
+                                                                    <label><input name="kou_quluoo" type="checkbox" value="true"/>屈螺酮炔雌醇片</label>
+                                                                    <label><input name="kou_quluot" type="checkbox" value="true"/>屈螺酮炔雌醇片Ⅱ</label>
+                                                                    <label><input name="kou_quyang" type="checkbox" value="true"/>去氧孕烯炔雌醇片</label>
+                                                                    <label><input name="kou_fufang" type="checkbox" value="true"/>复方孕二烯酮片</label>
+                                                                    <label>其他:<input type="text" id="kou_qita" name="kou_qita" value=""/></label>
+
                                                                 <label><input name="hormone_xiong" type="checkbox" value="true"/>雄激素</label>
                                                                 <label><input name="hormone_gn" type="checkbox" value="true"/>GnRH-α</label>
                                                                 <br>
@@ -2153,6 +2185,10 @@
                                                             <label><input name="shu_qiechu" type="checkbox" value="true"/>子宫切除术</label>
                                                             <br>
                                                             <label>其他:<input type="text" id="shu_qita" name="shu_qita" value=""/></label>
+                                                        
+                                                        <p><h5 style="color:blue">5、其他治疗</h5>
+                                                            <label>有<input type="text" id="other_cure" name="other_cure" value=""/></label>
+                                                            <label><input name="other_cure_wu" type="checkbox" value="true"/>无</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -2229,47 +2265,7 @@
 
     <script src="/public/js/ace-elements.min.js"></script>
     <script src="/public/js/ace.min.js"></script>
-    <!-- <script type="text/javascript">
-        jQuery(function ($) {
-            var oTable1 = $('#sample-table-2').dataTable({
-                "aoColumns": [{
-                        "bSortable": false
-                    },
-                    null, null, null, null, null,
-                    {
-                        "bSortable": false
-                    }
-                ]
-            });
-            $('table th input:checkbox').on('click', function () {
-                var that = this;
-                $(this).closest('table').find('tr > td:first-child input:checkbox')
-                    .each(function () {
-                        this.checked = that.checked;
-                        $(this).closest('tr').toggleClass('selected');
-                    });
-            });
-            $('[data-rel="tooltip"]').tooltip({
-                placement: tooltip_placement
-            });
-
-            function tooltip_placement(context, source) {
-                var $source = $(source);
-                var $parent = $source.closest('table')
-                var off1 = $parent.offset();
-                var w1 = $parent.width();
-                var off2 = $source.offset();
-                var w2 = $source.width();
-                if (parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2)) return 'right';
-                return 'left';
-            }
-        })
-    </script> -->
-
-    <!-- <script type="text/javascript">
-        var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-        document.write(unescape("%3Cscript src='" + _bdhmProtocol + ""));
-    </script> -->
+    
 </body>
 
 </html>

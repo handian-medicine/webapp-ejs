@@ -30,16 +30,19 @@
         $(document).ready(function () {
             $("#normal").hide();
             $("#abnormal").hide();
-            $("#historyBtn").click(function () {
+            $("#form-history").submit(function () {
                 $.ajax({
                         url: "/mobile/move3",
                         type: "POST",
                         // dataType: "json",
                         data: $('#form-history').serializeArray(),
                         success: function (result) {
-                            // alert(result.form_all);
-                            alert("继续填写下一页");
-                            window.location.href = "move4";
+                            if (result.form_all["relevant"] == undefined) {
+                                // alert("继续填写下一页");
+                                window.location.href = "move4";
+                            } else {
+                                window.history.go(1);
+                            }
                         },
                         error:  function () {
                             alert("请求错误");
@@ -67,7 +70,7 @@
         </div>
     </div>
 
-    <form class="modal-body no-padding" id="form-history">
+    <form class="modal-body no-padding" id="form-history" method="GET" onsubmit="return false;">
         <div class="modal-body">
             <div class="row">
                         <div class="col-xs-12 col-sm-12">
@@ -84,7 +87,10 @@
                                 <label><input name="pasthistory_luancaonangzhong" type="checkbox" value="true"/>卵巢囊肿</label>
                                 <label><input name="pasthistory_ruxianzengsheng" type="checkbox" value="true"/>乳腺增生</label>
                                 <label><input name="pasthistory_shengzhiyichang" type="checkbox" value="true"/>生殖器官发育异常</label>
-                                <label><input name="pasthistory_jiazhuangxian" type="checkbox" value="true"/>甲状腺相关疾病</label>
+                                
+                                <label><input name="pasthistory_minus" type="checkbox" value="true"/>甲减</label>
+                                <label><input name="pasthistory_plus" type="checkbox" value="true"/>甲亢</label>
+                                
                                 <label><input name="pasthistory_shenshangxian" type="checkbox" value="true"/>肾上腺相关疾病</label>
                                 <label><input name="pasthistory_xueye" type="checkbox" value="true"/>血液系统相关疾病</label>
                                 <label><input name="pasthistory_naochuitiliu" type="checkbox" value="true"/>脑垂体瘤</label>
@@ -102,7 +108,7 @@
                                 <label><input name="hobbies_wu" type="checkbox" value="true"/>无</label>
                                 <label><input name="hobbies_xiyan" type="checkbox" value="true"/>吸烟</label>
                                 <label><input name="hobbies_yinjiu" type="checkbox" value="true"/>饮酒</label>
-                                <label><input name="hobbies_aoye" type="checkbox" value="true"/>熬夜</label>
+                                <label><input name="hobbies_aoye" type="checkbox" value="true"/>熬夜(23:00以后睡)</label>
                                 <br>
                                 <label>其他<input type="text"  id="hobbies_qita" name="hobbies_qita" value=""/></label>
                             
@@ -297,6 +303,9 @@
                                     <p><label>其他<input type="text" class="form-control" id="spirit_qita" name="spirit_qita" value=""/></label>
                                     
                                     <p><h6 style="color:#871F78">(2)形体四肢:</h6>
+
+                                        <label><input name="body_normal" type="checkbox" value="true"/>正常</label>
+
                                         <label><input name="body_fat" type="checkbox" value="true"/>形体肥胖</label>
                                         <label><input name="body_thin" type="checkbox" value="true"/>形体瘦小</label>
                                         <label><input name="body_skin" type="checkbox" value="true"/>皮肤不润</label>
@@ -308,6 +317,9 @@
                                         <label>其他<input type="text" id="body_qita" name="body_qita" value=""/></label>
                                     
                                     <p><h6 style="color:#871F78">(3)头面:</h6>
+
+                                        <label><input name="face_head_normal" id="face_head_normal" type="checkbox" value="true"/>正常</label>
+
                                         <label><input name="face_head_cangbai" id="face_head_cangbai" type="checkbox" value="true"/>面色苍白</label>
                                         <label><input name="face_head_huangbai" id="face_head_huangbai" type="checkbox" value="true"/>面色晄白</label>
                                         <label><input name="face_head_weihuang" id="face_head_weihuang" type="checkbox" value="true"/>面色萎黄</label>
@@ -471,6 +483,9 @@
                                         <label>其他<input type="text" id="sleep_qita" name="sleep_qita" value=""/></label>
                                     
                                     <p><h6 style="color:#871F78">(7)二便</h6>
+
+                                        <label><input name="erbian_normal" type="checkbox" value="true"/>正常</label>
+
                                         <label><input name="erbian_zaojie" type="checkbox" value="true"/>大便燥结</label>
                                         <label><input name="erbian_tangbo" type="checkbox" value="true"/>大便溏薄</label>
                                         <label><input name="erbian_pinshu" type="checkbox" value="true"/>小便频数</label>
@@ -518,6 +533,9 @@
                                     <label><input name="leucorrhea_color" type="radio" value="带下色白"/>带下色白</label>
                                     <label><input name="leucorrhea_color" type="radio" value="带下色青"/>带下色青</label>
                                 <p><span style="color:#871F78">(3)质:</span>
+
+                                    <label><input name="leucorrhea_feature" type="radio" value="带下质黏而不稠"/>带下质黏而不稠</label>
+
                                     <label><input name="leucorrhea_feature" type="radio" value="带下质清稀"/>带下质清稀</label>
                                     <label><input name="leucorrhea_feature" type="radio" value="带下质粘稠"/>带下质粘稠</label>
                                                         
@@ -634,7 +652,10 @@
                                     </script>
                                 <div id="div-disease">
                                     <p><span style="color:#871F78">(1)病史</span>:
-                                        <label><input name="pastfamily_xinzangbing" type="checkbox" value="true"/>甲状腺相关疾病</label>
+
+                                        <label><input name="pastfamily_minus" type="checkbox" value="true"/>甲减</label>
+                                        <label><input name="pastfamily_plus" type="checkbox" value="true"/>甲亢</label>
+
                                         <label><input name="pastfamily_duonangluanchao" type="checkbox" value="true"/>多囊卵巢综合征</label>
                                         <label><input name="pastfamily_tangniaobing" type="checkbox" value="true"/>糖尿病</label>
                                         <label><input name="pastfamily_buxiang" type="checkbox" value="true"/>不详</label>
@@ -651,7 +672,7 @@
                 }
             </script>
             <button type="button" class="btn btn-primary" onclick="goback()">上一页</button>
-            <button type="button" class="btn btn-primary historyBtn" id="historyBtn">
+            <button type="submit" class="btn btn-primary historyBtn" id="historyBtn">
                 下一页
             </button>
         </div>
