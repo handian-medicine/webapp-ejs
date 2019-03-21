@@ -1,0 +1,96 @@
+html, body, div, ul, li, span{margin: 0;padding: 0;}
+
+.nav_tab {
+    text-align: center;
+    position: fixed;
+    margin-left: 0;
+    left: 0;
+    top: 0;
+    width: 20%;
+    height: 100vh;
+    font-size: 30px;
+}
+
+.move_tab {
+    position: relative;
+    text-decoration: none;
+    list-style: none;
+    height: 70vh;
+    width: 100%;
+    line-height: 20%;
+    left: 0;
+}
+
+.move_tab .move_li {
+    position: relative;
+    height: 10vh;
+    left: 0;
+    top: 0;
+    line-height: 10vh;
+    color: white;
+}
+
+.move_li:nth-child(1){
+    background: #91b684;
+}
+.move_li:nth-child(2){
+    background: #538ac5;
+}
+.move_li:nth-child(3){
+    background: #f5b964;
+}
+.move_li:nth-child(4){
+    background: #c3624e;
+}
+.move_li:nth-child(5){
+    background: #7db2dc;
+}
+.move_li:nth-child(6){
+    background: #91b684;
+}
+.move_li:nth-child(7){
+    background: #538ac5;
+}
+
+.move_content {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 80%;
+    height: auto;
+    background: white;
+}
+
+.move_content .move_one {
+    position: relative;
+}
+
+/* ---  move_one  --- */
+.move_one_table {
+    position: relative;
+    rigth: 0;
+    top: 0;
+    width: 100%;
+    height: auto;
+    border-collapse: collapse;
+    border: 1px solid gray;
+}
+.move_one_table .move_one_tr {
+    height: 45px;
+    width: 95%;
+    text-align: center;
+    border: 1px solid gray;
+    line-height: 45px;
+}
+.move_one_table .move_one_tr .move_one_td_name{
+    width: 15%;
+    border: 1px solid gray;
+}
+.move_one_table .move_one_tr .move_one_td_content {
+    width: 40%;
+}
+.move_one_table .move_one_tr td .input_style {
+    position: relative;
+    height: 30px;
+    width: 40%;
+}
