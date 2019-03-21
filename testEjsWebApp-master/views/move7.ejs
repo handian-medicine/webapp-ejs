@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>疗效情况</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- basic styles -->
+    <link rel="stylesheet" href="../public/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../public/../public/css/font-awesome.min.css">
+
+    <!-- page specific plugin styles -->
+    <link rel="stylesheet" href="../public/../public/css/ace.min.css">
+    <link rel="stylesheet" href="../public/../public/css/ace-rtl.min.css">
+    <link rel="stylesheet" href="../public/../public/css/ace-skins.min.css">
+
+    <!-- inline styles related to this page -->
+    <script src="../public/javascripts/jquery.min.js"></script>
+    <script src="../public/../public/js/ace-extra.min.js"></script>
+</head>
+<body>
+<script>
+    $(document).ready(function () {
+        $("#form-results").submit(function () {
+            $.ajax({
+                url: "/mobile/move7",
+                type: "POST",
+                // dataType: "json",
+                data: $('#form-results').serializeArray(),
+                success: function (result) {
+                    alert(result.msg);
+                    if (result.msg=="信息提交成功") {
+                        $(".resultsBtn").attr("disabled", true);
+                        // window.location.href = "";
+                    } else {
+                        $(".resultsBtn").attr("disabled", false);
+                    }
+                },
+                error:  function (result) {
+                    alert(result.msg);
+                },
+            })
+        })
+    })
+</script>
+<div class="modal-content">
+    <div class="modal-header no-padding">
+        <div class="table-header center">
+            疗效情况
+        </div>
+    </div>
+
+    <form class="modal-body no-padding" id="form-results" onsubmit="return false;">
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12">
+                        <!-- <input type="hidden" id="person-results"/> -->
+                        <input type="hidden" class="person" name="person" id="person-results"/>
+                    <p><h5 style="color:blue">近期治疗</h5>
+                    <label>经治疗<input id="last_result" name="last_result" type="text" value="" style="width:30px; border:0; border-bottom:1px solid #000; text-align:center;"/>天后，阴道流血停止</label>
+                    <p><h5 style="color:blue">远期治疗</h5>
+                    <label>经治疗<input id="far_result" name="far_result" type="text" value="" style="width:30px; border:0; border-bottom:1px solid #000; text-align:center;"/>天后，月经周期恢复正常.</label>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <script>
+                function goback() {
+                    window.history.go(-1);
+                }
+            </script>
+            <button type="button" class="btn btn-primary" onclick="goback()">上一页</button>
+            <button type="submit" class="btn btn-primary resultsBtn" id="resultsBtn">提交</button>
+        </div>
+    </form>
+</div>
+
+
+
+<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+    <i class="icon-double-angle-up icon-only bigger-110"></i>
+</a>
+
+<script type="text/javascript">
+    if("ontouchend" in document) document.write("<script src='../public/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+</script>
+<script src="../public/js/bootstrap.min.js"></script>
+<script src="../public/js/typeahead-bs2.min.js"></script>
+
+<script src="../public/js/ace-elements.min.js"></script>
+<script src="../public/js/ace.min.js"></script>
+</body>
+</html>

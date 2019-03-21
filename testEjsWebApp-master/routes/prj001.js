@@ -562,6 +562,7 @@ router.put('/history_save', function (req, res, next){
                     //console.log(">>>Getting archives met unknown error. " + error.error_description);
                     else {
                         console.log(">>>其它错误码的body: ", body);
+                        res.json({user_history:user_history});
                     }
                     
                 }
@@ -2311,6 +2312,7 @@ router.post('/check', function (req, res, next){
         var id = req.body.id;
         var page = req.body.page;
         var check = req.body.check;
+        var reason = req.body.reason;
         // var id = req.params.id; //router.get('/patientInfo/:id'...
         console.log("显示id+check"+id+check);
         var check_url = myconst.apiurl + "prj001/info/" + id +'/checked/';
@@ -2318,11 +2320,12 @@ router.post('/check', function (req, res, next){
         var authstring = req.cookies.prj001token.access_token;
         var options = {
             url: check_url,
-            form:{is_checked:check,id:id,},
+            form:{is_checked:check,id:id,reasons_for_not_passing:reason},
             headers: {
                 'Authorization': 'Bearer ' + authstring
             }
         };
+        console.log("原因",options);
         request.post(options, function (error, response, body) {
             var user_geninfo = JSON.parse(body); 
             console.log("check",response.statusCode)           

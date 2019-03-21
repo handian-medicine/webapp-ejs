@@ -38,7 +38,8 @@
                     }
                 },
                 error: function (result) {
-                        alert("保存失败" + result.status)
+                    alert("保存失败" + result.status)
+                        window.location.href="/prj001"
                 },
             })
         });
@@ -1198,5 +1199,4 @@
                 });
             };
         })
-        //审核
 })

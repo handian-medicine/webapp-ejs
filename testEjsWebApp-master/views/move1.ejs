@@ -56,6 +56,8 @@
         // $("#province option[value='"+result["nation"]+"']").prop("selected","selected");
         // $("#province option[value='北京']").prop("selected","selected");
         // $("#city option[value='朝阳区']").prop("selected","selected");
+        $("#normal").hide();
+        $("#abnormal").hide();
         $("#form-all").submit(function () {
             event.preventDefault();
             $('#address').val( $('#province').val() + $('#city').val() + $('#adrs').val() );
@@ -94,6 +96,19 @@
     
     })
 </script>
+
+<!-- 患者病史 选择显示 -->
+<script>
+        function display_accompany(){
+        var val = $('input[name="menstruation_is_accompany"]:checked').val();
+        if (val=="true") {
+            $('.accompany').show();
+        } else {
+            $('.accompany').hide();
+        }
+        }
+</script>
+        <!-- 患者病史 选择显示 -->
 
 <div class="modal-content">
     <div class="modal-header no-padding">

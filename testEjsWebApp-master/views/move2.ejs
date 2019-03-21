@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>病情概要</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- basic styles -->
+    <link rel="stylesheet" href="../public/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../public/css/font-awesome.min.css">
+
+    <!-- page specific plugin styles -->
+    <link rel="stylesheet" href="../public/css/ace.min.css">
+    <link rel="stylesheet" href="../public/css/ace-rtl.min.css">
+    <link rel="stylesheet" href="../public/css/ace-skins.min.css">
+
+    <!-- inline styles related to this page -->
+    <script src="../public/javascripts/jquery.min.js"></script>
+    <script src="../public/js/ace-extra.min.js"></script>
+</head>
+<body>
+    <script>
+        var test=1;
+        $(document).ready(function () {
+            // alert("全局变量");
+            $("#form-summary").submit(function () {
+                $.ajax({
+                        url: "/mobile/move2",
+                        type: "POST",
+                        // dataType: "json",
+                        data: $('#form-summary').serializeArray(),
+                        success: function (result) {
+                            if (result.form_all["history"] == undefined) {
+                                // alert("继续填写下一页");
+                                window.location.href = "move3";
+                            } else {
+                                // window.history.go(1);
+                                window.location.href = "move3";
+                            }
+                        },
+                        error:  function () {
+                            alert("请求错误");
+                        },
+                })
+            })
+        })
+    </script>
+<div class="modal-content">
+    <div class="modal-header no-padding">
+        <div class="table-header center">
+            病情概要
+        </div>
+    </div>
+
+    <form class="modal-body no-padding" id="form-summary" method="GET" onsubmit="return false;">
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12">
+                            <input type="hidden" class="person" name="person" id="person-summary"/>
+                            
+                            <p><h5 style="color:blue">1、主诉</h5>
+                                <p style="color:#871F78">(1)阴道不规则流血<input id="owner_buguize"  name="owner_buguize" type="text" value="" style="width:30px; border:0; border-bottom:1px solid #000; text-align:center;"/>天
+                                <p style="color:#871F78">(2)月经周期缩短<input id="owner_suoduan"  name="owner_suoduan" type="text" value="" style="width:30px; border:0; border-bottom:1px solid #000; text-align:center;"/>月    
+                                <p style="color:#871F78">(3)行经时间延长<input id="owner_yanchang" name="owner_yanchang" type="text" value="" style="width:30px; border:0; border-bottom:1px solid #000; text-align:center;"/>月
+                                <p style="color:#871F78">(4)月经量多<input id="owner_liangduo" name="owner_liangduo" type="text" value="" style="width:30px; border:0; border-bottom:1px solid #000; text-align:center;"/>月
+                                <p style="color:#871F78">(5)排卵期出血<input id="owner_pailuan"  name="owner_pailuan" type="text" value="" style="width:30px; border:0; border-bottom:1px solid #000; text-align:center;"/>月 
+                                <p style="color:#871F78">其他:<input type="text"  id="owner_qita" name="owner_qita" value=""/></label>
+                            
+                            <p><h5 style="color:blue">2、出血量(24h)</h5>
+                                <label><input type="radio" value="出血量中等,每天约需2-4张卫生巾" name="blood_cond"/>出血量中等,每天约需2-4张卫生巾</label>
+                                <label><input type="radio" value="出血量多,每天约需5-10张卫生巾" name="blood_cond"/>出血量多,每天约需5-10张卫生巾</label>
+                                <label><input type="radio" value="出血量极多,每天多于10张卫生巾" name="blood_cond"/>出血量极多,每天多于10张卫生巾</label>
+                                <label><input type="radio" value="经量少,每天少于1张卫生巾" name="blood_cond"/>经量少,每天少于1张卫生巾</label>
+                                <label><input type="radio" value="经量极少,几乎不用卫生巾,用护垫即可" name="blood_cond"/>经量极少,几乎不用卫生巾,用护垫即可</label>
+                                <label><input type="radio" value="其他" name="blood_cond"/>其他</label>
+                            
+                            <p><h5 style="color:blue">3、出血颜色</h5>
+                                <label><input type="radio" value="淡红" name="blood_color"/>淡红</label>
+                                <label><input type="radio" value="鲜红" name="blood_color"/>鲜红</label>
+                                <label><input type="radio" value="暗红" name="blood_color"/>暗红</label>
+                                <label><input type="radio" value="紫红" name="blood_color"/>紫红</label>
+                                <label><input type="radio" value="紫黯" name="blood_color"/>紫黯</label>
+                                <label><input type="radio" value="紫黑" name="blood_color"/>紫黑</label>
+                                <label><input type="radio" value="褐色" name="blood_color"/>褐色</label>
+                                <label><input type="radio" value="其他" name="blood_color"/>其他</label>
+                            
+                            <p><h5 style="color:blue">4、出血质地</h5>
+                            <span style="color:#871F78">(1)</span>
+                                <label><input type="radio" value="正常" name="blood_quality"/>正常</label>
+                                <label><input type="radio" value="粘稠" name="blood_quality"/>粘稠</label>
+                                <label><input type="radio" value="清稀" name="blood_quality"/>清稀</label>
+                            <p><span style="color:#871F78">(2)</span>
+                                <label><input type="radio" value="无血块" name="blood_block"/>无血块</label>
+                                <label><input type="radio" value="偶有血块" name="blood_block"/>偶有血块</label>
+                                <label><input type="radio" value="经常出现血块" name="blood_block"/>经常出现血块</label>
+                                <label><input type="radio" value="夹少量小血块" name="blood_block"/>夹少量小血块</label>
+                                <label><input type="radio" value="夹较大血块" name="blood_block"/>夹较大血块</label>
+                            
+                            <p><h5 style="color:blue">5、出血特点</h5>
+                                <label><input type="radio" value="不畅" name="blood_character"/>不畅</label>
+                                <label><input type="radio" value="势急暴下" name="blood_character"/>势急暴下</label>
+                                <label><input type="radio" value="淋漓不断" name="blood_character"/>淋漓不断</label>
+                                <label><input type="radio" value="点滴即净" name="blood_character"/>点滴即净</label>
+                                <label><input type="radio" value="其他" name="blood_character"/>其他</label>
+                            
+                            <p><h5 style="color:blue">6、精神情绪</h5>
+                                <label><input name="spirit_jinglichongpei" type="checkbox" value="true"/>精力充沛</label>
+                                <label><input name="spirit_shenpifali" type="checkbox" value="true"/>神疲乏力</label>
+                                <label><input name="spirit_jianwang" type="checkbox" value="true"/>健忘</label>
+                                <label><input name="spirit_yalida" type="checkbox" value="true"/>压力大</label>
+                                <label><input name="spirit_jiaolv" type="checkbox" value="true"/>焦虑</label>
+                                <label><input name="spirit_yiyu" type="checkbox" value="true"/>抑郁</label>
+                                <label><input name="spirit_xinu" type="checkbox" value="true"/>喜怒无常</label>
+                                <label><input name="spirit_yinu" type="checkbox" value="true"/>烦躁易怒</label>
+                                <label><input name="spirit_beishangyuku" type="checkbox" value="true"/>悲伤欲哭</label>
+                                <label><input name="spirit_qita" type="checkbox" value="true"/>其他</label>
+                            
+                            <p><h5 style="color:blue">7、寒热及汗出</h5>
+                                <label><input name="sweat_zhengchang" type="checkbox" value="true"/>正常</label>
+                                <label><input name="sweat_weihan" type="checkbox" value="true"/>畏寒</label>
+                                <label><input name="sweat_weire" type="checkbox" value="true"/>畏热</label>
+                                <label><input name="sweat_wuxin" type="checkbox" value="true"/>五心烦热</label>
+                                <label><input name="sweat_chaore" type="checkbox" value="true"/>潮热</label>
+                                <label><input name="sweat_dire" type="checkbox" value="true"/>低热不退</label>
+                                <label><input name="sweat_dongze" type="checkbox" value="true"/>动则汗出</label>
+                                <label><input name="sweat_yewo" type="checkbox" value="true"/>夜卧汗出,醒后汗出</label>
+                                <label><input name="sweat_hongre" type="checkbox" value="true"/>烘热汗出</label>
+                                <label><input name="sweat_qita" type="checkbox" value="true"/>其他</label>
+                            
+                            <p><h5 style="color:blue">8、面色</h5>
+                                <label><input name="face_zhengchang" type="checkbox" value="true"/>正常</label>
+                                <label><input name="face_danbaiwuhua" type="checkbox" value="true"/>淡白无华</label>
+                                <label><input name="face_cangbai" type="checkbox" value="true"/>苍白</label>
+                                <label><input name="face_qingbai" type="checkbox" value="true"/>青白</label>
+                                <label><input name="face_baierfuzhong" type="checkbox" value="true"/>白而浮肿</label>
+                                <label><input name="face_weihuang" type="checkbox" value="true"/>萎黄</label>
+                                <label><input name="face_huangzhong" type="checkbox" value="true"/>黄肿</label>
+                                <label><input name="face_chaohong" type="checkbox" value="true"/>潮红</label>
+                                <label><input name="face_huian" type="checkbox" value="true"/>晦黯</label>
+                                <label><input name="face_mianmulihei" type="checkbox" value="true"/>面目黧黑</label>
+                                <label><input name="face_qita" type="checkbox" value="true"/>其他</label>
+                            
+                            <p><h5 style="color:blue">9、头面部</h5>
+                                <label><input name="head_zhengchang" type="checkbox" value="true"/>正常</label>
+                                <label><input name="head_touyun" type="checkbox" value="true"/>头晕</label>
+                                <label><input name="head_toutong" type="checkbox" value="true"/>头痛</label>
+                                <label><input name="head_touchenzhong" type="checkbox" value="true"/>头沉重</label>
+                                <label><input name="eyes_yanhua" type="checkbox" value="true"/>眼花</label>
+                                <label><input name="eyes_muxuan" type="checkbox" value="true"/>目眩</label>
+                                <label><input name="eyes_muse" type="checkbox" value="true"/>目涩</label>
+                                <label><input name="eyes_muyang" type="checkbox" value="true"/>目痒</label>
+                                <label><input name="eyes_chenqifz" type="checkbox" value="true"/>晨起眼睑浮肿</label>
+                                <label><input name="ear_erming" type="checkbox" value="true"/>耳鸣</label>
+                                <label><input name="ear_erlong" type="checkbox" value="true"/>耳聋</label>
+                                <label><input name="ear_xiajiang" type="checkbox" value="true"/>听力下降</label>
+                                <label><input name="ear_chongfu" type="checkbox" value="true"/>声音重复</label>
+                                <label><input name="e_qita" type="checkbox" value="true"/>其他</label>
+                            
+                            <p><h5 style="color:blue">10、口咽部</h5>
+                                <label><input name="breath_wuyiwei" type="checkbox" value="true"/>口中无异味</label>
+                                <label><input name="breath_kouku" type="checkbox" value="true"/>口苦</label>
+                                <label><input name="breath_kougan" type="checkbox" value="true"/>口干</label>
+                                <label><input name="breath_kounian" type="checkbox" value="true"/>口粘</label>
+                                <label><input name="breath_buyuyan" type="checkbox" value="true"/>口干不欲饮</label>
+                                <label><input name="throat_yantong" type="checkbox" value="true"/>咽痛</label>
+                                <label><input name="throat_yanyang" type="checkbox" value="true"/>咽痒</label>
+                                <label><input name="throat_yiwugan" type="checkbox" value="true"/>咽部异物感</label>
+                                <label><input name="breath_qita" type="checkbox" value="true"/>其他</label>
+                            
+                            <p><h5 style="color:blue">11、胸胁及语音</h5>
+                                <label><input name="sound_zhengchang" type="checkbox" value="true"/>正常</label>
+                                <label><input name="sound_xinhuang" type="checkbox" value="true"/>心慌</label>
+                                <label><input name="sound_qiduan" type="checkbox" value="true"/>气短</label>
+                                <label><input name="breast_zhangmen" type="checkbox" value="true"/>胸胁胀闷</label>
+                                <label><input name="breast_yintong" type="checkbox" value="true"/>胸胁隐痛</label>
+                                <label><input name="breast_citong" type="checkbox" value="true"/>胸胁刺痛</label>
+                                <label><input name="breast_biezhang" type="checkbox" value="true"/>乳房憋涨</label>
+                                <label><input name="bre_citong" type="checkbox" value="true"/>乳房刺痛</label>
+                                <label><input name="bre_zhangtong" type="checkbox" value="true"/>乳房胀痛</label>
+                                <label><input name="sound_xitanxi" type="checkbox" value="true"/>喜叹息</label>
+                                <label><input name="sound_shaoqi" type="checkbox" value="true"/>少气懒言</label>
+                                <label><input name="s_qita" type="checkbox" value="true"/>其他</label>
+                            
+                            <p><h5 style="color:blue">12、腹腰</h5>
+                                <label><input name="stomach_zhengchang" type="checkbox" value="true"/>正常</label>
+                                <label><input name="stomach_zhangtongjuan" type="checkbox" value="true"/>小腹胀痛拒按</label>
+                                <label><input name="stomach_yintongxian" type="checkbox" value="true"/>小腹隐痛喜按</label>
+                                <label><input name="stomach_xiaofuzhuizhang" type="checkbox" value="true"/>小腹下坠感</label>
+                                <label><input name="stomach_xiaofubiezhang" type="checkbox" value="true"/>小腹憋胀</label>
+                                <label><input name="stomach_xiaofulengtong" type="checkbox" value="true"/>小腹冷痛</label>
+                                <label><input name="stomach_zhuotong" type="checkbox" value="true"/>小腹灼痛</label>
+                                <label><input name="stomach_xiaofucitong" type="checkbox" value="true"/>小腹刺痛</label>
+                                <label><input name="stomach_yaosuan" type="checkbox" value="true"/>腰酸痛</label>
+                                <label><input name="stomach_yaoleng" type="checkbox" value="true"/>腰冷痛</label>
+                                <label><input name="stomach_qita" type="checkbox" value="true"/>其他</label>
+                            
+                            <p><h5 style="color:blue">13、四肢</h5>
+                                <label><input name="limb_zhengchang" type="checkbox" value="true"/>正常</label>
+                                <label><input name="limb_wuli" type="checkbox" value="true"/>无力</label>
+                                <label><input name="limb_mamu" type="checkbox" value="true"/>麻木</label>
+                                <label><input name="limb_kunzhong" type="checkbox" value="true"/>困重</label>
+                                <label><input name="limb_zhileng" type="checkbox" value="true"/>肢冷</label>
+                                <label><input name="limb_fuzhong" type="checkbox" value="true"/>浮肿</label>
+                                <label><input name="limb_szxinre" type="checkbox" value="true"/>手足心热</label>
+                                <label><input name="limb_qita" type="checkbox" value="true"/>其他</label>
+                            
+                            <p><h5 style="color:blue">14、饮食</h5>
+                                <label><input name="diet_zhengchang" type="checkbox" value="true"/>正常</label>
+                                <label><input name="diet_nadaishishao" type="checkbox" value="true"/>食欲不振</label>
+                                <label><input name="diet_shiyuws" type="checkbox" value="true"/>多食易饥</label>
+                                <label><input name="diet_xireyin" type="checkbox" value="true"/>喜热饮</label>
+                                <label><input name="diet_xilengyin" type="checkbox" value="true"/>喜冷饮</label>
+                                <label><input name="diet_shixinla" type="checkbox" value="true"/>喜辛辣</label>
+                                <label><input name="diet_bushu" type="checkbox" value="true"/>食后胃脘不舒</label>
+                                <label><input name="diet_qita" type="checkbox" value="true"/>其他</label>
+                            
+                            <p><h5 style="color:blue">15、睡眠</h5>
+                                <label><input name="sleep_zhengchang" type="checkbox" value="true"/>正常</label>
+                                <label><input name="sleep_duomeng" type="checkbox" value="true"/>多梦</label>
+                                <label><input name="sleep_yixing" type="checkbox" value="true"/>易醒</label>
+                                <label><input name="sleep_nanyirumian" type="checkbox" value="true"/>难以入眠</label>
+                                <label><input name="sleep_cheyebumian" type="checkbox" value="true"/>彻夜不眠</label>
+                                <label><input name="sleep_shishui" type="checkbox" value="true"/>嗜睡</label>
+                                <label><input name="sleep_qita" type="checkbox" value="true"/>其他</label>
+                            
+                            <p><h5 style="color:blue">16、性欲</h5>
+                                <label><input name="sex_zhengchang" type="checkbox" value="true"/>正常</label>
+                                <label><input name="sex_xywangsheng" type="checkbox" value="true"/>性欲旺盛</label>
+                                <label><input name="sex_xyjiantui" type="checkbox" value="true"/>性欲减退</label>
+                            
+                            <p><h5 style="color:blue">17、大便</h5>
+                                <label><input name="stool_zhengchang" type="checkbox" value="true"/>正常</label>
+                                <label><input name="stool_biangan" type="checkbox" value="true"/>便干</label>
+                                <label><input name="stool_zhixi" type="checkbox" value="true"/>质稀</label>
+                                <label><input name="stool_sgsx" type="checkbox" value="true"/>时干时稀</label>
+                                <label><input name="stool_xiexie" type="checkbox" value="true"/>泄泻</label>
+                                <label><input name="stool_tlzqxiexie" type="checkbox" value="true"/>天亮前泄泻</label>
+                                <label><input name="stool_zhinian" type="checkbox" value="true"/>质黏，有排不尽</label>
+                                <label><input name="stool_weixiaohua" type="checkbox" value="true"/>夹杂未消化食物</label>
+                                <label><input name="stool_qita" type="checkbox" value="true"/>其他</label>
+                            
+                            <p><h5 style="color:blue">18、小便</h5>
+                                <label><input name="urine_zhengchang" type="checkbox" value="true"/>正常</label>
+                                <label><input name="urine_duanhuang" type="checkbox" value="true"/>短黄</label>
+                                <label><input name="urine_qingchang" type="checkbox" value="true"/>清长</label>
+                                <label><input name="urine_xbpinshu" type="checkbox" value="true"/>频数</label>
+                                <label><input name="urine_niaoji" type="checkbox" value="true"/>尿急</label>
+                                <label><input name="urine_niaotong" type="checkbox" value="true"/>尿痛</label>
+                                <label><input name="urine_yulibujin" type="checkbox" value="true"/>余沥不尽</label>
+                                <label><input name="urine_shaoniao" type="checkbox" value="true"/>少尿</label>
+                                <label><input name="urine_yeniaopin" type="checkbox" value="true"/>夜尿频</label>
+                                <label><input name="urine_qita" type="checkbox" value="true"/>其他</label>
+                            
+                            <p><h5 style="color:blue">19、舌质</h5>
+                                <label><input name="texture_danhong" type="checkbox" value="true"/>淡红</label>
+                                <label><input name="texture_danbai" type="checkbox" value="true"/>淡白</label>
+                                <label><input name="texture_pianhong" type="checkbox" value="true"/>鲜红</label>
+                                <label><input name="texture_shenhong" type="checkbox" value="true"/>深红</label>
+                                <label><input name="texture_zihong" type="checkbox" value="true"/>紫红</label>
+                                <label><input name="texture_anhong" type="checkbox" value="true"/>黯红</label>
+                                <label><input name="texture_danan" type="checkbox" value="true"/>淡黯</label>
+                                <label><input name="texture_zian" type="checkbox" value="true"/>紫黯</label>
+                                <label><input name="texture_yudian" type="checkbox" value="true"/>有瘀点或瘀斑</label>
+                                <label><input name="texture_jianhong" type="checkbox" value="true"/>舌边尖红</label>
+                                <label><input name="texture_qita" type="checkbox" value="true"/>其他</label>
+                            
+                            <p><h5 style="color:blue">20、舌苔</h5>
+                                <label><input name="coating_bai" type="checkbox" value="true"/>白</label>
+                                <label><input name="coating_huang" type="checkbox" value="true"/>黄</label>
+                                <label><input name="coating_bo" type="checkbox" value="true"/>薄</label>
+                                <label><input name="coating_hou" type="checkbox" value="true"/>厚</label>
+                                <label><input name="coating_ni" type="checkbox" value="true"/>腻</label>
+                                <label><input name="coating_run" type="checkbox" value="true"/>润</label>
+                                <label><input name="coating_hua" type="checkbox" value="true"/>滑</label>
+                                <label><input name="coating_gan" type="checkbox" value="true"/>干</label>
+                                <label><input name="coating_shaotai" type="checkbox" value="true"/>少苔</label>
+                                <label><input name="coating_huabo" type="checkbox" value="true"/>花剥</label>
+                                <label><input name="coating_wutai" type="checkbox" value="true"/>无苔</label>
+                                <label><input name="coating_qita" type="checkbox" value="true"/>其他</label>
+                            
+                            <p><h5 style="color:blue">21、舌体</h5>
+                                <label><input name="tongue_zhengchang" type="checkbox" value="true"/>正常</label>
+                                <label><input name="tongue_shouxiao" type="checkbox" value="true"/>瘦小</label>
+                                <label><input name="tongue_pangda" type="checkbox" value="true"/>胖大</label>
+                                <label><input name="tongue_youchihen" type="checkbox" value="true"/>有齿痕</label>
+                                <label><input name="tongue_zhongyouliewen" type="checkbox" value="true"/>有裂纹</label>
+                                <label><input name="tongue_qita" type="checkbox" value="true"/>其他</label>
+                            
+                            <p><h5 style="color:blue">22、脉象</h5>
+                                <label><input name="pulse_fu" type="checkbox" value="true"/>浮</label>
+                                <label><input name="pulse_chen" type="checkbox" value="true"/>沉</label>
+                                <label><input name="pulse_hua" type="checkbox" value="true"/>滑</label>
+                                <label><input name="pulse_shu" type="checkbox" value="true"/>数</label>
+                                <label><input name="pulse_xian" type="checkbox" value="true"/>弦</label>
+                                <label><input name="pulse_xi" type="checkbox" value="true"/>细</label>
+                                <label><input name="pulse_ruo" type="checkbox" value="true"/>弱</label>
+                                <label><input name="pulse_huan" type="checkbox" value="true"/>缓</label>
+                                <label><input name="pulse_chi" type="checkbox" value="true"/>迟</label>
+                                <label><input name="pulse_se" type="checkbox" value="true"/>涩</label>
+                                <label><input name="pulse_jin" type="checkbox" value="true"/>紧</label>
+                                <label><input name="pulse_qita" type="checkbox" value="true"/>其他</label>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+        <script>
+        	function goback() {
+        		window.history.go(-1);
+            }
+        </script>
+            <button type="button" class="btn btn-primary" id="prepage" onclick="goback()">上一页</button>
+            <button type="submit" class="btn btn-primary" id="nextpage">下一页</button>
+        </div>
+    </form>
+</div>
+
+<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+    <i class="icon-double-angle-up icon-only bigger-110"></i>
+</a>
+
+
+
+<!--[if !IE]> -->
+
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='../public/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
+</script>
+
+<!-- <![endif]-->
+
+<script type="text/javascript">
+    if("ontouchend" in document) document.write("<script src='../public/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+</script>
+<script src="../public/js/bootstrap.min.js"></script>
+<script src="../public/js/typeahead-bs2.min.js"></script>
+
+<!-- page specific plugin scripts -->
+<!-- <script src="../public/js/jquery.dataTables.min.js"></script>
+<script src="../public/js/jquery.dataTables.bootstrap.js"></script> -->
+<!-- ace scripts -->
+
+<script src="../public/js/ace-elements.min.js"></script>
+<script src="../public/js/ace.min.js"></script>
+
+</body>
+</html>
