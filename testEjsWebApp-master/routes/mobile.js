@@ -9,7 +9,7 @@ var router = express.Router();
 
 router.get('/move1', function (req, res, next) {
     console.log("基本信息");
-    res.render('move');
+    res.render('move1');
 });
 router.post('/move1', function (req, res, next) {
     var url = myconst.apiurl + "o/token/";
