@@ -412,10 +412,6 @@ router.put('/geninfo_save', function (req, res, next){
                 //console.log(">>>Getting archives met unknown error. " + error.error_description);
                 else {
                     console.log(">>>其它错误码的body: ", user_geninfo);
-                    // var info_cn = {};
-                    // for (var i in user_geninfo) {
-                    //     info_cn[dict[i]] = user_geninfo[i][0];
-                    // }
                     res.json({user_geninfo: user_geninfo, status:1400});
                 }
             }
@@ -2266,42 +2262,91 @@ router.get('/patientInfo', function (req, res, next){
 
 });
 /* 审核 */
-router.get('/check', function (req, res, next){
-    var id = req.query.id;
-    var page = req.query.page;
-    var check = req.query.check;
-    // var id = req.params.id; //router.get('/patientInfo/:id'...
-    console.log("显示id+check"+id+check);
-    var check_url = myconst.apiurl + "prj001/info/" + id +'/checked/';
+// router.get('/check', function (req, res, next){
+//     if (req.cookies.prj001token) {
+//         var id = req.query.id;
+//         var page = req.query.page;
+//         var check = req.query.check;
+//         // var id = req.params.id; //router.get('/patientInfo/:id'...
+//         console.log("显示id+check"+id+check);
+//         var check_url = myconst.apiurl + "prj001/info/" + id +'/checked/';
 
-    var authstring = req.cookies.prj001token.access_token;
-    var options = {
-        url: check_url,
-        form:{is_checked:check,id:id,},
-        headers: {
-            'Authorization': 'Bearer ' + authstring
-        }
-    };
-    request.post(options, function (error, response, body) {
-        var user_geninfo = JSON.parse(body); 
-        console.log("check",response.statusCode)           
-        if (!error && response.statusCode == 200) {
-            // res.json({user_geninfo: user_geninfo, status: 200});
-            res.redirect("/prj001/?page="+page);
-        } else {
-            if (response.statusCode == 403) {
-                console.log(">>>审核 body: ", user_geninfo);
-                res.json({user_geninfo:user_geninfo, status:403});
+//         var authstring = req.cookies.prj001token.access_token;
+//         var options = {
+//             url: check_url,
+//             form:{is_checked:check,id:id,},
+//             headers: {
+//                 'Authorization': 'Bearer ' + authstring
+//             }
+//         };
+//         request.post(options, function (error, response, body) {
+//             var user_geninfo = JSON.parse(body); 
+//             console.log("check",response.statusCode)           
+//             if (!error && response.statusCode == 200) {
+//                 // res.json({user_geninfo: user_geninfo, status: 200});
+//                 res.redirect("/prj001/?page="+page);
+//             } else {
+//                 if (response.statusCode == 403) {
+//                     console.log(">>>审核 body: ", user_geninfo);
+//                     res.json({user_geninfo:user_geninfo, status:403});
+//                     // res.redirect("/prj001/?page="+page);
+//                 }
+//                 //console.log(">>>Getting archives met unknown error. " + error.error_description);
+//                 else {
+//                     console.log(">>>其它错误码的body: ", user_geninfo);
+//                     res.json({user_geninfo: user_geninfo, status:1400});
+//                     // res.redirect("/prj001/?page="+page);
+//                 }
+//             }
+//         });
+//     } else {
+//         res.redirect("/");
+//     }
+// });
+
+/* 审核 */
+router.post('/check', function (req, res, next){
+    if (req.cookies.prj001token) {
+        // console.log("看这里",JSON.parse(req.body));
+        var id = req.body.id;
+        var page = req.body.page;
+        var check = req.body.check;
+        // var id = req.params.id; //router.get('/patientInfo/:id'...
+        console.log("显示id+check"+id+check);
+        var check_url = myconst.apiurl + "prj001/info/" + id +'/checked/';
+
+        var authstring = req.cookies.prj001token.access_token;
+        var options = {
+            url: check_url,
+            form:{is_checked:check,id:id,},
+            headers: {
+                'Authorization': 'Bearer ' + authstring
             }
-            //console.log(">>>Getting archives met unknown error. " + error.error_description);
-            else {
-                console.log(">>>其它错误码的body: ", user_geninfo);
-                res.json({user_geninfo: user_geninfo, status:1400});
+        };
+        request.post(options, function (error, response, body) {
+            var user_geninfo = JSON.parse(body); 
+            console.log("check",response.statusCode)           
+            if (!error && response.statusCode == 200) {
+                // res.json({user_geninfo: user_geninfo, status: 200});
+                res.redirect("/prj001/?page="+page);
+            } else {
+                if (response.statusCode == 403) {
+                    console.log(">>>审核 body: ", user_geninfo);
+                    res.json({user_geninfo:user_geninfo, status:403});
+                    // res.redirect("/prj001/?page="+page);
+                }
+                //console.log(">>>Getting archives met unknown error. " + error.error_description);
+                else {
+                    console.log(">>>其它错误码的body: ", user_geninfo);
+                    res.json({user_geninfo: user_geninfo, status:1400});
+                    // res.redirect("/prj001/?page="+page);
+                }
             }
-        }
-    });
+        });
+    } else {
+        res.redirect("/");
+    }
 });
-
 /* 搜索 导出 */
 router.get('/info/search/', function (req, res, next) {
     console.log("表单", req.body, typeof(req.body));
@@ -2377,7 +2422,8 @@ router.get('/info/search/', function (req, res, next) {
                     previouspage: previousPage,
                     nextpage: nextPage,
                     totalCount: archiveobjs.count,
-                    name: params["name"], address:params["address"], hospital:params["hospital"], telephone:params["telephone"],
+                    name: params["name"], address:params["address"], 
+                    hospital:params["hospital"], telephone:params["telephone"],is_checked:params["is_checked"],
                     code: archiveobjs.code
                 });
                 } else {
@@ -2394,7 +2440,7 @@ router.get('/info/search/', function (req, res, next) {
                 previouspage: null,
                 nextpage: null,
                 totalCount: 0,
-                name: '', address:'', hospital:'', telephone:'',
+                name: '', address:'', hospital:'', telephone:'',is_checked:'未审核',
                 code: null
                 });
             }

@@ -206,6 +206,7 @@
     <style>html {touch-action: manipulation;}</style>
     <script>
         $(document).ready(function () {
+            // alert(($("#id_is_checked").val()=="未审核"));
             $("#fileoutBtn").click(function () {
                 $.ajax({
                         url: "/prj001/info/search/", 
@@ -229,6 +230,58 @@
                         },
                 })
             })
+        
+            $(".no-check").click(function () {
+                $.ajax({
+                        url: "/prj001/check", 
+                        type: "POST",
+                        data:{id:$(this).attr("userid"),
+                              check:$(this).attr("checkstatus"),
+                              page:$(this).attr("page")},
+                        success: function (result) {
+                            alert("成功");
+                            window.location.href="/prj001/?page=" + $(".no-check").attr("page");
+                        },
+                        error:  function () {
+                            alert("失败");
+                        },
+                })
+            })
+        
+            $(".pass-check").click(function () {
+                $.ajax({
+                        url: "/prj001/check", 
+                        type: "POST",
+                        data:{id:$(this).attr("userid"),
+                              check:$(this).attr("checkstatus"),
+                              page:$(this).attr("page")},
+                        success: function (result) {
+                            alert("成功");
+                            window.location.href="/prj001/?page=" + curpage_global;
+                        },
+                        error:  function () {
+                            alert("失败");
+                        },
+                })
+            })
+        
+            $(".fail-check").click(function () {
+                $.ajax({
+                        url: "/prj001/check", 
+                        type: "POST",
+                        data:{id:$(this).attr("userid"),
+                              check:$(this).attr("checkstatus"),
+                              page:$(this).attr("page")},
+                        success: function (result) {
+                            alert("成功");
+                            window.location.href="/prj001/?page=" + curpage_global;
+                        },
+                        error:  function () {
+                            alert("失败");
+                        },
+                })
+            })
+    
         })
     </script>
     
@@ -528,11 +581,13 @@
                                                                 <i class="icon-caret-down"></i>
                                                             </button>
                                                             <ul class="dropdown-menu user-menu pull-right dropdown-yellow dropdown-caret dropdown-close">
-                                                                <li><a href="/prj001/check/?page=<%= curpage %>&id=<%= archive.id %>&check=未审核">未审核</a ></li>
-                                                                <li><a href="/prj001/check/?page=<%= curpage %>&id=<%= archive.id %>&check=审核通过">审核通过</a ></li>
-                                                                <li><a href="/prj001/check/?page=<%= curpage %>&id=<%= archive.id %>&check=审核不通过">审核不通过</a ></li>
+                                                                <li class="no-check" checkstatus="未审核" page=<%= curpage %> userid=<%= archive.id %> >未审核</li>
+                                                                <li class="pass-check" checkstatus="审核通过" page=<%= curpage %> userid=<%= archive.id %> >审核通过</li>
+                                                                <li class="fail-check" checkstatus="审核不通过" page=<%= curpage %> userid=<%= archive.id %> >审核不通过</li>
+                                                                <!-- <li><a href="/prj001/check/?page=<%= curpage %>&id=<%= archive.id %>&check=未审核">未审核</a ></li> -->
+                                                                <!-- <li><a href="/prj001/check/?page=<%= curpage %>&id=<%= archive.id %>&check=审核通过">审核通过</a ></li> -->
+                                                                <!-- <li><a href="/prj001/check/?page=<%= curpage %>&id=<%= archive.id %>&check=审核不通过">审核不通过</a ></li> -->
                                                             </ul>
-                                                            
                                                         </div>
                                                         <div class="visible-xs visible-sm hidden-md hidden-lg btn-group">
                                                                 <div class="inline position-relative">
@@ -726,7 +781,7 @@
                                                                      $("#saddress").val()=="" && 
                                                                      $("#stelephone").val()=="" && 
                                                                      $("#shospital").val()==""&&
-                                                                     $("#is_checked").val()=="") {
+                                                                     $("#id_is_checked").val()=="未审核") {
                                                                         // alert("在这里if->" + current);
                                                                     window.location.href = "/prj001/?page=" + current;
                                                                 } else {
@@ -978,7 +1033,7 @@
                                                 </div>
                                             </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-primary geninfoBtn" id="geninfoBtn">提交</button>
+                                            <button type="button" class="btn btn-primary geninfoBtn" id="geninfoBtn">保存修改</button>
                                         </div>
                                         </form>
 
@@ -1248,7 +1303,7 @@
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-primary summaryBtn" id="summaryBtn">提交</button>
+                                            <button type="button" class="btn btn-primary summaryBtn" id="summaryBtn">保存修改</button>
                                         </div>
                                     </form>
 
@@ -1853,7 +1908,7 @@
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-primary historyBtn" id="historyBtn">提交</button>
+                                            <button type="button" class="btn btn-primary historyBtn" id="historyBtn">保存修改</button>
                                         </div>
                                     </form>
 
@@ -1906,7 +1961,7 @@
                                                 </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-primary relevantBtn" id="relevantBtn">提交</button>
+                                            <button type="button" class="btn btn-primary relevantBtn" id="relevantBtn">保存修改</button>
                                         </div>
                                     </form>
                                 </div>
@@ -1976,7 +2031,7 @@
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-primary ccBtn" id="ccBtn">提交</button>
+                                            <button type="button" class="btn btn-primary ccBtn" id="ccBtn">保存修改</button>
                                         </div>
                                     </form>
                                 </div>
@@ -2195,7 +2250,7 @@
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-primary cureBtn" id="cureBtn">提交</button>
+                                            <button type="button" class="btn btn-primary cureBtn" id="cureBtn">保存修改</button>
                                         </div>
                                     </form>
 
@@ -2229,7 +2284,7 @@
                                                 </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-primary resultsBtn" id="resultsBtn">提交</button>
+                                            <button type="button" class="btn btn-primary resultsBtn" id="resultsBtn">保存修改</button>
                                         </div>
                                     </form>
 

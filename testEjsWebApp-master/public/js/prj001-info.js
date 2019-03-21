@@ -25,7 +25,11 @@
                         window.location.href = '/prj001' + '/?page=' + curpage_global;
                     } else {
                         if (result.status == 403) {
-                            alert("" + result.user_geninfo.detail);
+                            if (result.user_geninfo.msg==undefined) {
+                                alert("" + result.user_geninfo.detail);
+                            } else {
+                                alert("" + result.user_geninfo.msg);
+                            }
                         } else {
                             if (result.status == 1400){
                                 alert("您有未填字段");
@@ -138,7 +142,11 @@
                         window.location.href = '/prj001' + '/?page=' + curpage_global;
                     } else {
                         if (result.status == 403) {
-                            alert("" + result.user_summary.detail)
+                            if (result.user_summary.msg==undefined) {
+                                alert("" + result.user_summary.detail);
+                            } else {
+                                alert("" + result.user_summary.msg);
+                            }
                         } else {
                             alert("保存失败" + result.status)
                         }
@@ -423,7 +431,11 @@
                         window.location.href = '/prj001' + '/?page=' + curpage_global;
                     } else {
                         if (result.status == 403) {
-                            alert("" + result.user_history.detail)
+                            if (result.user_history.msg==undefined) {
+                                alert("" + result.user_history.detail);
+                            } else {
+                                alert("" + result.user_history.msg);
+                            }
                         } else {
                             alert("保存失败" + result.status)
                         }
@@ -727,7 +739,11 @@
                         window.location.href = '/prj001' + '/?page=' + curpage_global;
                     } else {
                         if (result.status == 403) {
-                            alert("" + result.user_relevant.detail)
+                            if (result.user_relevant.msg==undefined) {
+                                alert("" + result.user_relevant.detail);
+                            } else {
+                                alert("" + result.user_relevant.msg);
+                            }
                         } else {
                             alert("保存失败" + result.status)
                         }
@@ -816,7 +832,11 @@
                         window.location.href = '/prj001' + '/?page=' + curpage_global;
                     } else {
                         if (result.status == 403) {
-                            alert("" + result.user_cc.detail)
+                            if (result.user_cc.msg==undefined) {
+                                alert("" + result.user_cc.detail);
+                            } else {
+                                alert("" + result.user_cc.msg);
+                            }
                         } else {
                             alert("保存失败" + result.status)
                         }
@@ -903,7 +923,11 @@
                         window.location.href = '/prj001' + '/?page=' + curpage_global;
                     } else {
                         if (result.status == 403) {
-                            alert("" + result.user_cure.detail)
+                            if (result.user_cure.msg==undefined) {
+                                alert("" + result.user_cure.detail);
+                            } else {
+                                alert("" + result.user_cure.msg);
+                            }
                         } else {
                             alert("保存失败" + result.status)
                         }
@@ -1115,7 +1139,11 @@
                         window.location.href = '/prj001' + '/?page=' + curpage_global;
                     } else {
                         if (result.status == 403) {
-                            alert("" + result.user_results.detail)
+                            if (result.user_results.msg==undefined) {
+                                alert("" + result.user_results.detail);
+                            } else {
+                                alert("" + result.user_results.msg);
+                            }
                         } else {
                             alert("保存失败" + result.status)
                         }
