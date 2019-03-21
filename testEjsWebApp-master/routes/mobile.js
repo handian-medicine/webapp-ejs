@@ -7,11 +7,11 @@ var router = express.Router();
 // 'use strict';
 // var form_all = {};
 
-router.get('/move', function (req, res, next) {
+router.get('/move1', function (req, res, next) {
     console.log("基本信息");
     res.render('move');
 });
-router.post('/move', function (req, res, next) {
+router.post('/move1', function (req, res, next) {
     var url = myconst.apiurl + "o/token/";
     var mobileData = {
         "username": 'prj001-patient@handian.com',

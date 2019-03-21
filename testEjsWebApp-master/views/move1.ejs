@@ -78,7 +78,7 @@
                 };
             }
             $.ajax({
-                url: "/mobile/move",
+                url: "/mobile/move1",
                 type: "POST",
                 // dataType: "json",
                 data: {all_data:JSON.stringify(obj)},
@@ -101,19 +101,17 @@
             信息调查表
         </div>
     </div>
-
-
 </div>
 
     <ul id="myTab" class="nav nav-tabs">
-            <li class="active"><a href="#geninfo" data-toggle="tab">基本信息</a></li>
-            <li><a href="#summary" data-toggle="tab">病情概要</a></li>
-            <li><a href="#history" data-toggle="tab">患者病史</a></li>
-            <li><a href="#relevant" data-toggle="tab">相关检查</a></li>
-            <li><a href="#cc" data-toggle="tab">临床诊断</a></li>
-            <li><a href="#cure" data-toggle="tab">中西治疗</a></li>
-            <li><a href="#results" data-toggle="tab">疗效情况</a></li>
-            <li><a href="#confirm" data-toggle="tab">确认提交</a></li>
+        <li class="active"><a href="#geninfo" data-toggle="tab">基本信息</a></li>
+        <li><a href="#summary" data-toggle="tab">病情概要</a></li>
+        <li><a href="#history" data-toggle="tab">患者病史</a></li>
+        <li><a href="#relevant" data-toggle="tab">相关检查</a></li>
+        <li><a href="#cc" data-toggle="tab">临床诊断</a></li>
+        <li><a href="#cure" data-toggle="tab">中西治疗</a></li>
+        <li><a href="#results" data-toggle="tab">疗效情况</a></li>
+        <li><a href="#confirm" data-toggle="tab">确认提交</a></li>
     </ul>
 
          <div id="myTabContent" class="tab-content">
