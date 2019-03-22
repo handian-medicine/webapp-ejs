@@ -282,7 +282,7 @@
                 })
             })
     
-            //审核原因修改
+            //审核原因显示
             $(".reason").click(function () {
                 $("#reason-not-passing").val($(this).attr("reasontext"));
                 // $('#geninfoBtn').attr("geninfoBtn-url", result["url"]);
@@ -296,6 +296,7 @@
                 $("#reasonBtn").attr("userid",$(this).attr("userid"));
                 $("#reasonBtn").attr("reasontext",$(this).attr("reasontext"));
             });
+            //审核原因修改
             $(".reasonBtn").click(function () {
                 
                 $.ajax({
@@ -306,11 +307,12 @@
                               page:$(this).attr("page"),
                             reason:$("#reason-not-passing").val()},
                         success:function(result){
-                            alert("成功了");
+                            alert("修改成功");
+                            window.location.href="/prj001/?page=" + curpage_global;
                         },
                         error: function () {
-                            alert("请求失败！");
-                            window.location.href = '/prj001';
+                            alert("修改失败！");
+                            window.location.href = "/prj001/?page=" + curpage_global;
                         }
                 })
             })
