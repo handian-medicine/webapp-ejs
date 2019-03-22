@@ -462,19 +462,25 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <input hidden type="text" value="<%= is_checked %>" id="search-check">
+                                            <input hidden type="text" id="search-check" value="<%= is_checked %>" >
+                                            
                                             <div class="col-xs-4">
-                                                <select id="id_is_checked" name="is_checked">
-                                                    <option value=""></option>
-                                                    <option value="未审核">未审核</option>
-                                                    <option value="审核通过">审核通过</option>
-                                                    <option value="审核不通过">审核不通过</option>
-                                                </select>
+                                                <!-- <div class="form-group"> -->
+                                                    <!-- <div class="col-sm-9"> -->
+                                                    <!-- <label class="col-sm-4 control-label no-padding-right" for="">审核状态</label> -->
+                                                    <select id="id_is_checked" name="is_checked">
+                                                        <option value=""></option>
+                                                        <option value="未审核">未审核</option>
+                                                        <option value="审核通过">审核通过</option>
+                                                        <option value="审核不通过">审核不通过</option>
+                                                    </select>
+                                                    <!-- </div> -->
+                                                <!-- </div> -->
                                             </div>
+
                                         </div>
                                         <div class="row">
                                             <div class="col-xs-4">
-
                                                 <div class="form-group">
                                                     <label class="col-sm-3 control-label no-padding-right" for=""> 患者手机 </label>
                                                     <div class="col-sm-9">
@@ -868,7 +874,8 @@
                                                             </div>
                                                             <div style="margin-top: 10px">
                                                                 <textarea class="form-control limited" id="check-reason" name="check-reason" maxlength="50" 
-                                                                    style="margin: 0px -3.67188px 0px 0px; width: 321px; height: 139px;" value=""></textarea>
+                                                                    style="margin: 0px -3.67188px 0px 20px; width: 514px; height: 117px;
+                                                                    " value=""></textarea>
                                                                 <!-- <input class="form-control" type="text" id="check-reason" name="check-reason" value=""/> -->
                                                             </div>
         

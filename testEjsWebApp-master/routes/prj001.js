@@ -232,7 +232,7 @@ router.get('/', function (req, res, next) {
                                     nextpage: nextPage,
                                     totalCount: archiveobjs.count,
                                     searchname: '',
-                                    name: '', address:'', hospital:'', telephone:'',
+                                    name: '', address:'', hospital:'', telephone:'',is_checked:'',
                                     code: archiveobjs.code
                                 });
                             } else {
@@ -247,7 +247,7 @@ router.get('/', function (req, res, next) {
                                     nextpage: nextPage,
                                     totalCount: archiveobjs.count,
                                     searchname: params["keyword"],
-                                    name: params["name"], address:params["address"], hospital:params["hospital"], telephone:params["telephone"],
+                                    name: params["name"], address:params["address"], hospital:params["hospital"], telephone:params["telephone"],is_checked:'params["is_checked"]',
                                     code: archiveobjs.code
                                 });
                             }
