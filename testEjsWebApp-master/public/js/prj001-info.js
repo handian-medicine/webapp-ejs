@@ -635,14 +635,16 @@
                                 $("input[name='pastfamily_womb_blood'][value='无']").trigger("onchange");//触发 收回 动作
                             }
                             //一级亲属（母亲、姐妹、女儿）其它病史
-                            if ( (result["pastfamily_xinzangbing"] != null && result["pastfamily_xinzangbing"] != false) ||
+                            if ( (result["pastfamily_minus"] != null && result["pastfamily_minus"] != false) ||
+                                 (result["pastfamily_plus"] != null && result["pastfamily_plus"] != false) ||
                                  (result["pastfamily_duonangluanchao"] != null && result["pastfamily_duonangluanchao"] != false) ||
                                  (result["pastfamily_tangniaobing"] != null && result["pastfamily_tangniaobing"] != false) ||
                                  (result["pastfamily_buxiang"] != null && result["pastfamily_buxiang"] != false) ||
                                  (result["pastfamily_qita"] != null && result["pastfamily_qita"] != false) ) 
                             {
                                 $("input[name='pastfamily_disease'][value='有']").prop("checked", true);//触发 展开 动作
-                                $("input:checkbox[name='pastfamily_xinzangbing']").prop('checked',result["pastfamily_xinzangbing"]);
+                                $("input:checkbox[name='pastfamily_minus']").prop('checked',result["pastfamily_minus"]);
+                                $("input:checkbox[name='pastfamily_plus']").prop('checked',result["pastfamily_plus"]);
                                 $("input:checkbox[name='pastfamily_duonangluanchao']").prop('checked',result["pastfamily_duonangluanchao"]);
                                 $("input:checkbox[name='pastfamily_tangniaobing']").prop('checked',result["pastfamily_tangniaobing"]);
                                 $("input:checkbox[name='pastfamily_buxiang']").prop('checked',result["pastfamily_buxiang"]);
@@ -1029,6 +1031,7 @@
                             $("input:checkbox[name='zhong_xu_liuwei']").prop('checked',result["zhong_xu_liuwei"]);
                             $("input:checkbox[name='zhong_xu_erzhi']").prop('checked',result["zhong_xu_erzhi"]);
                             $("input:checkbox[name='zhong_xu_fuke']").prop('checked',result["zhong_xu_fuke"]);
+                            $("input:checkbox[name='zhong_xu_wuzi']").prop('checked',result["zhong_xu_wuzi"]);
                             $('#zhong_xu_qita').val(result["zhong_xu_qita"]);
 
                             $("input:checkbox[name='zhong_shi_xuening']").prop('checked',result["zhong_shi_xuening"]);

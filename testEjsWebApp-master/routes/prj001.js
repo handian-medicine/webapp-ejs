@@ -95,7 +95,7 @@ router.get('/', function (req, res, next) {
                         nextpage: nextPage,
                         totalCount: archiveobjs.count,
                         searchname: '',
-                        name: '', address:'', hospital:'', telephone:'',//用于搜索框保留关键字
+                        name: '', address:'', hospital:'', telephone:'',is_checked:'',//用于搜索框保留关键字
                         code: archiveobjs.code
                     });
                 } else {
@@ -110,7 +110,7 @@ router.get('/', function (req, res, next) {
                         nextpage: nextPage,
                         totalCount: archiveobjs.count,
                         //用于搜索框保留关键字
-                        name: params["name"], address:params["address"], hospital:params["hospital"], telephone:params["telephone"],
+                        name: params["name"], address:params["address"], hospital:params["hospital"], telephone:params["telephone"],is_checked:params["is_checked"],
                         code: archiveobjs.code
                     });
                 }
@@ -2443,7 +2443,7 @@ router.get('/info/search/', function (req, res, next) {
                 previouspage: null,
                 nextpage: null,
                 totalCount: 0,
-                name: '', address:'', hospital:'', telephone:'',is_checked:'未审核',
+                name: '', address:'', hospital:'', telephone:'',is_checked:'',
                 code: null
                 });
             }
