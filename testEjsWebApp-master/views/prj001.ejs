@@ -230,82 +230,42 @@
                         },
                 })
             })
-        
-            $(".no-check").click(function () {
-                $.ajax({
-                        url: "/prj001/check", 
-                        type: "POST",
-                        data:{id:$(this).attr("userid"),
-                              check:$(this).attr("checkstatus"),
-                              page:$(this).attr("page")},
-                        success: function (result) {
-                            alert("状态修改成功");
-                            window.location.href="/prj001/?page=" + $(".no-check").attr("page");
-                        },
-                        error:  function () {
-                            alert("状态修改失败");
-                        },
-                })
-            })
-        
-            $(".pass-check").click(function () {
-                $.ajax({
-                        url: "/prj001/check", 
-                        type: "POST",
-                        data:{id:$(this).attr("userid"),
-                              check:$(this).attr("checkstatus"),
-                              page:$(this).attr("page")},
-                        success: function (result) {
-                            alert("状态修改成功");
-                            window.location.href="/prj001/?page=" + curpage_global;
-                        },
-                        error:  function () {
-                            alert("状态修改失败");
-                        },
-                })
-            })
-        
-            $(".fail-check").click(function () {
-                $.ajax({
-                        url: "/prj001/check", 
-                        type: "POST",
-                        data:{id:$(this).attr("userid"),
-                              check:$(this).attr("checkstatus"),
-                              page:$(this).attr("page")},
-                        success: function (result) {
-                            alert("状态修改成功");
-                            window.location.href="/prj001/?page=" + curpage_global;
-                        },
-                        error:  function () {
-                            alert("状态修改失败");
-                        },
-                })
-            })
     
             //审核原因显示
-            $(".reason").click(function () {
-                $("#reason-not-passing").val($(this).attr("reasontext"));
-                // $('#geninfoBtn').attr("geninfoBtn-url", result["url"]);
+            $(".check-opt").click(function () {
+                $("#checkBtn").attr("checkstatus",$(this).attr("checkstatus"));
+                $("#checkBtn").attr("page",$(this).attr("page"));
+                $("#checkBtn").attr("userid",$(this).attr("userid"));
+                $("#checkBtn").attr("reasontext",$(this).attr("reasontext"));
+                $("#checkBtn").attr("is-admin",$(this).attr("is-admin"));
+
+                $("#check-reason").val($(this).attr("reasontext"));//写入审核不通过原因
+                $("input[name='check-status'][value='"+$(this).attr("checkstatus")+"']").prop("checked",true);//审核状态勾选
                 if ($(this).attr("is-admin") == "false") {
-                    $("#reasonBtn").prop("disabled","disabled")
-                } else {
-                    $("#reasonBtn").prop("disabled",false)
+                    $("#checkBtn").prop("disabled","disabled");
+                    $(".check-items").remove();
+                    $("#checkBtn").remove();
+                } 
+                else {
+                    if ($(this).attr("checkstatus") == "审核不通过") {
+                        $("#check-reason").prop("disabled", false);
+                    } else {
+                        $("#check-reason").val("");
+                        $("#check-reason").prop("disabled", true);
+                    }
                 }
-                $("#reasonBtn").attr("checkstatus",$(this).attr("checkstatus"));
-                $("#reasonBtn").attr("page",$(this).attr("page"));
-                $("#reasonBtn").attr("userid",$(this).attr("userid"));
-                $("#reasonBtn").attr("reasontext",$(this).attr("reasontext"));
-            });
-            //审核原因修改
-            $(".reasonBtn").click(function () {
                 
+            })
+            //审核原因修改
+            $(".checkBtn").click(function () {
+                // alert(""+$('input[name="check-status"]:checked').val())
                 $.ajax({
                     url: "/prj001/check",
                         method: "POST",
                         data: {id:$(this).attr("userid"),
-                              check:$(this).attr("checkstatus"),
+                              check:$('input[name="check-status"]:checked').val(),
                               page:$(this).attr("page"),
-                            reason:$("#reason-not-passing").val()},
+                            reason:$("#check-reason").val()},
                         success:function(result){
                             alert("修改成功");
                             window.location.href="/prj001/?page=" + curpage_global;
@@ -315,7 +275,7 @@
                             window.location.href = "/prj001/?page=" + curpage_global;
                         }
                 })
-            })
+            });
 
         })
     </script>
@@ -477,8 +437,8 @@
 
                             <div class="row">
                                 <div class="col-xs-12">
-
-                                    <form class="form-horizontal" id="search-form" role="form" method='get' action="/prj001/info/search/">
+                                        <!-- 搜索 -->
+                                        <form class="form-horizontal" id="search-form" role="form" method='get' action="/prj001/info/search/">
                                         <input hidden type="search" id="types" name="types" value="search">
                                         <div class="row">
                                             <div class="col-xs-4">
@@ -499,6 +459,7 @@
                                             </div>
                                             <div class="col-xs-4">
                                                 <select id="id_is_checked" name="is_checked">
+                                                    <option value=""></option>
                                                     <option value="未审核">未审核</option>
                                                     <option value="审核通过">审核通过</option>
                                                     <option value="审核不通过">审核不通过</option>
@@ -539,7 +500,7 @@
                                         <!-- <button type="button" class="btn btn-primary fileoutBtn" id="fileoutBtn"  onclick="srch_or_out()">
                                             导出结果
                                         </button> -->
-                                    </form>
+                                        </form>
                                     <hr>
                                     <div class="table-responsive">
                                         <!-- 信息列表框 -->
@@ -587,8 +548,9 @@
                                                         <%= archive.is_checked %>
                                                         </td>   
                                                     <td>
-                                                        <!-- 有审核按钮 -->
+                                                    <!-- 有审核按钮 -->
                                                         <% if (is_admin == true) { %>
+                                                        <!-- 大窗口 -->
                                                         <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
                                                             <button id="geninfo"  checked-info="no" data-backdrop="static" data-backdrop="static" data-toggle="modal" data-target="#modal-table" class="btn btn-xs btn-success geninfo" geninfo-url=<%= archive.url %>>
                                                                 基本信息
@@ -611,20 +573,13 @@
                                                             <button id="results" checked-info="no" data-backdrop="static" data-toggle="modal" data-target="#modal-table6" class="btn btn-xs btn-primary results" geninfo-url=<%= archive.url %> results-url=<%= archive.results %>>
                                                                 疗效情况
                                                             </button>
-                                                            <button type="button" class="btn btn-xs btn-info" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                审核状态
-                                                                <i class="icon-caret-down"></i>
-                                                            </button>
-                                                            <ul class="dropdown-menu user-menu pull-right dropdown-yellow dropdown-caret dropdown-close">
-                                                                <li class="no-check" checkstatus="未审核" page=<%= curpage %> userid=<%= archive.id %> >未审核</li>
-                                                                <li class="pass-check" checkstatus="审核通过" page=<%= curpage %> userid=<%= archive.id %> >审核通过</li>
-                                                                <li class="fail-check" checkstatus="审核不通过" page=<%= curpage %> userid=<%= archive.id %> >审核不通过</li>
-                                                            </ul>
-                                                            <button type="button" class="btn btn-xs btn-info reason" data-backdrop="static"  data-toggle="modal" data-target="#modal-table7" class="btn btn-xs btn-primary" 
+
+                                                            <button class="btn btn-xs btn-danger check-opt" data-backdrop="static"  data-toggle="modal" data-target="#check-table"
                                                                     is-admin=<%= is_admin %> checkstatus=<%= archive.is_checked %> page=<%= curpage %> userid=<%= archive.id %> reasontext=<%= archive.reasons_for_not_passing %> >
-                                                                    审核不通过原因
+                                                                    审核操作
                                                             </button>
                                                         </div>
+                                                        <!-- 小窗口 -->
                                                         <div class="visible-xs visible-sm hidden-md hidden-lg btn-group">
                                                                 <div class="inline position-relative">
                                                                     <button class="btn btn-minier btn-primary dropdown-toggle"
@@ -689,28 +644,19 @@
                                                                             </a>
                                                                             </li>
                                                                         <li>
-                                                                            <button type="button" class="btn btn-xs btn-info" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                                    审核状态
-                                                                                    <i class="icon-caret-down"></i>
-                                                                            </button>
-                                                                            <ul class="dropdown-menu user-menu pull-right dropdown-yellow dropdown-caret dropdown-close">
-                                                                                    <li class="no-check" checkstatus="未审核" page=<%= curpage %> userid=<%= archive.id %> >未审核</li>
-                                                                                    <li class="pass-check" checkstatus="审核通过" page=<%= curpage %> userid=<%= archive.id %> >审核通过</li>
-                                                                                    <li class="fail-check" checkstatus="审核不通过" page=<%= curpage %> userid=<%= archive.id %> >审核不通过</li>
-                                                                                    <!-- <li><a href="/prj001/check/?page=<%= curpage %>&id=<%= archive.id %>&check=未审核">未审核</a ></li> -->
-                                                                                    <!-- <li><a href="/prj001/check/?page=<%= curpage %>&id=<%= archive.id %>&check=审核通过">审核通过</a ></li> -->
-                                                                                    <!-- <li><a href="/prj001/check/?page=<%= curpage %>&id=<%= archive.id %>&check=审核不通过">审核不通过</a ></li> -->
-                                                                            </ul>
-                                                                            <button type="button" class="btn btn-xs btn-info reason" data-backdrop="static"  data-toggle="modal" data-target="#modal-table7" class="btn btn-xs btn-primary" 
-                                                                                    is-admin=<%= is_admin %> checkstatus=<%= archive.is_checked %> page=<%= curpage %> userid=<%= archive.id %> reasontext=<%= archive.reasons_for_not_passing %> >
-                                                                                    审核不通过原因
-                                                                            </button>
+                                                                            <a href="#check-table" class="tooltip-error check-opt" role="button" data-toggle="modal"
+                                                                                is-admin=<%= is_admin %> checkstatus=<%= archive.is_checked %> page=<%= curpage %> userid=<%= archive.id %> reasontext=<%= archive.reasons_for_not_passing %> >
+                                                                                <span class="red">
+                                                                                    审核操作
+                                                                                </span>
+                                                                            </a >
                                                                         </li>
                                                                     </ul>
                                                                 </div>
                                                         </div>
-                                                        <!-- 无审核按钮 -->
+                                                    <!-- 无审核按钮 -->
                                                         <% } else { %>
+                                                        <!-- 大窗口 -->
                                                         <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
                                                                     <button id="geninfo" data-backdrop="static" checked-info="yes" data-toggle="modal" data-target="#modal-table" class="btn btn-xs btn-success geninfo" geninfo-url=<%= archive.url %>>
                                                                         基本信息
@@ -733,11 +679,14 @@
                                                                     <button id="results" data-backdrop="static" checked-info="yes" data-toggle="modal" data-target="#modal-table6" class="btn btn-xs btn-primary results" geninfo-url=<%= archive.url %> results-url=<%= archive.results %>>
                                                                         疗效情况
                                                                     </button>
-                                                                    <button type="button" class="btn btn-xs btn-info reason" data-backdrop="static"  data-toggle="modal" data-target="#modal-table7" class="btn btn-xs btn-primary" 
+                                                                    <% if (archive.is_checked == "审核不通过") { %>
+                                                                    <button class="btn btn-xs btn-danger check-opt" data-backdrop="static"  data-toggle="modal" data-target="#check-table"
                                                                             is-admin=<%= is_admin %> checkstatus=<%= archive.is_checked %> page=<%= curpage %> userid=<%= archive.id %> reasontext=<%= archive.reasons_for_not_passing %> >
-                                                                            审核不通过原因
+                                                                        不通过原因
                                                                     </button>
+                                                                    <% } %>
                                                         </div>
+                                                        <!-- 小窗口 -->
                                                         <div class="visible-xs visible-sm hidden-md hidden-lg btn-group">
                                                                 <div class="inline position-relative">
                                                                     <button class="btn btn-minier btn-primary dropdown-toggle"
@@ -800,7 +749,17 @@
                                                                                     疗效情况
                                                                                 </span>
                                                                             </a>
-                                                                            </li>
+                                                                        </li>
+                                                                        <% if (archive.is_checked == "审核不通过") { %>
+                                                                        <li>
+                                                                            <a href="#check-table" class="tooltip-error check-opt" role="button" data-toggle="modal"
+                                                                                is-admin=<%= is_admin %> checkstatus=<%= archive.is_checked %> page=<%= curpage %> userid=<%= archive.id %> reasontext=<%= archive.reasons_for_not_passing %> >
+                                                                                <span class="red">
+                                                                                    不通过原因
+                                                                                </span>
+                                                                            </a >
+                                                                        </li>
+                                                                        <% } %>
                                                                     </ul>
                                                                 </div>
                                                         </div>
@@ -851,26 +810,76 @@
                                     </div>
                                 </div>
                             </div>
-                        <!--审核不通过原因-->
-                        <div id="modal-table7" class="modal fade" tabindex="-1">
+                            
+                        <!--审核操作-->
+                        <script>
+                                function disable_check_reason () {
+                                    // alert(""+$("input[name='check-status']").val())
+                                    $("#check-reason").val("");
+                                    $("#check-reason").prop("disabled", true);
+                                }
+                                function able_check_reason () {
+                                    // alert(""+$("input[name='check-status']").val())
+                                    $("#check-reason").prop("disabled", false);
+                                }
+                        </script>
+                        <div id="check-table" class="modal fade" tabindex="-1">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header no-padding">
-                                        <div class="table-header center">
+                                        <div class="table-header" style="background-color: #f0ad4e">
                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                                                 <span class="white">&times;</span>
                                             </button>
-                                            审核不通过原因
+                                            审核状态
                                         </div>
                                     </div>
-
-                                    <label>原因<input class="form-control ace" id="reason-not-passing" name="reason-not-passing" type="text" /></label> 
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-primary reasonBtn" id="reasonBtn">保存修改</button>
-                                    </div>                               
+                                    <form class="modal-body no-padding" id="check-form">
+                                        <table class="table table-striped table-bordered table-hover no-margin-bottom no-border-top">
+                                            <div class="modal-body">
+                                                <div class="row">
+                                                    <div class="col-xs-12 col-sm-12">
+                                                        <div class="control-group">
+                                                        
+                                                            <div class="radio check-items" >
+                                                                <label>
+                                                                    <input name="check-status" type="radio" class="ace" value="未审核" onchange="disable_check_reason();"/>
+                                                                    <span class="lbl"> 未审核</span>
+                                                                </label>
+                                                            </div>
+                                                        
+                                                            <div class="radio check-items" >
+                                                                <label>
+                                                                    <input name="check-status" type="radio" class="ace" value="审核通过" onchange="disable_check_reason();"/>
+                                                                    <span class="lbl"> 审核通过</span>
+                                                                </label>
+                                                            </div>
+                                                        
+                                                            <div class="radio check-items" >
+                                                                <label>
+                                                                    <input name="check-status" type="radio" class="ace" value="审核不通过" onchange="able_check_reason();"/>
+                                                                    <span class="lbl"> 审核不通过</span>
+                                                                </label>
+                                                            </div>
+                                                            <div style="margin-top: 10px">
+                                                                <textarea class="form-control limited" id="check-reason" name="check-reason" maxlength="50" 
+                                                                    style="margin: 0px -3.67188px 0px 0px; width: 321px; height: 139px;" value=""></textarea>
+                                                                <!-- <input class="form-control" type="text" id="check-reason" name="check-reason" value=""/> -->
+                                                            </div>
+        
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </table>
+                                        <div class="modal-footer">
+                                            <!-- <button type="button" class="btn btn-primary pull-left cancelBtn" id="cancelBtn">取消</button> -->
+                                            <button type="button" class="btn btn-primary checkBtn" id="checkBtn">提交</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
-                        </div>
+                        </div>                                
                         <!--基本信息-->
                         <div id="modal-table" class="modal fade" tabindex="-1">
                                 <div class="modal-dialog">
@@ -1411,7 +1420,6 @@
                                                             <label><input name="pasthistory_minus" type="checkbox" value="true"/>甲减</label>
                                                             <label><input name="pasthistory_plus" type="checkbox" value="true"/>甲亢</label>
 
-                                                            <label><input name="pasthistory_jiazhuangxian" type="checkbox" value="true"/>甲状腺相关疾病</label>
                                                             <label><input name="pasthistory_shenshangxian" type="checkbox" value="true"/>肾上腺相关疾病</label>
                                                             <label><input name="pasthistory_xueye" type="checkbox" value="true"/>血液系统相关疾病</label>
                                                             <label><input name="pasthistory_naochuitiliu" type="checkbox" value="true"/>脑垂体瘤</label>
@@ -2177,7 +2185,6 @@
                                                                 <label><input name="pre_shi_xiaoyao" type="checkbox" value="true"/>逍遥散</label>
                                                                 <label><input name="pre_shi_qingjing" type="checkbox" value="true"/>清经散</label>
                                                                 <label><input name="pre_shi_wenjing" type="checkbox" value="true"/>温经汤(《妇人大全良方》)</label>
-                                                                <label><input name="pre_shi_wuyao" type="checkbox" value="true"/>乌药汤</label>
                                                                 <label><input name="pre_shi_taohong" type="checkbox" value="true"/>桃红四物汤</label>
 													            <label><input name="pre_shi_siwu" type="checkbox" value="true"/>四物汤合失笑散</label>
                                                                 <label><input name="pre_shi_cangfu" type="checkbox" value="true"/>苍附导痰丸</label>
@@ -2273,8 +2280,9 @@
                                                                     <label><input name="kou_quyang" type="checkbox" value="true"/>去氧孕烯炔雌醇片</label>
                                                                     <label><input name="kou_fufang" type="checkbox" value="true"/>复方孕二烯酮片</label>
                                                                     <label>其他:<input type="text" id="kou_qita" name="kou_qita" value=""/></label>
-
+                                                                <br>
                                                                 <label><input name="hormone_xiong" type="checkbox" value="true"/>雄激素</label>
+                                                                <br>
                                                                 <label><input name="hormone_gn" type="checkbox" value="true"/>GnRH-α</label>
                                                                 <br>
                                                                 <label>其他:<input type="text" id="hormone_qita" name="hormone_qita" value=""/></label>
@@ -2309,8 +2317,9 @@
                                                             <br>
                                                             <label>其他:<input type="text" id="shu_qita" name="shu_qita" value=""/></label>
                                                         
-                                                        <p><h5 style="color:blue">5、其他治疗</h5>
-                                                            <label>有<input type="text" id="other_cure" name="other_cure" value=""/></label>
+                                                            <p><h5 style="color:blue">5、其他治疗</h5>
+                                                                <label>有<input type="text" id="other_cure" name="other_cure" value=""/></label>
+                                                            <br>
                                                             <label><input name="other_cure_wu" type="checkbox" value="true"/>无</label>
                                                 </div>
                                             </div>
