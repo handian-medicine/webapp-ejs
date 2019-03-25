@@ -67,17 +67,22 @@ router.post('/move1', function (req, res, next) {
                 console.log("response.statusCode: ", response.statusCode);
                 var mobile_body = JSON.parse(body);
                 if (!error && response.statusCode == 200) {
-                    if (mobile_body.msg == "信息提交成功") {
+                    console.log("if-1");
+                    // if (mobile_body.msg == "信息提交成功") {}
                         res.json({status:1, msg:mobile_body.msg});
-                    } else {
-                        res.json({status:1, msg:mobile_body.msg});
-                    }    
                     //res.json()不能用在太前面，否则会调用res.send()
                     //res.render and res.json will both call res.end() 
                     //which is basically like trying to send a response twice to the client
                 } else {
-                    console.log("有未填写信息response:", mobile_body.msg);
-                    res.json({status:0, msg:mobile_body.msg});
+                    if (response.statusCode==400) {
+                        console.log("if-2");
+                        res.json({status:2, msg:mobile_body.msg});
+                        //"错误信息:账号不存在"
+                    } else {
+                        console.log("else-1");
+                        res.json({status:3, msg:mobile_body.msg});
+                    }
+                    
                     // console.log('response.statusCode wrong');
                 }
             })       

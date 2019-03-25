@@ -457,14 +457,15 @@ router.put('/summary_save', function (req, res, next){
         };
             console.log(">>>prj001.js put options: ", options);
             request.put(options, function (error, response, body) {
+                var user_summary = JSON.parse(body);
                 console.log(">>>prj001.js put method response.statusCode: ", response.statusCode);
                 if (!error && response.statusCode == 200) {
-                    var user_summary = JSON.parse(body);
+                    // var user_summary = JSON.parse(body);
                     console.log(">>>prj001.js put方法-> body: ", user_summary);
                     res.json({user_summary:user_summary, status: 200});
                 } else {
                     if (response.statusCode == 403) {
-                        var user_summary = JSON.parse(body);
+                        // var user_summary = JSON.parse(body);
                         console.log(">>>prj001.js put方法-> body: ", user_summary);
                         res.json({user_summary:user_summary, status: 403});
                     }

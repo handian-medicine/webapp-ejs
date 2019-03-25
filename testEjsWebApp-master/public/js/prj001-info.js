@@ -196,13 +196,17 @@
                             $('#owner_qita').val(result["owner_qita"]);
                             /* 出血量 */
                             $("input[name='blood_cond'][value='"+result["blood_cond"]+"']").prop("checked",true);
+                            $('#ss_blood_cond_qita').val(result["ss_blood_cond_qita"]);
                             /* 出血颜色 */
                             $("input[name='blood_color'][value='"+result["blood_color"]+"']").prop("checked",true);
+                            $('#ss_blood_color_qita').val(result["ss_blood_color_qita"]);
                             /* 出血质地 */
                             $("input[name='blood_quality'][value='"+result["blood_quality"]+"']").prop("checked",true);
                             $("input[name='blood_block'][value='"+result["blood_block"]+"']").prop("checked",true);
+                            $('#ss_blood_block_qita').val(result["ss_blood_block_qita"]);
                             /* 出血特点 */
                             $("input[name='blood_character'][value='"+result["blood_character"]+"']").prop("checked",true);
+                            $('#ss_blood_character_qita').val(result["ss_blood_character_qita"]);
 
                             /* 精神情绪 */
                             $("input:checkbox[name='spirit_jinglichongpei']").prop('checked',result["spirit_jinglichongpei"]);	
@@ -214,7 +218,8 @@
                             $("input:checkbox[name='spirit_xinu']").prop('checked',result["spirit_xinu"]);	
                             $("input:checkbox[name='spirit_yinu']").prop('checked',result["spirit_yinu"]);	
                             $("input:checkbox[name='spirit_beishangyuku']").prop('checked',result["spirit_beishangyuku"]);	
-                            $("input:checkbox[name='spirit_qita']").prop('checked',result["spirit_qita"]);	
+                            // $("input:checkbox[name='spirit_qita']").prop('checked',result["spirit_qita"]);	
+                            $('#spirit_qita').val(result["spirit_qita"]);
 
                             /* 寒热及汗出 */
                             $("input:checkbox[name='sweat_zhengchang']").prop('checked',result["sweat_zhengchang"]);	
@@ -227,6 +232,7 @@
                             $("input:checkbox[name='sweat_yewo']").prop('checked',result["sweat_yewo"]);
                             $("input:checkbox[name='sweat_hongre']").prop('checked',result["sweat_hongre"]);
                             $("input:checkbox[name='sweat_qita']").prop('checked',result["sweat_qita"]);
+                            $('#sweat_qita').val(result["sweat_qita"]);
 
                             /* 面色 */
                             $("input:checkbox[name='face_zhengchang']").prop('checked',result["face_zhengchang"]);	
@@ -240,6 +246,7 @@
                             $("input:checkbox[name='face_huian']").prop('checked',result["face_huian"]);	
                             $("input:checkbox[name='face_mianmulihei']").prop('checked',result["face_mianmulihei"]);	
                             $("input:checkbox[name='face_qita']").prop('checked',result["face_qita"]);
+                            $('#face_qita').val(result["face_qita"]);
 
                             /* 头面部 */
                             $("input:checkbox[name='head_zhengchang']").prop('checked',result["head_zhengchang"]);	
@@ -256,6 +263,7 @@
                             $("input:checkbox[name='ear_chongfu']").prop('checked',result["ear_chongfu"]);
                             $("input:checkbox[name='ear_xiajiang']").prop('checked',result["ear_xiajiang"]);
                             $("input:checkbox[name='e_qita']").prop('checked',result["e_qita"]);
+                            $('#e_qita').val(result["e_qita"]);
 
                             /* 口咽部 */
                             $("input:checkbox[name='throat_yantong']").prop('checked',result["throat_yantong"]);	
@@ -267,6 +275,7 @@
                             $("input:checkbox[name='breath_kounian']").prop('checked',result["breath_kounian"]);	
                             $("input:checkbox[name='breath_buyuyan']").prop('checked',result["breath_buyuyan"]);	
                             $("input:checkbox[name='breath_qita']").prop('checked',result["breath_qita"])
+                            $('#breath_qita').val(result["breath_qita"]);
 
                             /* 胸胁及语音 */
                             $("input:checkbox[name='sound_zhengchang']").prop('checked',result["sound_zhengchang"]);
@@ -281,6 +290,7 @@
                             $("input:checkbox[name='sound_xitanxi']").prop('checked',result["sound_xitanxi"]);
                             $("input:checkbox[name='sound_shaoqi']").prop('checked',result["sound_shaoqi"]);
                             $("input:checkbox[name='s_qita']").prop('checked',result["s_qita"]);
+                            $('#s_qita').val(result["s_qita"]);
 
                             /* 腹腰 */
                             $("input:checkbox[name='stomach_zhengchang']").prop('checked',result["stomach_zhengchang"]);
@@ -294,6 +304,7 @@
                             $("input:checkbox[name='stomach_yaosuan']").prop('checked',result["stomach_yaosuan"]);
                             $("input:checkbox[name='stomach_yaoleng']").prop('checked',result["stomach_yaoleng"]);
                             $("input:checkbox[name='stomach_qita']").prop('checked',result["stomach_qita"]);
+                            $('#stomach_qita').val(result["stomach_qita"]);
 
                             /* 四肢 */
                             $("input:checkbox[name='limb_zhengchang']").prop('checked',result["limb_zhengchang"]);
@@ -304,6 +315,7 @@
                             $("input:checkbox[name='limb_fuzhong']").prop('checked',result["limb_fuzhong"]);
                             $("input:checkbox[name='limb_szxinre']").prop('checked',result["limb_szxinre"]);
                             $("input:checkbox[name='limb_qita']").prop('checked',result["limb_qita"]);
+                            $('#limb_qita').val(result["limb_qita"]);
 
                             /* 饮食 */
                             $("input:checkbox[name='diet_zhengchang']").prop('checked',result["diet_zhengchang"]);
@@ -314,6 +326,7 @@
                             $("input:checkbox[name='diet_shixinla']").prop('checked',result["diet_shixinla"]);
                             $("input:checkbox[name='diet_bushu']").prop('checked',result["diet_bushu"]);
                             $("input:checkbox[name='diet_qita']").prop('checked',result["diet_qita"]);
+                            $('#diet_qita').val(result["diet_qita"]);
 
                             /* 睡眠 */
                             $("input:checkbox[name='sleep_zhengchang']").prop('checked',result["sleep_zhengchang"]);
@@ -323,6 +336,7 @@
                             $("input:checkbox[name='sleep_cheyebumian']").prop('checked',result["sleep_cheyebumian"]);
                             $("input:checkbox[name='sleep_shishui']").prop('checked',result["sleep_shishui"]);
                             $("input:checkbox[name='sleep_qita']").prop('checked',result["sleep_qita"]);
+                            $('#sleep_qita').val(result["sleep_qita"]);
 
                             /* 性欲 */
                             $("input:checkbox[name='sex_zhengchang']").prop('checked',result["sex_zhengchang"]);
@@ -339,6 +353,7 @@
                             $("input:checkbox[name='stool_zhinian']").prop('checked',result["stool_zhinian"]);
                             $("input:checkbox[name='stool_weixiaohua']").prop('checked',result["stool_weixiaohua"]);
                             $("input:checkbox[name='stool_qita']").prop('checked',result["stool_qita"]);
+                            $('#stool_qita').val(result["stool_qita"]);
 
                             /* 小便 */
                             $("input:checkbox[name='urine_zhengchang']").prop('checked',result["urine_zhengchang"]);
@@ -351,6 +366,7 @@
                             $("input:checkbox[name='urine_yulibujin']").prop('checked',result["urine_yulibujin"]);
                             $("input:checkbox[name='urine_yeniaopin']").prop('checked',result["urine_yeniaopin"]);
                             $("input:checkbox[name='urine_qita']").prop('checked',result["urine_qita"]);
+                            $('#urine_qita').val(result["urine_qita"]);
 
                             /* 舌质 */
                             $("input:checkbox[name='texture_danhong']").prop('checked',result["texture_danhong"]);
@@ -364,6 +380,7 @@
                             $("input:checkbox[name='texture_yudian']").prop('checked',result["texture_yudian"]);
                             $("input:checkbox[name='texture_jianhong']").prop('checked',result["texture_jianhong"]);
                             $("input:checkbox[name='texture_qita']").prop('checked',result["texture_qita"]);
+                            $('#texture_qita').val(result["texture_qita"]);
 
                             /* 舌苔 */
                             $("input:checkbox[name='coating_bai']").prop('checked',result["coating_bai"]);
@@ -378,6 +395,7 @@
                             $("input:checkbox[name='coating_huabo']").prop('checked',result["coating_huabo"]);
                             $("input:checkbox[name='coating_wutai']").prop('checked',result["coating_wutai"]);
                             $("input:checkbox[name='coating_qita']").prop('checked',result["coating_qita"]);
+                            $('#coating_qita').val(result["coating_qita"]);
 
                             /* 舌体 */
                             $("input:checkbox[name='tongue_zhengchang']").prop('checked',result["tongue_zhengchang"]);
@@ -386,6 +404,7 @@
                             $("input:checkbox[name='tongue_youchihen']").prop('checked',result["tongue_youchihen"]);
                             $("input:checkbox[name='tongue_zhongyouliewen']").prop('checked',result["tongue_zhongyouliewen"]);
                             $("input:checkbox[name='tongue_qita']").prop('checked',result["tongue_qita"]);
+                            $('#tongue_qita').val(result["tongue_qita"]);
 
                             /* 脉象 */
                             $("input:checkbox[name='pulse_fu']").prop('checked',result["pulse_fu"]);
@@ -400,6 +419,7 @@
                             $("input:checkbox[name='pulse_se']").prop('checked',result["pulse_se"]);
                             $("input:checkbox[name='pulse_jin']").prop('checked',result["pulse_jin"]);
                             $("input:checkbox[name='pulse_qita']").prop('checked',result["pulse_qita"]);
+                            $('#pulse_qita').val(result["pulse_qita"]);
                         }else {
                             alert("result.status wrong");
                         }
@@ -503,14 +523,20 @@
                             $('#pasthistory_qita').val(result["pasthistory_qita"]);
                             /* 出血量 */
                             $("input[name='blood_cond'][value='"+result["blood_cond"]+"']").prop("checked",true);
+                            $("#mm_blood_cond_qita").val(result["mm_blood_cond_qita"]);
                             /* 出血颜色 */
                             $("input[name='blood_color'][value='"+result["blood_color"]+"']").prop("checked",true);
+                            $("#mm_blood_color_qita").val(result["mm_blood_color_qita"]);
                             /* 出血质地 */
                             $("input[name='blood_quality'][value='"+result["blood_quality"]+"']").prop("checked",true);
                             $("input[name='blood_block'][value='"+result["blood_block"]+"']").prop("checked",true);
+                            $("#mm_blood_block_qita").val(result["mm_blood_block_qita"]);
                             /* 出血特点 */
                             $("input[name='blood_character'][value='"+result["blood_character"]+"']").prop("checked",true);
+                            // $("#mm_blood_character_qita").val(result["mm_blood_character_qita"]);
+                            
                             $("input[name='first_time'][value='"+result["first_time"]+"']").prop("checked",true);
+                            $('#first_time_qita').val(result["first_time_qita"]);
 
                             if (result["normal"] != null)
                             {
@@ -526,6 +552,7 @@
                             }
 
                             $("input[name='cyclicity_sum'][value='"+result["cyclicity_sum"]+"']").prop("checked",true);
+                            $("#cyclicity_sum_qita").val(result["cyclicity_sum_qita"]);
                             
                             $("input[name='menstruation_is_accompany'][value='"+result["menstruation_is_accompany"]+"']").prop("checked",true);
                             
