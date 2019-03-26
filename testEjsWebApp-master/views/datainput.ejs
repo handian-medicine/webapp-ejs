@@ -142,9 +142,21 @@
 </head>
 
 <body>
-
+<script>
+        function my_date_default() {
+            var myDate = new Date();
+            var month = myDate.getMonth()+1;
+            if (month < 10) {
+                var fulldate = myDate.getFullYear() + '-' + '0' + month + '-' + myDate.getDate()
+            } else {
+                var fulldate = myDate.getFullYear() + '-' + month + '-' + myDate.getDate()
+            };
+            $("#recdate").val(fulldate);
+        }
+</script>
 <script>
     $(document).ready(function () {
+        my_date_default();
         $("#tijiaoBtn").click(function () {
             $('#address').val( $('#province').val() + $('#city').val() + $('#adrs').val() );
             $.ajax({
