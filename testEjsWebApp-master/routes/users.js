@@ -35,6 +35,7 @@ router.post('/login', function (req, res, next) {
                 "expires_in": obj.expires_in
                 }, {maxAge: 1000 * 60 * 60 * 4, httpOnly: true});//cookie 4小时有效时间
             res.cookie("userinfo", {
+                // "username":req.body.user_name,
                 "email": req.body.email,
                 "password": req.body.pass
                 }, {maxAge: 1000 * 60 * 60 * 4, httpOnly: true});//cookie 4小时有效时间

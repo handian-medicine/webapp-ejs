@@ -337,8 +337,21 @@
         
                             <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
         
-                                <li class="divider"></li>
-        
+                                <!-- <li class="divider"></li> -->
+                                <li>
+                                    <a href="#account-info" role="button" data-toggle="modal">
+                                        <i class="icon-user"></i>
+                                        个人信息
+                                    </a >
+                                </li>
+                                        
+                                <li>
+                                    <a href="../cipher">
+                                    <!-- <a href="../users/cipher"> -->
+                                        <i class="icon-cog"></i>
+                                        修改密码
+                                    </a>
+                                </li>
                                 <li>
                                     <a href="/logout">
                                         <i class="icon-off"></i>
@@ -351,7 +364,43 @@
             </div>
 
     </div>
-    
+    <!-- 账户信息 -->
+    <div id="account-info" class="modal fade" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header no-padding">
+                        <div class="table-header" style="background-color: #d9edf7; color: #3a87ad">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                <span class="ui-button-text">&times;</span>
+                            </button>
+                            个人信息
+                        </div>
+                    </div>
+        
+                    <form class="modal-body no-padding" id="">
+                        <table class="table table-striped table-bordered table-hover no-margin-bottom no-border-top">
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12">
+                                        <div class="control-group">
+                                            <p>姓名：<%= username %></p >
+                                            <p>医院：<%= account_hospital %></p >
+                                            <p>地址：<%= account_address %></p >
+                                            <p>性别：<%= account_sex %></p >
+                                            <p>邮箱：<%= account_email %></p >
+                                            <p>手机号：<%= account_phone %></p >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </table>
+                    </form>
+        
+        
+                </div>
+            </div>
+    </div>
+    <!-- 账户信息 -->
     <div class="main-container" id="main-container">
             
         <script type="text/javascript">
@@ -966,14 +1015,14 @@
                                                                             <td style="vertical-align:middle;">体重kg</td>
                                                                             <td><input class="form-control"  type="text" name="weight" id="weight"/></td>
                                                                         </tr>
-                                                                        <tr>
+                                                                        <!-- <tr>
                                                                             <td style="vertical-align:middle;">腰围cm</td>
                                                                             <td><input class="form-control"  type="text" name="waistline" id="waistline"/></td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td style="vertical-align:middle;">臀围cm</td>
                                                                             <td><input class="form-control"  type="text" name="hipline" id="hipline"/></td>
-                                                                        </tr>
+                                                                        </tr> -->
                                                                         <tr>
                                                                             <td style="vertical-align:middle;">血型</td>
                                                                             <td style="color:black;font-size:15px;">
@@ -1160,7 +1209,7 @@
                                                         <label><input type="radio" value="经量极少,几乎不用卫生巾,用护垫即可" name="blood_cond"/>经量极少,几乎不用卫生巾,用护垫即可</label>
                                                         <br>
                                                         <!-- <label><input type="radio" value="其他" name="blood_cond"/>其他</label> -->
-							                            <label><input type="text" value="" id="ss_blood_cond_qita" name="ss_blood_cond_qita"/></label>
+							                            <label>其他<input type="text" value="" id="ss_blood_cond_qita" name="ss_blood_cond_qita"/></label>
                                                     
                                                     <p><h5 style="color:blue">3、出血颜色</h5>
                                                         <label><input type="radio" value="淡红" name="blood_color"/>淡红</label>
@@ -1172,7 +1221,7 @@
                                                         <label><input type="radio" value="褐色" name="blood_color"/>褐色</label>
                                                         <br>
                                                         <!-- <label><input type="radio" value="其他" name="blood_color"/>其他</label> -->
-							                            <label><input type="text" value="" id="ss_blood_color_qita" name="ss_blood_color_qita"/></label>
+							                            <label>其他<input type="text" value="" id="ss_blood_color_qita" name="ss_blood_color_qita"/></label>
                                                     
                                                     <p><h5 style="color:blue">4、出血质地</h5>
                                                     <span style="color:#871F78">(1)</span>
@@ -1188,7 +1237,7 @@
                                                         <label><input type="radio" value="夹较大血块" name="blood_block"/>夹较大血块</label>
                                                         <br>
                                                         <!-- <label><input type="radio" value="其他" name="blood_block"/>其他</label> -->
-							                            <label><input type="text" value="" id="ss_blood_block_qita" name="ss_blood_block_qita"/></label>
+							                            <label>其他<input type="text" value="" id="ss_blood_block_qita" name="ss_blood_block_qita"/></label>
                                                     
                                                     <p><h5 style="color:blue">5、出血特点</h5>
                                                         <label><input type="radio" value="不畅" name="blood_character"/>不畅</label>
@@ -1368,7 +1417,8 @@
                                                         <br>
                                                         <!-- <label><input name="urine_qita" type="checkbox" value="true"/>其他</label> -->
                                                         <label>其他<input id="urine_qita" name="urine_qita" type="text" value=""/></label>
-
+                                                    
+                                                    <p><h5 style="color:red">以下请在医生指导下填写</h5>
                                                     <p><h5 style="color:blue">19、舌质</h5>
                                                         <label><input name="texture_danhong" type="checkbox" value="true"/>淡红</label>
                                                         <label><input name="texture_danbai" type="checkbox" value="true"/>淡白</label>
@@ -1384,7 +1434,7 @@
                                                         <!-- <label><input name="texture_qita" type="checkbox" value="true"/>其他</label> -->
                                                         <label>其他<input id="texture_qita" name="texture_qita" type="text" value=""/></label>
                                                     
-                                                    <p><h5 style="color:red">以下请在医生指导下填写</h5>
+                                                    
                                                     <p><h5 style="color:blue">20、舌苔</h5>
                                                         <label><input name="coating_bai" type="checkbox" value="true"/>白</label>
                                                         <label><input name="coating_huang" type="checkbox" value="true"/>黄</label>

@@ -56,7 +56,32 @@ router.get('/home', function (req, res, next) {
                 if (!error && response.statusCode == 200) {
                     var userobj = JSON.parse(body);
                     console.log(">>>index.js: userobj : ", userobj);
-                    res.render('home', {title: '临床流调项目中心', prjs: userobj.myprojects, userobj: userobj});
+
+                    // console.log("添加username之前的cookie",res.get('Set-Cookie'));
+                    res.cookie("accountinfo", {
+                        "email":userobj.email,
+                        "phone":userobj.phone,
+                        "user_name":userobj.user_name,
+                        "sex":userobj.sex,
+                        "area":userobj.area,
+                        "hospital":userobj.hospital,
+                        "address":userobj.address,
+                        },{maxAge: 1000 * 60 * 60 * 4, httpOnly: true});
+                    // console.log("添加username之后的cookie",res.get('Set-Cookie'));
+
+                    res.render('home', {
+                        title: '临床流调项目中心', 
+                        prjs: userobj.myprojects, 
+                        userobj: userobj,
+                        //账户信息
+                        account_email:req.cookies.accountinfo.email,
+                        account_phone:req.cookies.accountinfo.phone,
+                        username:req.cookies.accountinfo.user_name,
+                        account_sex:req.cookies.accountinfo.sex,
+                        account_area:req.cookies.accountinfo.area,
+                        account_hospital:req.cookies.accountinfo.hospital,
+                        account_address:req.cookies.accountinfo.address,
+                    });
                 }
                 else {
                     console.log(">>>index.js: Getting user details met unknown error. "+err.error_description);
@@ -79,7 +104,16 @@ router.get('/logout', function (req, res, next){
 
 router.get('/cipher',  function (req, res, next){
     console.log(">>>修改密码页面");
-    res.render('cipher',{username: req.cookies.userinfo.email});
+    res.render('cipher',{
+        //账户信息
+        account_email:req.cookies.accountinfo.email,
+        account_phone:req.cookies.accountinfo.phone,
+        username:req.cookies.accountinfo.user_name,
+        account_sex:req.cookies.accountinfo.sex,
+        account_area:req.cookies.accountinfo.area,
+        account_hospital:req.cookies.accountinfo.hospital,
+        account_address:req.cookies.accountinfo.address,
+    });
 });
 router.put('/cipher',  function (req, res, next){
     console.log("1看这里", req.headers["cookie"]);
