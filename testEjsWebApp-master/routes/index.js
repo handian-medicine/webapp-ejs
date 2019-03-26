@@ -10,6 +10,7 @@ router.get('/', function (req, res, next) {
     console.log(">>>index.js: path: ", req.path);
     console.log(">>>index.js: headers: ", req.headers);
     console.log(">>>Clear all cookies");
+    res.clearCookie('accountinfo');
     res.clearCookie('userinfo');
     res.clearCookie('usertoken');
     res.clearCookie('prj001token');
@@ -74,13 +75,13 @@ router.get('/home', function (req, res, next) {
                         prjs: userobj.myprojects, 
                         userobj: userobj,
                         //账户信息
-                        account_email:req.cookies.accountinfo.email,
-                        account_phone:req.cookies.accountinfo.phone,
-                        username:req.cookies.accountinfo.user_name,
-                        account_sex:req.cookies.accountinfo.sex,
-                        account_area:req.cookies.accountinfo.area,
-                        account_hospital:req.cookies.accountinfo.hospital,
-                        account_address:req.cookies.accountinfo.address,
+                        account_email:userobj.email,
+                        account_phone:userobj.phone,
+                        username:userobj.user_name,
+                        account_sex:userobj.sex,
+                        account_area:userobj.area,
+                        account_hospital:userobj.hospital,
+                        account_address:userobj.address,
                     });
                 }
                 else {

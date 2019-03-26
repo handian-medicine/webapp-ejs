@@ -101,6 +101,7 @@
     
     })
 </script>
+<!-- 表单验证 -->
 <script>
     $(document).ready(function () {
         $("#form-geninfo").validate({
@@ -125,11 +126,13 @@
                     },
                     height:{
                         required:false,
-                        rangelength:[0,6]
+                        rangelength:[0,6],
+                        range:[0,9999]
                     },
                     weight:{
                         required:false,
-                        rangelength:[0,6]
+                        rangelength:[0,6],
+                        range:[0,9999]
                     },
                     address:{
                         required:true,
@@ -158,10 +161,12 @@
                         range:$.validator.format("年龄必须在{0}-{1}之间")
                     },
                     height:{
-                        rangelength:$.validator.format("数值长度必须在{0}-{1}之间,包含小数点")
+                        rangelength:$.validator.format("数值长度必须在{0}-{1}之间,包含小数点"),
+                        range:$.validator.format("身高必须在{0}-{1}之间")
                     },
                     weight:{
-                        rangelength:$.validator.format("数值长度必须在{0}-{1}之间,包含小数点")
+                        rangelength:$.validator.format("数值长度必须在{0}-{1}之间,包含小数点"),
+                        range:$.validator.format("体重必须在{0}-{1}之间")
                     },
                     entrance:{required:"请填写该字段"},
                     province:{required:"请填写该字段"},
@@ -264,6 +269,7 @@
 
     });
 </script>
+<!-- 表单验证 -->
 <!-- 患者病史 选择显示 -->
 <script>
         function display_accompany(){
@@ -276,82 +282,7 @@
         }
 </script>
 <!-- 患者病史 选择显示 -->
-<!-- 测试 -->
-<!-- <script>
-    function validate_info () {
-        alert("你好");
-        /*关键在此增加了一个return，返回的是一个validate对象，这个对象有一个form方法，返回的是是否通过验证*/
-        return $("#form-test").validate({
-            debug:true,
-            rules:{
-                    name:{
-                        required:true
-                    },
-                    telephone:{
-                        required:true,
-                        digits:true,
-                        rangelength:[1,11]
-                    },
-                    age:{
-                        required:true,
-                        digits:true,
-                        range:[0,200]
-                        // rangelength:[1,4]
-                    },
-                    height:{
-                        required:false,
-                        rangelength:[0,6]
-                    },
-                    weight:{
-                        required:false,
-                        rangelength:[0,6]
-                    },
-                    address:{
-                        required:true,
-                    },
-                    entrance:{
-                        required:true,
-                    }
-                },
-            messages:{
-                    recdate:{required:"请填写该字段"},
-                    serial:{required:"请填写该字段"},
-                    hospital:{required:"请填写该字段"},
-                    name:{required:"请填写该字段"},
-                    telephone:{
-                        required:"请填写该字段",
-                        rangelength:$.validator.format("电话号码长度必须在{0}-{1}之间"),
-                        digits:"不能填写非数字字符"        
-                    },
-                    age:{
-                        required:"请填写该字段",
-                        digits:"不能填写非数字字符",
-                        range:$.validator.format("年龄必须在{0}-{1}之间")
-                    },
-                    entrance:{required:"请填写该字段"},
-                    height:{
-                        rangelength:$.validator.format("数值长度必须在{0}-{1}之间,包含小数点")
-                    },
-                    weight:{
-                        rangelength:$.validator.format("数值长度必须在{0}-{1}之间,包含小数点")
-                    },
-                },
-        })
-    }
-    //注册表单验证
-    $(validate_info());
-    $("#confirm-tab").click(function(){
-        alert('1')
-        if(validate_info().form()) {
-        //通过表单验证，以下编写自己的代码
-        alert('if');
-        } else {
-        //校验不通过，什么都不用做，校验信息已经正常显示在表单上
-        alert('else');
-        }
-    });
-</script> -->
-<!-- 测试 -->
+
 
 <div class="modal-content">
     <div class="modal-header no-padding">
@@ -450,11 +381,11 @@
                                     </tr>
                                     <tr>
                                         <td style="vertical-align:middle;">身高cm</td>
-                                        <td><input class="form-control"  type="text" name="height" id="height"/></td>
+                                        <td><input class="form-control"  type="number" name="height" id="height"/></td>
                                     </tr>
                                     <tr>
                                         <td style="vertical-align:middle;">体重kg</td>
-                                        <td><input class="form-control"  type="text" name="weight" id="weight"/></td>
+                                        <td><input class="form-control"  type="number" name="weight" id="weight"/></td>
                                     </tr>
                                     <!-- <tr>
                                         <td style="vertical-align:middle;">腰围cm</td>
