@@ -561,7 +561,8 @@
                             $("input[name='spirit_yiyu_m'][value='"+result["spirit_yiyu_m"]+"']").prop("checked",true);
                             $("input[name='spirit_tanxi'][value='"+result["spirit_tanxi"]+"']").prop("checked",true);
                             $("input[name='spirit_yinu'][value='"+result["spirit_yinu"]+"']").prop("checked",true);
-                            $('#spirit_qita').val(result["spirit_qita"]);
+                            $('#history_spirit_qita').val(result["spirit_qita"]);
+
                             
                             $("input:checkbox[name='body_normal']").prop('checked',result["body_normal"]);
                             $("input:checkbox[name='body_fat']").prop('checked',result["body_fat"]);
@@ -609,12 +610,12 @@
                             $("input[name='diet_bujia'][value='"+result["diet_bujia"]+"']").prop("checked",true);
                             $("input[name='diet_lengyin'][value='"+result["diet_lengyin"]+"']").prop("checked",true);
                             $("input[name='diet_kouzao'][value='"+result["diet_kouzao"]+"']").prop("checked",true);
-                            $('#diet_qita').val(result["diet_qita"]);
+                            $('#history_diet_qita').val(result["diet_qita"]);
                             
                             $("input[name='sleep_shimian'][value='"+result["sleep_shimian"]+"']").prop("checked",true);
                             $("input[name='sleep_buning'][value='"+result["sleep_buning"]+"']").prop("checked",true);
                             $("input[name='sleep_mengduo'][value='"+result["sleep_mengduo"]+"']").prop("checked",true);
-                            $('#sleep_qita').val(result["sleep_qita"]);
+                            $('#history_sleep_qita').val(result["sleep_qita"]);
                             
                             $("input:checkbox[name='erbian_normal']").prop('checked',result["erbian_normal"]);
                             $("input:checkbox[name='erbian_zaojie']").prop('checked',result["erbian_zaojie"]);

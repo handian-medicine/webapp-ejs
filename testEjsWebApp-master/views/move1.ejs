@@ -30,11 +30,6 @@
     <script src="/public/js/bootstrap.min.js"></script>
     <script src="/public/js/jquery.validate.min.js"></script>
     <!-- 表单验证 -->
-    <!-- <style>
-        .error{ 
-            color:#FF0000; /* red */ 
-        }
-    </style> -->
 </head>
 <body>
 <!-- <script>
@@ -71,6 +66,10 @@
         // $("#city option[value='朝阳区']").prop("selected","selected");
         $("#normal").hide();
         $("#abnormal").hide();
+
+        // var error_list = form_all();
+        // console.log("----", error_list);
+
         $("#form-all").submit(function () {
             event.preventDefault();
             $('#address').val( $('#province').val() + $('#city').val() + $('#adrs').val() );
@@ -108,7 +107,8 @@
                 error:  function (result) {
                     alert("保存失败");    
                 }
-                })  
+            })  
+            
             })
     
     
@@ -118,6 +118,7 @@
 <script>
     $(document).ready(function () {
         function form_all() {
+            // var a = 
             $("#form-geninfo").validate({
             // debug:true,
             rules:{
@@ -280,20 +281,88 @@
                     },
                     },
         })
-        }
-
+        // return {a:a.errorList,b:b.errorList,c:c.errorList,d:d.errorList}
+    };
+    form_all();
     });
 </script>
 <!-- 表单验证 -->
 <!-- 患者病史 选择显示 -->
 <script>
-        function display_accompany(){
-        var val = $('input[name="menstruation_is_accompany"]:checked').val();
-        if (val=="true") {
-            $('.accompany').show();
-        } else {
-            $('.accompany').hide();
-        }
+        function display_accompany () {
+            var val = $('input[name="menstruation_is_accompany"]:checked').val();
+            if (val=="true") {
+                $('.accompany').show();
+            } else {
+                $('.accompany').hide();
+                
+                $("input[name='spirit_shenpi']").prop("checked",false);
+                $("input[name='spirit_qiduan']").prop("checked",false);
+                $("input[name='spirit_yiyu_m']").prop("checked",false);
+                $("input[name='spirit_tanxi']").prop("checked",false);
+                $("input[name='spirit_yinu']").prop("checked",false);
+                $('#history_spirit_qita').val('');
+                            
+                $("input:checkbox[name='body_fat']").prop('checked',false);
+                $("input:checkbox[name='body_thin']").prop('checked',false);
+                $("input:checkbox[name='body_skin']").prop('checked',false);
+                $("input:checkbox[name='body_cold']").prop('checked',false);
+                $("input:checkbox[name='body_hot']").prop('checked',false);
+                $("input:checkbox[name='body_leg']").prop('checked',false);
+                $("input:checkbox[name='body_waist']").prop('checked',false);
+                $('#body_qita').val('');
+
+                $("input:checkbox[name='face_head_cangbai']").prop("checked",false);
+                $("input:checkbox[name='face_head_huangbai']").prop("checked",false);
+                $("input:checkbox[name='face_head_weihuang']").prop("checked",false);
+                $("input:checkbox[name='face_head_huian']").prop("checked",false);
+                $("input:checkbox[name='face_head_anban']").prop("checked",false);
+                $("input:checkbox[name='face_head_zhizhong']").prop("checked",false);
+                $("input:checkbox[name='face_head_chunhong']").prop("checked",false);
+
+                $("input[name='face_head_kouku']").prop("checked",false);
+                $("input[name='face_head_erming']").prop("checked",false);
+                $("input[name='face_head_yanghua']").prop("checked",false);
+                $('#face_head_qita').val('');
+                            
+                $("input[name='belly_fanmen']").prop("checked",false);
+                $("input[name='belly_rufangzhangtong']").prop("checked",false);
+                $("input[name='belly_xiongxiezhangtong']").prop("checked",false);
+                $("input[name='belly_shaofuzhangtong']").prop("checked",false);
+                $("input[name='belly_kongzhui']").prop("checked",false);
+                $("input[name='belly_kongtong']").prop("checked",false);
+                $("input[name='belly_citong']").prop("checked",false);
+                $("input[name='belly_zhangtong']").prop("checked",false);
+                $("input[name='belly_lengtong']").prop("checked",false);
+                $("input[name='belly_yintong']").prop("checked",false);
+                $("input[name='belly_juan']").prop("checked",false);
+                $("input[name='belly_xian']").prop("checked",false);
+                $("input[name='belly_deretongjian']").prop("checked",false);
+                $("input[name='belly_tongjian']").prop("checked",false);
+                $('#belly_qita').val('');
+                            
+                $("input[name='diet_exin']").prop("checked",false);
+                $("input[name='diet_shishao']").prop("checked",false);
+                $("input[name='diet_zhangman']").prop("checked",false);
+                $("input[name='diet_bujia']").prop("checked",false);
+                $("input[name='diet_lengyin']").prop("checked",false);
+                $("input[name='diet_kouzao']").prop("checked",false);
+                $('#history_diet_qita').val('');
+                            
+                $("input[name='sleep_shimian']").prop("checked",false);
+                $("input[name='sleep_buning']").prop("checked",false);
+                $("input[name='sleep_mengduo']").prop("checked",false);
+                $('#history_sleep_qita').val('');
+                            
+                $("input:checkbox[name='erbian_zaojie']").prop('checked',false);
+                $("input:checkbox[name='erbian_tangbo']").prop('checked',false);
+                $("input:checkbox[name='erbian_pinshu']").prop('checked',false);
+                $("input:checkbox[name='erbian_duanchi']").prop('checked',false);
+                $("input:checkbox[name='erbian_qingchang']").prop('checked',false);
+                $('#erbian_qita').val('');
+
+            }
+        
         }
 </script>
 <!-- 患者病史 选择显示 -->
@@ -344,9 +413,93 @@
                                     </tr>
                                     <tr>
                                         <td style="vertical-align:middle;">辅助医生账号</td>
-                                        <td><input class="form-control ace" id="owner" name="owner" type="text" 
-                                            pattern="^[\w.\-]+@(?:[a-z0-9]+(?:-[a-z0-9]+)*\.)+[a-z]{2,3}$"
-                                            title="请填写正确邮箱" placeholder="请填写正确邮箱" required/></td>
+                                        <td>
+                                            <!-- <div class="col-sm-3">
+                                                <input class="form-control ace" id="owner" name="owner" type="text" 
+                                                title="请填写正确邮箱" placeholder="请填写正确邮箱" required/>
+                                            </div> -->
+                                            <!-- 函数get_area获取地区 -->
+                                                <script>
+                                                    function get_area () {
+                                                        $.ajax({
+                                                            url: "/mobile/area",
+                                                            type: "GET",
+                                                            // dataType: "json",
+                                                            // data: $('#geninfo-form').serializeArray(),
+                                                            success: function (result) {
+                                                            //    alert("数据："+result.area_data[0]["area"])
+                                                                var area=document.getElementById("area");
+                                                                // var index=area.selectedIndex;
+                                                                for (var i=0;i < result.area_length;i++) {
+                                                                    area[i+1]=new Option(result.area_data[i]["area"],result.area_data[i]["area"]);
+                                                                }
+                                                            },
+                                                            error:  function (result) {
+                                                                alert("错误");    
+                                                            }
+                                                        })
+                                                    }
+                                                </script>
+                                            <div class="col-sm-3">
+                                                <select id="area" name="area" class="form-control" onclick="get_area();" onchange="get_hospital();">
+                                                    <option value=""></option>
+                                                </select>
+                                            </div>
+                                            <!-- 函数get_hospital获取医院 -->
+                                                <script> 
+                                                    function get_hospital () {
+                                                            $.ajax({
+                                                                url: "/mobile/hospital",
+                                                                type: "POST",
+                                                                // dataType: "json",
+                                                                data: {area:$('#area option:selected').val()},
+                                                                success: function (result) {
+                                                                //    alert("数据："+result.area_data[0]["account_hospital"])
+                                                                    var hospital=document.getElementById("hospital2");
+                                                                    // var index=area.selectedIndex;
+                                                                    for (var i=0;i < result.hospital_length;i++) {
+                                                                        hospital[i+1]=new Option(result.hospital_data[i]["hospital"],result.hospital_data[i]["hospital"]);
+                                                                    }
+                                                                },
+                                                                error:  function (result) {
+                                                                    alert("错误");    
+                                                                }
+                                                            })
+                                                    }
+                                                </script>
+                                            <div class="col-sm-3">
+                                                <select id="hospital2" name="hospital2" class="form-control" onchange="get_owner();">
+                                                    <option value=""></option>
+                                                </select>
+                                            </div>
+                                            <!-- 函数get_owner获取账户 -->
+                                                <script>
+                                                    function get_owner () {
+                                                            $.ajax({
+                                                                url: "/mobile/owner",
+                                                                type: "POST",
+                                                                // dataType: "json",
+                                                                data: {hospital:$('#hospital2 option:selected').val()},
+                                                                success: function (result) {
+                                                                //    alert("数据："+result.area_data[0]["account_hospital"])
+                                                                    var owner=document.getElementById("owner");
+                                                                    // var index=area.selectedIndex;
+                                                                    for (var i=0;i < result.owner_length;i++) {
+                                                                        owner[i+1]=new Option(result.owner_data[i]["email"],result.owner_data[i]["email"]);
+                                                                    }
+                                                                },
+                                                                error:  function (result) {
+                                                                    alert("错误");    
+                                                                }
+                                                            })
+                                                    }
+                                                </script>
+                                            <div class="col-sm-3">
+                                                <select id="owner" name="owner" class="form-control" >
+                                                    <option value=""></option>
+                                                </select>
+                                            </div>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td style="vertical-align:middle;">职称</td>
@@ -392,7 +545,7 @@
                                     <tr>
                                         <td style="vertical-align:middle;">患者年龄</td>
                                         <td><input class="form-control"  type="text" name="age" id="age"
-                                            title="年龄格式不正确" required/></td>
+                                            required/></td>
                                     </tr>
                                     <tr>
                                         <td style="vertical-align:middle;">身高cm</td>
@@ -1077,7 +1230,8 @@
                                                     <label><input type="radio" value="有时" name="spirit_yinu"/>有时</label>
                                                     <label><input type="radio" value="经常" name="spirit_yinu"/>经常</label>
                                                     <label><input type="radio" value="总是" name="spirit_yinu"/>总是</label>
-                                                <p><label>其他<input type="text" class="form-control" id="spirit_qita" name="spirit_qita" value=""/></label>
+                                                    <br>
+                                                    <label>其他<input type="text" id="history_spirit_qita" name="spirit_qita" value=""/></label>
                                                 
                                                 <p><h6 style="color:#871F78">(2)形体四肢:</h6>
                                                     <label><input name="body_normal" type="checkbox" value="true"/>正常</label>
@@ -1231,7 +1385,7 @@
                                                     <label><input type="radio" value="经常" name="diet_kouzao"/>经常</label>
                                                     <label><input type="radio" value="总是" name="diet_kouzao"/>总是</label>
                                                     <br>
-                                                    <label>其他<input type="text" id="diet_qita" name="diet_qita" value=""/></label>
+                                                    <label>其他<input type="text" id="history_diet_qita" name="diet_qita" value=""/></label>
                                                 
                                                 <p><h6 style="color:#871F78">(6)睡眠</h6>
                                                 <p><span style="color:#871F78">心悸失眠:</span>
@@ -1253,7 +1407,7 @@
                                                     <label><input type="radio" value="经常" name="sleep_mengduo"/>经常</label>
                                                     <label><input type="radio" value="总是" name="sleep_mengduo"/>总是</label>
                                                     <br>
-                                                    <label>其他<input type="text" id="sleep_qita" name="sleep_qita" value=""/></label>
+                                                    <label>其他<input type="text" id="history_sleep_qita" name="sleep_qita" value=""/></label>
                                                 
                                                 <p><h6 style="color:#871F78">(7)二便</h6>
                                                     <label><input name="erbian_normal" type="checkbox" value="true"/>正常</label>
