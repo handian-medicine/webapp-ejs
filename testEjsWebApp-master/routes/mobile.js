@@ -43,6 +43,7 @@ router.get('/move1', function (req, res, next) {
                 res.json({status:2, msg:""});
         }
     })
+    
 });
 router.post('/move1', function (req, res, next) {
     var newurl = myconst.apiurl + "prj001/mobile/";
