@@ -4,9 +4,9 @@
 // var client_secret = "kn5Rq9rD4x6L1LoCvjVmcMBeVoTTNQYH9Wc6shpI7BO48tUrlF3EmhhSzFKmUD7GelrpEyhdY24HRuxnVnRNLkJ6923UzbeSWdgyVUkzQTma7j3EkX6wFJeSfec084gs";
 
 //47服务器 新
-var apiurl = "http://47.94.22.221:9002/";
-var client_id = "PqRU3wo0U6jwzo0BDQyZST8tryqegJ95nxb4TUwj";
-var client_secret = "Jly2pFvGBoOAXCaDuRsW1VPF6Y5wt9y1LhAEQn3SUcO7Nur8wApjqoQst9dVEzxVLvpH7Oc6JLlW17XT0LSgS0rsKbPF1SuefCe3lwVxuuaBb73ts6fil2e8f1cFW9Ui";
+// var apiurl = "http://47.94.22.221:9002/";
+// var client_id = "PqRU3wo0U6jwzo0BDQyZST8tryqegJ95nxb4TUwj";
+// var client_secret = "Jly2pFvGBoOAXCaDuRsW1VPF6Y5wt9y1LhAEQn3SUcO7Nur8wApjqoQst9dVEzxVLvpH7Oc6JLlW17XT0LSgS0rsKbPF1SuefCe3lwVxuuaBb73ts6fil2e8f1cFW9Ui";
 
 //测试服务器
 // var apiurl = "http://10.17.1.108:8001/";//wifi167
@@ -15,9 +15,9 @@ var client_secret = "Jly2pFvGBoOAXCaDuRsW1VPF6Y5wt9y1LhAEQn3SUcO7Nur8wApjqoQst9d
 // var client_secret = "REmyfsiy3egeWWy3JF631S2kURtz9QbvdWnhptSx6011I9e1fyttmvZ9r9PiixZvvvcWQlvPFWtKHI9i5HfEVNC6e8a1BhTlfAtzqIa1KJySln3nMbJ4ri0Jkk9PS9x3";
 
 //测试服务器 新
-// var apiurl = "http://10.17.1.98:8001/";//10.17.1.108:8001
-// var client_id = "axeHOBmfZ05mdbybUruJIAAgfdIl2uZFNdBmLcUu";
-// var client_secret = "kNUvZhjFX8IBQWwJxyNFJfiCdPFbjMYDk2cZxLFB9LHNOQzLIxGffU2bdL1yiZkHDTWc0OKxuO5seA4giHSYhCtTdMGIxLeleRN9tE8mAEBb355Rxbbtc3XBy1NjQ0js";
+var apiurl = "http://10.17.1.98:8001/";//10.17.1.108:8001
+var client_id = "axeHOBmfZ05mdbybUruJIAAgfdIl2uZFNdBmLcUu";
+var client_secret = "kNUvZhjFX8IBQWwJxyNFJfiCdPFbjMYDk2cZxLFB9LHNOQzLIxGffU2bdL1yiZkHDTWc0OKxuO5seA4giHSYhCtTdMGIxLeleRN9tE8mAEBb355Rxbbtc3XBy1NjQ0js";
 
 
 var scope_prj001 = "prj001";

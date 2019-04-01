@@ -104,7 +104,6 @@ router.get('/', function (req, res, next) {
                         totalCount: archiveobjs.count,
                         searchname: '',
                         name: '', address:'', hospital:'', telephone:'',is_checked:'',//用于搜索框保留关键字
-                        code: archiveobjs.code
                     });
                 } else {
                     res.render('prj001', {
@@ -127,7 +126,6 @@ router.get('/', function (req, res, next) {
                         totalCount: archiveobjs.count,
                         //用于搜索框保留关键字
                         name: params["name"], address:params["address"], hospital:params["hospital"], telephone:params["telephone"],is_checked:params["is_checked"],
-                        code: archiveobjs.code
                     });
                 }
                 /*   分页测试  */
@@ -257,7 +255,6 @@ router.get('/', function (req, res, next) {
                                     totalCount: archiveobjs.count,
                                     searchname: '',
                                     name: '', address:'', hospital:'', telephone:'',is_checked:'',
-                                    code: archiveobjs.code
                                 });
                             } else {
                                 res.render('prj001', {
@@ -280,7 +277,6 @@ router.get('/', function (req, res, next) {
                                     totalCount: archiveobjs.count,
                                     searchname: params["keyword"],
                                     name: params["name"], address:params["address"], hospital:params["hospital"], telephone:params["telephone"],is_checked:'params["is_checked"]',
-                                    code: archiveobjs.code
                                 });
                             }
                             /*   分页测试  */

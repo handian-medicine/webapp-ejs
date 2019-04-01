@@ -94,34 +94,6 @@ router.post('/move1', function (req, res, next) {
     })    
 })
 
-router.post('/input', function (req, res, next) {
-    if (req.cookies.prj001token) {
-        var url = myconst.apiurl + "prj001/mobile/";
-        var authstring = req.cookies.prj001token.access_token;
-        var options = {
-            form: req.body.formdata,
-            url: url,
-            headers: {
-                'Authorization': 'Bearer ' + authstring
-            }
-        };  
-        console.log("prj001.js formdata:", req.body.formdata);
-        console.log(">>>prj001.js -> options: ", options);
-        request.post(options, function (error, response, body) {
-            console.log("response:", body);
-            // console.log("response.statusCode: ", response.statusCode);
-            if (!error && response.statusCode == 200) {
-                res.json({status:1, msg:"录入成功"});
-                // console.log("prj001.js ajax result:", res);
-                //res.render('datainput',{username: req.cookies.userinfo.email});
-            } else {
-                res.json({status:0, msg:"请输入完整信息"});
-                console.log('response.statusCode wrong');
-            }
-        })
-    }
-})
-
 router.get('/area',function (req, res, next) {
     console.log(req.cookies.prj001token);
     if (req.cookies.prj001token) {
@@ -181,7 +153,10 @@ router.post('/owner',function (req, res, next) {
         var hospital = req.body.hospital;
         // console.log("-----",area);
         var options = {
-            form: {hospital:hospital},
+            form: {
+                hospital:hospital,
+                prj_code:'prj001'
+            },
             url: area_url,
             headers: {
                 'Authorization': 'Bearer ' + authstring,
