@@ -187,104 +187,7 @@
         
     })
 </script>
-<!-- 导航 -->
-<div class="navbar navbar-default" id="navbar">
-    <script type="text/javascript">
-        try {
-            ace.settings.check('navbar', 'fixed')
-        } catch (e) {
-        }
-    </script>
-
-        <div class="navbar-container" id="navbar-container">
-            <div class="navbar-header pull-left">
-                <a href="../home" class="navbar-brand">
-                    <small>
-                        <i class="icon-leaf">
-                            中医妇科临床流调数据中心
-                        </i>
-                    </small>
-                </a>
-            </div>
-        </div>
-
-        <div class="navbar-header pull-right" role="navigation">
-            <ul class="nav ace-nav">
-                <li class="light-blue">
-                    <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                        <img class="nav-user-photo" src="../public/avatars/0017030553263367_b.jpg" alt="Jason's Photo">
-                        <span class="user-info">
-                            <small>欢迎,</small>
-                            <%= username %>
-                        </span>
-
-                        <i class="icon-caret-down"></i>
-                    </a>
-
-                    <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-
-                        <li class="divider"></li>
-                        <li>
-                                <a href="#account-info" role="button" data-toggle="modal">
-                                    <i class="icon-user"></i>
-                                    个人信息
-                                </a >
-                        </li>        
-                        <li>
-                                <a href="../cipher">
-                                <!-- <a href="../users/cipher"> -->
-                                    <i class="icon-cog"></i>
-                                    修改密码
-                                </a>
-                        </li>
-                        <li>
-                            <a href="../logout">
-                                <i class="icon-off"></i>
-                                注销
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <!-- 账户信息 -->
-    <div id="account-info" class="modal fade" tabindex="-1">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header no-padding">
-                        <div class="table-header" style="background-color: #d9edf7; color: #3a87ad">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                <span class="ui-button-text">&times;</span>
-                            </button>
-                            个人信息
-                        </div>
-                    </div>
-        
-                    <form class="modal-body no-padding" id="">
-                        <table class="table table-striped table-bordered table-hover no-margin-bottom no-border-top">
-                            <div class="modal-body">
-                                <div class="row">
-                                    <div class="col-xs-12 col-sm-12">
-                                        <div class="control-group">
-                                                <p>姓名：<%= username %></p >
-                                                <p>医院：<%= account_hospital %></p >
-                                                <p>地址：<%= account_address %></p >
-                                                <p>性别：<%= account_sex %></p >
-                                                <p>邮箱：<%= account_email %></p >
-                                                <p>手机号：<%= account_phone %></p >
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </table>
-                    </form>
-        
-        
-                </div>
-            </div>
-    </div>
-    <!-- 账户信息 -->
+    <%include header.ejs %>
 <div class="main-container" id="main-container">
     <script type="text/javascript">
         try {
@@ -298,53 +201,7 @@
                 <span class="menu-text"></span>
             </a>
 
-            <div class="sidebar" id="sidebar">
-                <script type="text/javascript">
-                    try {
-                        ace.settings.check('sidebar', 'fixed')
-                    } catch (e) {}
-                </script>
-
-                <ul class="nav nav-list">
-                    <li>
-                        <a href="../prj001">
-                            <i class="icon-dashboard"></i>
-                            <span class="menu-text"> 数据展示 </span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="../prj001/datainput">
-                            <i class="icon-text-width"></i>
-                            <span class="menu-text"> 数据采集 </span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="../public/dataana.html">
-                            <i class="icon-list-alt"></i>
-                            <span class="menu-text"> 数据分析 </span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="../public/about.html">
-                            <i class="icon-tag"></i>
-                            <span class="menu-text"> 关于 </span>
-                        </a>
-                    </li>
-                </ul>
-
-                <div class="sidebar-collapse" id="sidebar-collapse">
-                    <i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
-                </div>
-
-                <script type="text/javascript">
-                    try {
-                        ace.settings.check('sidebar', 'collapsed')
-                    } catch (e) {}
-                </script>
-            </div>
+            <%include sidebar.ejs %>
 
             <div class="main-content"> 
                     <!-- 路径导航 -->
@@ -360,7 +217,7 @@
                                 </li>
                         
                                 <li>
-                                    <a href="../prj001/datainput">数据采集</a >
+                                    <a href="#">数据采集</a >
                                 </li>
                                 <li class="active">当前页</li>
                             </ul>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>关于</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/public/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/public/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/public/css/jquery-ui-1.10.3.full.min.css" />
+    <link rel="stylesheet" href="/public/css/datepicker.css" />
+    <link rel="stylesheet" href="/public/css/ui.jqgrid.css" />
+    <link rel="stylesheet" href="/public/css/ace.min.css">
+    <link rel="stylesheet" href="/public/css/ace-rtl.min.css">
+    <link rel="stylesheet" href="/public/css/ace-skins.min.css">
+
+    <script src="/public/js/ace-extra.min.js"></script>
+
+</head>
+<body>
+    <%include header.ejs %>
+
+<div class="main-container" id="main-container">
+    <script type="text/javascript">
+        try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+    </script>
+
+    <div class="main-container-inner">
+        <a class="menu-toggler" id="menu-toggler" href="#">
+            <span class="menu-text"></span>
+        </a>
+
+        <%include sidebar.ejs %>
+
+        <div class="main-content">
+                    <!-- 路径导航 -->
+                    <div class="breadcrumbs" id="breadcrumbs">
+                        <script type="text/javascript">
+                            try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+                        </script>
+                    
+                        <ul class="breadcrumb">
+                            <li>
+                                <i class="icon-home home-icon"></i>
+                                <a href="/home">首页</a >
+                            </li>
+                    
+                            <li>
+                                <a href="#">关于</a >
+                            </li>
+                            <li class="active">当前页</li>
+                        </ul>
+                </div>
+                <!-- 路径导航 -->
+            <div class="page-content">
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <!-- PAGE CONTENT BEGINS -->
+
+                        <div class="row">
+                            <div class="col-dm-6">
+                                <h3>排卵障碍性异常子宫出血</h3>
+                                <p>
+                                    本例临床流调针对排卵障碍性异常子宫出血进行，包含患者的一般情況、月经情況、全身症状及其它情况。
+                                </p>
+                                &nbsp
+                                <p>卵巢不排卵可导致孕激素缺乏，子宫内膜仅受雌激素的作用，可呈现不同程度的增值改变，</p>
+                                <p>继后，可因雌激素量的不足，子宫内膜发生突破性出血，抑或因雌激素持续作用的撤退，子宫内膜发生出血自限机制异常，出现月经量增多或经期延长，</p>
+                                <p>常见于卵巢功能初现期和衰退期，也就是青春期和更年期。</p>
+                                <p>表现有月经周期紊乱，经期长短与出血量多少不定，出血量少仅为点滴出血，出血量多时间长者可可能继发贫血，大量出血导致休克，</p>
+                                <p>出血期间一般无腹痛及其他不适。通过检查排除器质性病变或是其他系统的病变。</p>
+                            </div><!-- /span -->
+                        </div>
+
+                        <hr />
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.page-content -->
+        </div>
+
+    </div><!-- /.main-container-inner -->
+
+    <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+        <i class="icon-double-angle-up icon-only bigger-110"></i>
+    </a>
+</div>
+
+
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='/public/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
+</script>
+
+
+<script type="text/javascript">
+    if("ontouchend" in document) document.write("<script src='/public/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+</script>
+<script src="/public/js/bootstrap.min.js"></script>
+<script src="/public/js/typeahead-bs2.min.js"></script>
+
+
+<script src="/public/js/ace-elements.min.js"></script>
+<script src="/public/js/ace.min.js"></script>
+
+<!-- inline scripts related to this page -->
+<script type="text/javascript">
+    var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cscript src='" + _bdhmProtocol + ""));
+</script>
+</body>
+</html>

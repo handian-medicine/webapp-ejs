@@ -397,6 +397,35 @@ router.post('/file_upload', mutipartMiddeware, function (req, res, next) {
 
 });
 
+/*     数据分析        */
+router.get('/dataana', function (req, res, next) {
+    console.log(">>>Visting dataana page!");
+    res.render('dataana',{
+        //账户信息
+        account_email:req.cookies.accountinfo.email,
+        account_phone:req.cookies.accountinfo.phone,
+        username:req.cookies.accountinfo.user_name,
+        account_sex:req.cookies.accountinfo.sex,
+        account_area:req.cookies.accountinfo.area,
+        account_hospital:req.cookies.accountinfo.hospital,
+        account_address:req.cookies.accountinfo.address,
+    });
+});
+/*     关于        */
+router.get('/about', function (req, res, next) {
+    console.log(">>>Visting about page!");
+    res.render('about',{
+        //账户信息
+        account_email:req.cookies.accountinfo.email,
+        account_phone:req.cookies.accountinfo.phone,
+        username:req.cookies.accountinfo.user_name,
+        account_sex:req.cookies.accountinfo.sex,
+        account_area:req.cookies.accountinfo.area,
+        account_hospital:req.cookies.accountinfo.hospital,
+        account_address:req.cookies.accountinfo.address,
+    });
+});
+
 /*        数据展示        */
 /* 一般信息 查看*/
 router.post('/geninfo', function (req, res, next){
