@@ -142,18 +142,30 @@
 </head>
 
 <body>
+<!-- 日期自动填写 -->
 <script>
         function my_date_default() {
             var myDate = new Date();
             var month = myDate.getMonth()+1;
-            if (month < 10) {
-                var fulldate = myDate.getFullYear() + '-' + '0' + month + '-' + myDate.getDate()
+            var date = myDate.getDate();
+            if (date < 10) {
+                date = '0' + date;
             } else {
-                var fulldate = myDate.getFullYear() + '-' + month + '-' + myDate.getDate()
+                date = date;
+            }
+            if (month < 10) {
+                var fulldate = myDate.getFullYear() + '-' + '0' + month + '-' + date
+            } else {
+                var fulldate = myDate.getFullYear() + '-' + month + '-' + date
             };
             $("#recdate").val(fulldate);
         }
+        $(document).ready(function () {
+            my_date_default();
+        })
 </script>
+<!-- 日期自动填写 -->
+
 <script>
     $(document).ready(function () {
         my_date_default();

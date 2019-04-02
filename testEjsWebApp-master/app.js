@@ -9,6 +9,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var prj001Router = require('./routes/prj001');
+var prj999Router = require('./routes/prj001');//后续增加项目修改这里
 var mobileRouter = require('./routes/mobile');
 // var analysisRouter = require('./routes/analysis');
 
@@ -18,15 +19,6 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-// app.use(session({ 
-//   secret: 'keyboard cat', 
-//   resave: true,
-//   name:'sessionid',
-//   saveUninitialized: true,
-//   cookie: { 
-//     maxAge: 60000 
-//   } 
-// })); //sessionid
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -41,6 +33,8 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 app.use('/prj001', prj001Router);
+
+app.use('/prj999', prj999Router);//后续增加项目修改这里
 
 // app.use('/analysis', analysisRouter);
 
