@@ -254,7 +254,7 @@
         })
     </script>
     <!-- 单选可以取消选中 -->
-    <script>
+    <!-- <script>
         $(document).ready(function () {
             $(function () {
                 var flag = true;
@@ -264,6 +264,27 @@
                 })
             });
         });
+    </script> -->
+    <script>
+            $(document).ready(function () {
+            $(':radio').mousedown(function(e){
+                var $self = $(this);
+                if( $self.is(':checked') ){
+                var uncheck = function(){
+                  setTimeout(function(){$self.removeAttr('checked');},0);
+                };
+                var unbind = function(){
+                  $self.unbind('mouseup',up);
+                };
+                var up = function(){
+                  uncheck();
+                  unbind();
+                };
+                $self.bind('mouseup',up);
+                $self.one('mouseout', unbind);
+                }
+            });
+            })
     </script>
     <!-- 单选可以取消选中 -->
 </head>
