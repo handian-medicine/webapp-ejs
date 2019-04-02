@@ -5,9 +5,10 @@
     <title>信息调查表</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <link rel="stylesheet" type="text/css" href="/public/css/move.css"> -->
+    <!-- <link rel="stylesheet" type="text/css" href="/public/css/mobile.css"> -->
     <!-- basic styles -->
     <link rel="stylesheet" href="/public/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="/public/css/mobile.css"> -->
     <!-- <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css"> -->
     <link rel="stylesheet" href="/public/css/font-awesome.min.css">
     <link rel="stylesheet" href="/public/css/bootstrap-datepicker.css">
@@ -32,20 +33,13 @@
     <!-- 表单验证 -->
 </head>
 <body>
-<!-- <script>
-    $.validator.addMethod("phone",function(value,element,params){
-         if((value.length != 11) || (!value.match(/^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|17[0|6|7|8]|18[0-9])\d{8}$/))){
-            return false;
-         }else{
-            return true;
-        }
-    },"请输入正确的手机号");
-</script> -->
 <script>
         function func(event){
             event.preventDefault();
         }
 </script>
+
+<!-- 日期自动填写 -->
 <script>
     function my_date_default() {
         var myDate = new Date();
@@ -63,18 +57,20 @@
         };
         $("#recdate").val(fulldate);
     }
-</script>
-<script>
     $(document).ready(function () {
         my_date_default();
+    })
+</script>
+<!-- 日期自动填写 -->
+
+<!-- 表单提交 -->
+<script>
+    $(document).ready(function () {
         // $("#province option[value='"+result["nation"]+"']").prop("selected","selected");
         // $("#province option[value='北京']").prop("selected","selected");
         // $("#city option[value='朝阳区']").prop("selected","selected");
         $("#normal").hide();
         $("#abnormal").hide();
-
-        // var error_list = form_all();
-        // console.log("----", error_list);
 
         $("#form-all").submit(function () {
             event.preventDefault();
@@ -98,7 +94,7 @@
                 };
             }
             $.ajax({
-                url: "/mobile/move1",
+                url: "/mobile",
                 type: "POST",
                 // dataType: "json",
                 data: {all_data:JSON.stringify(obj)},
@@ -117,9 +113,10 @@
             
             })
     
-    
     })
 </script>
+<!-- 表单提交 -->
+
 <!-- 表单验证 -->
 <script>
     $(document).ready(function () {
@@ -290,14 +287,13 @@
         // return {a:a.errorList,b:b.errorList,c:c.errorList,d:d.errorList}
     };
     form_all();
-    $("#area").trigger("click");
-    $("#area").removeAttr("onclick");
     });
 </script>
 <!-- 表单验证 -->
-<!-- 患者病史 选择显示 -->
+
+<!-- 患者病史 伴随症状 选择显示 -->
 <script>
-        function display_accompany () {
+    function display_accompany () {
             var val = $('input[name="menstruation_is_accompany"]:checked').val();
             if (val=="true") {
                 $('.accompany').show();
@@ -373,8 +369,101 @@
         
         }
 </script>
-<!-- 患者病史 选择显示 -->
+<!-- 患者病史 伴随症状 选择显示 -->
 
+<!-- 单选可以取消选中 -->
+<script>
+    $(document).ready(function () {
+        $(function () {
+            var flag = true;
+            $("input:radio").click(function () {                
+                $(this).prop("checked",flag);
+                flag = !flag;
+            })
+        });
+    });
+</script>
+<!-- 单选可以取消选中 -->
+
+<!-- 辅助医生预加载地区 -->
+<script>
+    $(document).ready(function () {
+            // 预加载地区
+            $("#area").trigger("click");
+            $("#area").removeAttr("onclick");
+        });
+</script>
+<!-- 辅助医生预加载地区 -->
+
+<!-- 函数get_area获取地区 -->
+<script>
+    function get_area () {
+        $.ajax({
+            url: "/mobile/area",
+            type: "GET",
+            // dataType: "json",
+            // data: $('#geninfo-form').serializeArray(),
+            success: function (result) {
+            //    alert("数据："+result.area_data[0]["area"])
+                var area=document.getElementById("area");
+                // var index=area.selectedIndex;
+                for (var i=0;i < result.area_length;i++) {
+                    area[i+1]=new Option(result.area_data[i]["area"],result.area_data[i]["area"]);
+                }
+            },
+            error:  function (result) {
+                alert("错误");    
+            }
+        })
+    }
+</script>
+<!-- 函数get_hospital获取医院 -->
+<script> 
+    function get_hospital () {
+        $.ajax({
+            url: "/mobile/hospital",
+            type: "POST",
+            // dataType: "json",
+            data: {area:$('#area option:selected').val()},
+            success: function (result) {
+                // alert("数据："+result.area_data[0]["account_hospital"])
+                var hospital=document.getElementById("hospital2");
+
+                //地区更改后先清空 医院和医生,再重写医院
+                $("#hospital2").empty();
+                for (var i=0;i < result.hospital_length;i++) {
+                    hospital[i+1]=new Option(result.hospital_data[i]["hospital"],result.hospital_data[i]["hospital"]);
+                };
+                $("#owner").empty();
+            },
+            error:  function (result) {
+                alert("错误");    
+            }
+        })
+    }
+</script>
+<!-- 函数get_owner获取账户 -->
+<script>
+    function get_owner () {
+            $.ajax({
+                url: "/mobile/owner",
+                type: "POST",
+                // dataType: "json",
+                data: {hospital:$('#hospital2 option:selected').val()},
+                success: function (result) {
+                    var owner=document.getElementById("owner");
+                    //医院更改后先清空 医生,再重写医生
+                    $("#owner").empty();
+                    for (var i=0;i < result.owner_length;i++) {
+                        owner[i+1]=new Option(result.owner_data[i]["user_name"],result.owner_data[i]["id"]);
+                    }
+                },
+                error:  function (result) {
+                    alert("错误");    
+                }
+            })
+    }
+</script>
 
 <div class="modal-content">
     <div class="modal-header no-padding">
@@ -384,7 +473,8 @@
     </div>
 </div>
 
-    <ul id="myTab" class="nav nav-tabs">
+<!-- <div class="tab" role="tabpanel"> -->
+    <ul id="myTab" class="nav nav-tabs" role="tablist">
         <li class="active"><a href="#geninfo" data-toggle="tab" id="geninfo-tab">基本信息</a></li>
         <li><a href="#summary"  data-toggle="tab" id="summary-tab">病情概要</a></li>
         <li><a href="#history"  data-toggle="tab" id="history-tab" >患者病史</a></li>
@@ -396,7 +486,7 @@
         <!-- <li><a href="#confirm"   data-toggle="tab" id="confirm-tab" onclick="validate_info();">确认提交</a></li> -->
     </ul>
 
-         <div id="myTabContent" class="tab-content">
+         <div id="myTabContent" class="tab-content tabs">
             <!-- 基本信息 -->
             <div class="tab-pane fade in active" id="geninfo" method="POST"> 
                 <form class="modal-body no-padding" id="form-geninfo">
@@ -422,88 +512,17 @@
                                     <tr>
                                         <td style="vertical-align:middle;">辅助医生账号(地区、医院、账号)</td>
                                         <td>
-                                            <!-- 函数get_area获取地区 -->
-                                                <script>
-                                                    function get_area () {
-                                                        $.ajax({
-                                                            url: "/mobile/area",
-                                                            type: "GET",
-                                                            // dataType: "json",
-                                                            // data: $('#geninfo-form').serializeArray(),
-                                                            success: function (result) {
-                                                            //    alert("数据："+result.area_data[0]["area"])
-                                                                var area=document.getElementById("area");
-                                                                // var index=area.selectedIndex;
-                                                                for (var i=0;i < result.area_length;i++) {
-                                                                    area[i+1]=new Option(result.area_data[i]["area"],result.area_data[i]["area"]);
-                                                                }
-                                                            },
-                                                            error:  function (result) {
-                                                                alert("错误");    
-                                                            }
-                                                        })
-                                                    }
-                                                </script>
-
                                             <div class="col-sm-3">
                                                 <select id="area" name="area" class="form-control" onclick="get_area();" onchange="get_hospital();">
                                                     <option value=""></option>
                                                 </select>
                                             </div>
-                                            <!-- 函数get_hospital获取医院 -->
-                                                <script> 
-                                                    function get_hospital () {
-                                                        $.ajax({
-                                                            url: "/mobile/hospital",
-                                                            type: "POST",
-                                                            // dataType: "json",
-                                                            data: {area:$('#area option:selected').val()},
-                                                            success: function (result) {
-                                                                // alert("数据："+result.area_data[0]["account_hospital"])
-                                                                var hospital=document.getElementById("hospital2");
-                                                                
-                                                                //地区更改后先清空 医院和医生,再重写医院
-                                                                $("#hospital2").empty();
-                                                                for (var i=0;i < result.hospital_length;i++) {
-                                                                    hospital[i+1]=new Option(result.hospital_data[i]["hospital"],result.hospital_data[i]["hospital"]);
-                                                                };
-                                                                $("#owner").empty();
-                                                            },
-                                                            error:  function (result) {
-                                                                alert("错误");    
-                                                            }
-                                                        })
-                                                    }
-                                                </script>
-
+                                            
                                             <div class="col-sm-3">
                                                 <select id="hospital2" name="hospital2" class="form-control" onchange="get_owner();">
                                                     <option value=""></option>
                                                 </select>
                                             </div>
-                                            <!-- 函数get_owner获取账户 -->
-                                                <script>
-                                                    function get_owner () {
-                                                            $.ajax({
-                                                                url: "/mobile/owner",
-                                                                type: "POST",
-                                                                // dataType: "json",
-                                                                data: {hospital:$('#hospital2 option:selected').val()},
-                                                                success: function (result) {
-                                                                    var owner=document.getElementById("owner");
-
-                                                                    //医院更改后先清空 医生,再重写医生
-                                                                    $("#owner").empty();
-                                                                    for (var i=0;i < result.owner_length;i++) {
-                                                                        owner[i+1]=new Option(result.owner_data[i]["user_name"],result.owner_data[i]["id"]);
-                                                                    }
-                                                                },
-                                                                error:  function (result) {
-                                                                    alert("错误");    
-                                                                }
-                                                            })
-                                                    }
-                                                </script>
 
                                             <div class="col-sm-3">
                                                 <select id="owner" name="owner" class="form-control" >
@@ -696,6 +715,7 @@
                             <label><input name="shengleng" type="checkbox" value="true"/>生冷</label>
                             <label><input name="kafei" type="checkbox" value="true"/>含咖啡因食物或饮品</label>
                             <label><input name="qita" type="checkbox" value="true"/>其他</label>
+                        <hr>
                     </div>   
                     <!-- <button type="submit" class="btn btn-primary" id="tijiao">提交</button> -->
                 </form>
@@ -743,8 +763,8 @@
                 </form>
             </div>
         </div>
-        
 
+<!-- </div> -->
 <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
         <i class="icon-double-angle-up icon-only bigger-110"></i>
 </a>

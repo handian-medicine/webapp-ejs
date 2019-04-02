@@ -1,30 +1,43 @@
 var request = require("request");
 var express = require('express');
 var myconst = require("./const");
-
+var url_pack = require("url");
 var router = express.Router();
 //路由 ../moblie/
 // 'use strict';
 // var form_all = {};
+//move1?code=project001
+var prj_code = "";
+var mobileData = {
+    "username": 'prj001-patient@handian.com',
+    "password": 'asdf1234',
+    "grant_type": "password",
+    "scope": myconst.scope_users + " " + myconst.scope_prj001,
+    "client_id": myconst.client_id,
+    "client_secret": myconst.client_secret
+};
 
-router.get('/move1', function (req, res, next) {
-    console.log("基本信息");
+router.get('/', function (req, res, next) {
+    var params = url_pack.parse(req.url, true).query;
+    prj_code = params["code"];
+    console.log("基本信息,项目代号",params["code"]);
     var url = myconst.apiurl + "o/token/";
-    var mobileData = {
-        "username": 'prj001-patient@handian.com',
-        "password": 'asdf1234',
-        "grant_type": "password",
-        "scope": myconst.scope_users + " " + myconst.scope_prj001,
-        "client_id": myconst.client_id,
-        "client_secret": myconst.client_secret
-    };
+    
+    switch (prj_code) {
+        case "project001":
+        mobileData.username = 'prj001-patient@handian.com';//根据需要更改字段信息
+        break;
+        case "project999":
+        mobileData.username = 'prj001-patient@handian.com';//根据需要更改字段信息
+        break;
+    }
     request.post({url: url, form: mobileData}, function (error, response, body) {
-        console.log(">>>move8 mobile.js: Authentication results: ", body);
+        console.log(">>>mobile.js: Authentication results: ", body);
         if (!error && response.statusCode == 200) {
             var obj = JSON.parse(body); //由JSON字符串转换为JSON对象
             // 请求成功的处理逻辑
             // 登陆成功后将token写入Cookie，maxAge为cookie过期时间
-            console.log(">>>move8 mobile.js -> obj: ", obj);
+            console.log(">>>mobile.js -> obj: ", obj);
             res.cookie("prj001token", {
                 "access_token": obj.access_token,
                 "refresh_token": obj.refresh_token,
@@ -35,9 +48,16 @@ router.get('/move1', function (req, res, next) {
                 "email": 'prj001-patient@handian.com',
                 "password": 'asdf1234'
                 }, {maxAge: 1000 * 60 * 60 * 8, httpOnly: true});//cookie 4小时有效时间
-            // console.log(">>>mobile.js -> Set-Cookie: ", res.get('Set-Cookie'));           
-            // res.json({status:1, msg:""}); 
-            res.render('move1'); 
+            // console.log(">>>mobile.js -> Set-Cookie: ", res.get('Set-Cookie'));
+            switch (prj_code) {
+                case "project001":
+                res.render('project001/mobile'); 
+                break;
+                case "project999":  
+                res.render('project999/mobile');
+                break;
+            };           
+            
         } else {
                 var err = JSON.parse(body); //由JSON字符串转换为JSON对象
                 res.json({status:2, msg:""});
@@ -45,18 +65,15 @@ router.get('/move1', function (req, res, next) {
     })
     
 });
-router.post('/move1', function (req, res, next) {
+router.post('/', function (req, res, next) {
     var newurl = myconst.apiurl + "prj001/mobile/";
     var authstring = req.cookies.prj001token.access_token;
-    //body直接传过来的数据有[Object: null prototype],通过stringify和parse
-    //方法可以去掉
+    //body直接传过来的数据有[Object: null prototype],通过stringify和parse方法可以去掉
     // var results_data = JSON.stringify(req.body);//JSON.stringify()从一个对象中解析出字符串
     // results_data = JSON.parse(results_data);//JSON.parse() 从一个字符串中解析出json对象
-    // console.log("results_data:",results_data);
     
     var form_data = req.body;
     // var mydata = '{"info":{"name":"我","telephone":"12345678901","age":"12","address":"北京北京","entrance":"病房","owner":"874174345@qq.com"}}';
-    // console.log("mydata类型:", typeof(mydata));
     console.log("手机端authstring:",authstring);
     console.log("form_data:",form_data);
     var options = {
@@ -88,7 +105,6 @@ router.post('/move1', function (req, res, next) {
                 console.log("else-1");
                 res.json({status:3, msg:mobile_body.msg});
             }
-            
             // console.log('response.statusCode wrong');
         }
     })    
@@ -97,19 +113,19 @@ router.post('/move1', function (req, res, next) {
 router.get('/area',function (req, res, next) {
     console.log(req.cookies.prj001token);
     if (req.cookies.prj001token) {
-        var area_url = myconst.apiurl + "users/area/";
+        var area_url = myconst.apiurl + "users/area-list/";
         // var authstring = req.cookies.access_token;
         var authstring = req.cookies.prj001token.access_token;
         var options = {
-            // form: mobileData,
+            form: {prj_code:prj_code},
             url: area_url,
             headers: {
                 'Authorization': 'Bearer ' + authstring,
                 'Content-Type': 'application/json'
             }
         };  
-        request(options, function (error, response, body) {
-            console.log("获取地区信息,访问users/area/", body);
+        request.post(options, function (error, response, body) {
+            console.log("获取地区信息,访问users/area-list/", body);
             var area_data = JSON.parse(body);
             console.log("长度：",area_data.length)
             res.json({area_data:area_data,area_length:area_data.length});
@@ -127,7 +143,10 @@ router.post('/hospital',function (req, res, next) {
         var area = req.body.area;
         // console.log("-----",area);
         var options = {
-            form: {area:area},
+            form: {
+                area:area,
+                prj_code:prj_code
+            },
             url: area_url,
             headers: {
                 'Authorization': 'Bearer ' + authstring,
@@ -155,7 +174,7 @@ router.post('/owner',function (req, res, next) {
         var options = {
             form: {
                 hospital:hospital,
-                prj_code:'prj001'
+                prj_code:prj_code
             },
             url: area_url,
             headers: {
@@ -173,4 +192,6 @@ router.post('/owner',function (req, res, next) {
 
     }
 })
+
+
 module.exports = router;

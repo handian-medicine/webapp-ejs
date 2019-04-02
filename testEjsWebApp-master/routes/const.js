@@ -19,14 +19,13 @@ var apiurl = "http://10.17.1.98:8001/";//10.17.1.108:8001
 var client_id = "axeHOBmfZ05mdbybUruJIAAgfdIl2uZFNdBmLcUu";
 var client_secret = "kNUvZhjFX8IBQWwJxyNFJfiCdPFbjMYDk2cZxLFB9LHNOQzLIxGffU2bdL1yiZkHDTWc0OKxuO5seA4giHSYhCtTdMGIxLeleRN9tE8mAEBb355Rxbbtc3XBy1NjQ0js";
 
-
 var scope_prj001 = "prj001";
+var scope_prj999 = "prj999";
 var scope_users = "users";
-var NUMER_PER_PAGE = 10;// MUST be consistent with the api definition
 
 module.exports.apiurl = apiurl;
 module.exports.client_id = client_id;
 module.exports.client_secret = client_secret;
 module.exports.scope_prj001 = scope_prj001;
+module.exports.scope_prj999 = scope_prj999;
 module.exports.scope_users = scope_users;
-module.exports.NUMER_PER_PAGE = NUMER_PER_PAGE;

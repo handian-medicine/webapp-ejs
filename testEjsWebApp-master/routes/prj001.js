@@ -1092,8 +1092,7 @@ router.get('/info/search/', function (req, res, next) {
     var search_url = "";
     if ( (params["page"] == undefined) || (params["page"] == "") ) {
         search_url = myconst.apiurl + "prj001/info/search/";
-    }
-    else {
+    } else {
         search_url = myconst.apiurl + "prj001/info/search/?page=" + params["page"];
     }
 

@@ -172,6 +172,7 @@
     </style>
     <!-- 解决问题:Unable to preventDefault inside passive event listener due to target being treated as passive -->
     <style>html {touch-action: manipulation;}</style>
+    
     <script>
         $(document).ready(function () {
             // $("#id_is_checked option[value='"+$("#search-check").val()+"']").prop("selected","selected");//选中值
@@ -252,26 +253,19 @@
 
         })
     </script>
-    
-    <!-- <script>
+    <!-- 单选可以取消选中 -->
+    <script>
         $(document).ready(function () {
-            $("#searchBtn").click(function () {
-                
-                $.ajax({
-                        // url: "/prj001/fileout/", 
-                        url:"/prj001/info/search/",
-                        type: "GET",
-                        data: $('#search-form').serializeArray(),
-                        success: function (result) {
-                            alert("haha");
-                        },
-                        error:  function () {
-                            alert("ohno");
-                        },
+            $(function () {
+                var flag = true;
+                $("input:radio").click(function () {                
+                    $(this).prop("checked",flag);
+                    flag = !flag;
                 })
-            })
-        })
-    </script> -->
+            });
+        });
+    </script>
+    <!-- 单选可以取消选中 -->
 </head>
 
 <body>
@@ -1020,7 +1014,7 @@
                                     </div>
 
                                     <form class="modal-body no-padding" id="form-summary">
-                                        <%include form_summary.ejs %>
+                                        <%include project001/form_summary.ejs %>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-primary summaryBtn" id="summaryBtn">保存修改</button>
                                         </div>
@@ -1044,7 +1038,7 @@
                                     </div>
 
                                     <form class="modal-body no-padding" id="form-history">
-                                        <%include form_history.ejs %>
+                                        <%include project001/form_history.ejs %>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-primary historyBtn" id="historyBtn">保存修改</button>
                                         </div>
@@ -1067,7 +1061,7 @@
                                     </div>
 
                                     <form class="modal-body no-padding" id="form-relevant">
-                                        <%include form_relevant.ejs %>
+                                        <%include project001/form_relevant.ejs %>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-primary relevantBtn" id="relevantBtn">保存修改</button>
                                         </div>
@@ -1089,7 +1083,7 @@
                                     </div>
 
                                     <form class="modal-body no-padding" id="form-cc">
-                                        <%include form_cc.ejs %>
+                                        <%include project001/form_cc.ejs %>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-primary ccBtn" id="ccBtn">保存修改</button>
                                         </div>
@@ -1111,7 +1105,7 @@
                                     </div>
 
                                     <form class="modal-body no-padding" id="form-cure">
-                                        <%include form_cure.ejs %>
+                                        <%include project001/form_cure.ejs %>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-primary cureBtn" id="cureBtn">保存修改</button>
                                         </div>
@@ -1135,7 +1129,7 @@
                                     </div>
 
                                     <form class="modal-body no-padding" id="form-results">
-                                        <%include form_results.ejs %>
+                                        <%include project001/form_results.ejs %>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-primary resultsBtn" id="resultsBtn">保存修改</button>
                                         </div>
