@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="/public/css/ace-rtl.min.css">
     <link rel="stylesheet" href="/public/css/ace-skins.min.css">
     <link rel="stylesheet" href="/public/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="/public/css/jquery-ui-1.10.3.full.min.css" />
 
     <script src="/public/js/ace-extra.min.js"></script>
     <script src="/public/javascripts/jquery.min.js"></script>
@@ -29,89 +30,13 @@
     <script src="/public/js/jquery.pagination.min.js"></script>
 
     <script src="/public/js/prj001-info.js"></script>
-    <script>var curpage_global = '<%= curpage %>' ;
-            var totalpagenumber_global = '<%= totalpagenumber %>';
-            var username = '<%= username %>';
-            // $("#hello-user").text(username);</script>
-    <!-- 患者病史 选择显示 -->
+    
     <script>
-        function display_accompany () {
-            var val = $('input[name="menstruation_is_accompany"]:checked').val();
-            if (val=="true") {
-                $('.accompany').show();
-            } else {
-                $('.accompany').hide();
-                
-                $("input[name='spirit_shenpi']").prop("checked",false);
-                $("input[name='spirit_qiduan']").prop("checked",false);
-                $("input[name='spirit_yiyu_m']").prop("checked",false);
-                $("input[name='spirit_tanxi']").prop("checked",false);
-                $("input[name='spirit_yinu']").prop("checked",false);
-                $('#history_spirit_qita').val('');
-                            
-                $("input:checkbox[name='body_fat']").prop('checked',false);
-                $("input:checkbox[name='body_thin']").prop('checked',false);
-                $("input:checkbox[name='body_skin']").prop('checked',false);
-                $("input:checkbox[name='body_cold']").prop('checked',false);
-                $("input:checkbox[name='body_hot']").prop('checked',false);
-                $("input:checkbox[name='body_leg']").prop('checked',false);
-                $("input:checkbox[name='body_waist']").prop('checked',false);
-                $('#body_qita').val('');
-
-                $("input:checkbox[name='face_head_cangbai']").prop("checked",false);
-                $("input:checkbox[name='face_head_huangbai']").prop("checked",false);
-                $("input:checkbox[name='face_head_weihuang']").prop("checked",false);
-                $("input:checkbox[name='face_head_huian']").prop("checked",false);
-                $("input:checkbox[name='face_head_anban']").prop("checked",false);
-                $("input:checkbox[name='face_head_zhizhong']").prop("checked",false);
-                $("input:checkbox[name='face_head_chunhong']").prop("checked",false);
-
-                $("input[name='face_head_kouku']").prop("checked",false);
-                $("input[name='face_head_erming']").prop("checked",false);
-                $("input[name='face_head_yanghua']").prop("checked",false);
-                $('#face_head_qita').val('');
-                            
-                $("input[name='belly_fanmen']").prop("checked",false);
-                $("input[name='belly_rufangzhangtong']").prop("checked",false);
-                $("input[name='belly_xiongxiezhangtong']").prop("checked",false);
-                $("input[name='belly_shaofuzhangtong']").prop("checked",false);
-                $("input[name='belly_kongzhui']").prop("checked",false);
-                $("input[name='belly_kongtong']").prop("checked",false);
-                $("input[name='belly_citong']").prop("checked",false);
-                $("input[name='belly_zhangtong']").prop("checked",false);
-                $("input[name='belly_lengtong']").prop("checked",false);
-                $("input[name='belly_yintong']").prop("checked",false);
-                $("input[name='belly_juan']").prop("checked",false);
-                $("input[name='belly_xian']").prop("checked",false);
-                $("input[name='belly_deretongjian']").prop("checked",false);
-                $("input[name='belly_tongjian']").prop("checked",false);
-                $('#belly_qita').val('');
-                            
-                $("input[name='diet_exin']").prop("checked",false);
-                $("input[name='diet_shishao']").prop("checked",false);
-                $("input[name='diet_zhangman']").prop("checked",false);
-                $("input[name='diet_bujia']").prop("checked",false);
-                $("input[name='diet_lengyin']").prop("checked",false);
-                $("input[name='diet_kouzao']").prop("checked",false);
-                $('#history_diet_qita').val('');
-                            
-                $("input[name='sleep_shimian']").prop("checked",false);
-                $("input[name='sleep_buning']").prop("checked",false);
-                $("input[name='sleep_mengduo']").prop("checked",false);
-                $('#history_sleep_qita').val('');
-                            
-                $("input:checkbox[name='erbian_zaojie']").prop('checked',false);
-                $("input:checkbox[name='erbian_tangbo']").prop('checked',false);
-                $("input:checkbox[name='erbian_pinshu']").prop('checked',false);
-                $("input:checkbox[name='erbian_duanchi']").prop('checked',false);
-                $("input:checkbox[name='erbian_qingchang']").prop('checked',false);
-                $('#erbian_qita').val('');
-
-            }
-        
-        }
+        var curpage_global = '<%= curpage %>' ;
+        var totalpagenumber_global = '<%= totalpagenumber %>';
+        var username = '<%= username %>';
     </script>
-    <!-- 患者病史 选择显示 -->
+
     <!-- 分页格式 -->
     <style>
     .color{
@@ -173,6 +98,7 @@
     <!-- 解决问题:Unable to preventDefault inside passive event listener due to target being treated as passive -->
     <style>html {touch-action: manipulation;}</style>
     
+    <!-- 搜索结果导出、审核操作 -->
     <script>
         $(document).ready(function () {
             // $("#id_is_checked option[value='"+$("#search-check").val()+"']").prop("selected","selected");//选中值
@@ -253,6 +179,60 @@
 
         })
     </script>
+    <!-- 搜索结果导出、审核操作 -->
+
+    <!-- 删除操作 -->
+    <script>
+        $(document).ready(function () {
+            //删除显示
+            $(".delete-opt").click(function () {
+                $("#deleteBtn").attr("checkstatus",$(this).attr("checkstatus"));
+                $("#deleteBtn").attr("page",$(this).attr("page"));
+                $("#deleteBtn").attr("userid",$(this).attr("userid"));
+                $("#deleteBtn").attr("is-admin",$(this).attr("is-admin"));
+                $("#deleteBtn").attr("owner",$(this).attr("owner"));
+                if ("审核通过"==$(this).attr("checkstatus")) {
+                    alert("该条信息已审核通过,您无法删除。");
+                } else {
+                    if ($(this).attr("is-admin")=="true") {
+                        $('#delete-table').modal('show');
+                    } else {
+                        if (username == $(this).attr("owner")) {
+                            $('#delete-table').modal('show');
+                        } else {
+                            alert("该条信息由其他人创建,您无法删除。");
+                        }
+                    } 
+                }
+                    // $('#delete-table').modal('show');
+                    // $('#delete-table').modal('hide');
+            })
+            //删除执行
+            $(".deleteBtn").click(function () {
+                $.ajax({
+                    url: "/prj001/delete",
+                    method: "POST",
+                    data: {
+                        id:$(this).attr("userid"),
+                        is_admin:$(this).attr("is-admin"),
+                        check:$('input[name="check-status"]:checked').val(),
+                        page:$(this).attr("page"),
+                    },
+                    success:function(result){
+                        alert("删除成功");
+                        window.location.href="/prj001/?page=" + curpage_global;
+                    },
+                    error: function () {
+                        alert("删除失败");
+                        window.location.href="/prj001/?page=" + curpage_global;
+                    }
+                })
+            });
+        
+        })
+    </script>
+    <!-- 删除操作 -->
+
     <!-- 单选可以取消选中 -->
     <!-- <script>
         $(document).ready(function () {
@@ -333,7 +313,6 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <!-- PAGE CONTENT BEGINS -->
-
                             <div class="row">
                                 <div class="col-xs-12">
                                         <!-- 搜索框 -->
@@ -478,8 +457,14 @@
 
                                                             <button class="btn btn-xs btn-danger check-opt" data-backdrop="static"  data-toggle="modal" data-target="#check-table"
                                                                     is-admin=<%= is_admin %> checkstatus=<%= archive.is_checked %> page=<%= curpage %> userid=<%= archive.id %> reasontext=<%= archive.reasons_for_not_passing %> >
-                                                                    审核操作
+                                                                审核操作
                                                             </button>
+                                                            <% if (archive.is_checked != "审核通过") { %>
+                                                            <button class="btn btn-xs btn-danger delete-opt" data-backdrop="static"  data-toggle="modal"
+                                                                    is-admin=<%= is_admin %> checkstatus=<%= archive.is_checked %> page=<%= curpage %> userid=<%= archive.id %> owner=<%= archive.owner %> >
+                                                                删除
+                                                            </button>
+                                                            <% } %>
                                                         </div>
                                                         <!-- 小窗口 -->
                                                         <div class="visible-xs visible-sm hidden-md hidden-lg btn-group">
@@ -585,6 +570,12 @@
                                                                     <button class="btn btn-xs btn-danger check-opt" data-backdrop="static"  data-toggle="modal" data-target="#check-table"
                                                                             is-admin=<%= is_admin %> checkstatus=<%= archive.is_checked %> page=<%= curpage %> userid=<%= archive.id %> reasontext=<%= archive.reasons_for_not_passing %> >
                                                                         不通过原因
+                                                                    </button>
+                                                                    <% } %>
+                                                                    <% if (archive.is_checked != "审核通过") { %>
+                                                                    <button class="btn btn-xs btn-danger delete-opt" data-backdrop="static"  data-toggle="modal"
+                                                                            is-admin=<%= is_admin %> checkstatus=<%= archive.is_checked %> page=<%= curpage %> userid=<%= archive.id %> owner=<%= archive.owner %> >
+                                                                        删除
                                                                     </button>
                                                                     <% } %>
                                                         </div>
@@ -713,6 +704,40 @@
                                 </div>
                             </div>
                             
+                        <!-- 删除操作 -->
+                        <div id="delete-table" class="modal fade" tabindex="-1">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header no-padding">
+                                        <div class="table-header" style="background-color: #f0ad4e">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                <span class="white">&times;</span>
+                                            </button>
+                                            删除
+                                        </div>
+                                    </div>
+
+                                    <div id="dialog-confirm" class="ui-dialog-content ui-widget-content" style="width: auto; min-height: 28px; max-height: none; height: auto;">
+                                        <div class="space-6"></div>
+                                        <p class="bigger-110 bolder center grey">
+                                            <i class="icon-warning-sign red"></i>
+                                            提示：是否确定删除整条信息？
+                                        </p >
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" data-dismiss="modal" class="btn btn-xs ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" aria-disabled="false">
+                                            <span class="ui-button-text">取消</span>
+                                        </button>
+                                        <button type="button" id="deleteBtn" class="deleteBtn btn btn-primary btn-xs ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" aria-disabled="false">
+                                            <span class="ui-button-text">确定</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    
+
+
                         <!--审核操作-->
                         <script>
                                 function disable_check_reason () {

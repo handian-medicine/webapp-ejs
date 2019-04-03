@@ -1048,28 +1048,30 @@ router.post('/check', function (req, res, next){
         var authstring = req.cookies.prj001token.access_token;
         var options = {
             url: check_url,
-            form:{is_checked:check,id:id,reasons_for_not_passing:reason},
+            form:{
+                is_checked:check,
+                id:id,
+                reasons_for_not_passing:reason
+            },
             headers: {
                 'Authorization': 'Bearer ' + authstring
             }
         };
         console.log("原因",options);
         request.post(options, function (error, response, body) {
-            var user_geninfo = JSON.parse(body); 
+            var checkinfo = JSON.parse(body); 
             console.log("check",response.statusCode)           
             if (!error && response.statusCode == 200) {
-                // res.json({user_geninfo: user_geninfo, status: 200});
+                // res.json({user_geninfo: checkinfo, status: 200});
                 res.redirect("/prj001/?page="+page);
             } else {
                 if (response.statusCode == 403) {
-                    console.log(">>>审核 body: ", user_geninfo);
-                    res.json({user_geninfo:user_geninfo, status:403});
+                    console.log(">>>审核 body: ", checkinfo);
+                    res.json({user_geninfo:checkinfo, status:403});
                     // res.redirect("/prj001/?page="+page);
-                }
-                //console.log(">>>Getting archives met unknown error. " + error.error_description);
-                else {
-                    console.log(">>>其它错误码的body: ", user_geninfo);
-                    res.json({user_geninfo: user_geninfo, status:1400});
+                } else {
+                    console.log(">>>其它错误码的body: ", checkinfo);
+                    res.json({user_geninfo: checkinfo, status:1400});
                     // res.redirect("/prj001/?page="+page);
                 }
             }
@@ -1211,4 +1213,44 @@ router.get('/info/search/', function (req, res, next) {
 
 });
 
+/* 删除记录 */
+router.post('/delete', function (req, res, next){
+    if (req.cookies.prj001token) {
+        var id = req.body.id;
+        // var is_admin = req.body.is_admin;
+        // var check = req.body.check;
+        var page = req.body.page;
+
+        var delete_url = myconst.apiurl + "prj001/info/" + id +'/';
+        var authstring = req.cookies.prj001token.access_token;
+        var options = {
+            url: delete_url,
+            form:{
+                // is_admin:is_admin,
+                // is_checked:check, 
+                id:id
+            },
+            headers: {
+                'Authorization': 'Bearer ' + authstring
+            }
+        };
+        // res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
+        console.log("delete1:",options);
+        request.del(options, function (error, response, body) {
+            // var delete_info = JSON.parse(body); 
+            // console.log("delete2:",response.statusCode);           
+            // console.log("delete3:",delete_info);           
+            if (!error && response.statusCode == 204) {
+                res.redirect("/prj001/?page="+page);
+            } else {
+                console.log(">>>delete body: ", delete_info);
+                res.json({delete_info:delete_info, status:response.statusCode});
+                // res.redirect("/prj001/?page="+page);
+            }
+        })
+    } else {
+        res.redirect("/");
+    }
+
+})
 module.exports = router;

@@ -13,33 +13,75 @@
                                         <label><input name="yuejing_zhenduan" type="radio" value="经间期出血"/>经间期出血</label>
                                         <label><input name="yuejing_zhenduan" type="radio" value="崩漏"/>崩漏</label>
                     
-                                        <p><h5 style="color:blue">2、虚证诊断:</h5>
-                                        <label><input name="xuzheng" type="radio" value="肾气虚证"/>肾气虚证</label>
-                                        <label><input name="xuzheng" type="radio" value="肾阴虚证"/>肾阴虚证</label>
-                                        <label><input name="xuzheng" type="radio" value="肾阳虚证"/>肾阳虚证</label>
-                                        <label><input name="xuzheng" type="radio" value="气虚证"/>气虚证</label>
-                                        <label><input name="xuzheng" type="radio" value="血虚证"/>血虚证</label>
-                                        <label><input name="xuzheng" type="radio" value="虚热证"/>虚热证</label>
-                                        <label><input name="xuzheng" type="radio" value="脾气虚证"/>脾气虚证</label>
+                                        <script>
+                                            // $(document).ready(function(){
+                                            //     $("#xuzheng-div").hide();
+                                            //     $("#shizheng-div").hide();
+                                            //     $("#xushi-div").hide();
+                                            // })
+                                            function xuzheng_func() {
+                                                $("#xuzheng-div").show();
+                                                $("#shizheng-div").hide();
+                                                $("#xushi-div").hide();
+
+                                                $("input[name='shizheng']").prop("checked", false);
+                                                $("input[name='xushi']").prop("checked", false);
+                                                $("#qita_demonstration").val("");
+                                                $("#qita_def_ex").val("");
+                                            }
+                                            function shizheng_func() {
+                                                $("#xuzheng-div").hide();
+                                                $("#shizheng-div").show();
+                                                $("#xushi-div").hide();
+                                                $("input[name='xuzheng']").prop("checked", false);
+                                                $("input[name='xushi']").prop("checked", false);
+                                                $("#qita_asthenic").val("");
+                                                $("#qita_def_ex").val("");
+                                            }
+                                            function xushi_func() {
+                                                $("#xuzheng-div").hide();
+                                                $("#shizheng-div").hide();
+                                                $("#xushi-div").show();
+                                                $("input[name='shizheng']").prop("checked", false);
+                                                $("input[name='xuzheng']").prop("checked", false);
+                                                $("#qita_asthenic").val("");
+                                                $("#qita_demonstration").val("");
+                                            }
+                                        </script>
+                                        
+                                        <p><h5 style="color:blue">2、<input name="zheng_title" type="radio" value="test" onchange="xuzheng_func();"/>虚证诊断:</h5>
+                                        <div id="xuzheng-div">
+                                        <label><input name="xuzheng" type="radio" value="肾气虚证" onclick="xuzheng_func();"/>肾气虚证</label>
+                                        <label><input name="xuzheng" type="radio" value="肾阴虚证" onclick="xuzheng_func();"/>肾阴虚证</label>
+                                        <label><input name="xuzheng" type="radio" value="肾阳虚证" onclick="xuzheng_func();"/>肾阳虚证</label>
+                                        <label><input name="xuzheng" type="radio" value="气虚证" onclick="xuzheng_func();"/>气虚证</label>
+                                        <label><input name="xuzheng" type="radio" value="血虚证" onclick="xuzheng_func();"/>血虚证</label>
+                                        <label><input name="xuzheng" type="radio" value="虚热证" onclick="xuzheng_func();"/>虚热证</label>
+                                        <label><input name="xuzheng" type="radio" value="脾气虚证" onclick="xuzheng_func();"/>脾气虚证</label>
                                         <br>
                                         <label>其他:<input type="text" id="qita_asthenic" name="qita_asthenic" value=""/></label>
-                    
-                                        <p><h5 style="color:blue">3、实证诊断:</h5>
-                                        <label><input name="shizheng" type="radio" value="肝郁血热证"/>肝郁血热证</label>
-                                        <label><input name="shizheng" type="radio" value="阳盛血热证"/>阳盛血热证</label>
-                                        <label><input name="shizheng" type="radio" value="湿热证"/>湿热证</label>
-                                        <label><input name="shizheng" type="radio" value="痰湿证"/>痰湿证</label>
-                                        <label><input name="shizheng" type="radio" value="肝郁气滞证"/>肝郁气滞证</label>
-                                        <label><input name="shizheng" type="radio" value="气滞血瘀证"/>气滞血瘀证</label>
-                                        <label><input name="shizheng" type="radio" value="血寒证"/>血寒证</label>
-                                        <label><input name="shizheng" type="radio" value="实热证"/>实热证</label>
+                                        </div>
+
+                                        <p><h5 style="color:blue">3、<input name="zheng_title" type="radio" value="test" onchange="shizheng_func();"/>实证诊断:</h5>
+                                        <div id="shizheng-div">
+                                        <label><input name="shizheng" type="radio" value="肝郁血热证" onclick="shizheng_func();"/>肝郁血热证</label>
+                                        <label><input name="shizheng" type="radio" value="阳盛血热证" onclick="shizheng_func();"/>阳盛血热证</label>
+                                        <label><input name="shizheng" type="radio" value="湿热证" onclick="shizheng_func();"/>湿热证</label>
+                                        <label><input name="shizheng" type="radio" value="痰湿证" onclick="shizheng_func();"/>痰湿证</label>
+                                        <label><input name="shizheng" type="radio" value="肝郁气滞证" onclick="shizheng_func();"/>肝郁气滞证</label>
+                                        <label><input name="shizheng" type="radio" value="气滞血瘀证" onclick="shizheng_func();"/>气滞血瘀证</label>
+                                        <label><input name="shizheng" type="radio" value="血寒证" onclick="shizheng_func();"/>血寒证</label>
+                                        <label><input name="shizheng" type="radio" value="实热证" onclick="shizheng_func();"/>实热证</label>
                                         <br>
                                         <label>其他:<input type="text" id="qita_demonstration" name="qita_demonstration" value=""/></label>
-                    
-                                        <p><h5 style="color:blue">4、虚实夹杂诊断:</h5>
-                                        <label><input name="xushi" type="radio" value="阴虚血热证"/>阴虚血热证</label>
+                                        </div>
+
+                                        <p><h5 style="color:blue">4、<input name="zheng_title" type="radio" value="test" onchange="xushi_func();"/>虚实夹杂诊断:</h5>
+                                        <div id="xushi-div">
+                                        <label><input name="xushi" type="radio" value="阴虚血热证" onclick="xushi_func();"/>阴虚血热证</label>
                                         <br>
                                         <label>其他:<input type="text" id="qita_def_ex" name="qita_def_ex" value=""/></label>
+                                        </div>
                                         <hr>
                     
                                         <p><h4 style="color:#BC1717">二、西医诊断</h4>

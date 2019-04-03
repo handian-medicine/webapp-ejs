@@ -1,3 +1,83 @@
+    <!-- 患者病史 选择显示 -->
+    <script>
+            function display_accompany () {
+                var val = $('input[name="menstruation_is_accompany"]:checked').val();
+                if (val=="true") {
+                    $('.accompany').show();
+                } else {
+                    $('.accompany').hide();
+                    
+                    $("input[name='spirit_shenpi']").prop("checked",false);
+                    $("input[name='spirit_qiduan']").prop("checked",false);
+                    $("input[name='spirit_yiyu_m']").prop("checked",false);
+                    $("input[name='spirit_tanxi']").prop("checked",false);
+                    $("input[name='spirit_yinu']").prop("checked",false);
+                    $('#history_spirit_qita').val('');
+                                
+                    $("input:checkbox[name='body_fat']").prop('checked',false);
+                    $("input:checkbox[name='body_thin']").prop('checked',false);
+                    $("input:checkbox[name='body_skin']").prop('checked',false);
+                    $("input:checkbox[name='body_cold']").prop('checked',false);
+                    $("input:checkbox[name='body_hot']").prop('checked',false);
+                    $("input:checkbox[name='body_leg']").prop('checked',false);
+                    $("input:checkbox[name='body_waist']").prop('checked',false);
+                    $('#body_qita').val('');
+    
+                    $("input:checkbox[name='face_head_cangbai']").prop("checked",false);
+                    $("input:checkbox[name='face_head_huangbai']").prop("checked",false);
+                    $("input:checkbox[name='face_head_weihuang']").prop("checked",false);
+                    $("input:checkbox[name='face_head_huian']").prop("checked",false);
+                    $("input:checkbox[name='face_head_anban']").prop("checked",false);
+                    $("input:checkbox[name='face_head_zhizhong']").prop("checked",false);
+                    $("input:checkbox[name='face_head_chunhong']").prop("checked",false);
+    
+                    $("input[name='face_head_kouku']").prop("checked",false);
+                    $("input[name='face_head_erming']").prop("checked",false);
+                    $("input[name='face_head_yanghua']").prop("checked",false);
+                    $('#face_head_qita').val('');
+                                
+                    $("input[name='belly_fanmen']").prop("checked",false);
+                    $("input[name='belly_rufangzhangtong']").prop("checked",false);
+                    $("input[name='belly_xiongxiezhangtong']").prop("checked",false);
+                    $("input[name='belly_shaofuzhangtong']").prop("checked",false);
+                    $("input[name='belly_kongzhui']").prop("checked",false);
+                    $("input[name='belly_kongtong']").prop("checked",false);
+                    $("input[name='belly_citong']").prop("checked",false);
+                    $("input[name='belly_zhangtong']").prop("checked",false);
+                    $("input[name='belly_lengtong']").prop("checked",false);
+                    $("input[name='belly_yintong']").prop("checked",false);
+                    $("input[name='belly_juan']").prop("checked",false);
+                    $("input[name='belly_xian']").prop("checked",false);
+                    $("input[name='belly_deretongjian']").prop("checked",false);
+                    $("input[name='belly_tongjian']").prop("checked",false);
+                    $('#belly_qita').val('');
+                                
+                    $("input[name='diet_exin']").prop("checked",false);
+                    $("input[name='diet_shishao']").prop("checked",false);
+                    $("input[name='diet_zhangman']").prop("checked",false);
+                    $("input[name='diet_bujia']").prop("checked",false);
+                    $("input[name='diet_lengyin']").prop("checked",false);
+                    $("input[name='diet_kouzao']").prop("checked",false);
+                    $('#history_diet_qita').val('');
+                                
+                    $("input[name='sleep_shimian']").prop("checked",false);
+                    $("input[name='sleep_buning']").prop("checked",false);
+                    $("input[name='sleep_mengduo']").prop("checked",false);
+                    $('#history_sleep_qita').val('');
+                                
+                    $("input:checkbox[name='erbian_zaojie']").prop('checked',false);
+                    $("input:checkbox[name='erbian_tangbo']").prop('checked',false);
+                    $("input:checkbox[name='erbian_pinshu']").prop('checked',false);
+                    $("input:checkbox[name='erbian_duanchi']").prop('checked',false);
+                    $("input:checkbox[name='erbian_qingchang']").prop('checked',false);
+                    $('#erbian_qita').val('');
+    
+                }
+            
+            }
+    </script>
+    <!-- 患者病史 选择显示 -->
+
 <div class="modal-body">
     <div class="row">
         <div class="col-xs-12 col-sm-12">
@@ -203,8 +283,8 @@
                                             <hr>
 
                                             <p><span style="color:blue;font-size:15px">8、经期是否伴随症状</span>
-                                                <label><input type="radio" value="true" name="menstruation_is_accompany" onclick="display_accompany()"/>有</label>
-                                                <label><input type="radio" value="false" name="menstruation_is_accompany" onclick="display_accompany()"/>无</label>
+                                                <label><input type="radio" value="true" name="menstruation_is_accompany"  onclick="display_accompany();"/>有</label>
+                                                <label><input type="radio" value="false" name="menstruation_is_accompany" onclick="display_accompany();"/>无</label>
                         
                                             <div class="accompany" style="display: none">
                                                 <p><h6 style="color:#871F78">(1)精神情绪</h6>
