@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/public/css/myPagination.css">
     <!-- <link rel="stylesheet" href="../public/css/chosen.css" /> -->
     <!-- <link rel="stylesheet" href="../public/css/bootstrap.min.css"> -->
+    <!-- <link rel="stylesheet" href="/public/bootstrap4/css/bootstrap.min.css"> -->
     <link rel="stylesheet" href="/public/bootstrap3/css/bootstrap.min.css">
     <link rel="stylesheet" href="/public/css/font-awesome.min.css">
 
@@ -468,78 +469,87 @@
                                                         </div>
                                                         <!-- 小窗口 -->
                                                         <div class="visible-xs visible-sm hidden-md hidden-lg btn-group">
-                                                                <div class="inline position-relative">
-                                                                    <button class="btn btn-minier btn-primary dropdown-toggle"
-                                                                        data-toggle="dropdown">
-                                                                        <i class="icon-cog icon-only bigger-110"></i>
-                                                                    </button>
-                                                                    <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-caret dropdown-close pull-right">
-                                                                        <li>
-                                                                            <a checked-info="no" href="#modal-table" data-toggle="modal" class="tooltip-info geninfo"
-                                                                                geninfo-url=<%= archive.url %>>
-                                                                                <span class="" style="color:#777">
-                                                                                    基本信息
-                                                                                </span>
-                                                                            </a>
+                                                            <div class="inline position-relative">
+                                                                <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown">
+                                                                    <i class="icon-cog icon-only bigger-110"></i>
+                                                                </button>
+                                                                <ul style="overflow:auto" class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-caret dropdown-close pull-right">
+                                                                    <li>
+                                                                        <a checked-info="no" href="#modal-table" data-toggle="modal" class="tooltip-info geninfo"
+                                                                            geninfo-url=<%= archive.url %>>
+                                                                            <span class="" style="color:#777">
+                                                                                基本信息
+                                                                            </span>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a checked-info="no" href="#modal-table1" data-toggle="modal" class="tooltip-success summary" 
+                                                                        geninfo-url=<%= archive.url %> summary-url=<%= archive.summary %> >
+                                                                            <span class="" style="color: #204d74">
+                                                                                病情概要
+                                                                            </span>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a checked-info="no" href="#modal-table2" data-toggle="modal" class="tooltip-error history" 
+                                                                        geninfo-url=<%= archive.url %> history-url=<%= archive.history %> >
+                                                                            <span class="orange">
+                                                                                患者病史
+                                                                            </span>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a checked-info="no" href="#modal-table3" data-toggle="modal" class="tooltip-info relevant"  
+                                                                        geninfo-url=<%= archive.url %> relevant-url=<%= archive.relevant %> >
+                                                                            <span class="red">
+                                                                                相关检查
+                                                                            </span>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a checked-info="no" href="#modal-table4" data-toggle="modal" class="tooltip-info cc" 
+                                                                        geninfo-url=<%= archive.url %> cc-url=<%= archive.cc %> >
+                                                                            <span class="blue">
+                                                                                临床诊断
+                                                                            </span>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a checked-info="no" href="#modal-table5" data-toggle="modal" class="tooltip-info cure" 
+                                                                        geninfo-url=<%= archive.url %> cure-url=<%= archive.cure %> >
+                                                                            <span class="green">
+                                                                                中西治疗
+                                                                            </span>
+                                                                        </a>
                                                                         </li>
-                                                                        <li>
-                                                                            <a checked-info="no" href="#modal-table1" data-toggle="modal" class="tooltip-success summary" 
-                                                                            geninfo-url=<%= archive.url %> summary-url=<%= archive.summary %> >
-                                                                                <span class="" style="color: #204d74">
-                                                                                    病情概要
-                                                                                </span>
-                                                                            </a>
+                                                                    <li>
+                                                                        <a checked-info="no" href="#modal-table6" data-toggle="modal" class="tooltip-info results" 
+                                                                        geninfo-url=<%= archive.url %> results-url=<%= archive.results %> >
+                                                                            <span class="" style="color: #204d74">
+                                                                                疗效情况
+                                                                            </span>
+                                                                        </a>
                                                                         </li>
-                                                                        <li>
-                                                                            <a checked-info="no" href="#modal-table2" data-toggle="modal" class="tooltip-error history" 
-                                                                            geninfo-url=<%= archive.url %> history-url=<%= archive.history %> >
-                                                                                <span class="orange">
-                                                                                    患者病史
-                                                                                </span>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a checked-info="no" href="#modal-table3" data-toggle="modal" class="tooltip-info relevant"  
-                                                                            geninfo-url=<%= archive.url %> relevant-url=<%= archive.relevant %> >
-                                                                                <span class="red">
-                                                                                    相关检查
-                                                                                </span>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a checked-info="no" href="#modal-table4" data-toggle="modal" class="tooltip-info cc" 
-                                                                            geninfo-url=<%= archive.url %> cc-url=<%= archive.cc %> >
-                                                                                <span class="blue">
-                                                                                    临床诊断
-                                                                                </span>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a checked-info="no" href="#modal-table5" data-toggle="modal" class="tooltip-info cure" 
-                                                                            geninfo-url=<%= archive.url %> cure-url=<%= archive.cure %> >
-                                                                                <span class="green">
-                                                                                    中西治疗
-                                                                                </span>
-                                                                            </a>
-                                                                            </li>
-                                                                        <li>
-                                                                            <a checked-info="no" href="#modal-table6" data-toggle="modal" class="tooltip-info results" 
-                                                                            geninfo-url=<%= archive.url %> results-url=<%= archive.results %> >
-                                                                                <span class="" style="color: #204d74">
-                                                                                    疗效情况
-                                                                                </span>
-                                                                            </a>
-                                                                            </li>
-                                                                        <li>
-                                                                            <a href="#check-table" class="tooltip-error check-opt" role="button" data-toggle="modal"
-                                                                                is-admin=<%= is_admin %> checkstatus=<%= archive.is_checked %> page=<%= curpage %> userid=<%= archive.id %> reasontext=<%= archive.reasons_for_not_passing %> >
-                                                                                <span class="red">
-                                                                                    审核操作
-                                                                                </span>
-                                                                            </a >
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
+                                                                    <li>
+                                                                        <a href="#check-table" class="tooltip-error check-opt" role="button" data-toggle="modal"
+                                                                            is-admin=<%= is_admin %> checkstatus=<%= archive.is_checked %> page=<%= curpage %> userid=<%= archive.id %> reasontext=<%= archive.reasons_for_not_passing %> >
+                                                                            <span class="red">
+                                                                                审核操作
+                                                                            </span>
+                                                                        </a >
+                                                                    </li>
+                                                                    <% if (archive.is_checked != "审核通过") { %>
+                                                                    <li>
+                                                                        <a class="tooltip-error delete-opt" role="button"  data-toggle="modal" data-backdrop="static" 
+                                                                            is-admin=<%= is_admin %> checkstatus=<%= archive.is_checked %> page=<%= curpage %> userid=<%= archive.id %> owner=<%= archive.owner %> >
+                                                                            <span class="red">
+                                                                                删除
+                                                                            </span>
+                                                                        </a>
+                                                                    </li>
+                                                                    <% } %>
+                                                                </ul>
+                                                            </div>
                                                         </div>
                                                     <!-- 无审核按钮 -->
                                                         <% } else { %>
@@ -653,6 +663,16 @@
                                                                             </a >
                                                                         </li>
                                                                         <% } %>
+                                                                        <% if (archive.is_checked != "审核通过") { %>
+                                                                            <li>
+                                                                                <a class="tooltip-error delete-opt" role="button"  data-toggle="modal" data-backdrop="static" 
+                                                                                    is-admin=<%= is_admin %> checkstatus=<%= archive.is_checked %> page=<%= curpage %> userid=<%= archive.id %> owner=<%= archive.owner %> >
+                                                                                    <span class="red">
+                                                                                        删除
+                                                                                    </span>
+                                                                                </a>
+                                                                            </li>
+                                                                        <% } %>
                                                                     </ul>
                                                                 </div>
                                                         </div>
@@ -735,8 +755,6 @@
                                 </div>
                             </div>
                         </div>
-    
-
 
                         <!--审核操作-->
                         <script>
