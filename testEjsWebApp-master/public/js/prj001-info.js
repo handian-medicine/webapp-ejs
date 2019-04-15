@@ -9,7 +9,8 @@
         //基本信息
         $(".form-geninfo").submit(function () {
             var str = $("#birth").val();
-            year_month = str.split("-");
+            var year_month = str.split("-");
+            // tempstr = str.split("-");
             $("#birth_year").val(year_month[0]);
             $("#birth_month").val(year_month[1]);
             $.ajax({
@@ -921,9 +922,9 @@
                             $("input:checkbox[name='yuejing_beng']").prop('checked',result["yuejing_beng"]);
                             $('#yuejing_qita').val(result["yuejing_qita"]);
 
-                            // if (result["normal"] != null)
+                            // if (result["normal"] == null)
                             // {
-                            //     $("input[name='cycle'][value='尚规律']").prop("checked",true);
+                            //     $("input[name='xuzheng'][value='尚规律']").prop("checked",true);
                             //     $("input[name='cycle'][value='尚规律']").trigger("onchange");
                             //     $("input[name='normal'][value='"+result["normal"]+"']").prop("checked",true);
                             // }

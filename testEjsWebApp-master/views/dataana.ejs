@@ -102,19 +102,22 @@
 
                         <!-- <button id="test" type="button">点这里</button> -->
 
-                        <div class="col-sm-12">
+                        <div class="col-xs-12">
                             <!-- 第一行 -->
                             <div class="row">
                                 <div class="space-6"></div>
                                 <!-- 图一 -->
-                                <div class="col-sm-6">
-                                    <div class="col-sm-12" >
+                                <div class="col-dm-9">
+                                    <div class="col-xs-12" >
                                         <div id="main1" class="mycharts"></div>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row">
+                                <div class="space-6"></div>
                                 <!-- 图二 -->
-                                <div class="col-sm-6">
-                                    <div class="col-sm-12" >
+                                <div class="col-dm-9">
+                                    <div class="col-xs-12" >
                                         <div id="main2" class="mycharts"></div>
                                     </div>
                                 </div>
@@ -274,7 +277,7 @@
                             color: "#000000"
                         }
                     },
-                    data : charts_data.hospitals_list
+                    data : charts_data.hospitals_list.slice(0,10)
                 }
             ],
             yAxis : [
@@ -284,24 +287,24 @@
             ],
             series : [
                 {
-                    name:charts_data.bar[0].name,
+                    name:charts_data.bar[0].name.slice(0,10),
                     type:'bar',
                     stack:'hospital',
-                    data:charts_data.bar[0].data
+                    data:charts_data.bar[0].data.slice(0,10)
                 },
                 {
-                    name:charts_data.bar[1].name,
+                    name:charts_data.bar[1].name.slice(0,10),
                     type:'bar',
                     stack: 'hospital',
-                    data:charts_data.bar[1].data
+                    data:charts_data.bar[1].data.slice(0,10)
                 },
                 {
-                    name:charts_data.bar[2].name,
+                    name:charts_data.bar[2].name.slice(0,10),
                     type:'bar',
                     stack: 'hospital',
                     //设置柱的宽度，要是数据太少，柱子太宽不美观~
-                    barWidth:30,
-                    data:charts_data.bar[2].data
+                    barWidth:20,
+                    data:charts_data.bar[2].data.slice(0,10)
                 }
             ]
         };

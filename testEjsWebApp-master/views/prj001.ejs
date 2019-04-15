@@ -6,15 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <link rel="stylesheet" href="/public/css/myPagination.css">
-    <!-- <link rel="stylesheet" href="../public/css/chosen.css" /> -->
-    <!-- <link rel="stylesheet" href="../public/css/bootstrap.min.css"> -->
-    <!-- <link rel="stylesheet" href="/public/bootstrap4/css/bootstrap.min.css"> -->
     <link rel="stylesheet" href="/public/bootstrap3/css/bootstrap.min.css">
     <link rel="stylesheet" href="/public/css/font-awesome.min.css">
+
     <link rel="stylesheet" href="/public/css/ace.min.css">
-    <!-- <link rel="stylesheet" href="/public/css/ace.min.css" class="ace-main-stylesheet"> -->
     <link rel="stylesheet" href="/public/css/ace-rtl.min.css">
     <link rel="stylesheet" href="/public/css/ace-skins.min.css">
+
     <link rel="stylesheet" href="/public/css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="/public/css/jquery-ui-1.10.3.full.min.css" />
 
@@ -97,7 +95,11 @@
     <!-- 日期格式 -->
     <script>
         $(function(){
-            $('.datepicker').datepicker({format:"yyyy-mm-dd"});
+            $('.datepicker').datepicker({
+                format:"yyyy-mm-dd",
+                autoclose:true,
+                language:'zh-CN',
+            });
         })
     </script>
     <!-- 搜索结果导出、审核操作 -->
@@ -908,7 +910,7 @@
                                                                             <td style="text-align:left;" class="blue">患者出生年月</td>
                                                                             <input id="birth_year" name="birth_year" type="hidden" class="form-control ace"/>
                                                                             <input id="birth_month" name="birth_month" type="hidden" class="form-control ace"/>
-                                                                            <td><input id="birth" name="birth" type="text" class="form-control ace input-mask-birth" placeholder="格式:2019-04"/></td>
+                                                                            <td><input id="birth" name="birth" type="text" class="form-control datepicker"/></td>
                                                                             <!-- <td><input class="form-control"  type="text" name="age" id="age"/></td> -->
                                                                             </tr>
                                                                         <tr>

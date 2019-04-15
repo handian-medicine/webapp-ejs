@@ -30,7 +30,8 @@
         function dateStyle(){
             $('#recdate').datepicker({
                 format:"yyyy-mm-dd",
-                autoclose:true
+                autoclose:true,
+                language: "zh-CN"
             });
             $('#birth1').datepicker({
                 format:"yyyy-mm",
@@ -314,12 +315,12 @@
                                                             </tr>
                                                             <tr>
                                                                 <td style="vertical-align:middle;">填表专家姓名</td>
-                                                                <td><input class="form-control ace" id="expert" name="expert" type="text" /></td>
+                                                                <td><input class="form-control ace" id="expert" name="expert" type="text" required/></td>
                                                             </tr>
                                                             <tr>
                                                                 <td style="vertical-align:middle;">职称</td>
                                                                 <td style="color:black;font-size:14px;">
-                                                                    <select name="title" class="form-control">
+                                                                    <select name="title" class="form-control" required>
                                                                         <option value="主任医师">主任医师</option>
                                                                         <option value="副主任医师">副主任医师</option>
                                                                         <option value="主治医师">主治医师</option>
@@ -328,11 +329,11 @@
                                                             </tr>   
                                                             <tr>
                                                                 <td style="vertical-align:middle;">患者姓名</td>
-                                                                <td><input class="form-control"  type="text" name="name" id="name"/></td>
+                                                                <td><input class="form-control"  type="text" name="name" id="name" required/></td>
                                                             </tr>
                                                             <tr>
                                                                 <td style="vertical-align:middle;">电话</td>
-                                                                <td><input class="form-control"  type="text" name="telephone" id="telephone"/></td>
+                                                                <td><input class="form-control"  type="text" name="telephone" id="telephone" required/></td>
                                                             </tr>
                                                             <tr>
                                                                 <td style="vertical-align:middle;">患者现住址</td>
@@ -348,14 +349,14 @@
                                                                         </select>
                                                                     </div>
                                                                     <div class="col-sm-6">
-                                                                        <input class="form-control" id="adrs" name="" type="text" placeholder="请填写具体地址"/>
+                                                                        <input class="form-control" id="adrs" name="" type="text" placeholder="请填写具体地址" required/>
                                                                     </div>
                                                                 </td>
                                                             </tr>
                                                             <tr>
                                                                 <td style="vertical-align:middle;">患者来源</td>
                                                                 <td style="color:black;font-size:15px;">
-                                                                    <select name="entrance" class="form-control">
+                                                                    <select name="entrance" class="form-control" required>
                                                                         <option value="门诊">门诊</option>
                                                                         <option value="病房">病房</option>
                                                                     </select>
@@ -365,7 +366,7 @@
                                                                 <td style="vertical-align:middle;">患者出生年月</td>
                                                                 <input id="birth_year" name="birth_year" type="hidden" class="form-control ace"/>
                                                                 <input id="birth_month" name="birth_month" type="hidden" class="form-control ace"/>
-                                                                <td><input id="birth" name="birth" type="text" class="form-control ace input-mask-birth" placeholder="格式:2019-04"/></td>
+                                                                <td><input id="birth" name="birth" type="date" class="form-control ace" required/></td>
                                                             </tr>
                                                             <tr>
                                                                 <td style="vertical-align:middle;">身高cm</td>
@@ -378,7 +379,7 @@
                                                             <tr>
                                                                 <td style="vertical-align:middle;">民族</td>
                                                                 <td style="color:black;font-size:15px;">
-                                                                    <select name="nation" class="form-control" id="minzu-list">
+                                                                    <select name="nation" class="form-control" id="minzu-list" required>
                                                                             <!-- <option value="" disabled selected></option> -->
                                                                             <option value="汉族">汉族</option>
                                                                             <option value="蒙古族">蒙古族</option>
@@ -441,7 +442,7 @@
                                                             </tr>
                                                             <tr>
                                                                 <td style="vertical-align:middle;">职业</td>
-                                                                <td><select name="career" class="form-control">
+                                                                <td><select name="career" class="form-control" required>
                                                                             <option value="学生">学生</option>
                                                                             <option value="个体">个体</option>
                                                                             <option value="农民">农民</option>
@@ -459,7 +460,7 @@
                                                             <tr>
                                                                 <td style="vertical-align:middle;">文化程度</td>
                                                                 <td style="color:black;font-size:15px;">
-                                                                    <select name="culture" class="form-control">
+                                                                    <select name="culture" class="form-control" required>
                                                                         <option value="未接受国家教育(文盲)">未接受国家教育</option>
                                                                         <option value="小学及以下">小学及以下</option>
                                                                         <option value="初中">初中</option>
@@ -509,11 +510,11 @@
                             </div>
 
 
-                        <h4 class="pink">
+                        <!-- <h4 class="pink">
                             <i class="icon-hand-right icon-animated-hand-pointer blue"></i>
                             <a href="#" role="button" class="green" data-toggle="modal"> 3) 通过Excel模板创建案例 </a>
-                        </h4>
-                        <div class="row">
+                        </h4> -->
+                        <!-- <div class="row">
                             <div class="col-sm-5">
                                 <div class="widget-box">
                                     <div class="widget-header">
@@ -544,7 +545,6 @@
                                                     <input id="upload-button" type="submit" value="提交"/>
                                                 </div>
                                             </form>
-                                            <!-- <iframe name="form" id="form" style="display:none"></iframe> -->
                                         </div>
                                     </div>
                                 </div>
@@ -553,9 +553,9 @@
                         <ul class="pager">
                             <li class="previous">
                                <a href="http://47.94.22.221/Prj001%E6%8E%92%E5%8D%B5%E9%9A%9C%E7%A2%8D%E6%80%A7%E5%BC%82%E5%B8%B8%E5%AD%90%E5%AE%AB%E5%87%BA%E8%A1%80%E9%97%AE%E5%8D%B7_%E6%A8%A1%E6%9D%BF.xlsx">模板文件下载 →</a>
-                               <!-- <a>模板文件下载 →</a> -->
                             </li>
-                        </ul>
+                        </ul> -->
+
                     </div>
                 </div>
             </div>
