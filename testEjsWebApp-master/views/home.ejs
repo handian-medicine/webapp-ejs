@@ -8,7 +8,8 @@
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="/public/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="/public/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="/public/bootstrap3/css/bootstrap.min.css">
     <link rel="stylesheet" href="/public/css/font-awesome.min.css">
 
     <link rel="stylesheet" href="/public/css/ace.min.css">
@@ -17,6 +18,8 @@
     <script src="/public/javascripts/jquery.min.js"></script>
     
     <script src="/public/js/ace-extra.min.js"></script>
+    <script src="/public/javascripts/jquery.min.js"></script>
+    <script src="/public/js/bootstrap-datepicker.js"></script>
 
     <style>
         /* 侧边栏分辨率大于等于 768px 时 宽度设置250px） 小于768px时 样式表不起作用 */
@@ -32,31 +35,58 @@
     </style>
 </head>
 
-<body>
+<body class="no-skin" style="font-family: PingFangSC-Light, Tahoma, Arial, SimSun, Microsoft Yahei,sans-serif;background-color: rgb(250, 250, 250, 0.6);">
     <%include header.ejs %>
-    <div class="navbar-collapse" id="slider_sub">
-        <ul class="nav">
-            <% prjs.forEach(function(prj){ %>
-            <% if (prj.status == "进行中"){ %>
-            <li style="background-color: #EEEEEE"><a href="<%= prj.linkurl %>">
-                    <%= prj.name %><span class="glyphicon glyphicon-chevron-right pull-right">
-                    </span>
-                </a>
-            </li>
-            <% }else { %>
-            <li>
-                <a href="<%= prj.linkurl %>">
-                    <%= prj.name %><span class="glyphicon glyphicon-chevron-right pull-right">
-                    </span>
-                </a>
-            </li>
-            <% } %>
-            <% }) %>
+<hr>
+<div class="col-xs-12 col-sm-5 widget-container-col ui-sortable">
+        <div class="widget-box widget-color-blue ui-sortable-handle">
+            <!-- <div class="widget-header">
+                <h5 class="widget-title bigger lighter">
+                    <i class="ace-icon fa fa-table"></i>
+                    项目列表 &amp; 状态
+                </h5>
+            </div> -->
 
-        </ul>
+            <div class="widget-body">
+                <div class="widget-main no-padding">
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead class="thin-border-bottom">
+                            <tr>
+                                <th>
+                                    <i class="ace-icon fa fa-star blue"></i>
+                                    项目名称
+                                </th>
 
+                                <th class="hidden-480">状态</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <% prjs.forEach(function(prj){ %>
+                                <% if (prj.status == "进行中"){ %>
+                            <tr>
+                                <td class=""><a href="<%= prj.linkurl %>"><%= prj.name %></a></td>
+
+                                <td class="hidden-480">
+                                    <span class="label label-success arrowed-in arrowed-in-right"><%= prj.status %></span>
+                                </td>
+                            </tr>
+                            <% }else { %>
+                                <tr>
+                                <td class=""><a href="<%= prj.linkurl %>"><%= prj.name %></a></td>
+                        
+                                <td class="hidden-480">
+                                    <span class="label label-warning"><%= prj.status %></span>
+                                </td>
+                            </tr>
+                                <% } %>
+                            <% }) %> 
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
-
     <script language="JavaScript" src="/public/js/bootstrap.min.js"></script>
     <script src="/public/js/typeahead-bs2.min.js"></script>
 

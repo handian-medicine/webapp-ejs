@@ -5,7 +5,8 @@
     <title>修改密码</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- basic styles -->
-    <link rel="stylesheet" href="/public/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="/public/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="/public/bootstrap3/css/bootstrap.min.css">
     <link rel="stylesheet" href="/public/css/font-awesome.min.css">
     <link rel="stylesheet" href="/public/css/ace.min.css">
     <link rel="stylesheet" href="/public/css/ace-rtl.min.css">
@@ -13,113 +14,193 @@
     <script src="/public/javascripts/jquery.min.js"></script>
     <script src="/public/js/ace-extra.min.js"></script>
     <script src="/public/js/jquery.cookie.js"></script>
-    <style>
+    <!-- <style>
         .page-content1 {
             margin: 0;
             padding: 8px 20px 24px;
         }
-    </style>
-</head>
-<body>
-    <script>
-        function validate() {                  
-            var pwd = $("#newcode").val();
-            var pwd1 = $("#affirmcode").val();
+    </style> -->
+        <script>
+                $(document).ready(function () {
+                    $("#password-form").submit(function () {
+                        $.ajax({
+                            url: "/cipher",//路由，用来处理ajax请求的函数的所在地址
+                            type: "PUT",
+                            data: {
+                                oldcode: $("#oldcode").val(),   
+                                newcode: $("#newcode").val(),
+                                affirmcode: $("#affirmcode").val()
+                            },
+                            success: function (data) {
+                                if (data.status == 1) {
+                                    alert("密码修改成功,请重新登录")
+                                    $.removeCookie("userinfo", { path: '/' });  //密码修改成功后删除原cookie
+                                    $.removeCookie("prj001token", { path: '/' });
+                                    $.removeCookie("usertoken", { path: '/' });
+                                    $.removeCookie("userid", { path: '/' });
+                                    window.location.href = '/';    //    请求成功后跳转到你的主页
+                                } else {
+                                    alert("密码修改失败:" + data.msg);
+                                    window.location.href = '/cipher';
+                                }
+                            },
+                            error: function () {
+                                alert("密码修改失败");
+                                window.location.href = '/home';
+                            }
+                        });
+                    });
+                });
+        </script>
 
-            if (pwd == '' || pwd1 == '') {
-                $("#codeBtn").attr("disabled","disabled"); 
-            } else {
-                if (pwd == pwd1) {
-                    $("#tip").html("两次密码相同");
-                    $("#tip").css("color","green");
-                    $("#codeBtn").removeAttr("disabled");
-                } else {
-                    $("#tip").html("两次密码不相同");
-                    $("#tip").css("color","red")
-                    $("#codeBtn").attr("disabled","disabled");  
-                }
-            }
-        }
-        function empty() {
-            var pwd = $("#oldcode").val();
-            if (pwd == '') {
-                $("#codeBtn").attr("disabled","disabled"); 
-            } else {
+    <!-- 新旧密码验证 -->
+    <script>
+            function validate() {                  
+                var pwd = $("#newcode").val();
+                var pwd1 = $("#affirmcode").val();
+    
                 if (pwd == '' || pwd1 == '') {
                     $("#codeBtn").attr("disabled","disabled"); 
                 } else {
-                    $("#codeBtn").removeAttr("disabled");
-                }
-                
-            }
-        }
-    </script>
-    <script>
-        $(document).ready(function () {
-            $("#codeBtn").click(function () {
-                $.ajax({
-                    url: "/cipher",//路由，用来处理ajax请求的函数的所在地址
-                    type: "PUT",
-                    data: {
-                        oldcode: $("#oldcode").val(),   
-                        newcode: $("#newcode").val(),
-                        affirmcode: $("#affirmcode").val()
-                    },
-                    success: function (data) {
-                        if (data.status == 1) {
-                            alert("密码修改成功,请重新登录")
-                            $.removeCookie("userinfo", { path: '/' });  //密码修改成功后删除原cookie
-                            $.removeCookie("prj001token", { path: '/' });
-                            $.removeCookie("usertoken", { path: '/' });
-                            $.removeCookie("userid", { path: '/' });
-                            window.location.href = '/';    //    请求成功后跳转到你的主页
-                        } else {
-                            alert("密码修改失败:" + data.msg);
-                            window.location.href = '/cipher';
-                        }
-                    },
-                    error: function () {
-                        alert("密码修改失败");
-                        window.location.href = '/home';
+                    if (pwd == pwd1) {
+                        $("#tip").html("两次密码相同");
+                        $("#tip").css("color","green");
+                        $("#codeBtn").removeAttr("disabled");
+                    } else {
+                        $("#tip").html("两次密码不相同");
+                        $("#tip").css("color","red")
+                        $("#codeBtn").attr("disabled","disabled");  
                     }
-                });
-            });
-        });
+                }
+            }
+            function empty1() {
+                var pwd = $("#oldcode").val();
+                if (pwd == '') {
+                    $("#codeBtn").attr("disabled","disabled"); 
+                } else {
+                    if (pwd == '' || pwd1 == '') {
+                        $("#codeBtn").attr("disabled","disabled"); 
+                    } else {
+                        $("#codeBtn").removeAttr("disabled");
+                    }
+                    
+                }
+            }
     </script>
+</head>
+<body class="login-layout light-login" style="font-family: PingFangSC-Light, Tahoma, Arial, SimSun, Microsoft Yahei,sans-serif;background-color: rgb(250, 250, 250, 0.6);">
+
     <%include header.ejs %>
-<!-- 登录 -->
-<div class="page-content1">
-    <div class="row">
-        <div class="col-xs-3" style="width:21%">
-            <table>
-                <tbody>
-                <tr>
-                    <th><label for="oldcode">旧密码:</label></th>
-                    <td><input type="password" name="oldcode" maxlength="50" required="" id="oldcode" onkeyup="empty();"/></td>
-                </tr>
-                <tr>
-                    <th><label for="newcode">新密码:</label></th>
-                    <td><input type="password" name="newcode" required="true" id="newcode" onkeyup="validate();"/></td>                   
-                </tr>
-                <tr>
-                    <th><label for="affirmcode">确认新密码:</label></th>
-                    <td><input type="password" name="affirmcode" required="true" id="affirmcode" onkeyup="validate();"/></td>
-                </tr>
-                </tbody>
-            </table>
-            <span id="tip"></span>
-            <br>
-            <button type="submit" id="codeBtn" disabled>确认修改</button>
-            </div>
-                    <p style="color:darkgray">你的密码不能与其他个人信息太相似。</p >
-                    <p style="color:darkgray">你的密码必须包含至少 8 个字符。</p >
-                    <p style="color:darkgray">你的密码不能是大家都爱用的常见密码。</p >
-                    <p style="color:darkgray">你的密码不能全部为数字。</p >
 
-            </div>
-    </div>
-</div>
+    <!-- 新的登录界面 -->
+    <div class="main-content">
+            <div class="row">
+                <div class="position-relative">
+                    <div class="col-xs-12">
+                            
+                        <div class="login-container">
+                                
+                        <div id="login-box" class="login-box visible widget-box no-border">
+                            <div class="widget-body">
+                                <div class="widget-main">
+                                    <h4 class="header blue lighter bigger">
+                                        <i class="ace-icon fa fa-coffee green"></i>
+                                        请输入新旧密码
+                                    </h4>
+                                    <div class="space-6"></div>
+                                
+                                    <form method="PUT" id="password-form" onsubmit="return false">
+                                        <fieldset>
+                                            <label class="block clearfix">
+                                                <span class="block input-icon input-icon-right">
+                                                    <input type="password" name="oldcode" id="oldcode" onkeyup="empty();" class="form-control" placeholder="旧密码" required>
+                                                    <i class="ace-icon fa fa-lock"></i>
+                                                </span>
+                                            </label>
+    
+                                            <label class="block clearfix">
+                                                <span class="block input-icon input-icon-right">
+                                                    <input type="password" name="newcode" id="newcode" onkeyup="validate();" class="form-control" placeholder="新密码" required>
+                                                    <i class="ace-icon fa fa-lock"></i>
+                                                </span>
+                                            </label>
+                                            <label class="block clearfix">
+                                                    <span class="block input-icon input-icon-right">
+                                                        <input type="password" name="affirmcode" id="affirmcode" onkeyup="validate();" class="form-control" placeholder="确认新密码" required>
+                                                        <i class="ace-icon fa fa-lock"></i>
+                                                    </span>
+                                            </label>
+    
+                                            <div class="space"></div>
+    
+                                            <div class="clearfix">
+                                                <!-- <label class="inline">
+                                                    <input type="checkbox" class="ace">
+                                                    <span class="lbl"> Remember Me</span>
+                                                </label> -->
+                                                <!-- <span id="tip"></span> -->
+                                                <button disabled id="codeBtn" type="submit" class="width-35 pull-right btn btn-sm btn-primary">
+                                                    <i class="ace-icon fa fa-key"></i>
+                                                    <span class="bigger-110">确认修改</span>
+                                                </button>
+                                            </div>
+                                        
+                                            <div class="space-4"></div>
+                                        </fieldset>
+                                    </form>
+                                    <div class="social-or-login center">
+                                        <span id="tip" class="bigger-110"></span>
+                                    </div>
+                                    <!-- <div class="space-6"></div> -->
+                                </div><!-- /.widget-main -->
+    
+                            </div><!-- /.widget-body -->
+                        </div>
+                    
+                        </div>
+                    </div>
+                </div>
+            </div><!-- div row -->
 
+            <div class="row">
+                    <div class="col-xs-12 align-center">
+                            <div class="error-container" style="margin:12px 300px 12px 300px">
+                                    <div class="well" style="padding:10px">
+                                    <h3 class="lighter smaller">
+                                        修改
+                                        <i class="ace-icon fa fa-wrench icon-animated-wrench bigger-125"></i>
+                                        提示
+                                    </h3>
+            
+                                    <hr>
+            
+                                    <div>
+                                        <ul class="list-unstyled spaced inline bigger-110 margin-15">
+                                            <li>
+                                                <i class="ace-icon fa fa-hand-o-right blue"></i>
+                                                你的密码不能与其他个人信息太相似
+                                            </li>
+            
+                                            <li>
+                                                <i class="ace-icon fa fa-hand-o-right blue"></i>
+                                                你的密码必须包含至少 8 个字符。
+                                            </li>
+                                            <li>
+                                                <i class="ace-icon fa fa-hand-o-right blue"></i>
+                                                你的密码不能是大家都爱用的常见密码。
+                                            </li>
+                                            <li>
+                                                <i class="ace-icon fa fa-hand-o-right blue"></i>
+                                                你的密码不能全部为数字。
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    </div>
+                            </div>
+                    </div>
+            </div>
+    </div><!-- div main-content -->
+        <!-- 新的登录界面 -->
 
 <!--[if !IE]> -->
 
@@ -127,18 +208,10 @@
     window.jQuery || document.write("<script src='js/jquery-2.0.3.min.js'>"+"<"+"/script>");
 </script>
 
-<!-- <![endif]-->
-
-<!--[if IE]>
-<script type="text/javascript">
-    window.jQuery || document.write("<script src='js/jquery-1.10.2.min.js'>"+"<"+"/script>");
-</script>
-<![endif]-->
-
 <script type="text/javascript">
     if("ontouchend" in document) document.write("<script src='/public/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
 </script>
-<script src="/public/js/bootstrap.min.js"></script>
+<script src="/public/bootstrap3/js/bootstrap.min.js"></script>
 <script src="/public/js/typeahead-bs2.min.js"></script>
 
 <!-- page specific plugin scripts -->

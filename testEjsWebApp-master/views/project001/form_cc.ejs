@@ -1,17 +1,20 @@
 <div class="modal-body">
                                 <div class="row">
                                     <div class="col-xs-12 col-sm-12">
-                                            <p><h4 style="color:#BC1717">以下请在医生指导下填写:</h4>
-                                                <hr>
+                                        <p><h4 class="header red">以下请在医生指导下填写:</h4>
+                                            
                                         <input type="hidden" class="person" name="person" id="person-cc"/>
-                                        <p><h4 style="color:#BC1717">一、中医诊断</h4>
+                                        <p><h4 class="header red">一、中医诊断</h4>
                     
-                                        <p><h5 style="color:blue">1、诊断结果:</h5>
-                                        <label><input name="yuejing_zhenduan" type="radio" value="月经先期"/>月经先期</label>
-                                        <label><input name="yuejing_zhenduan" type="radio" value="月经过多"/>月经过多</label>
-                                        <label><input name="yuejing_zhenduan" type="radio" value="经期延长"/>经期延长</label>
-                                        <label><input name="yuejing_zhenduan" type="radio" value="经间期出血"/>经间期出血</label>
-                                        <label><input name="yuejing_zhenduan" type="radio" value="崩漏"/>崩漏</label>
+                                        <p><h5 class="header blue">1、诊断结果:</h5>
+
+                                        <label><input name="yuejing_xian" type="checkbox" value="true"/>月经先期</label>
+                                        <label><input name="yuejing_duo" type="checkbox" value="true"/>月经过多</label>
+                                        <label><input name="yuejing_yan" type="checkbox" value="true"/>经期延长</label>
+                                        <label><input name="yuejing_chu" type="checkbox" value="true"/>经间期出血</label>
+                                        <label><input name="yuejing_beng" type="checkbox" value="true"/>崩漏</label>
+                                        <br>
+                                        <label>其他:<input type="text" id="yuejing_qita" name="yuejing_qita" value=""/></label>
                     
                                         <script>
                                             // $(document).ready(function(){
@@ -49,7 +52,7 @@
                                             }
                                         </script>
                                         
-                                        <p><h5 style="color:blue">2、<input name="zheng_title" type="radio" value="test" onchange="xuzheng_func();"/>虚证诊断:</h5>
+                                        <p><h5 class="header blue">2、<input name="zheng_title" type="radio" value="test" onchange="xuzheng_func();"/>虚证诊断:</h5>
                                         <div id="xuzheng-div">
                                         <label><input name="xuzheng" type="radio" value="肾气虚证" onclick="xuzheng_func();"/>肾气虚证</label>
                                         <label><input name="xuzheng" type="radio" value="肾阴虚证" onclick="xuzheng_func();"/>肾阴虚证</label>
@@ -62,21 +65,21 @@
                                         <label>其他:<input type="text" id="qita_asthenic" name="qita_asthenic" value="" onclick="xuzheng_func();"/></label>
                                         </div>
 
-                                        <p><h5 style="color:blue">3、<input name="zheng_title" type="radio" value="test" onchange="shizheng_func();"/>实证诊断:</h5>
+                                        <p><h5 class="header blue">3、<input name="zheng_title" type="radio" value="test" onchange="shizheng_func();"/>实证诊断:</h5>
                                         <div id="shizheng-div">
                                         <label><input name="shizheng" type="radio" value="肝郁血热证" onclick="shizheng_func();"/>肝郁血热证</label>
                                         <label><input name="shizheng" type="radio" value="阳盛血热证" onclick="shizheng_func();"/>阳盛血热证</label>
                                         <label><input name="shizheng" type="radio" value="湿热证" onclick="shizheng_func();"/>湿热证</label>
                                         <label><input name="shizheng" type="radio" value="痰湿证" onclick="shizheng_func();"/>痰湿证</label>
                                         <label><input name="shizheng" type="radio" value="肝郁气滞证" onclick="shizheng_func();"/>肝郁气滞证</label>
-                                        <label><input name="shizheng" type="radio" value="气滞血瘀证" onclick="shizheng_func();"/>气滞血瘀证</label>
+                                        <label><input name="shizheng" type="radio" value="血瘀证" onclick="shizheng_func();"/>血瘀证</label>
                                         <label><input name="shizheng" type="radio" value="血寒证" onclick="shizheng_func();"/>血寒证</label>
                                         <label><input name="shizheng" type="radio" value="实热证" onclick="shizheng_func();"/>实热证</label>
                                         <br>
                                         <label>其他:<input type="text" id="qita_demonstration" name="qita_demonstration" value="" onclick="shizheng_func();"/></label>
                                         </div>
 
-                                        <p><h5 style="color:blue">4、<input name="zheng_title" type="radio" value="test" onchange="xushi_func();"/>虚实夹杂诊断:</h5>
+                                        <p><h5 class="header blue">4、<input name="zheng_title" type="radio" value="test" onchange="xushi_func();"/>虚实夹杂诊断:</h5>
                                         <div id="xushi-div">
                                         <label><input name="xushi" type="radio" value="阴虚血热证" onclick="xushi_func();"/>阴虚血热证</label>
                                         <br>
@@ -84,7 +87,7 @@
                                         </div>
                                         <hr>
                     
-                                        <p><h4 style="color:#BC1717">二、西医诊断</h4>
+                                        <p><h4 class="header red">二、西医诊断</h4>
                                         <label><input name="zigongchuxue" type="checkbox" value="true"/>排卵障碍性异常子宫出血</label>
                                         <br>
                                         <label>其他西医诊断:<input type="text" id="qita_west" name="qita_west" value=""/></label>

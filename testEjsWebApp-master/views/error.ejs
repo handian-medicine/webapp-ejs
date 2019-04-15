@@ -1,3 +1,69 @@
-<h1><%= message %></h1>
-<pre><%= error %></pre>
-<a href="/">重新登录</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数据展示</title>
+    <link rel="stylesheet" href="../public/css/myPagination.css">
+    <!-- <link rel="stylesheet" href="../public/css/chosen.css" /> -->
+    <!-- <link rel="stylesheet" href="../public/css/bootstrap.min.css"> -->
+    <!-- <link rel="stylesheet" href="/public/bootstrap4/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="../public/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../public/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../public/css/ace.min.css">
+
+    <link rel="stylesheet" href="../public/css/ace.min.css" class="ace-main-stylesheet">
+    <link rel="stylesheet" href="../public/css/ace-rtl.min.css">
+    <link rel="stylesheet" href="../public/css/ace-skins.min.css">
+    <link rel="stylesheet" href="../public/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="../public/css/jquery-ui-1.10.3.full.min.css" />
+    <script src="../public/js/ace-extra.min.js"></script>
+    <script src="../public/javascripts/jquery.min.js"></script>
+    <script src="../public/js/bootstrap-datepicker.js"></script>
+
+    <script src="/public/js/respond.min.js"></script>
+</head>
+
+<body class="no-skin" style="font-family: PingFangSC-Light, Tahoma, Arial, SimSun, Microsoft Yahei,sans-serif;">
+<div class="col-xs-12">
+								<!-- PAGE CONTENT BEGINS -->
+
+								<div class="error-container">
+									<div class="well">
+										<h1 class="grey lighter smaller">
+											<span class="blue bigger-125">
+												<i class="ace-icon fa fa-sitemap"></i>
+												404
+											</span>
+											Page Not Found
+										</h1>
+
+										<hr>
+										<h3 class="lighter smaller">We looked everywhere but we couldn't find it!</h3>
+
+										<div>
+											<div class="space"></div>
+                                            <h4 class="lighter smaller"><%= message %></h4>
+                                            <pre><%= error %></pre>
+										</div>
+                                            
+										    <hr>
+										<div class="space"></div>
+										
+										<div class="center">
+											<a href="/" class="btn btn-primary">
+												<i class="ace-icon fa fa-arrow-left"></i>
+												返回登录
+											</a>
+										</div>
+									</div>
+								</div>
+
+								<!-- PAGE CONTENT ENDS -->
+</div>
+
+
+<script src="/public/bootstrap3/js/bootstrap.min.js"></script>
+<script src="/public/js/typeahead-bs2.min.js"></script>
+<script src="/public/js/ace-elements.min.js"></script>
+<script src="/public/js/ace.min.js"></script>
+</body>

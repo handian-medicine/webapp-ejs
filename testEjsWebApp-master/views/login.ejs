@@ -8,134 +8,263 @@
     </title>
     <meta name="viewsport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="/public/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="/public/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="/public/bootstrap3/css/bootstrap.min.css">
     <link rel="stylesheet" href="/public/css/font-awesome.min.css">
-
     <link rel="stylesheet" href="/public/css/ace.min.css">
     <link rel="stylesheet" href="/public/css/ace-rtl.min.css">
     <link rel="stylesheet" href="/public/css/ace-skins.min.css">
     <script src="/public/js/ace-extra.min.js"></script>
     <script src="/public/javascripts/jquery.min.js"></script>
-</head>
-<style>
-    .page-content1 {
-        margin: 0;
-        padding: 8px 20px 24px;
-    }
-</style>
-<body>
-    <div class="navbar navbar-default" id="navbar">
-        <script type="text/javascript">
-            try {
-                ace.settings.check('navbar', 'fixed')
-            } catch (e) {}
-        </script>
-
-        <div class="navbar-container" id="navbar-container">
-            <div class="navbar-header pull-left">
-                <a href="#" class="navbar-brand">
-                    <small>
-                        <i class="icon-leaf">
-                            中医妇科临床流调数据中心
-                        </i>
-                    </small>
-                </a>
-            </div>
-        </div>
-    </div>
-    <script>
-        $(document).ready(function () {
-        $("#userLogin").click(function () {
-            $.ajax({
-                url: "/users/login",//路由，用来处理ajax请求的函数的所在地址
-                type: "POST",
-                data: {
-                    email: $("#id_email").val(),    //    用户邮箱和密码
-                    pass: $("#id_password").val()
-                },
-                success: function (data) {
-                    if (data.status == 1) {
-                        window.location.href = '/home';    //    请求成功后跳转到你的主页
-                    } else {
-                        alert(data.msg);
+        <!-- 登录 -->
+        <script>
+            $(document).ready(function () {
+            $("#login-form").submit(function () {
+                $.ajax({
+                    url: "/users/login",//路由，用来处理ajax请求的函数的所在地址
+                    type: "POST",
+                    data: {
+                        email: $("#id_email").val(),    //    用户邮箱和密码
+                        pass: $("#id_password").val()
+                    },
+                    success: function (data) {
+                        if (data.status == 1) {
+                            window.location.href = '/home';    //    请求成功后跳转到你的主页
+                        } else {
+                            alert(data.msg);
+                        }
+    
+                    },
+                    error: function () {
+                        alert("密码或账号错误");
+                        window.location.href = '/';
                     }
-
-                },
-                error: function () {
-                    alert("密码或账号错误");
-                    window.location.href = '/';
-                }
+                });
             });
         });
-    });
-</script>
-   <div class="page-content1"> 
-	<div class="row">
-        <div class="col-xs-6">
-    <table>
-        <tbody>
-            <tr>
-                <th><label for="id_email">电子邮箱:</label></th>
-                <td><input type="text" name="email" maxlength="50" required="" id="id_email"></td>
-            </tr>
-            <tr>
-                <th><label for="id_password">密码:</label></th>
-                <td><input type="password" name="password" required="" id="id_password"></td>
-            </tr>
-        </tbody>
-    </table>
-    <button type="submit" id="userLogin">登录</button>
-    <a href="/public/forget.html" style="margin-left:18%">忘记密码</a>
-        </div>
-    </div>
+        </script>
+        <!-- 密码找回 -->
+    <script>
+        $(document).ready(function () {
+            $("#verifyBtn").click(function () {
+                if ($("#id_email_verify").val()=='') {
+                    alert("请填写邮箱名");
+                    return
+                }
+                // alert("你好")
+                $.ajax({
+                        url: "/users/verify", 
+                        type: "POST",
+                        data:{
+                            email: $("#id_email_verify").val(),
+                        },
+                        success: function (result) {
+                            alert(result.msg);
+                            if (result.msg=='邮件发送成功, 新的密码请查看邮件'){
+                                window.location.href="/";
+                            }   
+                        },
+                        error:  function (result) {
+                            alert(result.msg);
+                            window.location.href="/";
+                        },
+                })
+            })
+        })
+    </script>
+        <!-- box切换 -->
+        <script type="text/javascript">
+            jQuery(function($) {
+             $(document).on('click', '.toolbar a[data-target]', function(e) {
+                e.preventDefault();
+                var target = $(this).data('target');
+                $('.widget-box.visible').removeClass('visible');//hide others
+                $(target).addClass('visible');//show target
+             });
+            });
+            
+            //you don't need this, just used for changing background
+        </script>
+</head>
+
+<body class="login-layout light-login" style="font-family: PingFangSC-Light, Tahoma, Arial, SimSun, Microsoft Yahei,sans-serif; background-color:rgb(230, 230, 230, 0.6);"">
+
+<div class="main-container">
+
+    <!-- 新的登录界面 -->
     <div class="main-content">
         <div class="row">
-                    <div class="col-xs-10">
+            <div class="position-relative">
+                <div class="col-xs-12">
+                        
+                    <div class="login-container" style="width:470px">
+                        <!-- 标题 -->
+                        <div class="center">
+                                <h1>
+                                    <i class="ace-icon fa fa-leaf green"></i>
+                                    <!-- <span class="red">Ace</span> -->
+                                    <span class="grey" id="id-text2">中医妇科临床流调数据中心</span>
+                                </h1>
+                        </div>
+                        <!-- 标题 -->
 
-                        <div class="error-container">
-                            <div class="well">
-                                <h3 class="lighter smaller">
-                                    使用
-                                    <i class="icon-wrench icon-animated-wrench bigger-125"></i>
-                                    提示!
-                                </h3>
+                        <hr style="width: 90%; height: 2px; border: none; background-color: #4f90c1">
+                        
+                        <!-- 登录 -->
+                        <div id="login-box" class="login-box visible widget-box no-border">
+                            <div class="widget-body">
+                                <div class="widget-main">
+                                    <h4 class="header blue lighter bigger">
+                                        <i class="ace-icon fa fa-coffee green"></i>
+                                        请输入登录信息
+                                    </h4>
+                                    <div class="space-6"></div>
+                                
+                                    <form method="POST" id="login-form" onsubmit="return false">
+                                        <fieldset>
+                                        <label class="block clearfix">
+                                            <span class="block input-icon input-icon-right">
+                                                <input type="email" name="email" maxlength="50" id="id_email" class="form-control" placeholder="用户名" required>
+                                                <i class="ace-icon fa fa-user"></i>
+                                            </span>
+                                        </label>
 
-                                <div class="space"></div>
+                                        <label class="block clearfix">
+                                            <span class="block input-icon input-icon-right">
+                                                <input type="password" name="password" id="id_password" class="form-control" placeholder="密码" required>
+                                                <i class="ace-icon fa fa-lock"></i>
+                                            </span>
+                                        </label>
 
-                                <div>
-                                    <h4 class="lighter smaller">为了保证用户使用功能正常，要求使用如下浏览器:</h4>
+                                        <div class="space"></div>
 
-                                    <ul class="list-unstyled spaced inline bigger-110 margin-15">
-                                        <li>
-                                            <i class="icon-hand-right blue"></i>
-                                            谷歌浏览器
-                                            <a href="https://www.google.cn/chrome/index.html">https://www.google.cn/chrome/index.html</a>
-                                        </li>
+                                        <div class="clearfix">
+                                            <!-- <label class="inline">
+                                                <input type="checkbox" class="ace">
+                                                <span class="lbl"> Remember Me</span>
+                                            </label> -->
+                                            <button type="submit" class="width-100 btn btn-sm btn-primary" id="userLogin">
+                                                <i class="ace-icon fa fa-key"></i>
+                                                <span class="bigger-110">登录</span>
+                                            </button>
+                                        </div>
+                                    
+                                        <div class="space-4"></div>
+                                        </fieldset>
+                                    </form>
+                                    <div class="social-or-login center">
+                                        <span class="bigger-110">友情提示<i class="ace-icon fa fa-wrench icon-animated-wrench bigger-125"></i></span>
+                                    </div>
 
-                                        <li>
-                                            <i class="icon-hand-right blue"></i>
-                                            火狐浏览器
-                                            <a href="http://www.firefox.com.cn/download/">http://www.firefox.com.cn/download/</a>
-                                        </li>
-                                        <li>
-                                            <i class="icon-hand-right blue"></i>
-                                            暂不支持IE及其它浏览器
-                                        </li>
-                                    </ul>
-                                    <h4 class="lighter smaller" style="font-weight: bold"><a href="/public/explain.html">系统使用帮助</h4>
+                                    <div class="space-6"></div>
+                                    <!-- 提示说明 -->
+                                    <div class="social-login center">
+                                        <div>
+                                            <h4 class="lighter smaller">为了保证用户使用功能正常，要求使用如下浏览器:</h4>
+                                    
+                                            <ul class="list-unstyled spaced inline bigger-110 margin-15">
+                                                <li>
+                                                    <i class="ace-icon fa fa-hand-o-right blue"></i>
+                                                    谷歌浏览器
+                                                    <a href="https://www.google.cn/chrome/index.html">
+                                                        <img class="nav-user-photo" src="/public/avatars/chrome.jpg" 
+                                                        style="width: 25px;height: 25px;" alt="https://www.google.cn/chrome/index.html">
+                                                    </a>
+                                                </li>
+                                            
+                                                <li>
+                                                    <i class="ace-icon fa fa-hand-o-right blue"></i>
+                                                    火狐浏览器
+                                                    <a href="http://www.firefox.com.cn/download/">
+                                                        <img class="nav-user-photo" src="/public/avatars/firefox.jpg" 
+                                                        style="width: 25px;height: 25px;" alt="http://www.firefox.com.cn/download/">
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <!-- <i class="ace-icon fa fa-hand-o-right blue"></i> -->
+                                                    <p class="blue">暂不支持IE及其它浏览器</p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <!-- 提示说明 -->
+                                </div><!-- /.widget-main -->
+
+                                <div class="toolbar clearfix">
+                                    <div>
+                                        <a href="#" data-target="#forgot-box" class="forgot-password-link">
+                                            <i class="ace-icon fa fa-arrow-left"></i>
+                                            忘记密码
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a href="/public/explain.html" class="user-signup-link">
+                                            系统帮助
+                                            <i class="ace-icon fa fa-arrow-right"></i>
+                                        </a>
+                                    </div>
                                 </div>
 
-                                <hr />
-                            </div>
+                            </div><!-- /.widget-body -->
                         </div>
+                        <!-- 登录 -->
 
+                        <!-- 找回密码 -->
+                        <div id="forgot-box" class="forgot-box widget-box no-border">
+                            <div class="widget-body">
+                                <div class="widget-main">
+                                    <h4 class="header red lighter bigger">
+                                        <i class="ace-icon fa fa-key"></i>
+                                        找回密码
+                                    </h4>
+
+                                    <div class="space-6"></div>
+                                    <p>
+                                        请输入您的邮箱，系统会向该邮箱发送验证信息
+                                    </p>
+
+                                    <form>
+                                        <fieldset>
+                                            <label class="block clearfix">
+                                                <span class="block input-icon input-icon-right">
+                                                    <input class="form-control" type="email" name="email" maxlength="50" id="id_email_verify" required>
+                                                    <i class="ace-icon fa fa-envelope"></i>
+                                                </span>
+                                            </label>
+
+                                            <div class="clearfix">
+                                                <button type="button" class="width-35 pull-right btn btn-sm btn-danger" id="verifyBtn">
+                                                    <i class="ace-icon fa fa-lightbulb-o"></i>
+                                                    <span class="bigger-110">发送</span>
+                                                </button>
+                                            </div>
+                                        </fieldset>
+                                    </form>
+                                </div><!-- /.widget-main -->
+
+                                <div class="toolbar center">
+                                    <a href="#" data-target="#login-box" class="back-to-login-link">
+                                        返回登录
+                                        <i class="ace-icon fa fa-arrow-right"></i>
+                                    </a>
+                                </div>
+                            </div><!-- /.widget-body -->
+                        </div>
+                        <!-- 找回密码 -->
                     </div>
                 </div>
+            </div>
+        </div><!-- div row -->
 
+
+    </div><!-- div main-content -->
+    <!-- 新的登录界面 -->
+    <div class="space-12"></div>
+    <div class="main-content">
         <div class="row">
-            <div class="col-xs-10" style="text-align:center;">
-                <div class="bigger-150">本项目由中华中医药学会妇科分会发起，
-                <a href="http://www.handian.com">北京汉典制药有限公司</a>
+            <div class="col-xs-12" style="text-align:center;">
+                <div class="bigger-150">本项目由<a>中华中医药学会妇科分会发起</a>，    
+                    <a href="http://www.handian.com">北京汉典制药有限公司</a>
                 <sup>®</sup>
                 支持
                 </div>
@@ -143,6 +272,8 @@
         </div>
 
     </div>
+
+</div> <!-- div main-container -->
     <script type="text/javascript">
         window.jQuery || document.write("<script src='/public/js/jquery-2.0.3.min.js'>" + "<" + "/script>");
     </script>
@@ -156,12 +287,13 @@
     <script src="/public/js/ace-elements.min.js"></script>
     <script src="/public/js/ace.min.js"></script>
 
-    <!-- inline scripts related to this page -->
+    <script type="text/javascript">
+        if('ontouchstart' in document.documentElement) document.write("<script src='/public/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+    </script>
     <script type="text/javascript">
         var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
         document.write(unescape("%3Cscript src='" + _bdhmProtocol + ""));
     </script>
-
 </body>
 
 </html>

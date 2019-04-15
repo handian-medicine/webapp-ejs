@@ -86,13 +86,13 @@ router.get('/home', function (req, res, next) {
                 }
                 else {
                     console.log(">>>index.js: Getting user details met unknown error. "+err.error_description);
-                    res.redirect("login");
+                    res.redirect("relogin");
                 }
             });
         });
     } else {
         console.log(">>>Failed to find cookie with access token");
-        res.redirect("login");
+        res.redirect("relogin");
     }
 
 });

@@ -131,7 +131,7 @@ router.get('/', function (req, res, next) {
                 /*   分页测试  */
             } else {
                 console.log(">>>Getting archives met unknown error. " , error.error_description);
-                res.redirect("login");
+                res.redirect("relogin");
             }
         });
     }
@@ -282,18 +282,18 @@ router.get('/', function (req, res, next) {
                             /*   分页测试  */
 
                         } else {
-                            console.log(">>>Getting archives met unknown error. " + err.error_description);
-                            res.redirect("login");
+                            console.log(">>>Getting archives met unknown error. ");//+ err.error_description
+                            res.redirect("relogin");
                         }
                     });
                 } else {
-                    console.log(">>>Invoking access token met unknown error. " + err.error_description);
-                    res.redirect("login");
+                    console.log(">>>Invoking access token met unknown error. ");// + err.error_description
+                    res.redirect("relogin");
                 }
             });
         } else {
             console.log(">>>Failed to find cookie with user info");
-            res.redirect("login");
+            res.redirect("relogin");
         }
     }
 });
@@ -407,6 +407,28 @@ router.get('/dataana', function (req, res, next) {
         account_address:req.cookies.accountinfo.address,
     });
 });
+router.get('/charts', function (req, res, next) {
+    // /prj001/charts
+    var charts_url = myconst.apiurl + "prj001/charts/";
+    var authstring = req.cookies.prj001token.access_token;
+    var options = {
+        url: charts_url,
+        headers: {
+            'Authorization': 'Bearer ' + authstring
+        }
+    };
+    // res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
+    console.log("charts:",options);
+    request(options, function (error, response, body) {
+        var charts_info = JSON.parse(body); 
+        console.log("charts2:",response.statusCode)           
+        console.log("charts3:",charts_info)           
+        if (!error && response.statusCode == 200) {
+            res.json({charts:charts_info});
+        }
+        // res.render('dataana',{});
+    })
+});
 /*     关于        */
 router.get('/about', function (req, res, next) {
     console.log(">>>Visting about page!");
@@ -451,7 +473,7 @@ router.post('/geninfo', function (req, res, next){
     //}
 });
 /* 一般信息 修改 */
-router.put('/geninfo_save', function (req, res, next){
+router.post('/geninfo_save', function (req, res, next){
     console.log(">>>prj001.js put method:", req.body.geninfo_url);
     //if (req.cookies.prj001token) {
         var geninfo_url = req.body.geninfo_url;
@@ -507,7 +529,7 @@ router.post('/summary', function (req, res, next){
         }
     });
 });
-router.put('/summary_save', function (req, res, next){
+router.post('/summary_save', function (req, res, next){
     console.log(">>>prj001.js put method:", req.body.summary_url);
     if ( req.body.summary_url != undefined) {
         console.log("url不为空");
@@ -599,7 +621,7 @@ router.post('/history', function (req, res, next){
         }
     });
 });
-router.put('/history_save', function (req, res, next){
+router.post('/history_save', function (req, res, next){
     console.log(">>>prj001.js put method:", req.body.history_url);
     if ( req.body.history_url != undefined) {
         console.log("url不为空");
@@ -691,7 +713,7 @@ router.post('/relevant', function (req, res, next){
         }
     });
 });
-router.put('/relevant_save', function (req, res, next){
+router.post('/relevant_save', function (req, res, next){
     console.log(">>>prj001.js put method:", req.body.relevant_url);
     if ( req.body.relevant_url != undefined) {
         console.log("url不为空");
@@ -782,7 +804,7 @@ router.post('/cc', function (req, res, next){
         }
     });
 });
-router.put('/cc_save', function (req, res, next){
+router.post('/cc_save', function (req, res, next){
 console.log(">>>prj001.js put method:", req.body.cc_url);
 if ( req.body.cc_url != undefined) {
     console.log("url不为空");
@@ -873,7 +895,7 @@ router.post('/cure', function (req, res, next){
         }
     });
 });
-router.put('/cure_save', function (req, res, next){
+router.post('/cure_save', function (req, res, next){
     console.log(">>>prj001.js put method:", req.body.cure_url);
     if ( req.body.cure_url != undefined) {
         console.log("url不为空");
@@ -964,7 +986,7 @@ router.post('/results', function (req, res, next){
         }
     });
 });
-router.put('/results_save', function (req, res, next){
+router.post('/results_save', function (req, res, next){
     console.log(">>>prj001.js put method:", req.body.results_url);
     if ( req.body.results_url != undefined) {
         console.log("url不为空");

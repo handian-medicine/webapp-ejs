@@ -1,3 +1,4 @@
+    var tempstr;
     $(document).ready(function () {
         // alert(window.length);
         var set_input = document.getElementsByTagName('input');
@@ -6,15 +7,17 @@
         }
 
         //基本信息
-        $(".geninfoBtn").click(function () {
-            // $('#waistline').val();
-            // $('#hipline').val();
+        $(".form-geninfo").submit(function () {
+            var str = $("#birth").val();
+            year_month = str.split("-");
+            $("#birth_year").val(year_month[0]);
+            $("#birth_month").val(year_month[1]);
             $.ajax({
                 url: "/prj001/geninfo_save",
-                type: "PUT",
+                type: "POST",
                 dataType: "json",
                 data: {
-                    geninfo_url: $(this).attr("geninfoBtn-url"),
+                    geninfo_url: $("#geninfoBtn").attr("geninfoBtn-url"),
                     form_geninfo: $('#form-geninfo').serialize(),
                 },
                 success:function (result) {
@@ -68,7 +71,9 @@
                         $('#telephone').val(result["telephone"]);
                         $('#expert').val(result["expert"]);
                         
-                        $('#age').val(result["age"]);
+                        // $('#age').val(result["age"]);
+                        // alert(""+result["birth_year"]+"-"+result["birth_month"])
+                        $('#birth').val(result["birth_year"]+"-"+result["birth_month"]);
                         $('#height').val(result["height"]);
                         
                         $('#weight').val(result["weight"]);
@@ -124,15 +129,15 @@
         });
         //病情概要
         //<input type="hidden" class="person" name="person" id="person-summary"/>
-        $(".summaryBtn").click(function () {
+        $(".form-summary").submit(function () {
             var temp_geninfourl = $('#person-summary').val();
             $('#person-summary').val(temp_geninfourl);//如果url不为空，api服务器返回的数据有person字段
             $.ajax({
                 url: "/prj001/summary_save",
-                type: "PUT",
+                type: "POST",
                 dataType: "json",
                 data: {
-                    summary_url: $(this).attr("summaryBtn-url"),
+                    summary_url: $("#summaryBtn").attr("summaryBtn-url"),
                     form_summary: $('#form-summary').serialize(),
                     // form_summary: $('#form-summary').ghostsf_serialize()
                 },
@@ -433,15 +438,15 @@
         })
         //患者病史
         //<input type="hidden" class="person" name="person" id="person-history"/>
-        $(".historyBtn").click(function () {
+        $(".form-history").submit(function () {
             var temp_geninfourl = $('#person-history').val();
             $('#person-history').val(temp_geninfourl);//如果url不为空，api服务器返回的数据有person字段
             $.ajax({
                 url: "/prj001/history_save",
-                type: "PUT",
+                type: "POST",
                 dataType: "json",
                 data: {
-                    history_url: $(this).attr("historyBtn-url"),
+                    history_url: $("#historyBtn").attr("historyBtn-url"),
                     form_history: $('#form-history').serialize(),
                     // form_history: $('#form-history').ghostsf_serialize()
                 },
@@ -751,15 +756,15 @@
         })
         //相关检查
         //<input type="hidden" class="person" name="person" id="person-relevant"/>
-        $(".relevantBtn").click(function () {
+        $(".form-relevant").submit(function () {
             var temp_geninfourl = $('#person-relevant').val();
             $('#person-relevant').val(temp_geninfourl);//如果url不为空，api服务器返回的数据有person字段
             $.ajax({
                 url: "/prj001/relevant_save",
-                type: "PUT",
+                type: "POST",
                 dataType: "json",
                 data: {
-                    relevant_url: $(this).attr("relevantBtn-url"),
+                    relevant_url: $("#relevantBtn").attr("relevantBtn-url"),
                     form_relevant: $('#form-relevant').serialize(),
                     // form_relevant: $('#form-relevant').ghostsf_serialize()
                 },
@@ -844,15 +849,15 @@
         })
         //临床诊断
         //<input type="hidden" class="person" name="person" id="person-cc"/>
-        $(".ccBtn").click(function () {
+        $(".form-cc").submit(function () {
             var temp_geninfourl = $('#person-cc').val();
             $('#person-cc').val(temp_geninfourl);//如果url不为空，api服务器返回的数据有person字段
             $.ajax({
                 url: "/prj001/cc_save",
-                type: "PUT",
+                type: "POST",
                 dataType: "json",
                 data: {
-                    cc_url: $(this).attr("ccBtn-url"),
+                    cc_url: $("#ccBtn").attr("ccBtn-url"),
                     form_cc: $('#form-cc').serialize(),
                     // form_cc: $('#form-cc').ghostsf_serialize()
                 },
@@ -908,8 +913,20 @@
                             }
                             $('#ccBtn').attr("ccBtn-url", result["url"]); 
 
-                            $("input[name='yuejing_zhenduan'][value='"+result["yuejing_zhenduan"]+"']").prop("checked",true);
-                            // $('#yuejing_qita').val(result["yuejing_qita"]);
+                            // $("input[name='yuejing_zhenduan'][value='"+result["yuejing_zhenduan"]+"']").prop("checked",true);
+                            $("input:checkbox[name='yuejing_xian']").prop('checked',result["yuejing_xian"]);
+                            $("input:checkbox[name='yuejing_duo']").prop('checked',result["yuejing_duo"]);
+                            $("input:checkbox[name='yuejing_yan']").prop('checked',result["yuejing_yan"]);
+                            $("input:checkbox[name='yuejing_chu']").prop('checked',result["yuejing_chu"]);
+                            $("input:checkbox[name='yuejing_beng']").prop('checked',result["yuejing_beng"]);
+                            $('#yuejing_qita').val(result["yuejing_qita"]);
+
+                            // if (result["normal"] != null)
+                            // {
+                            //     $("input[name='cycle'][value='尚规律']").prop("checked",true);
+                            //     $("input[name='cycle'][value='尚规律']").trigger("onchange");
+                            //     $("input[name='normal'][value='"+result["normal"]+"']").prop("checked",true);
+                            // }
 
                             $("input[name='xuzheng'][value='"+result["xuzheng"]+"']").prop("checked",true);
                             $('#qita_asthenic').val(result["qita_asthenic"]);
@@ -935,15 +952,15 @@
         })
         //中西治疗
         //<input type="hidden" class="person" name="person" id="person-cure"/>
-        $(".cureBtn").click(function () {
+        $(".form-cure").submit(function () {
             var temp_geninfourl = $('#person-cure').val();
             $('#person-cure').val(temp_geninfourl);//如果url不为空，api服务器返回的数据有person字段
             $.ajax({
                 url: "/prj001/cure_save",
-                type: "PUT",
+                type: "POST",
                 dataType: "json",
                 data: {
-                    cure_url: $(this).attr("cureBtn-url"),
+                    cure_url: $("#cureBtn").attr("cureBtn-url"),
                     form_cure: $('#form-cure').serialize(),
                     // form_cure: $('#form-cure').ghostsf_serialize()
                 },
@@ -1051,32 +1068,39 @@
 
                             $("input:checkbox[name='zhong_xu_buzhong']").prop('checked',result["zhong_xu_buzhong"]);
                             $("input:checkbox[name='zhong_xu_renshen']").prop('checked',result["zhong_xu_renshen"]);
-                            $("input:checkbox[name='zhong_xu_zhixue']").prop('checked',result["zhong_xu_zhixue"]);
+                            $("input:checkbox[name='zhong_xu_guipi']").prop('checked',result["zhong_xu_guipi"]);
                             $("input:checkbox[name='zhong_xu_ankun']").prop('checked',result["zhong_xu_ankun"]);
                             $("input:checkbox[name='zhong_xu_fufang']").prop('checked',result["zhong_xu_fufang"]);
                             $("input:checkbox[name='zhong_xu_gujing']").prop('checked',result["zhong_xu_gujing"]);
                             $("input:checkbox[name='zhong_xu_ejiao']").prop('checked',result["zhong_xu_ejiao"]);
-                            $("input:checkbox[name='zhong_xu_liuwei']").prop('checked',result["zhong_xu_liuwei"]);
+                            $("input:checkbox[name='zhong_xu_lvjiao']").prop('checked',result["zhong_xu_lvjiao"]);
                             $("input:checkbox[name='zhong_xu_erzhi']").prop('checked',result["zhong_xu_erzhi"]);
-                            $("input:checkbox[name='zhong_xu_fuke']").prop('checked',result["zhong_xu_fuke"]);
-                            $("input:checkbox[name='zhong_xu_wuzi']").prop('checked',result["zhong_xu_wuzi"]);
+                            $("input:checkbox[name='zhong_xu_zaizao']").prop('checked',result["zhong_xu_zaizao"]);
+                            $("input:checkbox[name='zhong_xu_yougui']").prop('checked',result["zhong_xu_yougui"]);
+                            $("input:checkbox[name='zhong_xu_bazhen']").prop('checked',result["zhong_xu_bazhen"]);
+                            $("input:checkbox[name='zhong_xu_wujibai']").prop('checked',result["zhong_xu_wujibai"]);
                             $('#zhong_xu_qita').val(result["zhong_xu_qita"]);
 
                             $("input:checkbox[name='zhong_shi_xuening']").prop('checked',result["zhong_shi_xuening"]);
                             $("input:checkbox[name='zhong_shi_duanxue']").prop('checked',result["zhong_shi_duanxue"]);
-                            $("input:checkbox[name='zhong_shi_jiawei']").prop('checked',result["zhong_shi_jiawei"]);
                             $("input:checkbox[name='zhong_shi_qianzhi']").prop('checked',result["zhong_shi_qianzhi"]);
                             $("input:checkbox[name='zhong_shi_yunnan']").prop('checked',result["zhong_shi_yunnan"]);
-                            $("input:checkbox[name='zhong_shi_gongning']").prop('checked',result["zhong_shi_gongning"]);
-                            $("input:checkbox[name='zhong_shi_zhixue']").prop('checked',result["zhong_shi_zhixue"]);
-                            $("input:checkbox[name='zhong_shi_xiaoyao']").prop('checked',result["zhong_shi_xiaoyao"]);
+                            $("input:checkbox[name='zhong_shi_yunnanh']").prop('checked',result["zhong_shi_yunnanh"]);
                             $("input:checkbox[name='zhong_shi_kunning']").prop('checked',result["zhong_shi_kunning"]);
+                            $("input:checkbox[name='zhong_shi_fuxue']").prop('checked',result["zhong_shi_fuxue"]);
+                            $("input:checkbox[name='zhong_shi_duyi']").prop('checked',result["zhong_shi_duyi"]);
+                            $("input:checkbox[name='zhong_shi_zhikang']").prop('checked',result["zhong_shi_zhikang"]);
+                            $("input:checkbox[name='zhong_shi_gongning']").prop('checked',result["zhong_shi_gongning"]);
                             $('#zhong_shi_qita').val(result["zhong_shi_qita"]);
 
                             $("input:checkbox[name='zhong_xushi_zhixue']").prop('checked',result["zhong_xushi_zhixue"]);
+                            $("input:checkbox[name='zhong_xushi_jiawei']").prop('checked',result["zhong_xushi_jiawei"]);
                             $("input:checkbox[name='zhong_xushi_gujing']").prop('checked',result["zhong_xushi_gujing"]);
                             $("input:checkbox[name='zhong_xushi_nvjin']").prop('checked',result["zhong_xushi_nvjin"]);
-                            $("input:checkbox[name='zhong_xushi_zhibo']").prop('checked',result["zhong_xushi_zhibo"]);
+                            $("input:checkbox[name='zhong_xushi_dingkun']").prop('checked',result["zhong_xushi_dingkun"]);
+                            $("input:checkbox[name='zhong_xushi_xiaoyao']").prop('checked',result["zhong_xushi_xiaoyao"]);
+                            $("input:checkbox[name='zhong_xushi_shiwei']").prop('checked',result["zhong_xushi_shiwei"]);
+                            $("input:checkbox[name='zhong_xushi_tiaojing']").prop('checked',result["zhong_xushi_tiaojing"]);
                             $('#zhong_xushi_qita').val(result["zhong_xushi_qita"]);
 
                             $("input:checkbox[name='zhongyi_body']").prop('checked',result["zhongyi_body"]);
@@ -1152,15 +1176,15 @@
         })
         //疗效情况
         //<input type="hidden" class="person" name="person" id="person-results"/>
-        $(".resultsBtn").click(function () {
+        $(".form-results").submit(function () {
             var temp_geninfourl = $('#person-results').val();
             $('#person-results').val(temp_geninfourl);//如果url不为空，api服务器返回的数据有person字段
             $.ajax({
                 url: "/prj001/results_save",
-                type: "PUT",
+                type: "POST",
                 dataType: "json",
                 data: {
-                    results_url: $(this).attr("resultsBtn-url"),
+                    results_url: $("#resultsBtn").attr("resultsBtn-url"),
                     form_results: $('#form-results').serialize(),
                     // form_results: $('#form-results').ghostsf_serialize()
                 },

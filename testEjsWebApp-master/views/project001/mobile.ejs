@@ -5,11 +5,9 @@
     <title>信息调查表</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <link rel="stylesheet" type="text/css" href="/public/css/mobile.css"> -->
-    <!-- basic styles -->
-    <link rel="stylesheet" href="/public/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="/public/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="/public/bootstrap3/css/bootstrap.min.css">
     <!-- <link rel="stylesheet" href="/public/css/mobile.css"> -->
-    <!-- <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css"> -->
     <link rel="stylesheet" href="/public/css/font-awesome.min.css">
     <link rel="stylesheet" href="/public/css/bootstrap-datepicker.css">
     <!-- page specific plugin styles -->
@@ -27,12 +25,11 @@
     <script src="/public/js/ace-extra.min.js"></script>
     <!-- 表单验证 -->
     <!-- <script src="../public/bootstrap-validator/js/validator.js"></script> -->
-    <!-- <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
     <script src="/public/js/bootstrap.min.js"></script>
     <script src="/public/js/jquery.validate.min.js"></script>
     <!-- 表单验证 -->
 </head>
-<body>
+<body style="font-family: PingFangSC-Light, Tahoma, Arial, SimSun, '宋体',sans-serif;background-color: rgba(255, 255, 255, 1);">
 <script>
         function func(event){
             event.preventDefault();
@@ -74,7 +71,18 @@
 
         $("#form-all").submit(function () {
             event.preventDefault();
+
+            /* 出生年月 */
+            var str = $("#birth").val();
+            year_month = str.split("-");
+            $("#birth_year").val(year_month[0]);
+            $("#birth_month").val(year_month[1]);
+            /* 出生年月 */
+
+            /* 住址 */
             $('#address').val( $('#province').val() + $('#city').val() + $('#adrs').val() );
+            /* 住址 */
+            
             var data={};
             var obj={"info":{},"summary":{},"history":{},"relevant":{},"cc":{},"cure":{},"results":{}};
             data.info     = $('#form-geninfo').serializeArray();
@@ -475,6 +483,13 @@
     }
 </script>
 
+<style>
+    .table>tbody>tr>td{
+        vertical-align:middle;
+        text-align: center;
+    }
+</style>
+
 <div class="modal-content">
     <div class="modal-header no-padding">
         <div class="table-header center">
@@ -483,7 +498,7 @@
     </div>
 </div>
 
-<!-- <div class="tab" role="tabpanel"> -->
+<div class="tabbable">
     <ul id="myTab" class="nav nav-tabs" role="tablist">
         <li class="active"><a href="#geninfo" data-toggle="tab" id="geninfo-tab">基本信息</a></li>
         <li><a href="#summary"  data-toggle="tab" id="summary-tab">病情概要</a></li>
@@ -496,31 +511,31 @@
         <!-- <li><a href="#confirm"   data-toggle="tab" id="confirm-tab" onclick="validate_info();">确认提交</a></li> -->
     </ul>
 
-         <div id="myTabContent" class="tab-content tabs">
+         <div id="myTabContent" class="tab-content">
             <!-- 基本信息 -->
             <div class="tab-pane fade in active" id="geninfo" method="POST"> 
                 <form class="modal-body no-padding" id="form-geninfo">
-                    <div class="col-xs-12 col-sm-12">
+                    <!-- <div class="col-xs-12 col-sm-12"> -->
                         <table class="table table-striped table-bordered table-hover">
                                 <input class="form-control" id="address" name="address" type="hidden"/>
                                 <!-- <input type="text" name="country_code" pattern="^[\w.\-]+@(?:[a-z0-9]+(?:-[a-z0-9]+)*\.)+[a-z]{2,3}$" title="请输入正确的邮箱" required/> -->
                                 <tbody style="color:blue;font-size:15px;">
                                     <tr>
-                                        <td style="vertical-align:middle;">就诊日期</td>
+                                        <td style="text-align:left" class="blue">就诊日期</td>
                                         <td><input class="form-control datepicker ace" id="recdate" name="recdate" type="text"/></td>
                                     </tr>
                                     <tr>
-                                        <td style="vertical-align:middle;">医院名称</td>
+                                        <td style="text-align:left" class="blue">医院名称</td>
                                         <td><input class="form-control ace" id="hospital" name="hospital" type="text" 
                                             title="请填写正确医院名称" placeholder="请填写正确医院名称" /></td>
                                     </tr>
                                     <tr>
-                                        <td style="vertical-align:middle;">填表专家姓名</td>
+                                        <td style="text-align:left" class="blue">填表专家姓名</td>
                                         <td><input class="form-control ace" id="expert" name="expert" type="text" 
                                             title="请填写专家姓名" placeholder="请填写专家姓名" /></td>
                                     </tr>
                                     <tr>
-                                        <td style="vertical-align:middle;">辅助医生账号(地区、医院、账号)</td>
+                                        <td style="text-align:left" class="blue">辅助医生账号(地区、医院、账号)</td>
                                         <td>
                                             <div class="col-sm-3">
                                                 <select id="area" name="area" class="form-control" onclick="get_area();" onchange="get_hospital();">
@@ -542,24 +557,24 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="vertical-align:middle;">职称</td>
-                                        <td style="color:black;font-size:14px;">
+                                        <td style="text-align:left" class="blue">职称</td>
+                                        <td style="color:black;font-size:14px;text-align:left">
                                             <input type="radio" value="主任医师" name="title" />主任医师
                                             <input type="radio" value="副主任医师" name="title"/>副主任医师
                                             <input type="radio" value="主治医师" name="title"/>主治医师
                                         </td>
                                     </tr> 
                                     <tr>
-                                        <td style="vertical-align:middle;">患者姓名</td>
-                                        <td><input class="form-control"  type="text" name="name" id="name" required/></td>
+                                        <td style="text-align:left" class="blue">患者姓名</td>
+                                        <td><input class="form-control" type="text" name="name" id="name" required/></td>
                                     </tr>
                                     <tr>
-                                        <td style="vertical-align:middle;">电话</td>
+                                        <td style="text-align:left" class="blue">电话</td>
                                         <td><input class="form-control"  type="text" name="telephone" id="telephone" 
                                             pattern="^\d{11}$" required/></td>
                                     </tr>
                                     <tr>
-                                        <td style="vertical-align:middle;">患者现住址</td>
+                                        <td style="text-align:left" class="blue">患者现住址</td>
                                         <td>
                                             <div class="col-sm-3">
                                                 <select name="" id="province" class="form-control" >
@@ -577,45 +592,28 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="vertical-align:middle;">患者来源</td>
-                                        <td style="color:black;font-size:15px;">
+                                        <td style="text-align:left" class="blue">患者来源</td>
+                                        <td style="color:black;font-size:15px;text-align:left">
                                             <input type="radio" value="门诊" name="entrance" required/>门诊
                                             <input type="radio" value="病房" name="entrance"/>病房</td>
                                     </tr>
                                     <tr>
-                                        <td style="vertical-align:middle;">患者年龄</td>
-                                        <td><input class="form-control"  type="text" name="age" id="age"
-                                            required/></td>
+                                        <td style="text-align:left;" class="blue">患者出生年月</td>
+                                        <input id="birth_year" name="birth_year" type="hidden" class="form-control ace"/>
+                                        <input id="birth_month" name="birth_month" type="hidden" class="form-control ace"/>
+                                        <td><input id="birth" name="birth" type="text" class="form-control ace input-mask-birth" placeholder="格式:2019-04"/></td>
                                     </tr>
                                     <tr>
-                                        <td style="vertical-align:middle;">身高cm</td>
+                                        <td style="text-align:left" class="blue">身高cm</td>
                                         <td><input class="form-control"  type="number" name="height" id="height"/></td>
                                     </tr>
                                     <tr>
-                                        <td style="vertical-align:middle;">体重kg</td>
+                                        <td style="text-align:left" class="blue">体重kg</td>
                                         <td><input class="form-control"  type="number" name="weight" id="weight"/></td>
                                     </tr>
-                                    <!-- <tr>
-                                        <td style="vertical-align:middle;">腰围cm</td>
-                                        <td><input class="form-control"  type="text" name="waistline" id="waistline"/></td>
-                                    </tr>
                                     <tr>
-                                        <td style="vertical-align:middle;">臀围cm</td>
-                                        <td><input class="form-control"  type="text" name="hipline" id="hipline"/></td>
-                                    </tr> -->
-                                    <tr>
-                                        <td style="vertical-align:middle;">血型</td>
-                                        <td style="color:black;font-size:15px;">
-                                            <input type="radio" value="A" name="blood_type" />A
-                                            <input type="radio" value="B" name="blood_type"/>B
-                                            <input type="radio" value="O" name="blood_type"/>O
-                                            <input type="radio" value="AB" name="blood_type"/>AB
-                                            <input type="radio" value="不详" name="blood_type"/>不详
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="vertical-align:middle;">民族</td>
-                                        <td style="color:black;font-size:15px;">
+                                        <td style="text-align:left" class="blue">民族</td>
+                                        <td style="color:black;font-size:15px;text-align:left">
                                             <select name="nation" class="form-control" id="minzu-list" >
                                                 <!-- <option value="" disabled selected></option> -->
                                                 <option value="汉族">汉族</option>
@@ -679,7 +677,7 @@
                                     </tr>
                                 </tbody>
                         </table>
-                        <p><h5 style="color:blue">职业</h5>
+                        <p><h5 class="header blue">职业</h5>
                             <label><input type="radio" value="学生" name="career" />学生</label>
                             <label><input type="radio" value="个体" name="career"/>个体</label>
                             <label><input type="radio" value="农民" name="career"/>农民</label>
@@ -693,7 +691,7 @@
                             <label><input type="radio" value="无业" name="career"/>无业</label>
                             <label><input type="radio" value="其它" name="career"/>其它</label>
     
-                        <p><h5 style="color:blue">文化程度</h5>
+                        <p><h5 class="header blue">文化程度</h5>
                             <label><input type="radio" value="未接受国家教育(文盲)" name="culture" />未接受国家教育</label>
                             <label><input type="radio" value="小学及以下" name="culture"/>小学及以下</label>
                             <label><input type="radio" value="初中" name="culture"/>初中</label>
@@ -702,7 +700,7 @@
                             <label><input type="radio" value="本科" name="culture"/>本科</label>
                             <label><input type="radio" value="研究生及以上" name="culture"/>研究生及以上</label>
     
-                        <p><h5 style="color:blue">特殊工种环境</h5>
+                        <p><h5 class="header blue">特殊工种环境</h5>
                             <label><input name="gaowen" type="checkbox" value="true"/><span class="lbl">高温</span></label>
                             <label><input name="diwen" type="checkbox" value="true"/><span class="lbl">低温</span></label>
                             <label><input name="yeban" type="checkbox" value="true"/><span class="lbl">夜班/熬夜</span></label>
@@ -714,7 +712,7 @@
                             <label><input name="gaokong" type="checkbox" value="true"/><span class="lbl">高空</span></label>
                             <label><input name="wu" type="checkbox" value="true"/><span class="lbl">无</span></label>
                         
-                        <p><h5 style="color:blue">饮食偏好</h5>
+                        <p><h5 class="header blue">饮食偏好</h5>
                             <label><input name="wuteshu" type="checkbox" value="true"/>无特殊</label>
                             <label><input name="sushi" type="checkbox" value="true"/>素食</label>
                             <label><input name="suan" type="checkbox" value="true"/>酸</label>
@@ -726,7 +724,7 @@
                             <label><input name="kafei" type="checkbox" value="true"/>含咖啡因食物或饮品</label>
                             <label><input name="qita" type="checkbox" value="true"/>其他</label>
                         <hr>
-                    </div>   
+                        <!-- </div>    -->
                     <!-- <button type="submit" class="btn btn-primary" id="tijiao">提交</button> -->
                 </form>
             </div>
@@ -773,10 +771,10 @@
                 </form>
             </div>
         </div>
+</div>
 
-<!-- </div> -->
 <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
-        <i class="icon-double-angle-up icon-only bigger-110"></i>
+        <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
 </a>
 
 <script src="/public/js/Province_city.js"></script>
@@ -787,5 +785,24 @@
 <script src="/public/js/ace-elements.min.js"></script>
 <script src="/public/js/ace.min.js"></script>
 
+<script src="../public/js/jquery.inputlimiter.1.3.1.min.js"></script>
+<script src="../public/js/jquery.maskedinput.min.js"></script>
+<script type="text/javascript">
+    jQuery(function ($) {
+            
+        $.mask.definitions['~'] = '[+-]';
+        $('.input-mask-date').mask('99/99/9999');
+        $('.input-mask-birth').mask('9999-99');
+        $('.input-mask-phone').mask('(999) 999-9999');
+        $('.input-mask-eyescript').mask('~9.99 ~9.99 999');
+        $(".input-mask-product").mask("a*-999-a999", {
+            placeholder: " ",
+            completed: function () {
+                alert("You typed the following: " + this.val());
+            }
+        });
+
+    });
+</script>
 </body>
 </html>
