@@ -17,15 +17,6 @@
     <script src="/public/js/bootstrap-datepicker.js"></script>
     <script src="/public/js/bootstrap-datepicker.zh-CN.js"></script>
     
-    <script>
-        $(function(){
-            $('.datepicker').datepicker({
-                format:"yyyy-mm-dd",
-                autoclose:true,
-                language:  'zh-CN',
-        });
-        })
-    </script>
     <!-- inline styles related to this page -->
     <script src="/public/js/ace-extra.min.js"></script>
     <!-- 表单验证 -->
@@ -69,10 +60,20 @@
     <!-- 日期格式 -->
     <script>
             $(function(){
-                $('.datepicker').datepicker({
-                    format:"yyyy-mm-dd",
-                    autoclose:true,
+                $('#recdate').datepicker({
+                format:"yyyy-mm-dd",
+                autoclose:true,
+                language:'zh-CN',
+            });
+                $('#birth').datepicker({
+                    format:"yyyy-mm",
+                    // changeMonth: true,
+                    // changeYear: true, 
+                    autoclose: true,  
                     language:'zh-CN',
+                    // yearRange: '1950:2013',
+                    viewMode: "months", 
+                    minViewMode: "months"
                 });
             })
     </script>
@@ -89,7 +90,6 @@
 
         $("#form-all").submit(function () {
             event.preventDefault();
-
             /* 出生年月 */
             var str = $("#birth").val();
             var year_month = str.split("-");
@@ -480,8 +480,6 @@
     }
 </script>
 <!-- 函数get_owner获取账户 -->
-
-
 <script>
     function get_owner () {
             $.ajax({
@@ -622,7 +620,7 @@
                                             <td style="text-align:left;" class="blue">患者出生年月</td>
                                             <input id="birth_year" name="birth_year" type="hidden" class="form-control ace"/>
                                             <input id="birth_month" name="birth_month" type="hidden" class="form-control ace"/>
-                                            <td><input id="birth" name="birth" type="text" class="form-control datepicker"/></td>
+                                            <td><input id="birth" name="birth" type="text" class="form-control datepicker ace"/></td>
                                             <!-- <td><input id="birth" name="birth" type="text" class="form-control ace input-mask-birth" placeholder="格式:2019-04"/></td> -->
                                     </tr>
                                     <tr>
