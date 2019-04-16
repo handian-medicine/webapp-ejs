@@ -85,16 +85,18 @@
                         
                         //单选
                         $("input[name='title'][value='"+result["title"]+"']").prop("checked",true);
-                        $("input[name='blood_type'][value='"+result["blood_type"]+"']").prop("checked",true);
+                        // $("input[name='blood_type'][value='"+result["blood_type"]+"']").prop("checked",true);
+                        $("input[name='entrance'][value='"+result["entrance"]+"']").prop("checked",true);
+                        $("input[name='marriage'][value='"+result["marriage"]+"']").prop("checked",true);
                         
+                        //下拉框
                         // $("#minzu-list option[value='回族']").prop("selected","selected");//选中值
                         // alert($('#minzu-list option:selected').val());//获取值
                         $("#nation option[value='"+result["nation"]+"']").prop("selected","selected");
-                        
-                        $("input[name='career'][value='"+result["career"]+"']").prop("checked",true);
-                        $("input[name='entrance'][value='"+result["entrance"]+"']").prop("checked",true);
-                        $("input[name='culture'][value='"+result["culture"]+"']").prop("checked",true);
-                        $("input[name='marriage'][value='"+result["marriage"]+"']").prop("checked",true);
+                        $("#career option[value='"+result["career"]+"']").prop("selected","selected");
+                        $("#culture option[value='"+result["culture"]+"']").prop("selected","selected");
+                        // $("input[name='career'][value='"+result["career"]+"']").prop("checked",true);
+                        // $("input[name='culture'][value='"+result["culture"]+"']").prop("checked",true);
                         
                         //多选
                         $("input:checkbox[name='wuteshu']").prop('checked',result["wuteshu"]);
