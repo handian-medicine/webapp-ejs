@@ -1017,6 +1017,62 @@
                             for(var i=0;i<set_input.length;i++){
                                 set_input[i].focus();
                             }
+                            // 治法
+                            if (result["xuzheng_one"] == null && result["xuzheng_qita"]=='') {
+                                $("#xuzheng-cure").hide();
+                            } else {
+                                $("#xuzheng-cure").show();
+                            }
+                            if (result["shizheng_one"] == null && result["shizheng_qita"]=='') {
+                                $("#shizheng-cure").hide();
+                            } else {
+                                $("#shizheng-cure").show();
+                            }
+                            if (result["xushi_one"] == null && result["xushi_qita"]=='') {
+                                $("#xushi-cure").hide();
+                            } else {
+                                $("#xushi-cure").show();
+                            }
+                            //代表方
+                            var flag_pre_xu = false;
+                            var flag_pre_shi = false;
+                            var flag_pre_xushi = false;
+                            $("input[class='pre_xu']").each(function(){ 
+                                var name = $(this).attr("name");
+                                flag_pre_xu = flag_pre_xu || Boolean(result[name]);
+                            });
+                            $("input[class='pre_shi']").each(function(){ 
+                                var name = $(this).attr("name");
+                                flag_pre_shi = flag_pre_shi || Boolean(result[name]);
+                            });
+                            $("input[class='pre_xushi']").each(function(){ 
+                                var name = $(this).attr("name");
+                                flag_pre_xushi = flag_pre_xushi || Boolean(result[name]);
+                            });
+                            if (flag_pre_xu) {$("#pre-xu").show();} else {$("#pre-xu").hide();}
+                            if (flag_pre_shi) {$("#pre-shi").show();} else {$("#pre-shi").hide();}
+                            if (flag_pre_xushi) {$("#pre-xushi").show();} else {$("#pre-xushi").hide();}
+
+                            //中成药
+                            var flag_zhong_xu = false;
+                            var flag_zhong_shi = false;
+                            var flag_zhong_xushi = false;
+                            $("input[class='zhong_xu']").each(function(){ 
+                                var name = $(this).attr("name");
+                                flag_zhong_xu = flag_zhong_xu || Boolean(result[name]);
+                            });
+                            $("input[class='zhong_shi']").each(function(){ 
+                                var name = $(this).attr("name");
+                                flag_zhong_shi = flag_zhong_shi || Boolean(result[name]);
+                            });
+                            $("input[class='zhong_xushi']").each(function(){ 
+                                var name = $(this).attr("name");
+                                flag_zhong_xushi = flag_zhong_xushi || Boolean(result[name]);
+                            });
+                            if (flag_zhong_xu) {$("#zhong-xu").show();} else {$("#zhong-xu").hide();}
+                            if (flag_zhong_shi) {$("#zhong-shi").show();} else {$("#zhong-shi").hide();}
+                            if (flag_zhong_xushi) {$("#zhong-xushi").show();} else {$("#zhong-xushi").hide();}
+                            
                             $('#cureBtn').attr("cureBtn-url", result["url"]); 
 
                             $("input[name='to_cure'][value='"+result["to_cure"]+"']").prop("checked",true);
@@ -1166,7 +1222,9 @@
 
                             $('#other_cure').val(result["other_cure"]);
                             $("input:checkbox[name='other_cure_wu']").prop('checked',result["other_cure_wu"]);
-                        }else {
+
+                            
+                        } else {
                             alert("result.status wrong");
                         }
                     },

@@ -1,17 +1,12 @@
 <script>
-        $(document).ready(function () {
-            $("#xuzheng-cure").hide();
-            $("#shizheng-cure").hide();
-            $("#xushi-cure").hide();
-
-            $("#pre-xu").hide();
-            $("#pre-shi").hide();
-            $("#pre-xushi").hide();
-
-            $("#zhong-xu").hide();
-            $("#zhong-shi").hide();
-            $("#zhong-xushi").hide();
-        })
+    // $(document).ready(function(){
+    //     alert(""+$("input[name='xuzheng_one']").val())
+    //     if ($("input[name='xuzheng_one']").val() != null) {
+    //         $("#xuzheng-cure").show();
+    //     } else {
+    //         $("#xuzheng-cure").hide();
+    //     }
+    // })
         // 治法
         function xuzheng_cure() {
             $("#xuzheng-cure").show();
@@ -187,102 +182,102 @@
 
             <p><h6 style="color:#871F78">(1)<input name="pre_fang" type="radio" onchange="pre_xu_cure();"/>虚证代表方:</h6>
             <div id="pre-xu">
-            <label><input name="pre_xu_yiqi" class="pre_xu" type="checkbox" value="true"/>补中益气汤</label>
-            <label><input name="pre_xu_guyin" class="pre_xu" type="checkbox" value="true"/>固阴煎</label>
-            <label><input name="pre_xu_yuanjian" class="pre_xu" type="checkbox" value="true"/>大补元煎</label>
-            <label><input name="pre_xu_yangrong" class="pre_xu" type="checkbox" value="true"/>人参养荣汤</label>
-            <label><input name="pre_xu_guipi" class="pre_xu" type="checkbox" value="true"/>归脾汤</label>
-            <label><input name="pre_xu_anchong" class="pre_xu" type="checkbox" value="true"/>安冲汤</label>
-            <label><input name="pre_xu_jianyuan" class="pre_xu" type="checkbox" value="true"/>举元煎</label>
-            <label><input name="pre_xu_qingxue" class="pre_xu" type="checkbox" value="true"/>清血养阴汤</label>
-            <label><input name="pre_xu_liangdi" class="pre_xu" type="checkbox" value="true"/>两地汤合二至丸</label>
-            <label><input name="pre_xu_jiajian" class="pre_xu" type="checkbox" value="true"/>加减一阴煎</label>
-            <label><input name="pre_xu_liuwei" class="pre_xu" type="checkbox" value="true"/>二至丸合六味地黄丸</label>
-            <label><input name="pre_xu_zuogui" class="pre_xu" type="checkbox" value="true"/>左归丸合二至丸</label>
-            <label><input name="pre_xu_yougui" class="pre_xu" type="checkbox" value="true"/>右归丸</label>
-            <label><input name="pre_xu_guchong" class="pre_xu" type="checkbox" value="true"/>固冲汤</label>
-            <label><input name="pre_xu_guben" class="pre_xu" type="checkbox" value="true"/>固本止崩汤</label>
-            <label><input name="pre_xu_baoyin" class="pre_xu" type="checkbox" value="true"/>保阴煎</label>
+            <label><input name="pre_xu_yiqi" class="pre_xu" type="checkbox" onclick="pre_xu_cure();" value="true"/>补中益气汤</label>
+            <label><input name="pre_xu_guyin" class="pre_xu" type="checkbox" onclick="pre_xu_cure();" value="true"/>固阴煎</label>
+            <label><input name="pre_xu_yuanjian" class="pre_xu" type="checkbox" onclick="pre_xu_cure();" value="true"/>大补元煎</label>
+            <label><input name="pre_xu_yangrong" class="pre_xu" type="checkbox" onclick="pre_xu_cure();" value="true"/>人参养荣汤</label>
+            <label><input name="pre_xu_guipi" class="pre_xu" type="checkbox" onclick="pre_xu_cure();" value="true"/>归脾汤</label>
+            <label><input name="pre_xu_anchong" class="pre_xu" type="checkbox" onclick="pre_xu_cure();" value="true"/>安冲汤</label>
+            <label><input name="pre_xu_jianyuan" class="pre_xu" type="checkbox" onclick="pre_xu_cure();" value="true"/>举元煎</label>
+            <label><input name="pre_xu_qingxue" class="pre_xu" type="checkbox" onclick="pre_xu_cure();" value="true"/>清血养阴汤</label>
+            <label><input name="pre_xu_liangdi" class="pre_xu" type="checkbox" onclick="pre_xu_cure();" value="true"/>两地汤合二至丸</label>
+            <label><input name="pre_xu_jiajian" class="pre_xu" type="checkbox" onclick="pre_xu_cure();" value="true"/>加减一阴煎</label>
+            <label><input name="pre_xu_liuwei" class="pre_xu" type="checkbox" onclick="pre_xu_cure();" value="true"/>二至丸合六味地黄丸</label>
+            <label><input name="pre_xu_zuogui" class="pre_xu" type="checkbox" onclick="pre_xu_cure();" value="true"/>左归丸合二至丸</label>
+            <label><input name="pre_xu_yougui" class="pre_xu" type="checkbox" onclick="pre_xu_cure();" value="true"/>右归丸</label>
+            <label><input name="pre_xu_guchong" class="pre_xu" type="checkbox" onclick="pre_xu_cure();" value="true"/>固冲汤</label>
+            <label><input name="pre_xu_guben" class="pre_xu" type="checkbox" onclick="pre_xu_cure();" value="true"/>固本止崩汤</label>
+            <label><input name="pre_xu_baoyin" class="pre_xu" type="checkbox" onclick="pre_xu_cure();" value="true"/>保阴煎</label>
             <br>
-            <label>其他:<input type="text" id="pre_xu_qita" name="pre_xu_qita" value=""/></label>
+            <label>其他:<input type="text" id="pre_xu_qita" name="pre_xu_qita" class="pre_xu" onclick="pre_xu_cure();" value=""/></label>
             </div>
 
             <p><h6 style="color:#871F78">(2)<input name="pre_fang" type="radio" onchange="pre_shi_cure();"/>实证代表方:</h6>
                 <div id="pre-shi">
-            <label><input name="pre_shi_xiaoyao" class="pre_shi" type="checkbox" value="true"/>逍遥散</label>
-            <label><input name="pre_shi_qingjing" class="pre_shi" type="checkbox" value="true"/>清经散</label>
-            <label><input name="pre_shi_wenjing" class="pre_shi" type="checkbox" value="true"/>温经汤(《妇人大全良方》)</label>
-            <label><input name="pre_shi_taohong" class="pre_shi" type="checkbox" value="true"/>桃红四物汤</label>
-            <label><input name="pre_shi_siwu" class="pre_shi" type="checkbox" value="true"/>四物汤合失笑散</label>
-            <label><input name="pre_shi_cangfu" class="pre_shi" type="checkbox" value="true"/>苍附导痰丸</label>
-            <label><input name="pre_shi_liangdi" class="pre_shi" type="checkbox" value="true"/>两地汤合二至丸</label>
-            <label><input name="pre_shi_zongpu" class="pre_shi" type="checkbox" value="true"/>棕蒲散</label>
-            <label><input name="pre_shi_qinggan" class="pre_shi" type="checkbox" value="true"/>清肝止淋汤</label>
-            <label><input name="pre_shi_zuyu" class="pre_shi" type="checkbox" value="true"/>逐瘀止血汤</label>
-            <label><input name="pre_shi_qingre" class="pre_shi" type="checkbox" value="true"/>清热固经汤</label>
-            <label><input name="pre_shi_zhibeng" class="pre_shi" type="checkbox" value="true"/>逐瘀止崩汤</label>
-            <label><input name="pre_shi_danzhi" class="pre_shi" type="checkbox" value="true"/>丹栀逍遥散</label>
-            <label><input name="pre_shi_longdan" class="pre_shi" type="checkbox" value="true"/>龙胆泻肝汤</label>
+            <label><input name="pre_shi_xiaoyao" class="pre_shi" type="checkbox" onclick="pre_shi_cure();" value="true"/>逍遥散</label>
+            <label><input name="pre_shi_qingjing" class="pre_shi" type="checkbox" onclick="pre_shi_cure();" value="true"/>清经散</label>
+            <label><input name="pre_shi_wenjing" class="pre_shi" type="checkbox" onclick="pre_shi_cure();" value="true"/>温经汤(《妇人大全良方》)</label>
+            <label><input name="pre_shi_taohong" class="pre_shi" type="checkbox" onclick="pre_shi_cure();" value="true"/>桃红四物汤</label>
+            <label><input name="pre_shi_siwu" class="pre_shi" type="checkbox" onclick="pre_shi_cure();" value="true"/>四物汤合失笑散</label>
+            <label><input name="pre_shi_cangfu" class="pre_shi" type="checkbox" onclick="pre_shi_cure();" value="true"/>苍附导痰丸</label>
+            <label><input name="pre_shi_liangdi" class="pre_shi" type="checkbox" onclick="pre_shi_cure();" value="true"/>两地汤合二至丸</label>
+            <label><input name="pre_shi_zongpu" class="pre_shi" type="checkbox" onclick="pre_shi_cure();" value="true"/>棕蒲散</label>
+            <label><input name="pre_shi_qinggan" class="pre_shi" type="checkbox" onclick="pre_shi_cure();" value="true"/>清肝止淋汤</label>
+            <label><input name="pre_shi_zuyu" class="pre_shi" type="checkbox" onclick="pre_shi_cure();" value="true"/>逐瘀止血汤</label>
+            <label><input name="pre_shi_qingre" class="pre_shi" type="checkbox" onclick="pre_shi_cure();" value="true"/>清热固经汤</label>
+            <label><input name="pre_shi_zhibeng" class="pre_shi" type="checkbox" onclick="pre_shi_cure();" value="true"/>逐瘀止崩汤</label>
+            <label><input name="pre_shi_danzhi" class="pre_shi" type="checkbox" onclick="pre_shi_cure();" value="true"/>丹栀逍遥散</label>
+            <label><input name="pre_shi_longdan" class="pre_shi" type="checkbox" onclick="pre_shi_cure();" value="true"/>龙胆泻肝汤</label>
             <br>
-            <label>其他:<input type="text" id="pre_shi_qita" name="pre_shi_qita" value=""/></label>
+            <label>其他:<input type="text" id="pre_shi_qita" name="pre_shi_qita" class="pre_shi" value="" onclick="pre_shi_cure();"/></label>
                 </div>
 
             <p><h6 style="color:#871F78">(3)<input name="pre_fang" type="radio" onchange="pre_xushi_cure();"/>虚实夹杂证代表方:</h6>
                 <div id="pre-xushi">
-            <label><input name="pre_xushi_liangdi" class="pre_xushi" type="checkbox" value="true"/>两地汤</label>
-            <label><input name="pre_xushi_qingjing" class="pre_xushi" type="checkbox" value="true"/>清经散</label>
+            <label><input name="pre_xushi_liangdi" class="pre_xushi" type="checkbox" onclick="pre_xushi_cure();" value="true"/>两地汤</label>
+            <label><input name="pre_xushi_qingjing" class="pre_xushi" type="checkbox" onclick="pre_xushi_cure();" value="true"/>清经散</label>
             <br>
-            <label>其他:<input type="text" id="pre_xushi_qita" name="pre_xushi_qita" value=""/></label>
+            <label>其他:<input type="text" id="pre_xushi_qita" name="pre_xushi_qita" value="" class="pre_xushi" onclick="pre_xushi_cure();"/></label>
                 </div>
 
             <p><h5 class="header blue">3、中成药</h5>
             <p><h6 style="color:#871F78">(1)<input name="zhong-cheng-yao" type="radio" onchange="zhong_xu_cure();"/>虚证中成药:</h6>
             <div id="zhong-xu">
-            <label><input name="zhong_xu_buzhong" class="zhong_xu" type="checkbox" value="true"/>补中益气丸/颗粒</label>
-            <label><input name="zhong_xu_renshen" class="zhong_xu" type="checkbox" value="true"/>人参归脾丸</label>
-            <label><input name="zhong_xu_guipi" class="zhong_xu" type="checkbox" value="true"/>归脾丸</label>
-            <label><input name="zhong_xu_ankun" class="zhong_xu" type="checkbox" value="true"/>安坤颗粒</label>
-            <label><input name="zhong_xu_fufang" class="zhong_xu" type="checkbox" value="true"/>复方阿胶浆</label>
-            <label><input name="zhong_xu_gujing" class="zhong_xu" type="checkbox" value="true"/>固经丸</label>
-            <label><input name="zhong_xu_ejiao" class="zhong_xu" type="checkbox" value="true"/>阿胶当归合剂</label>
-            <label><input name="zhong_xu_lvjiao" class="zhong_xu" type="checkbox" value="true"/>驴胶补血颗粒</label>
-            <label><input name="zhong_xu_erzhi" class="zhong_xu" type="checkbox" value="true"/>二至丸</label>
-            <label><input name="zhong_xu_zaizao" class="zhong_xu" type="checkbox" value="true"/>妇科再造丸/胶囊</label>
-            <label><input name="zhong_xu_yougui" class="zhong_xu" type="checkbox" value="true"/>右归丸</label>
-            <label><input name="zhong_xu_bazhen" class="zhong_xu" type="checkbox" value="true"/>八珍益母胶囊</label>
-            <label><input name="zhong_xu_wujibai" class="zhong_xu" type="checkbox" value="true"/>乌鸡白凤丸/片/颗粒</label>
+            <label><input name="zhong_xu_buzhong" class="zhong_xu" type="checkbox" onclick="zhong_xu_cure();" value="true"/>补中益气丸/颗粒</label>
+            <label><input name="zhong_xu_renshen" class="zhong_xu" type="checkbox" onclick="zhong_xu_cure();" value="true"/>人参归脾丸</label>
+            <label><input name="zhong_xu_guipi" class="zhong_xu" type="checkbox" onclick="zhong_xu_cure();" value="true"/>归脾丸</label>
+            <label><input name="zhong_xu_ankun" class="zhong_xu" type="checkbox" onclick="zhong_xu_cure();" value="true"/>安坤颗粒</label>
+            <label><input name="zhong_xu_fufang" class="zhong_xu" type="checkbox" onclick="zhong_xu_cure();" value="true"/>复方阿胶浆</label>
+            <label><input name="zhong_xu_gujing" class="zhong_xu" type="checkbox" onclick="zhong_xu_cure();" value="true"/>固经丸</label>
+            <label><input name="zhong_xu_ejiao" class="zhong_xu" type="checkbox" onclick="zhong_xu_cure();" value="true"/>阿胶当归合剂</label>
+            <label><input name="zhong_xu_lvjiao" class="zhong_xu" type="checkbox" onclick="zhong_xu_cure();" value="true"/>驴胶补血颗粒</label>
+            <label><input name="zhong_xu_erzhi" class="zhong_xu" type="checkbox" onclick="zhong_xu_cure();" value="true"/>二至丸</label>
+            <label><input name="zhong_xu_zaizao" class="zhong_xu" type="checkbox" onclick="zhong_xu_cure();" value="true"/>妇科再造丸/胶囊</label>
+            <label><input name="zhong_xu_yougui" class="zhong_xu" type="checkbox" onclick="zhong_xu_cure();" value="true"/>右归丸</label>
+            <label><input name="zhong_xu_bazhen" class="zhong_xu" type="checkbox" onclick="zhong_xu_cure();" value="true"/>八珍益母胶囊</label>
+            <label><input name="zhong_xu_wujibai" class="zhong_xu" type="checkbox" onclick="zhong_xu_cure();" value="true"/>乌鸡白凤丸/片/颗粒</label>
             <br>
-            <label>其他:<input type="text" id="zhong_xu_qita" name="zhong_xu_qita" value=""/></label>
+            <label>其他:<input type="text" id="zhong_xu_qita" name="zhong_xu_qita" class="zhong_xu" value=""onclick="zhong_xu_cure();"/></label>
             </div>
 
             <p><h6 style="color:#871F78">(2)<input name="zhong-cheng-yao" type="radio" onchange="zhong_shi_cure();"/>实证中成药:</h6>
             <div id="zhong-shi">
-            <label><input name="zhong_shi_xuening" class="zhong_shi" type="checkbox" value="true"/>宫血宁胶囊</label>
-            <label><input name="zhong_shi_duanxue" class="zhong_shi" type="checkbox" value="true"/>断血流片</label>
-            <label><input name="zhong_shi_qianzhi" class="zhong_shi" type="checkbox" value="true"/>茜芷胶囊/片</label>
-            <label><input name="zhong_shi_yunnan" class="zhong_shi" type="checkbox" value="true"/>云南白药胶囊</label>
-            <label><input name="zhong_shi_yunnanh" class="zhong_shi" type="checkbox" value="true"/>云南红药胶囊</label>
-            <label><input name="zhong_shi_kunning" class="zhong_shi" type="checkbox" value="true"/>坤宁口服液/颗粒</label>
-            <label><input name="zhong_shi_fuxue" class="zhong_shi" type="checkbox" value="true"/>妇科断红饮胶囊</label>
-            <label><input name="zhong_shi_duyi" class="zhong_shi" type="checkbox" value="true"/>独一味胶囊/丸</label>
-            <label><input name="zhong_shi_zhikang" class="zhong_shi" type="checkbox" value="true"/>致康胶囊</label>
-            <label><input name="zhong_shi_gongning" class="zhong_shi" type="checkbox" value="true"/>宫宁颗粒</label>
+            <label><input name="zhong_shi_xuening" class="zhong_shi" type="checkbox" onclick="zhong_shi_cure();" value="true"/>宫血宁胶囊</label>
+            <label><input name="zhong_shi_duanxue" class="zhong_shi" type="checkbox" onclick="zhong_shi_cure();" value="true"/>断血流片</label>
+            <label><input name="zhong_shi_qianzhi" class="zhong_shi" type="checkbox" onclick="zhong_shi_cure();" value="true"/>茜芷胶囊/片</label>
+            <label><input name="zhong_shi_yunnan" class="zhong_shi" type="checkbox" onclick="zhong_shi_cure();" value="true"/>云南白药胶囊</label>
+            <label><input name="zhong_shi_yunnanh" class="zhong_shi" type="checkbox" onclick="zhong_shi_cure();" value="true"/>云南红药胶囊</label>
+            <label><input name="zhong_shi_kunning" class="zhong_shi" type="checkbox" onclick="zhong_shi_cure();" value="true"/>坤宁口服液/颗粒</label>
+            <label><input name="zhong_shi_fuxue" class="zhong_shi" type="checkbox" onclick="zhong_shi_cure();" value="true"/>妇科断红饮胶囊</label>
+            <label><input name="zhong_shi_duyi" class="zhong_shi" type="checkbox" onclick="zhong_shi_cure();" value="true"/>独一味胶囊/丸</label>
+            <label><input name="zhong_shi_zhikang" class="zhong_shi" type="checkbox" onclick="zhong_shi_cure();" value="true"/>致康胶囊</label>
+            <label><input name="zhong_shi_gongning" class="zhong_shi" type="checkbox" onclick="zhong_shi_cure();" value="true"/>宫宁颗粒</label>
             <br>
-            <label>其他:<input type="text" id="zhong_shi_qita" name="zhong_shi_qita" value=""/></label>
+            <label>其他:<input type="text" id="zhong_shi_qita" name="zhong_shi_qita" class="zhong_shi" value="" onclick="zhong_shi_cure();" /></label>
             </div>    
 
             <p><h6 style="color:#871F78">(3)<input name="zhong-cheng-yao" type="radio" onchange="zhong_xushi_cure();"/>虚实夹杂证中成药:</h6>
             <div id="zhong-xushi">
-            <label><input name="zhong_xushi_zhixue" class="zhong_xushi" type="checkbox" value="true"/>葆宫止血颗粒</label>
-            <label><input name="zhong_xushi_jiawei" class="zhong_xushi" type="checkbox" value="true"/>加味逍遥口服液/合剂</label>
-            <label><input name="zhong_xushi_gujing" class="zhong_xushi" type="checkbox" value="true"/>固经丸</label>
-            <label><input name="zhong_xushi_nvjin" class="zhong_xushi" type="checkbox" value="true"/>女金丸/胶囊</label>
-            <label><input name="zhong_xushi_dingkun" class="zhong_xushi" type="checkbox" value="true"/>定坤丹</label>
-            <label><input name="zhong_xushi_xiaoyao" class="zhong_xushi" type="checkbox" value="true"/>丹栀逍遥丸</label>
-            <label><input name="zhong_xushi_shiwei" class="zhong_xushi" type="checkbox" value="true"/>妇科十味片</label>
-            <label><input name="zhong_xushi_tiaojing" class="zhong_xushi" type="checkbox" value="true"/>妇科调经片</label>
+            <label><input name="zhong_xushi_zhixue" class="zhong_xushi" type="checkbox" onclick="zhong_xushi_cure();"  value="true"/>葆宫止血颗粒</label>
+            <label><input name="zhong_xushi_jiawei" class="zhong_xushi" type="checkbox" onclick="zhong_xushi_cure();"  value="true"/>加味逍遥口服液/合剂</label>
+            <label><input name="zhong_xushi_gujing" class="zhong_xushi" type="checkbox" onclick="zhong_xushi_cure();"  value="true"/>固经丸</label>
+            <label><input name="zhong_xushi_nvjin" class="zhong_xushi" type="checkbox" onclick="zhong_xushi_cure();"  value="true"/>女金丸/胶囊</label>
+            <label><input name="zhong_xushi_dingkun" class="zhong_xushi" type="checkbox" onclick="zhong_xushi_cure();"  value="true"/>定坤丹</label>
+            <label><input name="zhong_xushi_xiaoyao" class="zhong_xushi" type="checkbox" onclick="zhong_xushi_cure();"  value="true"/>丹栀逍遥丸</label>
+            <label><input name="zhong_xushi_shiwei" class="zhong_xushi" type="checkbox" onclick="zhong_xushi_cure();"  value="true"/>妇科十味片</label>
+            <label><input name="zhong_xushi_tiaojing" class="zhong_xushi" type="checkbox" onclick="zhong_xushi_cure();"  value="true"/>妇科调经片</label>
             <br>
-            <label>其他:<input type="text" id="zhong_xushi_qita" name="zhong_xushi_qita" value=""/></label>
+            <label>其他:<input type="text" id="zhong_xushi_qita" name="zhong_xushi_qita" class="zhong_xushi" value="" onclick="zhong_xushi_cure();"/></label>
             </div>    
 
             <p><h6 style="color:#871F78">(4)中医其他治疗:</h6>
