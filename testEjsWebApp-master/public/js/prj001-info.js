@@ -36,7 +36,13 @@
                             }
                         } else {
                             if (result.status == 1400){
-                                alert("您有未填字段");
+                                // alert(""+$("#birth_year").val());
+                                if (Number($("#birth_year").val()) >=2019 ) {
+                                    alert("出生年月有误，请核实后再次提交")
+                                } else {
+                                    alert("您有未填字段");
+                                }
+                                
                             }
                         }
                     }

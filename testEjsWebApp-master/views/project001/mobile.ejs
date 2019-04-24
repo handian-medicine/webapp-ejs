@@ -62,6 +62,7 @@
 <script>
     // var tempstr;
     $(document).ready(function () {
+        form_all();
         // $("#province option[value='"+result["nation"]+"']").prop("selected","selected");
         // $("#province option[value='北京']").prop("selected","selected");
         // $("#city option[value='朝阳区']").prop("selected","selected");
@@ -138,6 +139,9 @@
                         required:true,
                         // email:true
                     },
+                    expert:{
+                        required:true
+                    },
                     name:{
                         required:true
                     },
@@ -146,22 +150,7 @@
                         digits:true,
                         rangelength:[11,11]
                     },
-                    age:{
-                        required:true,
-                        digits:true,
-                        range:[0,200]
-                    },
-                    height:{
-                        required:false,
-                        rangelength:[0,6],
-                        range:[0,9999]
-                    },
-                    weight:{
-                        required:false,
-                        rangelength:[0,6],
-                        range:[0,9999]
-                    },
-                    address:{
+                    birth:{
                         required:true,
                     },
                     province:{
@@ -172,36 +161,28 @@
                     },
                     entrance:{
                         required:true,
-                    }
+                    },
                 },
             messages:{
                     owner:{required:"请填写该字段"},
                     name:{required:"请填写该字段"},
+                    expert:{required:"请填写该字段"},
                     telephone:{
                         required:"请填写该字段",
                         rangelength:$.validator.format("电话号码长度为{0}位数字"),
                         digits:"不能填写非数字字符"        
                     },
-                    age:{
+                    birth:{
                         required:"请填写该字段",
-                        digits:"不能填写非数字字符",
-                        range:$.validator.format("年龄必须在{0}-{1}之间")
                     },
-                    height:{
-                        rangelength:$.validator.format("数值长度必须在{0}-{1}之间,包含小数点"),
-                        range:$.validator.format("身高必须在{0}-{1}之间")
-                    },
-                    weight:{
-                        rangelength:$.validator.format("数值长度必须在{0}-{1}之间,包含小数点"),
-                        range:$.validator.format("体重必须在{0}-{1}之间")
-                    },
-                    entrance:{required:"请填写该字段"},
                     province:{required:"请填写该字段"},
                     city:{required:"请填写该字段"},
+                    entrance:{required:"请填写该字段"},
                 },
             // submitHandler:function () {
             //     alert("这里");    
             // } 
+            onfocusout: function(element) { $(element).valid(); }
         })
             $("#form-summary").validate({
             // debug:true,
@@ -541,7 +522,7 @@
                                             </div>
 
                                             <div class="col-sm-3">
-                                                <select id="owner" name="owner" class="form-control" >
+                                                <select id="owner" name="owner" class="form-control" required>
                                                     <option value=""></option>
                                                 </select>
                                             </div>
@@ -555,12 +536,12 @@
                                         <td style="text-align:left" class="blue">患者现住址</td>
                                         <td>
                                             <div class="col-sm-3">
-                                                <select name="" id="province" class="form-control" >
+                                                <select name="province" id="province" class="form-control" required>
                                                     <option value=""></option>
                                                 </select>
                                             </div>
                                             <div class="col-sm-3">
-                                                <select name="" id="city" class="form-control" >
+                                                <select name="city" id="city" class="form-control" required>
                                                     <option value=""></option>
                                                 </select>
                                             </div>
